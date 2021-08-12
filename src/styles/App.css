@@ -1,0 +1,71 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  font-family: Lato, Sans-Serif, serif !important;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* remove scrollbar space */
+  background: transparent; /* optional: just make scrollbar invisible */
+}
+
+.headContainer {
+  height: 50px;
+}
+
+.mainContainer {
+  min-height: 100vh;
+  background-color: #dee2e6 /*rgb(237, 239, 240)*/;
+}
+
+.vastContainer {
+  padding: 8px;
+}
+
+.logo {
+  float: left;
+  overflow: hidden;
+  color: #fff;
+  font-size: 20px;
+  line-height: 55px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-right: 24px;
+}
+
+/**
+* Below are the css for layout examples
+*/
+.nodeOverview {
+  border-radius: 5px;
+  background: #F3F8FB;
+  height: 60vh;
+}
+
+.detailPanel {
+  border-radius: 5px;
+  background: #F3F8FB;
+  height: 32vh;
+}
+
+.viewPanel {
+  height: 60vh;
+  padding: 5px;
+  background: #F3F8FB;
+}
+
+.correlationPanel {
+  border-radius: 5px;
+  background: #F3F8FB;
+  height: 32vh;
+  padding: 5px;
+}
+
+.varControlPanel {
+  border-radius: 5px;
+  background: #F3F8FB;
+  height: 32vh;
+}
