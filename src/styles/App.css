@@ -22,7 +22,7 @@
 }
 
 .vastContainer {
-  padding: 8px;
+  /*padding: 8px;*/
 }
 
 .logo {
@@ -35,6 +35,12 @@
   text-decoration: none;
   margin-right: 24px;
 }
+
+.mainMap {
+  width: 100vw;
+  height: 100vh;
+}
+
 
 /**
 * Below are the css for layout examples

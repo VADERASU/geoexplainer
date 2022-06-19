@@ -1,12 +1,14 @@
-//import logo from './logo.svg';
 import {Component} from 'react';
 import './styles/App.css';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
+import Map from 'react-map-gl';
 //import NavBar from './components/nav_bar';
 
 /** import data */ 
 //import {DATA_NAME} from "./resource/data_example";
+
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
 
 class App extends Component {
   constructor(props) {
@@ -45,40 +47,17 @@ class App extends Component {
             {/**
              * Main layout of the system
              */}
-            <Row gutter={8}>
-              {/** Left part views */}
-              <Col span={14}>
-                <Row gutter={[8, 8]}>
-                  {/** Node overview panel */}
-                  <Col span={24}>
-                    <div className="nodeOverview"></div>
-                  </Col>
-                  {/** node details panel */}
-                  <Col span={24}>
-                    <div className="detailPanel"></div>
-                  </Col>
-                </Row>   
-              </Col>
-            
-              <Col span={10}>
-              <Row gutter={[8, 8]}>
-                  {/** Time-series panel */}
-                  <Col span={24}>
-                    <div className="viewPanel"></div>
-                  </Col>
-                  {/** Variable correlation panel */}
-                  <Col span={12}>
-                    <div className="correlationPanel"></div>
-                  </Col>
-                  {/** variable controller panel */}
-                  <Col span={12}>
-                    <div className="varControlPanel"></div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-
-
+            <Map
+              initialViewState={{
+                latitude: 40,
+                longitude: -100,
+                zoom: 3
+              }}
+              style={{width: '100vw', height: '90vh'}}
+              mapStyle="mapbox://styles/mapbox/light-v9"
+              mapboxAccessToken={MAPBOX_TOKEN}
+            />
+             
 
           </Content>
         </Layout>
