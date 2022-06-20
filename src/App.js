@@ -3,7 +3,7 @@ import './styles/App.css';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map from 'react-map-gl';
-//import NavBar from './components/nav_bar';
+import NavBar from './components/nav';
 
 /** import data */ 
 //import {DATA_NAME} from "./resource/data_example";
@@ -28,24 +28,19 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state);
-    //let nodes = this.state.current_vis_data.nodes.filter(node => this.state.selectedNodeTypes.includes(node.name));
-    //console.log(nodes);
+    //console.log(this.state); 
+    
     const { Header, Content } = Layout;
-    //const {selectedResources} = this.state;
-    //const {selectedNodeTypes} = this.state;
     
     return (
       <div className="App">
         <Layout className="mainContainer">
           <Header className="headContainer">
-            <div>
-              <span className="logo" href="#">GeoExplainer</span>
-            </div>
+            <NavBar />
           </Header>
           <Content className="vastContainer">
             {/**
-             * Main layout of the system
+             * Main layout of the systemx
              */}
             <Map
               initialViewState={{

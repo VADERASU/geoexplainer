@@ -13,7 +13,7 @@
 }
 
 .headContainer {
-  height: 50px;
+  height: 40px;
 }
 
 .mainContainer {
@@ -30,7 +30,7 @@
   overflow: hidden;
   color: #fff;
   font-size: 20px;
-  line-height: 55px;
+  line-height: 40px;
   white-space: nowrap;
   text-decoration: none;
   margin-right: 24px;
