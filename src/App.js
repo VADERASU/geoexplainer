@@ -49,7 +49,7 @@ class App extends Component {
                 longitude: -100,
                 zoom: 3
               }}
-              style={{width: '100vw', height: '90vh'}}
+              style={{width: '100vw', height: '96.5vh'}}
               mapStyle="mapbox://styles/mapbox/light-v9"
               mapboxAccessToken={MAPBOX_TOKEN}
             />
