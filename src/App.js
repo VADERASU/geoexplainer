@@ -1,9 +1,13 @@
 import {Component} from 'react';
-import './styles/App.css';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map from 'react-map-gl';
+// custom components
 import NavBar from './components/nav';
+import ModelConfigPanel from './components/modelConfig';
+// import css style files
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './styles/App.css';
 
 /** import data */ 
 //import {DATA_NAME} from "./resource/data_example";
@@ -17,7 +21,7 @@ class App extends Component {
      * TODO: Modify the state initial with a more flexible way
      */
     this.state = {
-      example_state1: 'hello world',
+      modelTrained: false,
     };
   }
 
@@ -49,10 +53,11 @@ class App extends Component {
                 zoom: 3
               }}
               style={{width: '100vw', height: '90vh'}}
-              mapStyle="mapbox://styles/mapbox/light-v9"
+              mapStyle="mapbox://styles/mapbox/light-v10"
               mapboxAccessToken={MAPBOX_TOKEN}
             />
-             
+            
+            <ModelConfigPanel />
 
           </Content>
         </Layout>
