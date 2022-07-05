@@ -1,9 +1,4 @@
 import {Component} from 'react';
-<<<<<<< HEAD
-=======
-import './styles/App.css';
-import 'mapbox-gl/dist/mapbox-gl.css';
->>>>>>> 3d7bc9aff51be13057023cf1d76c7a57757d7dae
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map from 'react-map-gl';
