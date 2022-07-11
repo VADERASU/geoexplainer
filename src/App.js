@@ -21,7 +21,10 @@ class App extends Component {
      * TODO: Modify the state initial with a more flexible way
      */
     this.state = {
-      modelTrained: false,
+      model_trained: false,
+      spatial_kernel: "adaptive_bisquare",
+      model_type: "Gaussian",
+      local_modal: "GWR",
     };
   }
 
@@ -57,7 +60,12 @@ class App extends Component {
               mapboxAccessToken={MAPBOX_TOKEN}
             />
             
-            <ModelConfigPanel />
+            <ModelConfigPanel
+              model_trained={this.state.model_trained}
+              spatial_kernel={this.state.spatial_kernel}
+              model_type={this.state.model_type}
+              local_modal={this.state.local_modal}
+            />
 
           </Content>
         </Layout>
