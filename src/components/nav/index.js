@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Select } from 'antd';
+import { Space, Select, Button } from 'antd';
 
 class NavBar extends React.Component{
 
@@ -8,9 +8,9 @@ class NavBar extends React.Component{
         return(
             <>
                 
-                 <span className="logo" href="#">GeoExplainer</span>
+                <span className="logo" href="#">GeoExplainer</span>
                 <Space
-                    style={{ float: 'left' }}
+                    style={{ float: 'left', lineHeight: 0, marginTop: 8 }}
                 >
                     <Select
                         defaultValue="georgia"
@@ -18,12 +18,16 @@ class NavBar extends React.Component{
                         style={{
                             width: 140,
                             float: 'left',
-                            marginTop: 8
+                            
                         }}
                     >
                         <Option value="georgia">Georgia demo</Option>
                         <Option value="chicago">Chicago AirBnB</Option>
                     </Select>
+
+                    <Button type="primary" size='small'>Load Data</Button>
+                    <Button type="primary" size='small'>Import Trained CSV</Button>
+                    <Button type="primary" size='small'>Export as PDF</Button>
 
 
                 </Space>
