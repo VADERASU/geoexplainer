@@ -13,8 +13,9 @@ class NavBar extends React.Component{
                     style={{ float: 'left', lineHeight: 0, marginTop: 8 }}
                 >
                     <Select
-                        defaultValue="georgia"
+                        value={this.props.select_case}
                         size="small"
+                        onChange={this.props.handleCaseSelectionChange}
                         style={{
                             width: 140,
                             float: 'left',
@@ -25,7 +26,7 @@ class NavBar extends React.Component{
                         <Option value="chicago">Chicago AirBnB</Option>
                     </Select>
 
-                    <Button type="primary" size='small'>Load Data</Button>
+                    <Button type="primary" size='small' onClick={this.props.handleLoadData}>Load Data</Button>
                     <Button type="primary" size='small'>Import Trained CSV</Button>
                     <Button type="primary" size='small'>Export as PDF</Button>
 
