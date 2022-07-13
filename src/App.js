@@ -29,9 +29,9 @@ class App extends Component {
     this.state = {
       // model config states
       model_trained: false,
-      spatial_kernel: "adaptive_bisquare",
-      model_type: "Gaussian",
-      local_modal: "GWR",
+      spatial_kernel: "adaptive bisquare",
+      model_type: "gaussian",
+      local_modal: "gwr",
       // selected case
       select_case: 'georgia',
       loaded_map_data: null,
@@ -98,6 +98,18 @@ class App extends Component {
     }
   };
 
+  // Model Config options
+  handleModelKernel = (val) => {
+    this.setState({spatial_kernel: val});
+  };
+  handleModelType = (val) => {
+    this.setState({model_type: val});
+  };
+  handleLocalModel = (val) => {
+    this.setState({local_modal: val});
+  };
+
+  //MAIN APP Controllers
   onHover = (event) => {
     let feature = event.features && event.features[0];
     let hoverInfo = {
@@ -155,6 +167,10 @@ class App extends Component {
               spatial_kernel={this.state.spatial_kernel}
               model_type={this.state.model_type}
               local_modal={this.state.local_modal}
+
+              handleModelKernel={this.handleModelKernel}
+              handleModelType={this.handleModelType}
+              handleLocalModel={this.handleLocalModel}
             />
 
           </Content>
