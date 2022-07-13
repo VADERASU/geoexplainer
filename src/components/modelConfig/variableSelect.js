@@ -11,6 +11,12 @@ class VariableSelection extends Component {
                 <DropCardContainer
                     title={'Dependent Variable Y'}
                 />
+                <DropCardContainer
+                    title={'Independent Variable X'}
+                />
+                <DropCardContainer
+                    title={'Original Feature List'}
+                />
             </div>
         );
     }
