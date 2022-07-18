@@ -12,6 +12,7 @@ import './styles/App.css';
 
 // import utilities
 import { getCountyCenter } from './utilities';
+import { SortableItem } from './utilities/sortableItem';
 
 /** import data */ 
 //import {DATA_NAME} from "./resource/data_example";
@@ -19,6 +20,7 @@ import georgia_demo from './data/georgia_demo.json';
 import chicago_demo from './data/chicago_config_poly.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
+const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name'];
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +37,12 @@ class App extends Component {
       // selected case
       select_case: 'georgia',
       loaded_map_data: null,
+      original_features:[],
+      dependent_features: [],
+      independent_features: [],
+      original_feature_sortable: [],
+      dependent_sortable: [],
+      independent_sortable: [],
       viewState:{
         latitude: 40,
         longitude: -100,
@@ -73,6 +81,10 @@ class App extends Component {
     // TODO: Add us-election case
     if(this.state.select_case === 'georgia'){
       let map_coords = getCountyCenter(georgia_demo);
+      let global_data_properties_list = [];
+      Object.keys(georgia_demo.features[0].properties).forEach((e,i)=>{
+        if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
+      });
       let viewState = {
         latitude: map_coords.center_coords[1],
         longitude: map_coords.center_coords[0],
@@ -80,11 +92,17 @@ class App extends Component {
       };
       this.setState({
         loaded_map_data: georgia_demo,
+        original_features: global_data_properties_list,
+        original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
+      let global_data_properties_list = [];
+      Object.keys(chicago_demo.features[0].properties).forEach((e,i)=>{
+        if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
+      });
       let viewState = {
         latitude: map_coords.center_coords[1],
         longitude: map_coords.center_coords[0],
@@ -92,6 +110,8 @@ class App extends Component {
       };
       this.setState({
         loaded_map_data: chicago_demo,
+        original_features: global_data_properties_list,
+        original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds
       });
@@ -107,6 +127,18 @@ class App extends Component {
   };
   handleLocalModel = (val) => {
     this.setState({local_modal: val});
+  };
+
+  updateSortableItems = (varType, items) => {
+    const sortableItems = [];
+    let key_prefix = '';
+    if(varType === "original"){
+      key_prefix = 'Original_';
+      items.forEach((e,i)=>{sortableItems.push(<SortableItem key={key_prefix+i} content={e} />)});
+      //this.setState({original_feature_sortable: sortableItems});
+      return sortableItems;
+    }
+      
   };
 
   //MAIN APP Controllers
@@ -171,6 +203,12 @@ class App extends Component {
               handleModelKernel={this.handleModelKernel}
               handleModelType={this.handleModelType}
               handleLocalModel={this.handleLocalModel}
+
+              // variavle selection panels
+              //dependentSortableItems={this.state.dependent_sortable}
+              //independentSortableItems={this.state.independent_sortable}
+              originalSortableItems={this.state.original_feature_sortable}
+              original_features={this.state.original_features}
             />
 
           </Content>

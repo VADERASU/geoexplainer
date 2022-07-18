@@ -22,7 +22,10 @@ class ModelConfigPanel extends Component {
             />
 
             {/** model variable selection panels */}
-            <VariableSelection />
+            <VariableSelection
+                original_features={this.props.original_features}
+                originalSortableItems={this.props.originalSortableItems}
+            />
                 
             </div>
         );
