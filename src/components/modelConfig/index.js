@@ -2,7 +2,7 @@ import {Component} from 'react';
 import '../../styles/modelConfig.css';
 //import { Card, Button, Select, Row, Col } from 'antd';
 import ModelParameterSelection from './modelConfig';
-import VariableSelection from './variableSelect';
+import { VariableSelection } from './variableSelect';
  
 class ModelConfigPanel extends Component {
 
@@ -24,7 +24,10 @@ class ModelConfigPanel extends Component {
             {/** model variable selection panels */}
             <VariableSelection
                 original_features={this.props.original_features}
-                originalSortableItems={this.props.originalSortableItems}
+                dependent_features={this.props.dependent_features}
+                independent_features={this.props.independent_features}
+                //originalSortableItems={this.props.originalSortableItems}
+                updateSortableList={this.props.updateSortableList}
             />
                 
             </div>

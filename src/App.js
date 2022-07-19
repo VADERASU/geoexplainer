@@ -39,7 +39,7 @@ class App extends Component {
       loaded_map_data: null,
       original_features:[],
       dependent_features: [],
-      independent_features: [],
+      independent_features: [1,2,3,4,5],
       original_feature_sortable: [],
       dependent_sortable: [],
       independent_sortable: [],
@@ -93,7 +93,7 @@ class App extends Component {
       this.setState({
         loaded_map_data: georgia_demo,
         original_features: global_data_properties_list,
-        original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds
       });
@@ -111,7 +111,7 @@ class App extends Component {
       this.setState({
         loaded_map_data: chicago_demo,
         original_features: global_data_properties_list,
-        original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds
       });
@@ -137,8 +137,12 @@ class App extends Component {
       items.forEach((e,i)=>{sortableItems.push(<SortableItem key={key_prefix+i} content={e} />)});
       //this.setState({original_feature_sortable: sortableItems});
       return sortableItems;
-    }
-      
+    }  
+  };
+
+  // update sortable list
+  updateSortableList = (newList) => {
+    this.setState({original_features: newList});
   };
 
   //MAIN APP Controllers
@@ -207,8 +211,11 @@ class App extends Component {
               // variavle selection panels
               //dependentSortableItems={this.state.dependent_sortable}
               //independentSortableItems={this.state.independent_sortable}
-              originalSortableItems={this.state.original_feature_sortable}
+              //originalSortableItems={this.state.original_feature_sortable}
               original_features={this.state.original_features}
+              dependent_features={this.state.dependent_features}
+              independent_features={this.state.independent_features}
+              updateSortableList={this.updateSortableList}
             />
 
           </Content>
