@@ -25,7 +25,7 @@ export function VariableSelection(props) {
 
     const findContainer = (id) => {
         //setContainerId(null);
-        
+        //console.log(id);
         let containerDict = {
             original: props.original_features,
             dependent: props.dependent_features,
@@ -33,8 +33,7 @@ export function VariableSelection(props) {
         };
         
         Object.keys(containerDict).forEach(e=>{
-            if(id in containerDict[e]){
-                //console.log(e);
+            if(containerDict[e].includes(id)){
                 setContainerId(e.toString());
             }
         });
@@ -49,29 +48,11 @@ export function VariableSelection(props) {
         setActiveId(null);
         console.log(event);
         if (active.id !== over.id) {
+            //find which container item comes from
+            findContainer(active.id); // => container's Id 
+            const activeContainer = containerId;
             const oldIndex = props.original_features.indexOf(active.id);
             const newIndex = props.original_features.indexOf(over.id);
-            console.log(newIndex);
-            // drag to an empty container
-            if(newIndex === 'dependent'){
-                // keep only one item in "dependent" list
-                let dependentList = [oldIndex];
-                //find which container item comes from
-                findContainer(oldIndex);
-                console.log("HERE");
-                //let original_features = props.original_features;
-                //original_features.splice(indexOf(oldIndex),1);
-                //props.updateSortableList('original', original_features);
-                //props.updateSortableList('dependent', dependentList);
-            }else if(newIndex === 'independent'){
-                let independentList = [oldIndex];
-                let original_features = props.original_features;
-                //original_features.splice(indexOf(oldIndex),1);
-                //props.updateSortableList('original', original_features);
-                //props.updateSortableList('independent', independentList);
-            }else if(newIndex === 'original'){
-
-            }
 
             //findContainer(newIndex);
             //console.log(containerId);
