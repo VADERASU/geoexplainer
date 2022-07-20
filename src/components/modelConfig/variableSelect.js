@@ -21,6 +21,24 @@ import {
 
 export function VariableSelection(props) {
     const [activeId, setActiveId] = useState(null);
+    const [containerId, setContainerId] = useState(null);
+
+    const findContainer = (id) => {
+        //setContainerId(null);
+        
+        let containerDict = {
+            original: props.original_features,
+            dependent: props.dependent_features,
+            indenpendent: props.independent_features
+        };
+        
+        Object.keys(containerDict).forEach(e=>{
+            if(id in containerDict[e]){
+                //console.log(e);
+                setContainerId(e.toString());
+            }
+        });
+    };
 
     const handleDragStart = (event) =>{
         setActiveId(event.active.id);
@@ -33,9 +51,32 @@ export function VariableSelection(props) {
         if (active.id !== over.id) {
             const oldIndex = props.original_features.indexOf(active.id);
             const newIndex = props.original_features.indexOf(over.id);
+
+            // drag to an empty container
+            if(newIndex === 'dependent'){
+                // keep only one item in "dependent" list
+                let dependentList = [oldIndex];
+                //find which container item comes from
+                //findContainer(newIndex);
+                let original_features = props.original_features;
+                original_features.splice(indexOf(oldIndex),1);
+                props.updateSortableList('original', original_features);
+                props.updateSortableList('dependent', dependentList);
+            }else if(newIndex === 'independent'){
+                let independentList = [oldIndex];
+                let original_features = props.original_features;
+                original_features.splice(indexOf(oldIndex),1);
+                props.updateSortableList('original', original_features);
+                props.updateSortableList('independent', independentList);
+            }else if(newindex === 'original'){
+
+            }
+
+            //findContainer(newIndex);
+            //console.log(containerId);
         
             const newSortableList = arrayMove(props.original_features, oldIndex, newIndex);
-            props.updateSortableList(newSortableList);
+            props.updateSortableList('original', newSortableList);
         }
     };
 
@@ -57,6 +98,7 @@ export function VariableSelection(props) {
                     key={'dependent'}
                     ifBottom={false}
                     sortableItems={props.dependent_features}
+                    activeId={activeId}
                 />
                 <SortableContext
                     items={props.independent_features}
@@ -68,6 +110,7 @@ export function VariableSelection(props) {
                         key={'independent'}
                         ifBottom={false}
                         sortableItems={props.independent_features}
+                        activeId={activeId}
                     />
                 </SortableContext>
                 
@@ -81,6 +124,7 @@ export function VariableSelection(props) {
                         title={'Original Feature List'}
                         ifBottom={true}
                         sortableItems={props.original_features}
+                        activeId={activeId}
                     />
                 </SortableContext>
                 

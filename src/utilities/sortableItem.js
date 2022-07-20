@@ -28,6 +28,7 @@ export function SortableItem(props){
         >
             <div
                 className='sortableItem'
+                style={props.style}
             >
                 {props.content}
             </div>

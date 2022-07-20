@@ -24,7 +24,14 @@ export function DropCardContainer(props) {
             }}
         >
             <ul className='sortableContainer' ref={setNodeRef}>
-                {props.sortableItems.map(id => <SortableItem key={id} id={id} content={id} />)}
+                {props.sortableItems.map(id => {
+                    if(props.activeId === id){
+                        return <SortableItem key={id} id={id} content={id} style={{opacity: 0.33}} />;
+                    }else{
+                        return <SortableItem key={id} id={id} content={id} />;
+                    }
+                    
+                })}
             </ul>
         </Card>
     );
