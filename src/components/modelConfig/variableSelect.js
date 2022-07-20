@@ -51,24 +51,25 @@ export function VariableSelection(props) {
         if (active.id !== over.id) {
             const oldIndex = props.original_features.indexOf(active.id);
             const newIndex = props.original_features.indexOf(over.id);
-
+            console.log(newIndex);
             // drag to an empty container
             if(newIndex === 'dependent'){
                 // keep only one item in "dependent" list
                 let dependentList = [oldIndex];
                 //find which container item comes from
-                //findContainer(newIndex);
-                let original_features = props.original_features;
-                original_features.splice(indexOf(oldIndex),1);
-                props.updateSortableList('original', original_features);
-                props.updateSortableList('dependent', dependentList);
+                findContainer(oldIndex);
+                console.log("HERE");
+                //let original_features = props.original_features;
+                //original_features.splice(indexOf(oldIndex),1);
+                //props.updateSortableList('original', original_features);
+                //props.updateSortableList('dependent', dependentList);
             }else if(newIndex === 'independent'){
                 let independentList = [oldIndex];
                 let original_features = props.original_features;
-                original_features.splice(indexOf(oldIndex),1);
-                props.updateSortableList('original', original_features);
-                props.updateSortableList('independent', independentList);
-            }else if(newindex === 'original'){
+                //original_features.splice(indexOf(oldIndex),1);
+                //props.updateSortableList('original', original_features);
+                //props.updateSortableList('independent', independentList);
+            }else if(newIndex === 'original'){
 
             }
 
