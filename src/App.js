@@ -39,7 +39,7 @@ class App extends Component {
       loaded_map_data: null,
       original_features:[],
       dependent_features: [],
-      independent_features: [1,2,3],
+      independent_features: [],
       original_feature_sortable: [],
       dependent_sortable: [],
       independent_sortable: [],
@@ -93,8 +93,8 @@ class App extends Component {
       this.setState({
         loaded_map_data: georgia_demo,
         original_features: global_data_properties_list,
-        //dependent_features: [],
-        //independent_features: [],
+        dependent_features: [],
+        independent_features: [],
         //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds
@@ -113,8 +113,8 @@ class App extends Component {
       this.setState({
         loaded_map_data: chicago_demo,
         original_features: global_data_properties_list,
-        //dependent_features: [],
-        //independent_features: [],
+        dependent_features: [],
+        independent_features: [],
         //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds

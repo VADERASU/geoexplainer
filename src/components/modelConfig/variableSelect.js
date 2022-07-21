@@ -23,12 +23,26 @@ export function VariableSelection(props) {
     const [activeId, setActiveId] = useState(null);
 
     const findContainer = (id) => {
-        if(props.original_features.includes(id)){
+        if(props.original_features.includes(id) || id === 'original'){
             return "original";
-        }else if(props.dependent_features.includes(id)){
+        }else if(props.dependent_features.includes(id) || id === 'dependent'){
             return "dependent";
+        }else if(props.independent_features.includes(id) || id === 'independent'){
+            return "independent";
         }else{
-            
+            return null;
+        }
+    };
+
+    const retrieveVarList = (containerId) => {
+        if(containerId === 'original'){
+            return props.original_features;
+        }else if(containerId === 'dependent'){
+            return props.dependent_features;
+        }else if(containerId === 'independent'){
+            return props.independent_features;
+        }else{
+            return null;
         }
     };
 
@@ -41,16 +55,32 @@ export function VariableSelection(props) {
         setActiveId(null);
         console.log(active.id, over.id);
         if (active.id !== over.id) {
-            //find which container item comes from
             
-            const oldIndex = props.original_features.indexOf(active.id);
-            const newIndex = props.original_features.indexOf(over.id);
-
-            //findContainer(newIndex);
-            //console.log(activeContainer);
-        
-            const newSortableList = arrayMove(props.original_features, oldIndex, newIndex);
-            props.updateSortableList('original', newSortableList);
+            let activeContainer = findContainer(active.id);
+            let activeList = retrieveVarList(activeContainer);
+            let overContainer = findContainer(over.id);
+            let overList = retrieveVarList(overContainer);
+            //console.log(activeList, overList);
+            if(activeContainer === overContainer){
+                // singel sortable list
+                let oldIndex = activeList.indexOf(active.id);
+                let newIndex = overList.indexOf(over.id);
+                let newSortableList = arrayMove(activeList, oldIndex, newIndex);
+                props.updateSortableList(overContainer, newSortableList);
+            }else{
+                // drag between sortable lists
+                let oldIndex = activeList.indexOf(active.id);
+                activeList.splice(oldIndex, 1);
+                // dependent list only have one variable
+                if(overContainer === 'dependent' && overList.length > 0){
+                    activeList.unshift(overList[0]);
+                    overList.splice(0,1);
+                }
+                overList.unshift(active.id);
+                props.updateSortableList(activeContainer, activeList);
+                props.updateSortableList(overContainer, overList);
+            }
+            
         }
     };
 
@@ -66,14 +96,20 @@ export function VariableSelection(props) {
             onDragStart={handleDragStart}
         >
             <div className='variableSelectionContainer'>
-                <DropCardContainer
-                    title={'Dependent Variable Y'}
-                    id={'dependent'}
-                    key={'dependent'}
-                    ifBottom={false}
-                    sortableItems={props.dependent_features}
-                    activeId={activeId}
-                />
+                <SortableContext
+                    items={props.dependent_features}
+                    strategy={verticalListSortingStrategy}
+                >
+                    <DropCardContainer
+                        title={'Dependent Variable Y'}
+                        id={'dependent'}
+                        key={'dependent'}
+                        ifBottom={false}
+                        sortableItems={props.dependent_features}
+                        activeId={activeId}
+                    />
+                </SortableContext>
+                
                 <SortableContext
                     items={props.independent_features}
                     strategy={verticalListSortingStrategy}
