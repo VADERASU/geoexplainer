@@ -23,7 +23,7 @@ export function DropCardContainer(props) {
                 overflow: 'auto',
             }}
         >
-            <ul className='sortableContainer' ref={setNodeRef}>
+            <ul className='sortableContainer' ref={setNodeRef} style={{zIndex: 1}}>
                 {props.sortableItems.map(id => {
                     if(props.activeId === id){
                         return <SortableItem key={id} id={id} content={id} style={{opacity: 0.33}} />;

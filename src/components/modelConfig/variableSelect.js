@@ -21,22 +21,15 @@ import {
 
 export function VariableSelection(props) {
     const [activeId, setActiveId] = useState(null);
-    const [containerId, setContainerId] = useState(null);
 
     const findContainer = (id) => {
-        //setContainerId(null);
-        //console.log(id);
-        let containerDict = {
-            original: props.original_features,
-            dependent: props.dependent_features,
-            indenpendent: props.independent_features
-        };
-        
-        Object.keys(containerDict).forEach(e=>{
-            if(containerDict[e].includes(id)){
-                setContainerId(e.toString());
-            }
-        });
+        if(props.original_features.includes(id)){
+            return "original";
+        }else if(props.dependent_features.includes(id)){
+            return "dependent";
+        }else{
+            
+        }
     };
 
     const handleDragStart = (event) =>{
@@ -46,16 +39,15 @@ export function VariableSelection(props) {
     const handleDragEnd = (event) => {
         const {active, over} = event;
         setActiveId(null);
-        console.log(event);
+        console.log(active.id, over.id);
         if (active.id !== over.id) {
             //find which container item comes from
-            findContainer(active.id); // => container's Id 
-            const activeContainer = containerId;
+            
             const oldIndex = props.original_features.indexOf(active.id);
             const newIndex = props.original_features.indexOf(over.id);
 
             //findContainer(newIndex);
-            //console.log(containerId);
+            //console.log(activeContainer);
         
             const newSortableList = arrayMove(props.original_features, oldIndex, newIndex);
             props.updateSortableList('original', newSortableList);
