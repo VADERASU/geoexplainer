@@ -173,12 +173,12 @@ class App extends Component {
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
-    const filter = ['in', 'UID', selectedUID];
+    const hoverfilter = ['in', 'UID', selectedUID];
     const default_source_layers = 
       this.state.loaded_map_data === null ? <></> :
       <Source id='default_layer_source' type='geojson' data={this.state.loaded_map_data}>
         <Layer beforeId="waterway-label" {...this.state.default_fill_layer} />
-        <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={filter} />
+        <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={hoverfilter} />
       </Source>;
     
     return (
