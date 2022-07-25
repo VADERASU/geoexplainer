@@ -11,7 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/App.css';
 
 // import utilities
-import { getCountyCenter, getConfigMapLayer } from './utilities';
+import { getCountyCenter, getConfigMapLayerY } from './utilities';
 import { SortableItem } from './utilities/sortableItem';
 
 /** import data */ 
@@ -165,7 +165,7 @@ class App extends Component {
     if(varType === 'original'){
       this.setState({original_features: newList});
     }else if(varType === 'dependent'){
-      let configLayer = getConfigMapLayer(newList, this.state.loaded_map_data);
+      let configLayer = getConfigMapLayerY(newList, this.state.loaded_map_data);
       //console.log(configLayer);
       this.setState({
         dependent_features: newList,

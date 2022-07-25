@@ -58,6 +58,45 @@ export function getCountyCenter(geojson_data){
     };
 }
 
+export function getConfigMapLayerY(feature, geoData){
+    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+    const configLayer = {
+        id: 'config-fill',
+        type: 'fill',
+    };
+    const featureList = geoData.features.map(e=>e.properties[feature[0]]);
+    const max = Math.max(...featureList);
+    const min = Math.min(...featureList);
+    
+    const clusterInterval = parseInt((max - min) / 5); // start from 0, 5 classes
+    const classSteps = [];
+    
+    for(let i = 1; i < 4; i++){
+        let classBreak = min + clusterInterval * i;
+        classSteps.push(parseInt(classBreak));
+    }
+    let paintProp = {
+        'fill-color': [
+            'step',
+            ['get', feature[0]],
+            dependentColorScheme[0],
+            classSteps[0],
+            dependentColorScheme[1],
+            classSteps[1],
+            dependentColorScheme[2],
+            classSteps[2],
+            dependentColorScheme[3]
+        ],
+        'fill-opacity': 0.8,
+        
+    };
+    configLayer.paint = paintProp;
+
+    return configLayer;  
+}
+
+
+
 export function getConfigMapLayer(feature, geoData){
     const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
     const biVarColorScheme = [
@@ -105,6 +144,28 @@ export function getConfigMapLayer(feature, geoData){
         };
         configLayer.paint = paintProp;
         return configLayer;
-    }   
+    }else{
+        const featureListY = geoData.features.map(e=>e.properties[feature[0]]);
+        const featureListX = geoData.features.map(e=>e.properties[feature[1]]);
+        const maxY = Math.max(...featureListY);
+        const minY = Math.min(...featureListY);
+        const maxX = Math.max(...featureListX);
+        const minX = Math.min(...featureListX);
+
+        const clusterIntervalY = parseInt((maxY - minY) / 5); // start from 0, 5 classes
+        const clusterIntervalX = parseInt((maxX - minX) / 5); // start from 0, 5 classes
+        const classStepsY = [];
+        const classStepsX = [];
+        for(let i = 1; i < 4; i++){
+            let classBreakY = minY + clusterIntervalY * i;
+            classStepsY.push(parseInt(classBreakY));
+            let classBreakX = minX + clusterIntervalX * i;
+            classStepsX.push(parseInt(classBreakX));
+        }
+
+        //console.log(classStepsY, classStepsX);
+        // assign colors 3x3 to the bi-variate map
+
+    }
 }
 
