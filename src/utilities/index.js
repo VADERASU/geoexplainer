@@ -95,10 +95,7 @@ export function getConfigMapLayerY(feature, geoData){
     return configLayer;  
 }
 
-
-
-export function getConfigMapLayer(feature, geoData){
-    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+export function addBivariateProp(feature, geoData){
     const biVarColorScheme = [
         // Y
         ['#92c5de','#4393c3','#2166ac'],
@@ -107,65 +104,99 @@ export function getConfigMapLayer(feature, geoData){
         // x is correlated with y
         ['#f0f0f0', '#bdbdbd', '#636363']
     ];
+    const featureListY = geoData.features.map(e=>e.properties[feature[0]]);
+    const featureListX = geoData.features.map(e=>e.properties[feature[1]]);
+    const maxY = Math.max(...featureListY);
+    const minY = Math.min(...featureListY);
+    const maxX = Math.max(...featureListX);
+    const minX = Math.min(...featureListX);
+
+    const clusterIntervalY = parseInt((maxY - minY) / 4); // start from 0, 5 classes
+    const clusterIntervalX = parseInt((maxX - minX) / 4); // start from 0, 5 classes
+    const classStepsY = [];
+    const classStepsX = [];
+    for(let i = 1; i < 3; i++){
+        let classBreakY = minY + clusterIntervalY * i;
+        classStepsY.push(parseInt(classBreakY));
+        let classBreakX = minX + clusterIntervalX * i;
+        classStepsX.push(parseInt(classBreakX));
+    }
+
+    // add bi-variate property to the GeoJson obj
+    
+    geoData.features.map(e=>{
+        let y = e.properties[feature[0]];
+        let x = e.properties[feature[1]];
+        // decide smallest y-axis color
+        if(y < classStepsY[0]){
+            // decide three x-axis colors
+            if(x < classStepsX[0]){
+                // low y and low x
+                e.properties.biVariateLayer = biVarColorScheme[2][0];
+            }else if(classStepsX[0] <= x < classStepsX[1]){
+                // low y & mid x
+                e.properties.biVariateLayer = biVarColorScheme[1][0];
+            }else if(x >= classStepsX[1]){
+                // low y & high x
+                e.properties.biVariateLayer = biVarColorScheme[1][1];
+            }
+        }else if(classStepsY[0] <= y < classStepsY[1]){ //mid y
+            // decide three x-axis colors
+            if(x < classStepsX[0]){
+                // mid y and low x
+                e.properties.biVariateLayer = biVarColorScheme[0][0];
+            }else if(classStepsX[0] <= x < classStepsX[1]){
+                // mid y & mid x
+                e.properties.biVariateLayer = biVarColorScheme[2][1];
+            }else if(x >= classStepsX[1]){
+                // mid y & high x
+                e.properties.biVariateLayer = biVarColorScheme[1][2];
+            }
+        }else if(y >= classStepsY[1]){ //high y
+            // decide three x-axis colors
+            if(x < classStepsX[0]){
+                // high y and low x
+                e.properties.biVariateLayer = biVarColorScheme[0][1];
+            }else if(classStepsX[0] <= x < classStepsX[1]){
+                // high y & mid x
+                e.properties.biVariateLayer = biVarColorScheme[0][2];
+            }else if(x >= classStepsX[1]){
+                // high y & high x
+                e.properties.biVariateLayer = biVarColorScheme[2][2];
+            }
+        }
+    });
+    //console.log(geoData.features.map(e=>e.properties.biVariateLayer));
+    return geoData;
+
+}
+
+export function getConfigMapLayerYX(){
     const configLayer = {
         id: 'config-fill',
         type: 'fill',
     };
-    //console.log(geoData);
-    if(feature.length === 1){
-        // only visualize dependent Y
-        //find min & max
-        const featureList = geoData.features.map(e=>e.properties[feature[0]]);
-        const max = Math.max(...featureList);
-        const min = Math.min(...featureList);
+    
+    let paintProp = {
+        'fill-color': [
+            'match',
+            ['get', 'biVariateLayer'],
+            '#92c5de','#92c5de',
+            '#4393c3','#4393c3',
+            '#2166ac','#2166ac',
+            '#f4a582','#f4a582',
+            '#d6604d','#d6604d',
+            '#b2182b','#b2182b',
+            '#f0f0f0','#f0f0f0',
+            '#bdbdbd','#bdbdbd',
+            '#636363','#636363',
+            '#ffffff'
+        ],
+        'fill-opacity': 0.8,
         
-        const clusterInterval = parseInt((max - min) / 5); // start from 0, 5 classes
-        const classSteps = [];
-        
-        for(let i = 1; i < 4; i++){
-            let classBreak = min + clusterInterval * i;
-            classSteps.push(parseInt(classBreak));
-        }
-        //console.log(classSteps);
-        let paintProp = {
-            'fill-color': [
-                'step',
-                ['get', feature[0]],
-                dependentColorScheme[0],
-                classSteps[0],
-                dependentColorScheme[1],
-                classSteps[1],
-                dependentColorScheme[2],
-                classSteps[2],
-                dependentColorScheme[3]
-            ],
-            'fill-opacity': 0.8,
-            
-        };
-        configLayer.paint = paintProp;
-        return configLayer;
-    }else{
-        const featureListY = geoData.features.map(e=>e.properties[feature[0]]);
-        const featureListX = geoData.features.map(e=>e.properties[feature[1]]);
-        const maxY = Math.max(...featureListY);
-        const minY = Math.min(...featureListY);
-        const maxX = Math.max(...featureListX);
-        const minX = Math.min(...featureListX);
+    };
+    configLayer.paint = paintProp;
 
-        const clusterIntervalY = parseInt((maxY - minY) / 5); // start from 0, 5 classes
-        const clusterIntervalX = parseInt((maxX - minX) / 5); // start from 0, 5 classes
-        const classStepsY = [];
-        const classStepsX = [];
-        for(let i = 1; i < 4; i++){
-            let classBreakY = minY + clusterIntervalY * i;
-            classStepsY.push(parseInt(classBreakY));
-            let classBreakX = minX + clusterIntervalX * i;
-            classStepsX.push(parseInt(classBreakX));
-        }
-
-        //console.log(classStepsY, classStepsX);
-        // assign colors 3x3 to the bi-variate map
-
-    }
+    return configLayer;
 }
 

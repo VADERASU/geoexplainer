@@ -11,7 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/App.css';
 
 // import utilities
-import { getCountyCenter, getConfigMapLayerY } from './utilities';
+import { getCountyCenter, getConfigMapLayerY, addBivariateProp, getConfigMapLayerYX } from './utilities';
 import { SortableItem } from './utilities/sortableItem';
 
 /** import data */ 
@@ -172,7 +172,15 @@ class App extends Component {
         config_layer: configLayer
       });
     }else{ // independent list
-      this.setState({independent_features: newList});
+      //if(newList.length > 0){
+      //  let geoData = addBivariateProp(newList, this.state.loaded_map_data);
+      //  this.setState({loaded_map_data: geoData});
+      //  let configLayer = getConfigMapLayerYX();
+      //  this.setState({config_layer: configLayer});
+      //}
+      this.setState({
+        independent_features: newList
+      });
     }
   };
 
@@ -189,6 +197,10 @@ class App extends Component {
 
   render() {
     //console.log(this.state); 
+    if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
+      let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
+      addBivariateProp(newList, this.state.loaded_map_data);
+    }
     
     const { Header, Content } = Layout;
 
