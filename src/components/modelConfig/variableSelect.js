@@ -53,7 +53,7 @@ export function VariableSelection(props) {
     const handleDragEnd = (event) => {
         const {active, over} = event;
         setActiveId(null);
-        console.log(active.id, over.id);
+        //console.log(active.id, over.id);
         if (active.id !== over.id) {
             
             let activeContainer = findContainer(active.id);

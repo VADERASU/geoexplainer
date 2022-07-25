@@ -11,7 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/App.css';
 
 // import utilities
-import { getCountyCenter } from './utilities';
+import { getCountyCenter, getConfigMapLayer } from './utilities';
 import { SortableItem } from './utilities/sortableItem';
 
 /** import data */ 
@@ -34,6 +34,7 @@ class App extends Component {
       spatial_kernel: "adaptive bisquare",
       model_type: "gaussian",
       local_modal: "gwr",
+
       // selected case
       select_case: 'georgia',
       loaded_map_data: null,
@@ -49,13 +50,27 @@ class App extends Component {
         zoom: 3
       },
       NWSE_bounds: null,
+      config_layer: {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      },
+
       // background layer
       default_fill_layer: {
         id: 'counties-fill',
         type: 'fill',
         paint: {
-          'fill-outline-color': 'rgba(0,0,0,0.1)',
           'fill-color': 'rgba(0,0,0,0.1)'
+        }
+      },
+      default_stroke_layer: {
+        id: 'counties-stroke',
+        type: 'line',
+        paint: {
+          'line-color': 'rgba(0,0,0,0.1)',
         }
       },
       hover_border_layer: {
@@ -150,7 +165,12 @@ class App extends Component {
     if(varType === 'original'){
       this.setState({original_features: newList});
     }else if(varType === 'dependent'){
-      this.setState({dependent_features: newList});
+      let configLayer = getConfigMapLayer(newList, this.state.loaded_map_data);
+      //console.log(configLayer);
+      this.setState({
+        dependent_features: newList,
+        config_layer: configLayer
+      });
     }else{ // independent list
       this.setState({independent_features: newList});
     }
@@ -174,12 +194,17 @@ class App extends Component {
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
     const hoverfilter = ['in', 'UID', selectedUID];
+
     const default_source_layers = 
       this.state.loaded_map_data === null ? <></> :
       <Source id='default_layer_source' type='geojson' data={this.state.loaded_map_data}>
         <Layer beforeId="waterway-label" {...this.state.default_fill_layer} />
+        <Layer beforeId='waterway-label' {...this.state.config_layer} />
+        <Layer beforeId="waterway-label" {...this.state.default_stroke_layer} />
         <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={hoverfilter} />
       </Source>;
+
+    
     
     return (
       <div className="App">
@@ -204,6 +229,7 @@ class App extends Component {
               attributionControl={false}
               mapboxAccessToken={MAPBOX_TOKEN}
               onMouseMove={this.onHover}
+              projection={'globe'}
               interactiveLayerIds={this.state.loaded_map_data === null ? [] : ['counties-fill']}
             >
               {default_source_layers}
