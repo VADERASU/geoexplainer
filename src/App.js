@@ -92,7 +92,7 @@ class App extends Component {
   }
 
   getNormalityTestResult = (featureList, select_case) => {
-    axios.get('/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
+    axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
     .then(function (response) {
       // handle success
       console.log(response);
