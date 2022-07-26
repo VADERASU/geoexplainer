@@ -172,7 +172,7 @@ def normality_test(param):
         Y_list = raw_data[0].split(',')
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_data[1])
         georgia_data = pd.read_csv(dataset_path)
-        print(dataset_path)
+        #print(georgia_data)
         normality_result_list = []
         for Y in Y_list:
             normality_result = gaussian_verify(Y, georgia_data)

@@ -2,6 +2,8 @@ import {Component} from 'react';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map, { Source, Layer } from 'react-map-gl';
+import axios from 'axios';
+
 // custom components
 import NavBar from './components/nav';
 import ModelConfigPanel from './components/modelConfig';
@@ -38,12 +40,13 @@ class App extends Component {
       // selected case
       select_case: 'georgia',
       loaded_map_data: null,
+      data_properties: [],
       original_features:[],
       dependent_features: [],
       independent_features: [],
-      original_feature_sortable: [],
-      dependent_sortable: [],
-      independent_sortable: [],
+      //original_feature_sortable: [],
+      //dependent_sortable: [],
+      //independent_sortable: [],
       viewState:{
         latitude: 40,
         longitude: -100,
@@ -57,6 +60,7 @@ class App extends Component {
           'visibility': 'none',
         },
       },
+      norm_test_result: [],
 
       // background layer
       default_fill_layer: {
@@ -87,6 +91,18 @@ class App extends Component {
     };
   }
 
+  getNormalityTestResult = (featureList, select_case) => {
+    axios.get('/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+  };
+
   // NAV BAR CONTROLLERS
   handleCaseSelectionChange = (val) => {
     this.setState({select_case: val});
@@ -100,19 +116,35 @@ class App extends Component {
       Object.keys(georgia_demo.features[0].properties).forEach((e,i)=>{
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
+
+      //get normality test result
+      this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+
       let viewState = {
         latitude: map_coords.center_coords[1],
         longitude: map_coords.center_coords[0],
         zoom: 6
       };
+
+      let config_layer = {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      };
+
       this.setState({
         loaded_map_data: georgia_demo,
+        data_properties: global_data_properties_list,
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
         //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
-        NWSE_bounds: map_coords.NWSE_bounds
+        NWSE_bounds: map_coords.NWSE_bounds,
+        config_layer: config_layer,
+        //norm_test_result: 
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
@@ -120,19 +152,30 @@ class App extends Component {
       Object.keys(chicago_demo.features[0].properties).forEach((e,i)=>{
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
+
       let viewState = {
         latitude: map_coords.center_coords[1],
         longitude: map_coords.center_coords[0],
         zoom: 10
       };
+
+      let config_layer = {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      };
       this.setState({
         loaded_map_data: chicago_demo,
+        data_properties: global_data_properties_list,
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
         //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
         viewState: viewState,
-        NWSE_bounds: map_coords.NWSE_bounds
+        NWSE_bounds: map_coords.NWSE_bounds,
+        config_layer: config_layer,
       });
     }
   };
