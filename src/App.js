@@ -61,6 +61,7 @@ class App extends Component {
         },
       },
       norm_test_result: [],
+      VIF_test_result: [],
 
       // background layer
       default_fill_layer: {
@@ -118,7 +119,7 @@ class App extends Component {
       });
 
       //get normality test result
-      this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      //this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
 
       let viewState = {
         latitude: map_coords.center_coords[1],

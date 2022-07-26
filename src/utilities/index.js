@@ -133,19 +133,19 @@ export function addBivariateProp(feature, geoData){
             if(x < classStepsX[0]){
                 // low y and low x
                 e.properties.biVariateLayer = biVarColorScheme[2][0];
-            }else if(classStepsX[0] <= x < classStepsX[1]){
+            }else if((x >= classStepsX[0]) && (x < classStepsX[1])){
                 // low y & mid x
                 e.properties.biVariateLayer = biVarColorScheme[1][0];
             }else if(x >= classStepsX[1]){
                 // low y & high x
                 e.properties.biVariateLayer = biVarColorScheme[1][1];
             }
-        }else if(classStepsY[0] <= y < classStepsY[1]){ //mid y
+        }else if((y >= classStepsY[0]) && (y < classStepsY[1])){ //mid y
             // decide three x-axis colors
             if(x < classStepsX[0]){
                 // mid y and low x
                 e.properties.biVariateLayer = biVarColorScheme[0][0];
-            }else if(classStepsX[0] <= x < classStepsX[1]){
+            }else if((x >= classStepsX[0]) && (x < classStepsX[1])){
                 // mid y & mid x
                 e.properties.biVariateLayer = biVarColorScheme[2][1];
             }else if(x >= classStepsX[1]){
@@ -157,7 +157,7 @@ export function addBivariateProp(feature, geoData){
             if(x < classStepsX[0]){
                 // high y and low x
                 e.properties.biVariateLayer = biVarColorScheme[0][1];
-            }else if(classStepsX[0] <= x < classStepsX[1]){
+            }else if((x >= classStepsX[0]) && (x < classStepsX[1])){
                 // high y & mid x
                 e.properties.biVariateLayer = biVarColorScheme[0][2];
             }else if(x >= classStepsX[1]){
