@@ -5,7 +5,7 @@ import { SortableItem } from './sortableItem';
 import {useDroppable} from '@dnd-kit/core';
 
 export function DropCardContainer(props) {
-    //console.log(props.sortableItems);
+    //console.log(props);
 
     const {setNodeRef} = useDroppable({
         id: props.id,
@@ -26,9 +26,19 @@ export function DropCardContainer(props) {
             <ul className='sortableContainer' ref={setNodeRef} style={{zIndex: 1}}>
                 {props.sortableItems.map(id => {
                     if(props.activeId === id){
-                        return <SortableItem key={id} id={id} content={id} style={{opacity: 0.33}} />;
+                        return (
+                            <SortableItem 
+                                key={id} id={id} content={id} style={{opacity: 0.33}}
+                                norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+                            />
+                        );
                     }else{
-                        return <SortableItem key={id} id={id} content={id} />;
+                        return (
+                            <SortableItem
+                                key={id} id={id} content={id}
+                                norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+                            />
+                        );
                     }
                     
                 })}

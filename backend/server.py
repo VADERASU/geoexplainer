@@ -177,7 +177,7 @@ def normality_test(param):
         for Y in Y_list:
             normality_result = gaussian_verify(Y, georgia_data)
             normality_result_list.append(normality_result)
-        print(normality_result_list)
+        #print(normality_result_list)
 
         return _corsify_actual_response(jsonify({'normality_results': normality_result_list}))
 

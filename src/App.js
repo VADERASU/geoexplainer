@@ -94,14 +94,20 @@ class App extends Component {
 
   getNormalityTestResult = (featureList, select_case) => {
     axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
-    .then(function (response) {
-      // handle success
-      console.log(response);
+    .then(response => {
+      //console.log(response);
+      // update states
+      this.setState({norm_test_result: response.data.normality_results});
     })
     .catch(function (error) {
       // handle error
       console.log(error);
     });
+  };
+
+  setNormTestResults = (res) => {
+    console.log(res);
+    //this.setState({norm_test_result: res});
   };
 
   // NAV BAR CONTROLLERS
@@ -119,8 +125,8 @@ class App extends Component {
       });
 
       //get normality test result
-      //this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
-
+      this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      
       let viewState = {
         latitude: map_coords.center_coords[1],
         longitude: map_coords.center_coords[0],
@@ -145,7 +151,7 @@ class App extends Component {
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
-        //norm_test_result: 
+        //norm_test_result: normality_results,
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
@@ -153,6 +159,8 @@ class App extends Component {
       Object.keys(chicago_demo.features[0].properties).forEach((e,i)=>{
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
+
+      this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
 
       let viewState = {
         latitude: map_coords.center_coords[1],
@@ -177,6 +185,7 @@ class App extends Component {
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
+        //norm_test_result: normality_results,
       });
     }
   };
@@ -190,18 +199,6 @@ class App extends Component {
   };
   handleLocalModel = (val) => {
     this.setState({local_modal: val});
-  };
-
-  /** Deprecated */
-  updateSortableItems = (varType, items) => {
-    const sortableItems = [];
-    let key_prefix = '';
-    if(varType === "original"){
-      key_prefix = 'Original_';
-      items.forEach((e,i)=>{sortableItems.push(<SortableItem key={key_prefix+i} content={e} />)});
-      //this.setState({original_feature_sortable: sortableItems});
-      return sortableItems;
-    }  
   };
 
   // update sortable list
@@ -247,11 +244,11 @@ class App extends Component {
   };
 
   render() {
-    //console.log(this.state); 
-    if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
-      let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
-      addBivariateProp(newList, this.state.loaded_map_data);
-    }
+    //console.log(this.state.norm_test_result); 
+    //if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
+      //let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
+      //addBivariateProp(newList, this.state.loaded_map_data);
+    //}
     
     const { Header, Content } = Layout;
 
@@ -316,6 +313,8 @@ class App extends Component {
               dependent_features={this.state.dependent_features}
               independent_features={this.state.independent_features}
               updateSortableList={this.updateSortableList}
+
+              norm_test_result={this.state.norm_test_result}
             />
 
           </Content>

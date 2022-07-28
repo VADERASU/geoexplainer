@@ -26,6 +26,8 @@ class ModelConfigPanel extends Component {
                 original_features={this.props.original_features}
                 dependent_features={this.props.dependent_features}
                 independent_features={this.props.independent_features}
+
+                norm_test_result={this.props.norm_test_result}
                 //originalSortableItems={this.props.originalSortableItems}
                 updateSortableList={this.props.updateSortableList}
             />

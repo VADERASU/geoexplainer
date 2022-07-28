@@ -3,8 +3,11 @@ import { Spin } from 'antd';
 import { useSortable } from '@dnd-kit/sortable';
 import '../styles/App.css';
 import { CSS } from '@dnd-kit/utilities';
+import { Histogram } from './histogram';
 
 export function SortableItem(props){
+
+    //console.log(props);
 
     const {
         attributes,
@@ -36,9 +39,10 @@ export function SortableItem(props){
                     <div className='space-align-block' style={{width: '5vw'}}>
                         {props.content}
                     </div>
-                    <Spin spinning={true}>
+
+                    <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
                     <div className='space-align-block' style={{width: '7.5vw'}}>
-                        {props.content}
+                        <Histogram data={props.norm_test_result} height={20} />    
                     </div>
                     </Spin>
 

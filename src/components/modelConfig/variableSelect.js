@@ -107,6 +107,7 @@ export function VariableSelection(props) {
                         ifBottom={false}
                         sortableItems={props.dependent_features}
                         activeId={activeId}
+                        norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
                 
@@ -121,6 +122,7 @@ export function VariableSelection(props) {
                         ifBottom={false}
                         sortableItems={props.independent_features}
                         activeId={activeId}
+                        norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
                 
@@ -135,6 +137,7 @@ export function VariableSelection(props) {
                         ifBottom={true}
                         sortableItems={props.original_features}
                         activeId={activeId}
+                        norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
                 
