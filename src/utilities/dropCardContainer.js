@@ -18,7 +18,7 @@ export function DropCardContainer(props) {
             style={props.ifBottom ? {} : {marginBottom: 10}}
             bodyStyle={{
                 minHeight: 50,
-                maxHeight: 200,
+                maxHeight: 400,
                 backgroundColor: '#f6f6f6',
                 overflow: 'auto',
             }}

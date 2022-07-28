@@ -209,7 +209,14 @@ class App extends Component {
     if(varType === 'original'){
       this.setState({original_features: newList});
     }else if(varType === 'dependent'){
-      let configLayer = getConfigMapLayerY(newList, this.state.loaded_map_data);
+      let ori_config_layer = {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      };
+      let configLayer = newList.length > 0 ? getConfigMapLayerY(newList, this.state.loaded_map_data) : ori_config_layer;
       //console.log(configLayer);
       this.setState({
         dependent_features: newList,
