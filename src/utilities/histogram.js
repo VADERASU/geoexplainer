@@ -1,17 +1,12 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import * as d3 from 'd3';
 
 export function Histogram(props){
     
     const canvasRef = useRef(null);
 
-    // clear canvas at biginning
-    const svgRoot = d3.select(canvasRef.current).select("svg");
-    const rootGroup = svgRoot.select('g#root-group');
-    rootGroup.selectAll('g').remove();
-
-    if(props.data.length > 0){
-        let data = props.data[0].Y;
+    const drawHistogram = (data) => {
+        //let data = props.data[0].Y;
         // draw histogram
         const {scrollWidth, scrollHeight} = canvasRef.current;
         // was d3.thresholdFreedmanDiaconis
@@ -31,7 +26,8 @@ export function Histogram(props){
         dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right;
         dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom;
 
-        
+        const svgRoot = d3.select(canvasRef.current).select("svg");
+        const rootGroup = svgRoot.select('g#root-group');
         const histGroup = rootGroup.append('g')
             .attr("transform", `translate(${dimensions.margin.left}, ${dimensions.margin.top})`);
 
@@ -54,7 +50,16 @@ export function Histogram(props){
         .attr("y", d => yScale(d.length))
         .attr("height", d => yScale(0) - yScale(d.length))
         .attr("fill", 'rgb(25, 183, 207)');
-    }
+    };
+
+    const clearCanvas = () => {
+        const rootGroup = d3.select(canvasRef.current).select('g#root-group');
+        rootGroup.selectAll('g').remove();
+    };
+
+    useEffect(()=>{
+        //console.log(props);
+    });
 
     return(
         <div style={{height: props.height, width: 100}} ref={canvasRef}> {/** 235px in 1080p */}

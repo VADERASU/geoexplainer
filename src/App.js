@@ -107,7 +107,10 @@ class App extends Component {
   };
 
   // prerender all sortable items in model config interface
-  
+  renderSortableComponents = (featureList) => {
+    console.log(featureList);
+    console.log(this.state.norm_test_result);
+  };
 
   // NAV BAR CONTROLLERS
   handleCaseSelectionChange = (val) => {
