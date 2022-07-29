@@ -126,7 +126,7 @@ class App extends Component {
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
     });
-    //console.log(featureDict, this.state.norm_test_result);
+    console.log(featureDict);
     this.setState({sortable_components: featureDict});
   };
 
@@ -327,12 +327,11 @@ class App extends Component {
               handleLocalModel={this.handleLocalModel}
 
               // variavle selection panels
-              //dependentSortableItems={this.state.dependent_sortable}
-              //independentSortableItems={this.state.independent_sortable}
-              //originalSortableItems={this.state.original_feature_sortable}
               original_features={this.state.original_features}
               dependent_features={this.state.dependent_features}
               independent_features={this.state.independent_features}
+
+              sortable_components={this.state.sortable_components}
 
               updateSortableList={this.updateSortableList}
 

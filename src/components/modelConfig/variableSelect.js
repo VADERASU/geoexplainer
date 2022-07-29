@@ -109,6 +109,8 @@ export function VariableSelection(props) {
                         ifBottom={false}
                         sortableItems={props.dependent_features}
                         activeId={activeId}
+                        sortable_components={props.sortable_components}
+
                         norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
@@ -124,6 +126,8 @@ export function VariableSelection(props) {
                         ifBottom={false}
                         sortableItems={props.independent_features}
                         activeId={activeId}
+                        sortable_components={props.sortable_components}
+
                         norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
@@ -139,6 +143,8 @@ export function VariableSelection(props) {
                         ifBottom={true}
                         sortableItems={props.original_features}
                         activeId={activeId}
+                        sortable_components={props.sortable_components}
+
                         norm_test_result={props.norm_test_result}
                     />
                 </SortableContext>
@@ -147,12 +153,7 @@ export function VariableSelection(props) {
 
             <DragOverlay>
                 {
-                    activeId ? (
-                        <SortableItem
-                            key={activeId} id={activeId} content={activeId}
-                            norm_test_result={props.norm_test_result.filter(e=>e.feature === activeId)}
-                        />
-                    ) : null
+                    activeId ? props.sortable_components.origin[activeId] : null
                 }
             </DragOverlay>
         </DndContext>

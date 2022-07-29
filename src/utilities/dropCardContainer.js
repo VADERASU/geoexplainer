@@ -27,17 +27,11 @@ export function DropCardContainer(props) {
                 {props.sortableItems.map(id => {
                     if(props.activeId === id){
                         return (
-                            <SortableItem 
-                                key={id} id={id} content={id} style={{opacity: 0.33}}
-                                norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
-                            />
+                            props.sortable_components.activ[id]
                         );
                     }else{
                         return (
-                            <SortableItem
-                                key={id} id={id} content={id}
-                                norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
-                            />
+                            props.sortable_components.origin[id]
                         );
                     }
                     
