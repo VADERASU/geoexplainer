@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, cloneElement} from 'react';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map, { Source, Layer } from 'react-map-gl';
@@ -45,9 +45,7 @@ class App extends Component {
       dependent_features: [],
       independent_features: [],
       sortable_components: {},
-      //original_feature_sortable: [],
-      //dependent_sortable: [],
-      //independent_sortable: [],
+      
       viewState:{
         latitude: 40,
         longitude: -100,
@@ -97,8 +95,12 @@ class App extends Component {
     axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
     .then(response => {
       //console.log(response);
+      const featureDict = this.updateSortableComponents('normTest', response.data.normality_results);
       // update states
-      this.setState({norm_test_result: response.data.normality_results});
+      this.setState({
+        norm_test_result: response.data.normality_results,
+        sortable_components: featureDict
+      });
     })
     .catch(function (error) {
       // handle error
@@ -126,8 +128,29 @@ class App extends Component {
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
     });
-    console.log(featureDict);
+    //console.log(featureDict);
     this.setState({sortable_components: featureDict});
+  };
+
+  updateSortableComponents = (type, param) => {
+    if(type === 'normTest'){
+      let featureDict = this.state.sortable_components;
+      param.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e.feature],
+          {norm_test_result: [e]}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e.feature],
+          {norm_test_result: [e]}
+        );
+
+        featureDict.origin[e.feature] = sortableItem;
+        featureDict.activ[e.feature] = sortableItemActiv;
+      });
+      //console.log(featureDict);
+      return featureDict;
+    }
   };
 
   // NAV BAR CONTROLLERS
@@ -168,11 +191,11 @@ class App extends Component {
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
-        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+        
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
-        //norm_test_result: normality_results,
+        
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
@@ -202,11 +225,11 @@ class App extends Component {
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
-        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+       
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
-        //norm_test_result: normality_results,
+        
       });
     }
   };

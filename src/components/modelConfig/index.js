@@ -30,7 +30,7 @@ class ModelConfigPanel extends Component {
                 sortable_components={this.props.sortable_components}
 
                 norm_test_result={this.props.norm_test_result}
-                //originalSortableItems={this.props.originalSortableItems}
+                
                 updateSortableList={this.props.updateSortableList}
             />
                 

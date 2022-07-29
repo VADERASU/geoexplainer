@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import '../../styles/modelConfig.css';
 //import { Card, Button, Select, Row, Col } from 'antd';
 import { DropCardContainer } from '../../utilities/dropCardContainer';
-import { SortableItem } from '../../utilities/sortableItem';
+//import { SortableItem } from '../../utilities/sortableItem';
 
 import {
     DndContext, 

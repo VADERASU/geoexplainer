@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { Card } from 'antd';
 import '../styles/App.css';
-import { SortableItem } from './sortableItem';
+//import { SortableItem } from './sortableItem';
 import {useDroppable} from '@dnd-kit/core';
 
 export function DropCardContainer(props) {
