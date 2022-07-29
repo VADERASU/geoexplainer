@@ -44,6 +44,7 @@ class App extends Component {
       original_features:[],
       dependent_features: [],
       independent_features: [],
+      sortable_components: {},
       //original_feature_sortable: [],
       //dependent_sortable: [],
       //independent_sortable: [],
@@ -105,10 +106,8 @@ class App extends Component {
     });
   };
 
-  setNormTestResults = (res) => {
-    console.log(res);
-    //this.setState({norm_test_result: res});
-  };
+  // prerender all sortable items in model config interface
+  
 
   // NAV BAR CONTROLLERS
   handleCaseSelectionChange = (val) => {

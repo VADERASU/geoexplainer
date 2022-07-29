@@ -14,7 +14,8 @@ export function Histogram(props){
         let data = props.data[0].Y;
         // draw histogram
         const {scrollWidth, scrollHeight} = canvasRef.current;
-        const dataBins = d3.bin().thresholds(d3.thresholdFreedmanDiaconis)(data);
+        // was d3.thresholdFreedmanDiaconis
+        const dataBins = d3.bin().thresholds(10)(data);
 
         // Chart dimensions
         let dimensions = {
@@ -53,14 +54,10 @@ export function Histogram(props){
         .attr("y", d => yScale(d.length))
         .attr("height", d => yScale(0) - yScale(d.length))
         .attr("fill", 'rgb(25, 183, 207)');
-    }else{
-        console.log(props);
     }
-    
-    
 
     return(
-        <div style={{height: props.height}} ref={canvasRef}> {/** 235px in 1080p */}
+        <div style={{height: props.height, width: 100}} ref={canvasRef}> {/** 235px in 1080p */}
             <svg
                 style={{
                     width: '100%',

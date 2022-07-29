@@ -145,7 +145,12 @@ export function VariableSelection(props) {
 
             <DragOverlay>
                 {
-                    activeId ? ( <SortableItem key={activeId} id={activeId} content={activeId} />) : null
+                    activeId ? (
+                        <SortableItem
+                            key={activeId} id={activeId} content={activeId}
+                            norm_test_result={props.norm_test_result.filter(e=>e.feature === activeId)}
+                        />
+                    ) : null
                 }
             </DragOverlay>
         </DndContext>
