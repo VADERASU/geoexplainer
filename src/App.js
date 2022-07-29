@@ -108,8 +108,26 @@ class App extends Component {
 
   // prerender all sortable items in model config interface
   renderSortableComponents = (featureList) => {
-    console.log(featureList);
-    console.log(this.state.norm_test_result);
+    let featureDict = {
+      activ: {},
+      origin: {}
+    };
+    featureList.forEach(e=>{
+      let sortableItem = 
+      <SortableItem
+          key={e} id={e} content={e} active={false} norm_test_result={[]}
+          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+      />
+      let sortableItemActiv = 
+      <SortableItem
+          key={e} id={e} content={e} active={true} norm_test_result={[]}
+          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+      />
+      featureDict.origin[e] = sortableItem;
+      featureDict.activ[e] = sortableItemActiv;
+    });
+    //console.log(featureDict, this.state.norm_test_result);
+    this.setState({sortable_components: featureDict});
   };
 
   // NAV BAR CONTROLLERS
@@ -126,6 +144,7 @@ class App extends Component {
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
 
+      this.renderSortableComponents(global_data_properties_list);
       //get normality test result
       this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
       
@@ -314,6 +333,7 @@ class App extends Component {
               original_features={this.state.original_features}
               dependent_features={this.state.dependent_features}
               independent_features={this.state.independent_features}
+
               updateSortableList={this.updateSortableList}
 
               norm_test_result={this.state.norm_test_result}

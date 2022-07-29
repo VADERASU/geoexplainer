@@ -88,6 +88,8 @@ export function VariableSelection(props) {
         useSensor(PointerSensor)
     );
 
+    //generateSortableComponents();
+
     return(
         <DndContext
             sensors={sensors}

@@ -33,7 +33,7 @@ export function SortableItem(props){
         >
             <div
                 className='sortableItem'
-                style={props.style}
+                style={props.active ? {opacity: 0.33} : {}}
             >
                 <div className='space-align-container'>
                     <div className='space-align-block' style={{width: '5vw'}}>
@@ -42,7 +42,7 @@ export function SortableItem(props){
 
                     <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
                     <div className='space-align-block' style={{width: '7.5vw'}}>
-                        <Histogram data={props.norm_test_result} height={20} />    
+                        {/*<Histogram data={props.norm_test_result} height={20} /> */}
                     </div>
                     </Spin>
 
