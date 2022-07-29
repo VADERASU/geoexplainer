@@ -60,7 +60,7 @@ class App extends Component {
         },
       },
       norm_test_result: [],
-      VIF_test_result: [],
+      VIF_test_result: {},
 
       // background layer
       default_fill_layer: {
@@ -108,6 +108,27 @@ class App extends Component {
     });
   };
 
+  getVIF = (featureList, select_case) => {
+    axios.get('http://localhost:5005/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
+    .then(response => {
+      const vifList = response.data.VIF_results.VIF_list;
+      const vifDict = {};
+      featureList.forEach((e,i)=>{
+        vifDict[e] = vifList[i];
+      });
+      const featureDict = this.updateSortableComponents('VIF', vifDict);
+      // update states
+      this.setState({
+        VIF_test_result: vifDict,
+        sortable_components: featureDict
+      });
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+  };
+
   // prerender all sortable items in model config interface
   renderSortableComponents = (featureList) => {
     let featureDict = {
@@ -118,12 +139,12 @@ class App extends Component {
       let sortableItem = 
       <SortableItem
           key={e} id={e} content={e} active={false} norm_test_result={[]}
-          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+          VIFresult={null}
       />
       let sortableItemActiv = 
       <SortableItem
           key={e} id={e} content={e} active={true} norm_test_result={[]}
-          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+          VIFresult={null}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -150,6 +171,23 @@ class App extends Component {
       });
       //console.log(featureDict);
       return featureDict;
+    }else if(type === 'VIF'){
+      let featureDict = this.state.sortable_components;
+      Object.keys(param).forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {VIFresult: param[e]}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {VIFresult: param[e]}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      //console.log(featureDict);
+      return featureDict;
     }
   };
 
@@ -170,6 +208,7 @@ class App extends Component {
       this.renderSortableComponents(global_data_properties_list);
       //get normality test result
       this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      this.getVIF(global_data_properties_list, this.state.select_case);
       
       let viewState = {
         latitude: map_coords.center_coords[1],
@@ -204,7 +243,10 @@ class App extends Component {
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
 
+      this.renderSortableComponents(global_data_properties_list);
+
       this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      this.getVIF(global_data_properties_list, this.state.select_case);
 
       let viewState = {
         latitude: map_coords.center_coords[1],

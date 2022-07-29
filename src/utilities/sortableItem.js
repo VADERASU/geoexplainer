@@ -23,6 +23,8 @@ export function SortableItem(props){
         zIndex: 999,
     };
 
+    const VIFresult = props.VIFresult === null ? <></> : 'VIF: ' + props.VIFresult.toFixed(1);
+
     return(
         <li
             className='sortableListItemWrapper'
@@ -41,19 +43,19 @@ export function SortableItem(props){
                     </div>
 
                     <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
-                    <div className='space-align-block' style={{width: '7.5vw'}}>
-                        <Histogram data={props.norm_test_result} height={20} />
+                    <div className='space-align-block' style={{width: '6vw'}}>
+                        <Histogram data={props.norm_test_result} height={22} />
+                    </div>
+                    </Spin>
+
+                    <Spin spinning={props.VIFresult === null ? true : false}>
+                    <div className='space-align-block' style={{width: '4.6vw'}}>
+                        {VIFresult}
                     </div>
                     </Spin>
 
                     <Spin spinning={true}>
-                    <div className='space-align-block' style={{width: '4vw'}}>
-                        VIF:10
-                    </div>
-                    </Spin>
-
-                    <Spin spinning={true}>
-                    <div className='space-align-block end' style={{width: '2vw'}}>
+                    <div className='space-align-block end' style={{width: '3vw'}}>
                         ICON
                     </div>
                     </Spin>
