@@ -118,7 +118,7 @@ Sortable List Item <li> Wrapper
   flex: none;
   margin-right: 3px;
   padding: 4px;
-  border: 1px solid #40a9ff;
+  /*border: 1px solid #40a9ff;*/
   font-size: 14px;
 }
 .space-align-block.end{
