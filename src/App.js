@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, cloneElement} from 'react';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map, { Source, Layer } from 'react-map-gl';
@@ -45,9 +45,7 @@ class App extends Component {
       dependent_features: [],
       independent_features: [],
       sortable_components: {},
-      //original_feature_sortable: [],
-      //dependent_sortable: [],
-      //independent_sortable: [],
+      
       viewState:{
         latitude: 40,
         longitude: -100,
@@ -62,7 +60,7 @@ class App extends Component {
         },
       },
       norm_test_result: [],
-      VIF_test_result: [],
+      VIF_test_result: {},
 
       // background layer
       default_fill_layer: {
@@ -97,8 +95,33 @@ class App extends Component {
     axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
     .then(response => {
       //console.log(response);
+      const featureDict = this.updateSortableComponents('normTest', response.data.normality_results);
       // update states
-      this.setState({norm_test_result: response.data.normality_results});
+      this.setState({
+        norm_test_result: response.data.normality_results,
+        sortable_components: featureDict
+      });
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+  };
+
+  getVIF = (featureList, select_case) => {
+    axios.get('http://localhost:5005/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
+    .then(response => {
+      const vifList = response.data.VIF_results.VIF_list;
+      const vifDict = {};
+      featureList.forEach((e,i)=>{
+        vifDict[e] = vifList[i];
+      });
+      const featureDict = this.updateSortableComponents('VIF', vifDict);
+      // update states
+      this.setState({
+        VIF_test_result: vifDict,
+        sortable_components: featureDict
+      });
     })
     .catch(function (error) {
       // handle error
@@ -116,18 +139,56 @@ class App extends Component {
       let sortableItem = 
       <SortableItem
           key={e} id={e} content={e} active={false} norm_test_result={[]}
-          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+          VIFresult={null}
       />
       let sortableItemActiv = 
       <SortableItem
           key={e} id={e} content={e} active={true} norm_test_result={[]}
-          //norm_test_result={props.norm_test_result.filter(e=>e.feature === id)}
+          VIFresult={null}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
     });
-    //console.log(featureDict, this.state.norm_test_result);
+    //console.log(featureDict);
     this.setState({sortable_components: featureDict});
+  };
+
+  updateSortableComponents = (type, param) => {
+    if(type === 'normTest'){
+      let featureDict = this.state.sortable_components;
+      param.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e.feature],
+          {norm_test_result: [e]}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e.feature],
+          {norm_test_result: [e]}
+        );
+
+        featureDict.origin[e.feature] = sortableItem;
+        featureDict.activ[e.feature] = sortableItemActiv;
+      });
+      //console.log(featureDict);
+      return featureDict;
+    }else if(type === 'VIF'){
+      let featureDict = this.state.sortable_components;
+      Object.keys(param).forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {VIFresult: param[e]}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {VIFresult: param[e]}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      //console.log(featureDict);
+      return featureDict;
+    }
   };
 
   // NAV BAR CONTROLLERS
@@ -147,6 +208,7 @@ class App extends Component {
       this.renderSortableComponents(global_data_properties_list);
       //get normality test result
       this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      this.getVIF(global_data_properties_list, this.state.select_case);
       
       let viewState = {
         latitude: map_coords.center_coords[1],
@@ -168,11 +230,11 @@ class App extends Component {
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
-        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+        
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
-        //norm_test_result: normality_results,
+        
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
@@ -181,7 +243,10 @@ class App extends Component {
         if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
       });
 
+      this.renderSortableComponents(global_data_properties_list);
+
       this.getNormalityTestResult(global_data_properties_list, this.state.select_case);
+      this.getVIF(global_data_properties_list, this.state.select_case);
 
       let viewState = {
         latitude: map_coords.center_coords[1],
@@ -202,11 +267,11 @@ class App extends Component {
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
-        //original_feature_sortable: this.updateSortableItems('original', global_data_properties_list),
+       
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
-        //norm_test_result: normality_results,
+        
       });
     }
   };
@@ -327,12 +392,11 @@ class App extends Component {
               handleLocalModel={this.handleLocalModel}
 
               // variavle selection panels
-              //dependentSortableItems={this.state.dependent_sortable}
-              //independentSortableItems={this.state.independent_sortable}
-              //originalSortableItems={this.state.original_feature_sortable}
               original_features={this.state.original_features}
               dependent_features={this.state.dependent_features}
               independent_features={this.state.independent_features}
+
+              sortable_components={this.state.sortable_components}
 
               updateSortableList={this.updateSortableList}
 

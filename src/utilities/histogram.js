@@ -59,6 +59,13 @@ export function Histogram(props){
 
     useEffect(()=>{
         //console.log(props);
+        clearCanvas();
+        if(props.data.length > 0){
+            let data = props.data[0].Y;
+            drawHistogram(data);
+        }
+        
+
     });
 
     return(

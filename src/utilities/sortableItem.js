@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import { Spin } from 'antd';
+import { Spin, Tag, Row, Col } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import '../styles/App.css';
 import { CSS } from '@dnd-kit/utilities';
@@ -23,6 +24,15 @@ export function SortableItem(props){
         zIndex: 999,
     };
 
+    const VIFresult = props.VIFresult === null ? <></> : 
+        (props.VIFresult > 10 ? 
+        <Tag icon={<ExclamationCircleOutlined />} color="warning">
+            {'VIF: ' + props.VIFresult.toFixed(1)}
+        </Tag> : 
+        <Tag color="success">{'VIF: ' + props.VIFresult.toFixed(1)}</Tag>);
+
+    const { CheckableTag } = Tag;
+
     return(
         <li
             className='sortableListItemWrapper'
@@ -41,22 +51,26 @@ export function SortableItem(props){
                     </div>
 
                     <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
-                    <div className='space-align-block' style={{width: '7.5vw'}}>
-                        {/*<Histogram data={props.norm_test_result} height={20} /> */}
+                    <div className='space-align-block' style={{width: '6vw'}}>
+                        <Histogram data={props.norm_test_result} height={22} />
                     </div>
                     </Spin>
 
-                    <Spin spinning={true}>
-                    <div className='space-align-block' style={{width: '4vw'}}>
-                        VIF:10
+                    <Spin spinning={props.VIFresult === null ? true : false}>
+                    <div className='space-align-block' style={{width: '4.6vw', paddingLeft: 0}}>
+                        {VIFresult}
                     </div>
                     </Spin>
 
-                    <Spin spinning={true}>
-                    <div className='space-align-block end' style={{width: '2vw'}}>
-                        ICON
+                    <div className='space-align-block end' style={{width: '3vw'}}>
+                    <CheckableTag
+                        key={'A'}
+                        checked={true}
+                        
+                    >
+                        Norm
+                    </CheckableTag>
                     </div>
-                    </Spin>
                 </div>
                 
             </div>
