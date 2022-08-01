@@ -138,12 +138,14 @@ class App extends Component {
     featureList.forEach(e=>{
       let sortableItem = 
       <SortableItem
-          key={e} id={e} content={e} active={false} norm_test_result={[]}
+          key={e} id={e} content={e} active={false} 
+          norm_test_result={[]}
           VIFresult={null}
       />
       let sortableItemActiv = 
       <SortableItem
-          key={e} id={e} content={e} active={true} norm_test_result={[]}
+          key={e} id={e} content={e} active={true} 
+          norm_test_result={[]}
           VIFresult={null}
       />
       featureDict.origin[e] = sortableItem;

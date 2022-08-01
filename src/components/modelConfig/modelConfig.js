@@ -36,8 +36,8 @@ class ModelParameterSelection extends Component {
                     </div>
                 }
             >
-                <Row gutter={10}>
-                    <Col span={8}>
+                <div className='space-align-container-config'>
+                    <div className='space-align-block-config' style={{width: '7vw'}}>
                         <span style={{fontSize: 13}}>Spatial kernel</span>
                         <Select
                             value={this.props.spatial_kernel}
@@ -53,17 +53,17 @@ class ModelParameterSelection extends Component {
                             <Option value="adaptive bisquare" style={{fontSize: 12}}>adaptive bisquare</Option>
                             <Option value="fixed gaussian" style={{fontSize: 12}}>fixed gaussian</Option>
                         </Select>
-                    </Col>
+                    </div>
 
-                    <Col span={6}>
+                    <div className='space-align-block-config' style={{width: '6.5vw'}}>
                         <span style={{fontSize: 13}}>Model type</span>
                         <Select
                             value={this.props.model_type}
                             size="small"
                             onChange={this.props.handleModelType}
                             style={{
-                                width: 98,
-                                float: 'left',
+                                width: 135,
+                                
                                 fontSize: 12
                                 
                             }}
@@ -72,17 +72,17 @@ class ModelParameterSelection extends Component {
                             <Option value="binomal" style={{fontSize: 12}}>Binomal</Option>
                             <Option value="poisson" style={{fontSize: 12}}>Poisson</Option>
                         </Select>
-                    </Col>
+                    </div>
 
-                    <Col span={8}>
-                        <span style={{fontSize: 13, paddingRight: 30}}>Local Model</span>
+                    <div className='space-align-block-config end' style={{width: '6vw'}}>
+                        <span style={{fontSize: 13}}>Local Model</span>
                         <Select
                             value={this.props.local_modal}
                             size="small"
                             onChange={this.props.handleLocalModel}
                             style={{
                                 width: 100,
-                                float: 'left',
+                                
                                 fontSize: 12,
                                 //marginRight: '5px'
                             }}
@@ -90,8 +90,8 @@ class ModelParameterSelection extends Component {
                             <Option value="gwr" style={{fontSize: 12}}>GWR</Option>
                             <Option value="mgwr" style={{fontSize: 12}}>MGWR</Option>
                         </Select>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
 
             </Card>
         );

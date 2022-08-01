@@ -14,6 +14,23 @@
     box-shadow:         0 1px 5px rgba(0, 0, 0, 0.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
+.space-align-container-config {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+.space-align-block-config {
+    flex: none;
+    margin-right: 8px;
+    /*padding: 4px;*/
+    /*border: 1px solid #40a9ff;*/
+    font-size: 14px;
+  }
+.space-align-block-config .end{
+    margin: 0;
+  }
+
 .variableSelectionContainer {
     margin-top: 8px;
     /*border-radius: 5px;*/

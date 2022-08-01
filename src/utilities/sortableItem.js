@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { Spin, Tag, Row, Col } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, LineChartOutlined } from '@ant-design/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import '../styles/App.css';
 import { CSS } from '@dnd-kit/utilities';
@@ -24,14 +24,17 @@ export function SortableItem(props){
         zIndex: 999,
     };
 
+    const featureNameStyle = {width: '5vw', marginRight: 3, display: 'initial'};
+    const histogramStyle = {width: '5.8vw', marginRight: 3};
+    const VIFStyle = {width: '4.6vw', paddingLeft: 0, marginRight: 3};
+    const mapIconStyle = {padding: 0, fontSize: 30, height: 33};
+
     const VIFresult = props.VIFresult === null ? <></> : 
         (props.VIFresult > 10 ? 
         <Tag icon={<ExclamationCircleOutlined />} color="warning">
             {'VIF: ' + props.VIFresult.toFixed(1)}
         </Tag> : 
         <Tag color="success">{'VIF: ' + props.VIFresult.toFixed(1)}</Tag>);
-
-    const { CheckableTag } = Tag;
 
     return(
         <li
@@ -46,30 +49,25 @@ export function SortableItem(props){
                 style={props.active ? {opacity: 0.33} : {}}
             >
                 <div className='space-align-container'>
-                    <div className='space-align-block' style={{width: '5vw'}}>
+
+                    <div className='space-align-block' style={featureNameStyle}>
                         {props.content}
                     </div>
 
                     <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
-                    <div className='space-align-block' style={{width: '6vw'}}>
+                    <div className='space-align-block' style={histogramStyle}>
                         <Histogram data={props.norm_test_result} height={22} />
                     </div>
                     </Spin>
 
                     <Spin spinning={props.VIFresult === null ? true : false}>
-                    <div className='space-align-block' style={{width: '4.6vw', paddingLeft: 0}}>
+                    <div className='space-align-block' style={VIFStyle}>
                         {VIFresult}
                     </div>
                     </Spin>
 
-                    <div className='space-align-block end' style={{width: '3vw'}}>
-                    <CheckableTag
-                        key={'A'}
-                        checked={true}
-                        
-                    >
-                        Norm
-                    </CheckableTag>
+                    <div className='space-align-block' style={mapIconStyle}>
+                        <LineChartOutlined />
                     </div>
                 </div>
                 
