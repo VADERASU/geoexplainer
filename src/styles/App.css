@@ -106,6 +106,7 @@ Sortable List Item <li> Wrapper
   box-sizing: border-box;
   list-style: none;
   box-shadow: 0 1px 3px 1px rgba(34, 33, 81, 0.15);
+  /*box-shadow: 0 1px 3px 1px #0ff*/
 }
 
 .space-align-container {

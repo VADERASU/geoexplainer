@@ -139,12 +139,14 @@ class App extends Component {
       let sortableItem = 
       <SortableItem
           key={e} id={e} content={e} active={false} 
+          container={'original'}
           norm_test_result={[]}
           VIFresult={null}
       />
       let sortableItemActiv = 
       <SortableItem
           key={e} id={e} content={e} active={true} 
+          container={'original'}
           norm_test_result={[]}
           VIFresult={null}
       />

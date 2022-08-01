@@ -1,11 +1,11 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {cloneElement} from 'react';
 import { Card } from 'antd';
 import '../styles/App.css';
 //import { SortableItem } from './sortableItem';
 import {useDroppable} from '@dnd-kit/core';
 
 export function DropCardContainer(props) {
-    //console.log(props);
+    //console.log(props.id);
 
     const {setNodeRef} = useDroppable({
         id: props.id,
@@ -27,10 +27,20 @@ export function DropCardContainer(props) {
                 {props.sortableItems.map(id => {
                     if(props.activeId === id){
                         return (
+                            props.id === 'dependent' ?
+                            cloneElement(
+                                props.sortable_components.activ[id],
+                                {container: 'dependent'}
+                            ) :
                             props.sortable_components.activ[id]
                         );
                     }else{
                         return (
+                            props.id === 'dependent' ?
+                            cloneElement(
+                                props.sortable_components.origin[id],
+                                {container: 'dependent'}
+                            ) :
                             props.sortable_components.origin[id]
                         );
                     }

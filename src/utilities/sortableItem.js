@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import { Spin, Tag, Row, Col } from 'antd';
-import { ExclamationCircleOutlined, LineChartOutlined } from '@ant-design/icons';
+import { Spin, Tag, Button } from 'antd';
+import { ExclamationCircleOutlined, LineChartOutlined, GlobalOutlined } from '@ant-design/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import '../styles/App.css';
 import { CSS } from '@dnd-kit/utilities';
@@ -24,10 +24,21 @@ export function SortableItem(props){
         zIndex: 999,
     };
 
-    const featureNameStyle = {width: '5vw', marginRight: 3, display: 'initial'};
-    const histogramStyle = {width: '5.8vw', marginRight: 3};
-    const VIFStyle = {width: '4.6vw', paddingLeft: 0, marginRight: 3};
-    const mapIconStyle = {padding: 0, fontSize: 30, height: 33};
+    const featureNameStyle = {width: '4.9vw', marginRight: 3};
+    const histogramStyle = {width: '5.6vw', marginRight: 3};
+    const VIFStyle = {
+        width: '4.6vw', paddingLeft: 0, marginRight: 3, 
+        display: props.container !== 'dependent'? 'block' : 'none',
+    };
+    const collationIconStyle = {
+        marginRight: 3,
+        display: props.container !== 'dependent'? 'block' : 'none',
+    };
+    const mapIconStyle = {marginRight: 0, display: 'block'};
+    const logTransStyle = {
+        width: '6.3vw', paddingLeft: 0, marginRight: 3,
+        display: props.container === 'dependent'? 'block' : 'none',
+    };
 
     const VIFresult = props.VIFresult === null ? <></> : 
         (props.VIFresult > 10 ? 
@@ -66,8 +77,16 @@ export function SortableItem(props){
                     </div>
                     </Spin>
 
+                    <div className='space-align-block' style={logTransStyle}>
+                        <Button size='small' style={{fontSize: 11}}>Log Transformation</Button>
+                    </div>
+
+                    <div className='space-align-block' style={collationIconStyle}>
+                        <Button disabled={true} size='small' icon={<LineChartOutlined />}></Button>
+                    </div>
+
                     <div className='space-align-block' style={mapIconStyle}>
-                        <LineChartOutlined />
+                        <Button size='small' icon={<GlobalOutlined />}></Button>
                     </div>
                 </div>
                 

@@ -63,10 +63,12 @@ export function VariableSelection(props) {
             //console.log(activeList, overList);
             if(activeContainer === overContainer){
                 // singel sortable list
-                let oldIndex = activeList.indexOf(active.id);
-                let newIndex = overList.indexOf(over.id);
-                let newSortableList = arrayMove(activeList, oldIndex, newIndex);
-                props.updateSortableList(overContainer, newSortableList);
+                if(over.id !== overContainer){
+                    let oldIndex = activeList.indexOf(active.id);
+                    let newIndex = overList.indexOf(over.id);
+                    let newSortableList = arrayMove(activeList, oldIndex, newIndex);
+                    props.updateSortableList(overContainer, newSortableList);
+                }
             }else{
                 // drag between sortable lists
                 let oldIndex = activeList.indexOf(active.id);
