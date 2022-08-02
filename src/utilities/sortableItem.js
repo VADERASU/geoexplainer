@@ -8,7 +8,7 @@ import { Histogram } from './histogram';
 
 export function SortableItem(props){
 
-    //console.log(props.corrBtnActiv);
+    //console.log(props.norm_test_result);
     const mapBtnRef = useRef(null);
 
     const {
@@ -26,7 +26,7 @@ export function SortableItem(props){
     };
 
     const featureNameStyle = {width: '4.9vw', marginRight: 3};
-    const histogramStyle = {width: '5.6vw', marginRight: 3};
+    const histogramStyle = {width: '5.6vw', marginRight: 3, padding: 0};
     const VIFStyle = {
         width: '4.6vw', paddingLeft: 0, marginRight: 3, 
         display: props.container !== 'dependent'? 'block' : 'none',
@@ -82,7 +82,11 @@ export function SortableItem(props){
 
                     <Spin spinning={props.norm_test_result.length > 0 ? false : true}>
                     <div className='space-align-block' style={histogramStyle}>
-                        <Histogram data={props.norm_test_result} height={22} />
+                        <Histogram 
+                            data={props.norm_test_result} 
+                            height={30} 
+                            container={props.container}
+                        />
                     </div>
                     </Spin>
 

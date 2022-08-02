@@ -5,8 +5,8 @@ export function Histogram(props){
     
     const canvasRef = useRef(null);
 
-    const drawHistogram = (data) => {
-        //let data = props.data[0].Y;
+    const drawHistogram = (normResult) => {
+        let data = normResult.Y;
         // draw histogram
         const {scrollWidth, scrollHeight} = canvasRef.current;
         // was d3.thresholdFreedmanDiaconis
@@ -19,7 +19,7 @@ export function Histogram(props){
             margin: {
                 top: 0,
                 right: 0,
-                bottom: 0,
+                bottom: props.container === 'dependent' ? 11 : 0,
                 left: 0, //60
             },
         };
@@ -50,6 +50,21 @@ export function Histogram(props){
         .attr("y", d => yScale(d.length))
         .attr("height", d => yScale(0) - yScale(d.length))
         .attr("fill", 'rgb(25, 183, 207)');
+
+        // Text information
+        if(props.container === 'dependent'){
+            const normTestTooltip = normResult.p_value >= 0.05 ? 
+            'Normal distribution' : 
+            (normResult.skewness > 0 ? 'Positively skewed' : 'Negatively skewed');
+
+            const textGroup = histGroup.append('g').attr('class', 'bars')
+            .append('text')
+            .attr('x', dimensions.margin.left)
+            .attr('y', dimensions.height - 1)
+            .attr('font-size', 11)
+            .text(normTestTooltip);
+        }
+        
     };
 
     const clearCanvas = () => {
@@ -61,8 +76,8 @@ export function Histogram(props){
         //console.log(props);
         clearCanvas();
         if(props.data.length > 0){
-            let data = props.data[0].Y;
-            drawHistogram(data);
+            //let data = props.data[0].Y;
+            drawHistogram(props.data[0]);
         }
         
 
