@@ -52,6 +52,7 @@ class App extends Component {
         zoom: 3
       },
       NWSE_bounds: null,
+
       config_layer: {
         id: 'config-fill',
         type: 'fill',
@@ -59,6 +60,9 @@ class App extends Component {
           'visibility': 'none',
         },
       },
+      dependentMapLayer: {},
+
+      currentActivMapLayer: null, // actived map layer linked with config_layer
       norm_test_result: [],
       VIF_test_result: {},
 
@@ -140,15 +144,21 @@ class App extends Component {
       <SortableItem
           key={e} id={e} content={e} active={false} 
           container={'original'}
+          corrBtnActiv={true}
           norm_test_result={[]}
           VIFresult={null}
+          mapBtnActiv={'default'}
+          handleMapBtnClick={this.handleMapBtnClick}
       />
       let sortableItemActiv = 
       <SortableItem
           key={e} id={e} content={e} active={true} 
+          corrBtnActiv={true}
           container={'original'}
           norm_test_result={[]}
           VIFresult={null}
+          mapBtnActiv={'default'}
+          handleMapBtnClick={this.handleMapBtnClick}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -192,6 +202,55 @@ class App extends Component {
       });
       //console.log(featureDict);
       return featureDict;
+    }else if(type === 'activCorrBtn'){
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {corrBtnActiv: false}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {corrBtnActiv: false}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      return featureDict;
+    }else if(type === 'deactivCorrBtn'){
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {corrBtnActiv: true}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {corrBtnActiv: true}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      return featureDict;
+    }else if(type === 'updateMapClickBtn'){
+      let currentActivMapLayer = this.state.currentActivMapLayer !== param ? param : null;
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary'}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary'}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      return featureDict;
     }
   };
 
@@ -205,8 +264,12 @@ class App extends Component {
     if(this.state.select_case === 'georgia'){
       let map_coords = getCountyCenter(georgia_demo);
       let global_data_properties_list = [];
+      let data_properties = [];
       Object.keys(georgia_demo.features[0].properties).forEach((e,i)=>{
-        if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
+        if(ignore_properties.indexOf(e) === -1){
+          data_properties.push(e);
+          global_data_properties_list.push(e);
+        }
       });
 
       this.renderSortableComponents(global_data_properties_list);
@@ -230,7 +293,7 @@ class App extends Component {
 
       this.setState({
         loaded_map_data: georgia_demo,
-        data_properties: global_data_properties_list,
+        data_properties: data_properties,
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
@@ -238,13 +301,19 @@ class App extends Component {
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
+
+        currentActivMapLayer: null,
         
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
       let global_data_properties_list = [];
+      let data_properties = [];
       Object.keys(chicago_demo.features[0].properties).forEach((e,i)=>{
-        if(ignore_properties.indexOf(e) === -1) global_data_properties_list.push(e);
+        if(ignore_properties.indexOf(e) === -1){
+          data_properties.push(e);
+          global_data_properties_list.push(e);
+        }
       });
 
       this.renderSortableComponents(global_data_properties_list);
@@ -267,7 +336,7 @@ class App extends Component {
       };
       this.setState({
         loaded_map_data: chicago_demo,
-        data_properties: global_data_properties_list,
+        data_properties: data_properties,
         original_features: global_data_properties_list,
         dependent_features: [],
         independent_features: [],
@@ -275,6 +344,8 @@ class App extends Component {
         viewState: viewState,
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
+
+        currentActivMapLayer: null,
         
       });
     }
@@ -296,18 +367,22 @@ class App extends Component {
     if(varType === 'original'){
       this.setState({original_features: newList});
     }else if(varType === 'dependent'){
-      let ori_config_layer = {
-        id: 'config-fill',
-        type: 'fill',
-        layout: {
-          'visibility': 'none',
-        },
-      };
-      let configLayer = newList.length > 0 ? getConfigMapLayerY(newList, this.state.loaded_map_data) : ori_config_layer;
+     
+      if(newList.length > 0){
+        this.handleMapBtnClick(newList[0]);
+        const sortableComponents = this.updateSortableComponents('activCorrBtn');
+        this.setState({
+          dependentMapLayer: getConfigMapLayerY(newList, this.state.loaded_map_data),
+          sortable_components: sortableComponents,
+        });
+      }else if(newList.length === 0){
+        const sortableComponents = this.updateSortableComponents('deactivCorrBtn');
+        this.setState({sortable_components: sortableComponents});
+      }
       //console.log(configLayer);
       this.setState({
         dependent_features: newList,
-        config_layer: configLayer
+        //config_layer: configLayer,
       });
     }else{ // independent list
       //if(newList.length > 0){
@@ -322,6 +397,26 @@ class App extends Component {
     }
   };
 
+  // update actived map layer
+  handleMapBtnClick = (id) => {
+    //console.log(id);
+    let currentActivMapLayer = this.state.currentActivMapLayer !== id ? id : null;
+    let ori_config_layer = {
+      id: 'config-fill',
+      type: 'fill',
+      layout: {
+        'visibility': 'none',
+      },
+    };
+    let configLayer = currentActivMapLayer !== null ? getConfigMapLayerY([id], this.state.loaded_map_data) : ori_config_layer;
+    let sortableComponents = this.updateSortableComponents('updateMapClickBtn', id);
+    this.setState({
+      currentActivMapLayer: currentActivMapLayer,
+      config_layer: configLayer,
+      sortable_components: sortableComponents,
+    });
+  };
+
   //MAIN APP Controllers
   onHover = (event) => {
     let feature = event.features && event.features[0];
@@ -334,7 +429,7 @@ class App extends Component {
   };
 
   render() {
-    //console.log(this.state.norm_test_result); 
+    //console.log(this.state.data_properties); 
     //if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
       //let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
       //addBivariateProp(newList, this.state.loaded_map_data);

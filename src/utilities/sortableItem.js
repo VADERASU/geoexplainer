@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { Spin, Tag, Button } from 'antd';
-import { ExclamationCircleOutlined, LineChartOutlined, GlobalOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, DotChartOutlined, GlobalOutlined } from '@ant-design/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import '../styles/App.css';
 import { CSS } from '@dnd-kit/utilities';
@@ -8,7 +8,8 @@ import { Histogram } from './histogram';
 
 export function SortableItem(props){
 
-    //console.log(props);
+    //console.log(props.corrBtnActiv);
+    const mapBtnRef = useRef(null);
 
     const {
         attributes,
@@ -47,6 +48,20 @@ export function SortableItem(props){
         </Tag> : 
         <Tag color="success">{'VIF: ' + props.VIFresult.toFixed(1)}</Tag>);
 
+    const handleMapRefClick = event => {
+        props.handleMapBtnClick(props.id);
+    };
+
+    useEffect(() => {
+        const mapRef = mapBtnRef.current;
+    
+        mapRef.addEventListener('mousedown', handleMapRefClick);
+    
+        return () => {
+            mapRef.removeEventListener('mousedown', handleMapRefClick);
+        };
+      }, []);
+
     return(
         <li
             className='sortableListItemWrapper'
@@ -82,11 +97,11 @@ export function SortableItem(props){
                     </div>
 
                     <div className='space-align-block' style={collationIconStyle}>
-                        <Button disabled={true} size='small' icon={<LineChartOutlined />}></Button>
+                        <Button disabled={props.corrBtnActiv} size='small' icon={<DotChartOutlined />}></Button>
                     </div>
 
                     <div className='space-align-block' style={mapIconStyle}>
-                        <Button size='small' icon={<GlobalOutlined />}></Button>
+                        <Button size='small' type={props.mapBtnActiv} ref={mapBtnRef} icon={<GlobalOutlined />}></Button>
                     </div>
                 </div>
                 
