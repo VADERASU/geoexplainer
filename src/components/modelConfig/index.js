@@ -9,6 +9,9 @@ class ModelConfigPanel extends Component {
 
     render(){
 
+        const dependentContainerStyle = this.props.dependent_features.length > 0 ?
+        {display: 'block'} : {display: 'none'};
+
         return(
             <>
                 <div className='floatConfigContainer'>
@@ -37,7 +40,7 @@ class ModelConfigPanel extends Component {
                     />
                 </div>
 
-                <div className='configDependentYContainer'>
+                <div className='configDependentYContainer' style={dependentContainerStyle}>
                     <DependentVar
                         dependent_features={this.props.dependent_features}
                     />

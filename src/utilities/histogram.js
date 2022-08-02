@@ -11,7 +11,7 @@ export function Histogram(props){
         const {scrollWidth, scrollHeight} = canvasRef.current;
         // was d3.thresholdFreedmanDiaconis
         const dataBins = d3.bin().thresholds(10)(data);
-
+        //console.log(dataBins);
         // Chart dimensions
         let dimensions = {
             width: scrollWidth,
