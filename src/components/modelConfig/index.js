@@ -43,6 +43,7 @@ class ModelConfigPanel extends Component {
                 <div className='configDependentYContainer' style={dependentContainerStyle}>
                     <DependentVar
                         dependent_features={this.props.dependent_features}
+                        norm_test_result={this.props.norm_test_result}
                     />
                 </div>
             </>
