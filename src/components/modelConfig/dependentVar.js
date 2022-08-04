@@ -20,7 +20,8 @@ export function DependentVar(props){
     });
 
     const makeSuggestion = (narrativeInfo) => {
-        if(narrativeInfo.pValue >= 0.05){
+        //console.log(narrativeInfo);
+        if(parseFloat(narrativeInfo.pvalue) >= 0.05){
             let suggestionObj = {
                 msg: "Data is in normal distribution, can use Gaussian model type.",
                 type: 'success',
@@ -28,7 +29,7 @@ export function DependentVar(props){
                 btnMsg: 'no action needed'
             }
             setSuggestion(suggestionObj);
-        }else if(narrativeInfo.skewness > 0){
+        }else if(parseFloat(narrativeInfo.skewness) > 0){
             let suggestionObj = {
                 msg: "Data has a positively skewed distribution. Try log-transformation to normalize the data.",
                 type: 'warning',
@@ -36,7 +37,7 @@ export function DependentVar(props){
                 btnMsg: 'Log-transformation'
             }
             setSuggestion(suggestionObj);
-        }else if(narrativeInfo.skewness < 0){
+        }else if(parseFloat(narrativeInfo.skewness) < 0){
             let suggestionObj = {
                 msg: "Data has a negatively skewed distribution. Try square root transformation to normalize the data.",
                 type: 'warning',
