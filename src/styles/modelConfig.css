@@ -49,7 +49,7 @@
   position: absolute;
   top: 40px;
   left: 22vw;
-  width: 25vw;
+  width: 26vw;
   /*height: 32vh;*/
   margin-top: 6px;
   margin-left: 6px;
@@ -59,3 +59,5 @@
   -moz-box-shadow:    0 1px 5px rgba(0, 0, 0, 0.4);  /* Firefox 3.5 - 3.6 */
   box-shadow:         0 1px 5px rgba(0, 0, 0, 0.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
+
+

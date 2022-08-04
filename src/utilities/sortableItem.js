@@ -48,6 +48,13 @@ export function SortableItem(props){
         </Tag> : 
         <Tag color="success">{'VIF: ' + props.VIFresult.toFixed(1)}</Tag>);
 
+    const normTransformInfo = props.norm_test_result.length > 0 ? 
+    (parseFloat(props.norm_test_result[0].p_value)>=0.05 ? 'Normal distribution' : (
+        parseFloat(props.norm_test_result[0].skewness) > 0 ? 'Log transformation' : 'square root'
+    )) : null;
+
+    const normTransBtnDisable = props.norm_test_result.length > 0 ? (parseFloat(props.norm_test_result[0].p_value)>=0.05 ? true : false) : false;
+
     const handleMapRefClick = event => {
         props.handleMapBtnClick(props.id);
     };
@@ -97,7 +104,7 @@ export function SortableItem(props){
                     </Spin>
 
                     <div className='space-align-block' style={logTransStyle}>
-                        <Button size='small' style={{fontSize: 11}}>Log Transformation</Button>
+                        <Button size='small' style={{fontSize: 11}} disabled={normTransBtnDisable} >{normTransformInfo}</Button>
                     </div>
 
                     <div className='space-align-block' style={collationIconStyle}>

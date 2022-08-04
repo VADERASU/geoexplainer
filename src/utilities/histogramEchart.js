@@ -6,6 +6,7 @@ export function HistogramEchart (props) {
 
     const setOption = (echartHistData) => {
         const chartOption = {
+            grid: { top: 15, bottom: 20, right: 25 },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -35,11 +36,10 @@ export function HistogramEchart (props) {
     }, [props.echartHistData]);
 
     return(
-        <div
-        >
+        <div>
              <ReactECharts
                  option={chartOption} 
-                 style={{height: 220, width: '100%'}}
+                 style={{height: props.height, width: '100%'}}
              />               
         </div> 
      );
