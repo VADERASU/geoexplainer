@@ -44,6 +44,9 @@ class ModelConfigPanel extends Component {
                     <DependentVar
                         dependent_features={this.props.dependent_features}
                         norm_test_result={this.props.norm_test_result}
+                        logTransform={this.props.logTransform}
+                        select_case={this.props.select_case}
+                        logtrans_backup={this.props.logtrans_backup}
                     />
                 </div>
             </>

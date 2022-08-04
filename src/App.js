@@ -65,6 +65,10 @@ class App extends Component {
       currentActivMapLayer: null, // actived map layer linked with config_layer
       norm_test_result: [],
       VIF_test_result: {},
+      logtrans_backup: {
+        feature: null,
+        old_results: null
+      },
 
       // background layer
       default_fill_layer: {
@@ -134,7 +138,75 @@ class App extends Component {
   };
 
   logTransform = (feature, select_case) => {
-
+    if(this.state.logtrans_backup.feature === feature){
+      let oldResults = this.state.logtrans_backup.old_results[0];
+      console.log(oldResults);
+      let norm_test_result = this.state.norm_test_result.map(e=>{
+        if(e.feature === feature){
+          e.p_value = oldResults.p_value;
+          e.skewness = oldResults.skewness;
+          e.Y = oldResults.Y;
+          return e;
+        }else{
+          return e;
+        }
+      });
+      let initLogResult = {
+        feature: null,
+        old_results: null
+      };
+      //console.log('back to origin');
+      const featureDict = this.updateSortableComponents('normTest', norm_test_result);
+      // update states
+      this.setState({
+        norm_test_result: norm_test_result,
+        sortable_components: featureDict,
+        logtrans_backup: initLogResult
+      });
+      
+    }else{
+      //console.log(feature, select_case);
+      axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/log-transform/'+feature+'+'+select_case)
+      .then(response => {
+        console.log(feature);
+        //console.log(this.state.norm_test_result);
+        let norm_new = response.data.normality_results;
+        let old_norm = {
+          Y: this.state.norm_test_result.filter(e=>e.feature === feature)[0].Y,
+          p_value: this.state.norm_test_result.filter(e=>e.feature === feature)[0].p_value,
+          skewness: this.state.norm_test_result.filter(e=>e.feature === feature)[0].skewness
+        };
+        
+        let norm_test_result = this.state.norm_test_result.map(e=>{
+          if(e.feature === feature){
+            e.p_value = norm_new.p_value;
+            e.skewness = norm_new.skewness;
+            e.Y = norm_new.Y;
+            return e;
+          }else{
+            return e;
+          }
+        });
+        let logResultBackup = {
+          feature: feature,
+          old_results: [old_norm],
+        };
+        const featureDict = this.updateSortableComponents('normTest', norm_test_result);
+        // update states
+        this.setState({
+          norm_test_result: norm_test_result,
+          sortable_components: featureDict,
+          logtrans_backup: logResultBackup
+        });
+        //console.log(logResultBackup);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+      
+    }
+    
   };
 
   // prerender all sortable items in model config interface
@@ -253,6 +325,25 @@ class App extends Component {
 
         featureDict.origin[e] = sortableItem;
         featureDict.activ[e] = sortableItemActiv;
+      });
+      return featureDict;
+    }else if(type === 'logTransform'){
+      let normResult = param.normResult;
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        if(e === param.feature){
+          const sortableItem = cloneElement(
+            featureDict.origin[e],
+            {norm_test_result: [normResult]}
+          );
+          const sortableItemActiv = cloneElement(
+            featureDict.activ[e],
+            {norm_test_result: [normResult]}
+          );
+  
+          featureDict.origin[e] = sortableItem;
+          featureDict.activ[e] = sortableItemActiv;
+        }
       });
       return featureDict;
     }
@@ -504,6 +595,10 @@ class App extends Component {
               updateSortableList={this.updateSortableList}
 
               norm_test_result={this.state.norm_test_result}
+
+              logTransform={this.logTransform}
+              select_case={this.state.select_case}
+              logtrans_backup={this.state.logtrans_backup}
             />
 
           </Content>
