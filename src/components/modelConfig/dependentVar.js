@@ -31,10 +31,10 @@ export function DependentVar(props){
             setSuggestion(suggestionObj);
         }else if(parseFloat(narrativeInfo.skewness) > 0){
             let suggestionObj = {
-                msg: "Data has a positively skewed distribution. Try log-transformation to normalize the data.",
+                msg: "Data has a positively skewed distribution. Try log transformation to normalize the data.",
                 type: 'warning',
                 action: false,
-                btnMsg: 'Log-transformation'
+                btnMsg: 'Log transformation'
             }
             setSuggestion(suggestionObj);
         }else if(parseFloat(narrativeInfo.skewness) < 0){
@@ -58,6 +58,7 @@ export function DependentVar(props){
             distribution: rawDependentData.p_value >= 0.05 ? 'Normal distribution' : 
             (rawDependentData.skewness > 0 ? 'Positively skewed' : 'Negatively skewed'),
         };
+        makeSuggestion(narrativeInfo);
         setNarrativeInfo(narrativeInfo);
         // get databins
         const dataBins = d3.bin().thresholds(10)(data);
@@ -102,9 +103,6 @@ export function DependentVar(props){
         if((props.dependent_features.length > 0) && (props.norm_test_result.length > 0)){
             setCurrentY(props.dependent_features[0]);
             makeHistoData(props.norm_test_result.filter(e=>e.feature === props.dependent_features[0])[0], props.dependent_features[0]);
-            if(narrativeInfo.distribution !== null){
-                makeSuggestion(narrativeInfo);
-            }
         }
     }, [props]);
 

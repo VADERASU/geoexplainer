@@ -133,6 +133,10 @@ class App extends Component {
     });
   };
 
+  logTransform = (feature, select_case) => {
+
+  };
+
   // prerender all sortable items in model config interface
   renderSortableComponents = (featureList) => {
     let featureDict = {
