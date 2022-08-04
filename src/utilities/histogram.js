@@ -19,7 +19,7 @@ export function Histogram(props){
             margin: {
                 top: 0,
                 right: 0,
-                bottom: props.container === 'dependent' ? 11 : 0,
+                bottom: 0,//props.container === 'dependent' ? 11 : 0,
                 left: 0, //60
             },
         };
@@ -53,6 +53,7 @@ export function Histogram(props){
 
         // Text information
         if(props.container === 'dependent'){
+            /*
             const normTestTooltip = normResult.p_value >= 0.05 ? 
             'Normal distribution' : 
             (normResult.skewness > 0 ? 'Positively skewed' : 'Negatively skewed');
@@ -63,6 +64,7 @@ export function Histogram(props){
             .attr('y', dimensions.height - 1)
             .attr('font-size', 11)
             .text(normTestTooltip);
+            */
         }
         
     };
