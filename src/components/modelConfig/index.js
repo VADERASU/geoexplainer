@@ -4,12 +4,24 @@ import '../../styles/modelConfig.css';
 import ModelParameterSelection from './modelConfig';
 import { VariableSelection } from './variableSelect';
 import { DependentVar } from './dependentVar';
+import { Correlation } from './correlation';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
  
 class ModelConfigPanel extends Component {
-
+    
     render(){
 
+        var corrX = [];
+        var corrY = [];
+        if (this.props.loaded_map_data && this.props.currentActivCorrelation) {
+            corrX = this.props.loaded_map_data.features.map(d => d.properties[this.props.currentActivCorrelation]);
+            corrY = this.props.loaded_map_data.features.map(d => d.properties[this.props.dependent_features[0]]);
+        }
+
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
+        {display: 'block'} : {display: 'none'};
+
+        const correlationContainerStyle = this.props.currentActivCorrelation !== null ?
         {display: 'block'} : {display: 'none'};
 
         return(
@@ -44,6 +56,14 @@ class ModelConfigPanel extends Component {
                     <DependentVar
                         dependent_features={this.props.dependent_features}
                         norm_test_result={this.props.norm_test_result}
+                    />
+                </div>
+                <div className='configCorrelationContainer' style={correlationContainerStyle}>
+                    <Correlation
+                        dependent_features={this.props.dependent_features}
+                        currentActivCorrelation={this.props.currentActivCorrelation}
+                        corrX={corrX}
+                        corrY={corrY}
                     />
                 </div>
             </>

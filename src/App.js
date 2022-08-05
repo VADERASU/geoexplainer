@@ -63,6 +63,7 @@ class App extends Component {
       dependentMapLayer: {},
 
       currentActivMapLayer: null, // actived map layer linked with config_layer
+      currentActivCorrelation: null,
       norm_test_result: [],
       VIF_test_result: {},
 
@@ -153,6 +154,7 @@ class App extends Component {
           VIFresult={null}
           mapBtnActiv={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
+          handleCorrBtnClick={this.handleCorrBtnClick}
       />
       let sortableItemActiv = 
       <SortableItem
@@ -163,6 +165,7 @@ class App extends Component {
           VIFresult={null}
           mapBtnActiv={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
+          handleCorrBtnClick={this.handleCorrBtnClick}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -306,8 +309,7 @@ class App extends Component {
         NWSE_bounds: map_coords.NWSE_bounds,
         config_layer: config_layer,
 
-        currentActivMapLayer: null,
-        
+        currentActivMapLayer: null
       });
     }else{
       let map_coords = getCountyCenter(chicago_demo);
@@ -421,6 +423,13 @@ class App extends Component {
     });
   };
 
+  handleCorrBtnClick = (id) => {
+    let currentActivCorrelation = this.state.currentActivCorrelation !== id ? id : null;
+    this.setState({
+      currentActivCorrelation: currentActivCorrelation
+    })
+  };
+
   //MAIN APP Controllers
   onHover = (event) => {
     let feature = event.features && event.features[0];
@@ -504,6 +513,9 @@ class App extends Component {
               updateSortableList={this.updateSortableList}
 
               norm_test_result={this.state.norm_test_result}
+
+              currentActivCorrelation={this.state.currentActivCorrelation}
+              loaded_map_data={this.state.loaded_map_data}
             />
 
           </Content>

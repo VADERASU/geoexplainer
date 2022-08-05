@@ -9,6 +9,7 @@ import { Histogram } from './histogram';
 export function SortableItem(props){
 
     //console.log(props.norm_test_result);
+    const corrBtnRef = useRef(null);
     const mapBtnRef = useRef(null);
 
     const {
@@ -59,13 +60,20 @@ export function SortableItem(props){
         props.handleMapBtnClick(props.id);
     };
 
+    const handleCorrRefClick = event => {
+        props.handleCorrBtnClick(props.id);
+    };
+
     useEffect(() => {
         const mapRef = mapBtnRef.current;
-    
         mapRef.addEventListener('mousedown', handleMapRefClick);
+
+        const corrRef = corrBtnRef.current;
+        corrRef.addEventListener('mousedown', handleCorrRefClick);
     
         return () => {
             mapRef.removeEventListener('mousedown', handleMapRefClick);
+            corrRef.removeEventListener('mousedown', handleCorrRefClick);
         };
       }, []);
 
@@ -108,7 +116,7 @@ export function SortableItem(props){
                     </div>
 
                     <div className='space-align-block' style={collationIconStyle}>
-                        <Button disabled={props.corrBtnActiv} size='small' icon={<DotChartOutlined />}></Button>
+                        <Button disabled={props.corrBtnActiv} size='small' ref={corrBtnRef} icon={<DotChartOutlined />}></Button>
                     </div>
 
                     <div className='space-align-block' style={mapIconStyle}>
