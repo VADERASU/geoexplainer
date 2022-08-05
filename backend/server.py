@@ -171,7 +171,8 @@ def normality_test(param):
         raw_data = param.split('+')
         Y_list = raw_data[0].split(',')
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_data[1])
-        georgia_data = pd.read_csv(dataset_path)
+        abs_path = os.path.abspath(os.path.join(app.root_path, dataset_path))
+        georgia_data = pd.read_csv(abs_path)
         #print(georgia_data)
         normality_result_list = []
         for Y in Y_list:
@@ -194,7 +195,8 @@ def normality_log(param):
         raw_data = param.split('+')
         parameter = raw_data[0]
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_data[1])
-        georgia_data = pd.read_csv(dataset_path)
+        abs_path = os.path.abspath(os.path.join(app.root_path, dataset_path))
+        georgia_data = pd.read_csv(abs_path)
         Y = georgia_data[parameter]
         log_Y = np.log(Y, where=Y!=0)
         #print(Y)
@@ -229,7 +231,8 @@ def pearson_correlation(param):
         variableY = raw_data[0]
         variableX = raw_data[1]
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_data[2])
-        georgia_data = pd.read_csv(dataset_path)
+        abs_path = os.path.abspath(os.path.join(app.root_path, dataset_path))
+        georgia_data = pd.read_csv(abs_path)
         Y_data = georgia_data[variableY]
         X_data = georgia_data[variableX]
         pearson_result = stats.pearsonr(Y_data, X_data)
@@ -251,7 +254,8 @@ def get_VIF(param):
     elif request.method == "GET":  # The actual request following the preflight
         raw_data = param.split('+')
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_data[1])
-        georgia_data = pd.read_csv(dataset_path)
+        abs_path = os.path.abspath(os.path.join(app.root_path, dataset_path))
+        georgia_data = pd.read_csv(abs_path)
         x_data = raw_data[0].split(',')
         X = georgia_data[x_data]
         # VIF dataframe
@@ -278,7 +282,8 @@ def single_sentence_embed():
         raw_form = request.json
         raw_dataset_name = raw_form['dataset']
         dataset_path, pointJson_path, polyJson_path, shape_path = getDatasetPath(raw_dataset_name)
-        georgia_data = pd.read_csv(dataset_path)
+        abs_path = os.path.abspath(os.path.join(app.root_path, dataset_path))
+        georgia_data = pd.read_csv(abs_path)
         shp = gp.read_file(shape_path)
         model = {
             'Y': raw_form['dependent_Y'],
