@@ -93,6 +93,7 @@ export function SortableItem(props){
                             data={props.norm_test_result} 
                             height={30} 
                             container={props.container}
+                            mapBtnActiv={props.mapBtnActiv}
                         />
                     </div>
                     </Spin>

@@ -96,8 +96,21 @@ class App extends Component {
       hoverInfo:null,
       // saved config session
       saved_config_session: {},
+
+      // Model exploration
+      model_param: {
+        dependent_Y: null,
+        Y_data: null,
+        X_list: null,
+        spatial_kernel: null,
+        model_type: null,
+        gwr_mgwr: null,
+        dataset: null
+      },
     };
   }
+
+  
 
   getNormalityTestResult = (featureList, select_case) => {
     axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
