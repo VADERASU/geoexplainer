@@ -24,6 +24,8 @@ class ModelConfigPanel extends Component {
                         handleModelKernel={this.props.handleModelKernel}
                         handleModelType={this.props.handleModelType}
                         handleLocalModel={this.props.handleLocalModel}
+
+                        trainModel={this.props.trainModel}
                     />
 
                 {/** model variable selection panels */}

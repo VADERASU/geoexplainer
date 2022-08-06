@@ -459,6 +459,15 @@ class App extends Component {
     }
   };
 
+  trainModel = () => {
+    // click model training btn
+    console.log('train model');
+  };
+
+  /**
+   *  TRAINED MODEL EXPLORATION
+   */
+
   // Model Config options
   handleModelKernel = (val) => {
     this.setState({spatial_kernel: val});
@@ -612,6 +621,8 @@ class App extends Component {
               logTransform={this.logTransform}
               select_case={this.state.select_case}
               logtrans_backup={this.state.logtrans_backup}
+
+              trainModel={this.trainModel}
             />
 
           </Content>

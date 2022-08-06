@@ -29,7 +29,7 @@ class ModelParameterSelection extends Component {
                             marginRight: 5
                             
                         }}
-                        //onClick={this.submitOption}
+                        onClick={this.props.trainModel}
                         >
                             Train Model
                         </Button>
