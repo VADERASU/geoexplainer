@@ -459,15 +459,6 @@ class App extends Component {
     }
   };
 
-  trainModel = () => {
-    // click model training btn
-    console.log('train model');
-  };
-
-  /**
-   *  TRAINED MODEL EXPLORATION
-   */
-
   // Model Config options
   handleModelKernel = (val) => {
     this.setState({spatial_kernel: val});
@@ -544,6 +535,57 @@ class App extends Component {
     };
     this.setState({hoverInfo: hoverInfo});
   };
+
+  trainModel = () => {
+    // click model training btn
+    if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
+      
+      let model_param = {
+        'dependent_Y': this.state.dependent_features[0],
+        'Y_data': this.state.norm_test_result.filter(e=>e.feature === this.state.dependent_features[0])[0].Y,
+        'X_list': this.state.independent_features,
+        'spatial_kernel': this.state.spatial_kernel,
+        'model_type': this.state.model_type,
+        'gwr_mgwr': this.state.local_modal,
+        'dataset': this.state.select_case
+      };
+      
+      axios.post('http://localhost:5005/models/api/v0.1/models', model_param)
+    .then(response => {
+      console.log(response);
+      // update states
+      
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    }else{
+
+    }
+    
+  };
+
+  getModelTrainResult = () =>{
+    axios.post('http://localhost:5000/get/single_sentence_embed', {
+      // POST entity
+      "sentence": this.state.currentPrompt,
+      "prompt_key": this.state.currentPromptKey,
+      "topN": this.state.topCompletions,
+      "models": this.state.models
+    })
+    .then(response => {
+      //console.log(response);
+      // update states
+      this.processSinglePromptResults(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  };
+
+  /**
+   *  TRAINED MODEL EXPLORATION
+   */
 
   render() {
     //console.log(this.state.data_properties); 
