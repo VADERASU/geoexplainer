@@ -12,8 +12,10 @@ class ModelConfigPanel extends Component {
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
         {display: 'block'} : {display: 'none'};
 
+        const configInterfaceStyle = this.props.model_trained ? {display: 'none'} : {display: 'block'};
+
         return(
-            <>
+            <div style={configInterfaceStyle}>
                 <div className='floatConfigContainer'>
                 {/** model parameter config panel */}
                     <ModelParameterSelection 
@@ -26,6 +28,7 @@ class ModelConfigPanel extends Component {
                         handleLocalModel={this.props.handleLocalModel}
 
                         trainModel={this.props.trainModel}
+                        exportData={this.props.exportData}
                     />
 
                 {/** model variable selection panels */}
@@ -51,7 +54,7 @@ class ModelConfigPanel extends Component {
                         logtrans_backup={this.props.logtrans_backup}
                     />
                 </div>
-            </>
+            </div>
             
         );
     }

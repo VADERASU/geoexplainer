@@ -20,6 +20,8 @@ import { SortableItem } from './utilities/sortableItem';
 //import {DATA_NAME} from "./resource/data_example";
 import georgia_demo from './data/georgia_demo.json';
 import chicago_demo from './data/chicago_config_poly.json';
+// temporal import
+import model_result from './data/temp/model_result.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
 const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name'];
@@ -107,6 +109,8 @@ class App extends Component {
         gwr_mgwr: null,
         dataset: null
       },
+      model_result: {},
+      
     };
   }
 
@@ -549,38 +553,57 @@ class App extends Component {
         'gwr_mgwr': this.state.local_modal,
         'dataset': this.state.select_case
       };
-      
+      /* TODO after interface has been developed!
       axios.post('http://localhost:5005/models/api/v0.1/models', model_param)
-    .then(response => {
-      console.log(response);
-      // update states
+      .then(response => {
+        //console.log(response);
+        // update states
+        //this.setState({model_result: response.data.added_model});
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      */
+      let statsResult = model_result;
+      //init map layer with local R2
+      //let currentActivMapLayer = 'loacl_R2';
+      //let mapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
+
+      let currentActivMapLayer = null;
+      let ori_config_layer = {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      };
+
+      this.setState({
+        model_trained: true,
+        loaded_map_data: model_result.geojson_poly,
+        currentActivMapLayer: currentActivMapLayer,
+        config_layer: ori_config_layer,
+        model_result: model_result
+      });
       
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      //let updateActivMapLayer = 'loacl_R2';
+      //let newMapLayer = getConfigMapLayerY(['loacl_R2'], this.state.loaded_map_data);
+      //console.log(newMapLayer);
     }else{
 
     }
     
   };
 
-  getModelTrainResult = () =>{
-    axios.post('http://localhost:5000/get/single_sentence_embed', {
-      // POST entity
-      "sentence": this.state.currentPrompt,
-      "prompt_key": this.state.currentPromptKey,
-      "topN": this.state.topCompletions,
-      "models": this.state.models
-    })
-    .then(response => {
-      //console.log(response);
-      // update states
-      this.processSinglePromptResults(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  exportData = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(this.state.model_result)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "model_result.json";
+
+    link.click();
   };
 
   /**
@@ -588,7 +611,7 @@ class App extends Component {
    */
 
   render() {
-    //console.log(this.state.data_properties); 
+    //console.log(this.state.loaded_map_data); 
     //if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
       //let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
       //addBivariateProp(newList, this.state.loaded_map_data);
@@ -665,6 +688,7 @@ class App extends Component {
               logtrans_backup={this.state.logtrans_backup}
 
               trainModel={this.trainModel}
+              exportData={this.exportData}
             />
 
           </Content>
