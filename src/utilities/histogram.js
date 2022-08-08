@@ -19,7 +19,7 @@ export function Histogram(props){
             margin: {
                 top: 0,
                 right: 0,
-                bottom: props.container === 'dependent' ? 11 : 0,
+                bottom: 0,//props.container === 'dependent' ? 11 : 0,
                 left: 0, //60
             },
         };
@@ -49,10 +49,30 @@ export function Histogram(props){
         .attr("width", d => Math.max(0, xScale(d.x1) - xScale(d.x0) - 1))
         .attr("y", d => yScale(d.length))
         .attr("height", d => yScale(0) - yScale(d.length))
-        .attr("fill", 'rgb(25, 183, 207)');
+        
+
+        //change the color
+        if(props.mapBtnActiv === 'primary'){
+            const globalMax = d3.max(data);
+            const globalMin = d3.min(data);
+            const clusterInterval = parseInt((globalMax - globalMin) / 5); // start from 0, 5 classes
+            const classSteps = [];
+    
+            for(let i = 1; i < 4; i++){
+                let classBreak = globalMin + clusterInterval * i;
+                classSteps.push(parseInt(classBreak));
+            }
+
+            bars.attr("fill", d => d.x1 <= classSteps[0] ? '#eff3ff' : 
+            (d.x1 <=  classSteps[1] ? '#bdd7e7' : 
+            (d.x1 <= classSteps[2] ? '#6baed6' : '#2171b5')));
+        }else{
+            bars.attr("fill", 'rgb(25, 183, 207)');
+        }
 
         // Text information
-        if(props.container === 'dependent'){
+        //if(props.container === 'dependent'){
+            /*
             const normTestTooltip = normResult.p_value >= 0.05 ? 
             'Normal distribution' : 
             (normResult.skewness > 0 ? 'Positively skewed' : 'Negatively skewed');
@@ -63,7 +83,8 @@ export function Histogram(props){
             .attr('y', dimensions.height - 1)
             .attr('font-size', 11)
             .text(normTestTooltip);
-        }
+            */
+        //}
         
     };
 

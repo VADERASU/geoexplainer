@@ -21,6 +21,21 @@ class ModelParameterSelection extends Component {
                     >
                         <Button
                         size="small" 
+                        type="default" 
+                        style={{
+                            float:'left',
+                            //width: 70,
+                            marginTop: 5,
+                            marginRight: 8
+                            
+                        }}
+                        onClick={this.props.exportData}
+                        >
+                            Save Configuration
+                        </Button>
+
+                        <Button
+                        size="small" 
                         type="primary" 
                         style={{
                             float:'left',
@@ -29,7 +44,7 @@ class ModelParameterSelection extends Component {
                             marginRight: 5
                             
                         }}
-                        //onClick={this.submitOption}
+                        onClick={this.props.trainModel}
                         >
                             Train Model
                         </Button>

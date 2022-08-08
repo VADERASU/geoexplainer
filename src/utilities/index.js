@@ -104,6 +104,7 @@ export function addBivariateProp(feature, geoData){
         // x is correlated with y
         ['#f0f0f0', '#bdbdbd', '#636363']
     ];
+    
     const featureListY = geoData.features.map(e=>e.properties[feature[0]]);
     const featureListX = geoData.features.map(e=>e.properties[feature[1]]);
     const maxY = Math.max(...featureListY);

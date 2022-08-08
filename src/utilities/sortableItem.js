@@ -38,7 +38,7 @@ export function SortableItem(props){
     };
     const mapIconStyle = {marginRight: 0, display: 'block'};
     const logTransStyle = {
-        width: '6.3vw', paddingLeft: 0, marginRight: 3,
+        width: '6.3vw', paddingLeft: 0, marginRight: 3, fontSize: 11.5, paddingTop: 8,
         display: props.container === 'dependent'? 'block' : 'none',
     };
 
@@ -51,31 +51,29 @@ export function SortableItem(props){
 
     const normTransformInfo = props.norm_test_result.length > 0 ? 
     (parseFloat(props.norm_test_result[0].p_value)>=0.05 ? 'Normal distribution' : (
-        parseFloat(props.norm_test_result[0].skewness) > 0 ? 'Log transformation' : 'square root'
+        parseFloat(props.norm_test_result[0].skewness) > 0 ? 'Positively skewed' : 'Negatively skewed'
     )) : null;
-
-    const normTransBtnDisable = props.norm_test_result.length > 0 ? (parseFloat(props.norm_test_result[0].p_value)>=0.05 ? true : false) : false;
 
     const handleMapRefClick = event => {
         props.handleMapBtnClick(props.id);
     };
 
     const handleCorrRefClick = event => {
-        props.handleCorrBtnClick(props.id);
+        props.handleCorrBtnclick(props.id);
     };
 
     useEffect(() => {
         const mapRef = mapBtnRef.current;
-        mapRef.addEventListener('mousedown', handleMapRefClick);
-
         const corrRef = corrBtnRef.current;
+    
+        mapRef.addEventListener('mousedown', handleMapRefClick);
         corrRef.addEventListener('mousedown', handleCorrRefClick);
     
         return () => {
             mapRef.removeEventListener('mousedown', handleMapRefClick);
             corrRef.removeEventListener('mousedown', handleCorrRefClick);
         };
-      }, []);
+      });
 
     return(
         <li
@@ -101,6 +99,7 @@ export function SortableItem(props){
                             data={props.norm_test_result} 
                             height={30} 
                             container={props.container}
+                            mapBtnActiv={props.mapBtnActiv}
                         />
                     </div>
                     </Spin>
@@ -112,11 +111,11 @@ export function SortableItem(props){
                     </Spin>
 
                     <div className='space-align-block' style={logTransStyle}>
-                        <Button size='small' style={{fontSize: 11}} disabled={normTransBtnDisable} >{normTransformInfo}</Button>
+                        {normTransformInfo}
                     </div>
 
                     <div className='space-align-block' style={collationIconStyle}>
-                        <Button disabled={props.corrBtnActiv} size='small' ref={corrBtnRef} icon={<DotChartOutlined />}></Button>
+                        <Button disabled={props.corrBtnActiv} type={props.corrBtnType} size='small' ref={corrBtnRef} icon={<DotChartOutlined />}></Button>
                     </div>
 
                     <div className='space-align-block' style={mapIconStyle}>

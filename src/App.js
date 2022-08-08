@@ -20,9 +20,11 @@ import { SortableItem } from './utilities/sortableItem';
 //import {DATA_NAME} from "./resource/data_example";
 import georgia_demo from './data/georgia_demo.json';
 import chicago_demo from './data/chicago_config_poly.json';
+// temporal import
+import model_result from './data/temp/model_result.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
-const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name'];
+const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name', 'biVariateLayer'];
 
 class App extends Component {
   constructor(props) {
@@ -63,9 +65,13 @@ class App extends Component {
       dependentMapLayer: {},
 
       currentActivMapLayer: null, // actived map layer linked with config_layer
-      currentActivCorrelation: null,
+      currentCorrMapLayer: null,
       norm_test_result: [],
       VIF_test_result: {},
+      logtrans_backup: {
+        feature: null,
+        old_results: null
+      },
 
       // background layer
       default_fill_layer: {
@@ -93,11 +99,26 @@ class App extends Component {
       hoverInfo:null,
       // saved config session
       saved_config_session: {},
+
+      // Model exploration
+      model_param: {
+        dependent_Y: null,
+        Y_data: null,
+        X_list: null,
+        spatial_kernel: null,
+        model_type: null,
+        gwr_mgwr: null,
+        dataset: null
+      },
+      model_result: {},
+      
     };
   }
 
+  
+
   getNormalityTestResult = (featureList, select_case) => {
-    axios.get('http://192.168.0.176:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
+    axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
     .then(response => {
       //console.log(response);
       const featureDict = this.updateSortableComponents('normTest', response.data.normality_results);
@@ -114,7 +135,7 @@ class App extends Component {
   };
 
   getVIF = (featureList, select_case) => {
-    axios.get('http://192.168.0.176:5005/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
+    axios.get('http://localhost:5005/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
     .then(response => {
       const vifList = response.data.VIF_results.VIF_list;
       const vifDict = {};
@@ -135,7 +156,75 @@ class App extends Component {
   };
 
   logTransform = (feature, select_case) => {
-
+    if(this.state.logtrans_backup.feature === feature){
+      let oldResults = this.state.logtrans_backup.old_results[0];
+      console.log(oldResults);
+      let norm_test_result = this.state.norm_test_result.map(e=>{
+        if(e.feature === feature){
+          e.p_value = oldResults.p_value;
+          e.skewness = oldResults.skewness;
+          e.Y = oldResults.Y;
+          return e;
+        }else{
+          return e;
+        }
+      });
+      let initLogResult = {
+        feature: null,
+        old_results: null
+      };
+      //console.log('back to origin');
+      const featureDict = this.updateSortableComponents('normTest', norm_test_result);
+      // update states
+      this.setState({
+        norm_test_result: norm_test_result,
+        sortable_components: featureDict,
+        logtrans_backup: initLogResult
+      });
+      
+    }else{
+      //console.log(feature, select_case);
+      axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/log-transform/'+feature+'+'+select_case)
+      .then(response => {
+        console.log(feature);
+        //console.log(this.state.norm_test_result);
+        let norm_new = response.data.normality_results;
+        let old_norm = {
+          Y: this.state.norm_test_result.filter(e=>e.feature === feature)[0].Y,
+          p_value: this.state.norm_test_result.filter(e=>e.feature === feature)[0].p_value,
+          skewness: this.state.norm_test_result.filter(e=>e.feature === feature)[0].skewness
+        };
+        
+        let norm_test_result = this.state.norm_test_result.map(e=>{
+          if(e.feature === feature){
+            e.p_value = norm_new.p_value;
+            e.skewness = norm_new.skewness;
+            e.Y = norm_new.Y;
+            return e;
+          }else{
+            return e;
+          }
+        });
+        let logResultBackup = {
+          feature: feature,
+          old_results: [old_norm],
+        };
+        const featureDict = this.updateSortableComponents('normTest', norm_test_result);
+        // update states
+        this.setState({
+          norm_test_result: norm_test_result,
+          sortable_components: featureDict,
+          logtrans_backup: logResultBackup
+        });
+        //console.log(logResultBackup);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+      
+    }
+    
   };
 
   // prerender all sortable items in model config interface
@@ -153,8 +242,9 @@ class App extends Component {
           norm_test_result={[]}
           VIFresult={null}
           mapBtnActiv={'default'}
+          corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
-          handleCorrBtnClick={this.handleCorrBtnClick}
+          handleCorrBtnclick={this.handleCorrBtnclick}
       />
       let sortableItemActiv = 
       <SortableItem
@@ -164,8 +254,9 @@ class App extends Component {
           norm_test_result={[]}
           VIFresult={null}
           mapBtnActiv={'default'}
+          corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
-          handleCorrBtnClick={this.handleCorrBtnClick}
+          handleCorrBtnclick={this.handleCorrBtnclick}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -252,6 +343,42 @@ class App extends Component {
         const sortableItemActiv = cloneElement(
           featureDict.activ[e],
           {mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary'}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
+      });
+      return featureDict;
+    }else if(type === 'logTransform'){
+      let normResult = param.normResult;
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        if(e === param.feature){
+          const sortableItem = cloneElement(
+            featureDict.origin[e],
+            {norm_test_result: [normResult]}
+          );
+          const sortableItemActiv = cloneElement(
+            featureDict.activ[e],
+            {norm_test_result: [normResult]}
+          );
+  
+          featureDict.origin[e] = sortableItem;
+          featureDict.activ[e] = sortableItemActiv;
+        }
+      });
+      return featureDict;
+    }else if(type === 'updateCorrBtnClick'){
+      let currentCorrMapLayer = this.state.currentCorrMapLayer !== param ? param : null;
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
         );
 
         featureDict.origin[e] = sortableItem;
@@ -392,10 +519,10 @@ class App extends Component {
       });
     }else{ // independent list
       //if(newList.length > 0){
-      //  let geoData = addBivariateProp(newList, this.state.loaded_map_data);
-      //  this.setState({loaded_map_data: geoData});
-      //  let configLayer = getConfigMapLayerYX();
-      //  this.setState({config_layer: configLayer});
+        //let geoData = addBivariateProp(newList, this.state.loaded_map_data);
+        //this.setState({loaded_map_data: geoData});
+        //let configLayer = getConfigMapLayerYX();
+        //this.setState({config_layer: configLayer});
       //}
       this.setState({
         independent_features: newList
@@ -423,11 +550,38 @@ class App extends Component {
     });
   };
 
-  handleCorrBtnClick = (id) => {
-    let currentActivCorrelation = this.state.currentActivCorrelation !== id ? id : null;
+  // show correlation map
+  handleCorrBtnclick = (id) => {
+    let currentCorrMapLayer = this.state.currentCorrMapLayer !== id ? id : null;
+    let configLayer = {
+      id: 'config-fill',
+      type: 'fill',
+      layout: {
+        'visibility': 'none',
+      },
+    };
+    if(currentCorrMapLayer !== null){
+      // fisplay correlation map
+      let corrList = [this.state.dependent_features[0], id];
+      
+      this.setState({loaded_map_data: addBivariateProp(corrList, this.state.loaded_map_data)});
+      configLayer = getConfigMapLayerYX();
+      this.setState({config_layer: configLayer});
+    }else{
+      // display dependent variable map
+      configLayer = this.state.dependentMapLayer;
+      let sortableComponents = this.updateSortableComponents('updateMapClickBtn', this.state.dependent_features[0]);
+      this.setState({
+        sortable_components: sortableComponents,
+        config_layer: configLayer
+      });
+    }
+
+    let sortableComponents = this.updateSortableComponents('updateCorrBtnClick', id);
     this.setState({
-      currentActivCorrelation: currentActivCorrelation
-    })
+      currentCorrMapLayer: currentCorrMapLayer,
+      sortable_components: sortableComponents,
+    });
   };
 
   //MAIN APP Controllers
@@ -441,13 +595,78 @@ class App extends Component {
     this.setState({hoverInfo: hoverInfo});
   };
 
+  trainModel = () => {
+    // click model training btn
+    if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
+      
+      let model_param = {
+        'dependent_Y': this.state.dependent_features[0],
+        'Y_data': this.state.norm_test_result.filter(e=>e.feature === this.state.dependent_features[0])[0].Y,
+        'X_list': this.state.independent_features,
+        'spatial_kernel': this.state.spatial_kernel,
+        'model_type': this.state.model_type,
+        'gwr_mgwr': this.state.local_modal,
+        'dataset': this.state.select_case
+      };
+      /* TODO after interface has been developed!
+      axios.post('http://localhost:5005/models/api/v0.1/models', model_param)
+      .then(response => {
+        //console.log(response);
+        // update states
+        //this.setState({model_result: response.data.added_model});
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      */
+      let statsResult = model_result;
+      //init map layer with local R2
+      //let currentActivMapLayer = 'loacl_R2';
+      //let mapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
+
+      let currentActivMapLayer = null;
+      let ori_config_layer = {
+        id: 'config-fill',
+        type: 'fill',
+        layout: {
+          'visibility': 'none',
+        },
+      };
+
+      this.setState({
+        model_trained: true,
+        loaded_map_data: model_result.geojson_poly,
+        currentActivMapLayer: currentActivMapLayer,
+        config_layer: ori_config_layer,
+        model_result: model_result
+      });
+      
+      //let updateActivMapLayer = 'loacl_R2';
+      //let newMapLayer = getConfigMapLayerY(['loacl_R2'], this.state.loaded_map_data);
+      //console.log(newMapLayer);
+    }else{
+
+    }
+    
+  };
+
+  exportData = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(this.state.model_result)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "model_result.json";
+
+    link.click();
+  };
+
+  /**
+   *  TRAINED MODEL EXPLORATION
+   */
+
   render() {
     //console.log(this.state.data_properties); 
-    //if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
-      //let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
-      //addBivariateProp(newList, this.state.loaded_map_data);
-    //}
-    
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
@@ -514,8 +733,16 @@ class App extends Component {
 
               norm_test_result={this.state.norm_test_result}
 
-              currentActivCorrelation={this.state.currentActivCorrelation}
+
+              currentActivCorrelation={this.state.currentCorrMapLayer}
               loaded_map_data={this.state.loaded_map_data}
+
+              logTransform={this.logTransform}
+              select_case={this.state.select_case}
+              logtrans_backup={this.state.logtrans_backup}
+
+              trainModel={this.trainModel}
+              exportData={this.exportData}
             />
 
           </Content>

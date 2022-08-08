@@ -21,11 +21,15 @@ class ModelConfigPanel extends Component {
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
         {display: 'block'} : {display: 'none'};
 
+
         const correlationContainerStyle = this.props.currentActivCorrelation !== null ?
         {display: 'block'} : {display: 'none'};
 
+        const configInterfaceStyle = this.props.model_trained ? {display: 'none'} : {display: 'block'};
+
+
         return(
-            <>
+            <div style={configInterfaceStyle}>
                 <div className='floatConfigContainer'>
                 {/** model parameter config panel */}
                     <ModelParameterSelection 
@@ -36,6 +40,9 @@ class ModelConfigPanel extends Component {
                         handleModelKernel={this.props.handleModelKernel}
                         handleModelType={this.props.handleModelType}
                         handleLocalModel={this.props.handleLocalModel}
+
+                        trainModel={this.props.trainModel}
+                        exportData={this.props.exportData}
                     />
 
                 {/** model variable selection panels */}
@@ -56,8 +63,12 @@ class ModelConfigPanel extends Component {
                     <DependentVar
                         dependent_features={this.props.dependent_features}
                         norm_test_result={this.props.norm_test_result}
+                        logTransform={this.props.logTransform}
+                        select_case={this.props.select_case}
+                        logtrans_backup={this.props.logtrans_backup}
                     />
                 </div>
+
                 <div className='configCorrelationContainer' style={correlationContainerStyle}>
                     <Correlation
                         dependent_features={this.props.dependent_features}
@@ -66,8 +77,7 @@ class ModelConfigPanel extends Component {
                         corrY={corrY}
                     />
                 </div>
-            </>
-            
+            </div> 
         );
     }
 }

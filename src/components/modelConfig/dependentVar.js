@@ -19,14 +19,14 @@ export function DependentVar(props){
         btnMsg: null
     });
 
-    const makeSuggestion = (narrativeInfo) => {
+    const makeSuggestion = (narrativeInfo, logtrans_backup) => {
         //console.log(narrativeInfo);
         if(parseFloat(narrativeInfo.pvalue) >= 0.05){
             let suggestionObj = {
                 msg: "Data is in normal distribution, can use Gaussian model type.",
                 type: 'success',
-                action: true,
-                btnMsg: 'no action needed'
+                action: logtrans_backup.feature !== currentY ? true : false,
+                btnMsg: logtrans_backup.feature !== currentY ? 'no action needed' : 'Use original Y'
             }
             setSuggestion(suggestionObj);
         }else if(parseFloat(narrativeInfo.skewness) > 0){
@@ -48,7 +48,7 @@ export function DependentVar(props){
         }
     };
 
-    const makeHistoData = (rawDependentData, dependentVar) => {
+    const makeHistoData = (rawDependentData, dependentVar, logtrans_backup) => {
         let data = rawDependentData.Y;
         let pValue = parseFloat(rawDependentData.p_value);
         let skewness = parseFloat(rawDependentData.skewness);
@@ -58,7 +58,7 @@ export function DependentVar(props){
             distribution: rawDependentData.p_value >= 0.05 ? 'Normal distribution' : 
             (rawDependentData.skewness > 0 ? 'Positively skewed' : 'Negatively skewed'),
         };
-        makeSuggestion(narrativeInfo);
+        makeSuggestion(narrativeInfo, logtrans_backup);
         setNarrativeInfo(narrativeInfo);
         // get databins
         const dataBins = d3.bin().thresholds(10)(data);
@@ -102,12 +102,17 @@ export function DependentVar(props){
         //console.log(props.dependent_features);
         if((props.dependent_features.length > 0) && (props.norm_test_result.length > 0)){
             setCurrentY(props.dependent_features[0]);
-            makeHistoData(props.norm_test_result.filter(e=>e.feature === props.dependent_features[0])[0], props.dependent_features[0]);
+            makeHistoData(
+                props.norm_test_result.filter(e=>e.feature === props.dependent_features[0])[0], 
+                props.dependent_features[0], 
+                props.logtrans_backup, 
+            );
         }
     }, [props]);
 
     const handleBtnClick = (e) => {
-        console.log('click', e);
+        //console.log('click', props.select_case);
+        props.logTransform(currentY, props.select_case);
     };
     
     return(
