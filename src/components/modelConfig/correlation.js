@@ -28,7 +28,7 @@ export function Correlation(props) {
     
     return(
         <Card
-            title={'Correlation of [' + currentY + ']' + 'and [' + currentX + ']'}
+            title={'Correlation of [' + currentY + '] and [' + currentX + ']'}
         >
             <ScatterEchart echartScatterData={echartScatterData}></ScatterEchart>
         </Card>

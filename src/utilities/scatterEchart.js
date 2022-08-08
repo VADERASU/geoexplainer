@@ -8,6 +8,26 @@ export function ScatterEchart (props) {
         const chartOption = {
             xAxis: {},
             yAxis: {},
+            brush: {
+                toolbox: ['rect', 'polygon', 'clear']
+            },
+            toolbox: {
+                feature: {
+                    dataZoom: {}
+                }
+            },
+            dataZoom: [
+                {
+                    type: 'inside',
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    start: 0,
+                    end: 100
+                }
+            ],
             series: [{
                 symbolSize: 5,
                 data: echartScatterData,
