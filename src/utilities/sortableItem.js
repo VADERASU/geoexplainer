@@ -10,6 +10,7 @@ export function SortableItem(props){
 
     //console.log(props.norm_test_result);
     const mapBtnRef = useRef(null);
+    const corrBtnRef = useRef(null);
 
     const {
         attributes,
@@ -53,21 +54,26 @@ export function SortableItem(props){
         parseFloat(props.norm_test_result[0].skewness) > 0 ? 'Positively skewed' : 'Negatively skewed'
     )) : null;
 
-    const normTransBtnDisable = props.norm_test_result.length > 0 ? (parseFloat(props.norm_test_result[0].p_value)>=0.05 ? true : false) : false;
-
     const handleMapRefClick = event => {
         props.handleMapBtnClick(props.id);
     };
 
+    const handleCorrRefClick = event => {
+        props.handleCorrBtnclick(props.id);
+    };
+
     useEffect(() => {
         const mapRef = mapBtnRef.current;
+        const corrRef = corrBtnRef.current;
     
         mapRef.addEventListener('mousedown', handleMapRefClick);
+        corrRef.addEventListener('mousedown', handleCorrRefClick);
     
         return () => {
             mapRef.removeEventListener('mousedown', handleMapRefClick);
+            corrRef.removeEventListener('mousedown', handleCorrRefClick);
         };
-      }, []);
+      });
 
     return(
         <li
@@ -109,7 +115,7 @@ export function SortableItem(props){
                     </div>
 
                     <div className='space-align-block' style={collationIconStyle}>
-                        <Button disabled={props.corrBtnActiv} size='small' icon={<DotChartOutlined />}></Button>
+                        <Button disabled={props.corrBtnActiv} type={props.corrBtnType} size='small' ref={corrBtnRef} icon={<DotChartOutlined />}></Button>
                     </div>
 
                     <div className='space-align-block' style={mapIconStyle}>

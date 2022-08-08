@@ -24,7 +24,7 @@ import chicago_demo from './data/chicago_config_poly.json';
 import model_result from './data/temp/model_result.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
-const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name'];
+const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name', 'biVariateLayer'];
 
 class App extends Component {
   constructor(props) {
@@ -65,6 +65,7 @@ class App extends Component {
       dependentMapLayer: {},
 
       currentActivMapLayer: null, // actived map layer linked with config_layer
+      currentCorrMapLayer: null,
       norm_test_result: [],
       VIF_test_result: {},
       logtrans_backup: {
@@ -241,7 +242,9 @@ class App extends Component {
           norm_test_result={[]}
           VIFresult={null}
           mapBtnActiv={'default'}
+          corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
+          handleCorrBtnclick={this.handleCorrBtnclick}
       />
       let sortableItemActiv = 
       <SortableItem
@@ -251,7 +254,9 @@ class App extends Component {
           norm_test_result={[]}
           VIFresult={null}
           mapBtnActiv={'default'}
+          corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
+          handleCorrBtnclick={this.handleCorrBtnclick}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -361,6 +366,23 @@ class App extends Component {
           featureDict.origin[e] = sortableItem;
           featureDict.activ[e] = sortableItemActiv;
         }
+      });
+      return featureDict;
+    }else if(type === 'updateCorrBtnClick'){
+      let currentCorrMapLayer = this.state.currentCorrMapLayer !== param ? param : null;
+      let featureDict = this.state.sortable_components;
+      this.state.data_properties.forEach(e=>{
+        const sortableItem = cloneElement(
+          featureDict.origin[e],
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
+        );
+        const sortableItemActiv = cloneElement(
+          featureDict.activ[e],
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
+        );
+
+        featureDict.origin[e] = sortableItem;
+        featureDict.activ[e] = sortableItemActiv;
       });
       return featureDict;
     }
@@ -498,10 +520,10 @@ class App extends Component {
       });
     }else{ // independent list
       //if(newList.length > 0){
-      //  let geoData = addBivariateProp(newList, this.state.loaded_map_data);
-      //  this.setState({loaded_map_data: geoData});
-      //  let configLayer = getConfigMapLayerYX();
-      //  this.setState({config_layer: configLayer});
+        //let geoData = addBivariateProp(newList, this.state.loaded_map_data);
+        //this.setState({loaded_map_data: geoData});
+        //let configLayer = getConfigMapLayerYX();
+        //this.setState({config_layer: configLayer});
       //}
       this.setState({
         independent_features: newList
@@ -527,6 +549,41 @@ class App extends Component {
       config_layer: configLayer,
       sortable_components: sortableComponents,
     });
+  };
+
+  // show correlation map
+  handleCorrBtnclick = (id) => {
+    let currentCorrMapLayer = this.state.currentCorrMapLayer !== id ? id : null;
+    let configLayer = {
+      id: 'config-fill',
+      type: 'fill',
+      layout: {
+        'visibility': 'none',
+      },
+    };
+    if(currentCorrMapLayer !== null){
+      // fisplay correlation map
+      let corrList = [this.state.dependent_features[0], id];
+      
+      this.setState({loaded_map_data: addBivariateProp(corrList, this.state.loaded_map_data)});
+      configLayer = getConfigMapLayerYX();
+      this.setState({config_layer: configLayer});
+    }else{
+      // display dependent variable map
+      configLayer = this.state.dependentMapLayer;
+      let sortableComponents = this.updateSortableComponents('updateMapClickBtn', this.state.dependent_features[0]);
+      this.setState({
+        sortable_components: sortableComponents,
+        config_layer: configLayer
+      });
+    }
+
+    let sortableComponents = this.updateSortableComponents('updateCorrBtnClick', id);
+    this.setState({
+      currentCorrMapLayer: currentCorrMapLayer,
+      sortable_components: sortableComponents,
+    });
+    
   };
 
   //MAIN APP Controllers
@@ -611,12 +668,7 @@ class App extends Component {
    */
 
   render() {
-    //console.log(this.state.loaded_map_data); 
-    //if(this.state.dependent_features.length > 0 && this.state.independent_features.length > 0){
-      //let newList = [this.state.dependent_features[0], this.state.independent_features[0]];
-      //addBivariateProp(newList, this.state.loaded_map_data);
-    //}
-    
+    //console.log(this.state.data_properties); 
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
