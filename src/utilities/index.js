@@ -104,9 +104,9 @@ export function addBivariateProp(feature, geoData){
         // x is correlated with y
         ['#f0f0f0', '#bdbdbd', '#636363']
     ];
-    
-    const featureListY = geoData.features.map(e=>e.properties[feature[0]]);
-    const featureListX = geoData.features.map(e=>e.properties[feature[1]]);
+    const clonedata = JSON.parse(JSON.stringify(geoData));
+    const featureListY = clonedata.features.map(e=>e.properties[feature[0]]);
+    const featureListX = clonedata.features.map(e=>e.properties[feature[1]]);
     const maxY = Math.max(...featureListY);
     const minY = Math.min(...featureListY);
     const maxX = Math.max(...featureListX);
@@ -125,7 +125,7 @@ export function addBivariateProp(feature, geoData){
 
     // add bi-variate property to the GeoJson obj
     
-    geoData.features.map(e=>{
+    clonedata.features.map(e=>{
         let y = e.properties[feature[0]];
         let x = e.properties[feature[1]];
         // decide smallest y-axis color
@@ -168,7 +168,7 @@ export function addBivariateProp(feature, geoData){
         }
     });
     //console.log(geoData.features.map(e=>e.properties.biVariateLayer));
-    return geoData;
+    return clonedata;
 
 }
 

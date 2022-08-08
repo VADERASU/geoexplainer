@@ -1,7 +1,7 @@
 import {Component, cloneElement} from 'react';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
-import Map, { Source, Layer } from 'react-map-gl';
+import Map, { Source, Layer, useMap } from 'react-map-gl';
 import axios from 'axios';
 
 // custom components
@@ -338,11 +338,17 @@ class App extends Component {
       this.state.data_properties.forEach(e=>{
         const sortableItem = cloneElement(
           featureDict.origin[e],
-          {mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary'}
+          {
+            mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary',
+            corrBtnType: 'default'
+          }
         );
         const sortableItemActiv = cloneElement(
           featureDict.activ[e],
-          {mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary'}
+          {
+            mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary',
+            corrBtnType: 'default',
+          }
         );
 
         featureDict.origin[e] = sortableItem;
@@ -548,31 +554,32 @@ class App extends Component {
       currentActivMapLayer: currentActivMapLayer,
       config_layer: configLayer,
       sortable_components: sortableComponents,
+      currentCorrMapLayer: null,
     });
+
   };
 
   // show correlation map
   handleCorrBtnclick = (id) => {
+    //let geodata = this.state.loaded_map_data;
     let currentCorrMapLayer = this.state.currentCorrMapLayer !== id ? id : null;
-    let configLayer = {
-      id: 'config-fill',
-      type: 'fill',
-      layout: {
-        'visibility': 'none',
-      },
-    };
     if(currentCorrMapLayer !== null){
-      // fisplay correlation map
+      // display correlation map
       let corrList = [this.state.dependent_features[0], id];
-      
       this.setState({loaded_map_data: addBivariateProp(corrList, this.state.loaded_map_data)});
-      configLayer = getConfigMapLayerYX();
-      this.setState({config_layer: configLayer});
+      let configLayer = getConfigMapLayerYX();
+      let sortableComponents = this.updateSortableComponents('updateMapClickBtn', this.state.currentActivMapLayer);
+      this.setState({
+        currentActivMapLayer: null,
+        sortable_components: sortableComponents,
+        config_layer: configLayer
+      });
     }else{
       // display dependent variable map
-      configLayer = this.state.dependentMapLayer;
+      let configLayer = this.state.dependentMapLayer;
       let sortableComponents = this.updateSortableComponents('updateMapClickBtn', this.state.dependent_features[0]);
       this.setState({
+        currentActivMapLayer: this.state.dependent_features[0],
         sortable_components: sortableComponents,
         config_layer: configLayer
       });
@@ -668,7 +675,6 @@ class App extends Component {
    */
 
   render() {
-    //console.log(this.state.data_properties); 
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
@@ -711,7 +717,7 @@ class App extends Component {
               projection={'globe'}
               interactiveLayerIds={this.state.loaded_map_data === null ? [] : ['counties-fill']}
             >
-              {default_source_layers}
+              {this.state.loaded_map_data && (default_source_layers)}
             </Map>
             
             <ModelConfigPanel
