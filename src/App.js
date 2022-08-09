@@ -7,6 +7,7 @@ import axios from 'axios';
 // custom components
 import NavBar from './components/nav';
 import ModelConfigPanel from './components/modelConfig';
+import { ModelExplore } from './components/modelExplore';
 
 // import css style files
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -158,7 +159,7 @@ class App extends Component {
   logTransform = (feature, select_case) => {
     if(this.state.logtrans_backup.feature === feature){
       let oldResults = this.state.logtrans_backup.old_results[0];
-      console.log(oldResults);
+      //console.log(oldResults);
       let norm_test_result = this.state.norm_test_result.map(e=>{
         if(e.feature === feature){
           e.p_value = oldResults.p_value;
@@ -186,7 +187,7 @@ class App extends Component {
       //console.log(feature, select_case);
       axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/log-transform/'+feature+'+'+select_case)
       .then(response => {
-        console.log(feature);
+        //console.log(feature);
         //console.log(this.state.norm_test_result);
         let norm_new = response.data.normality_results;
         let old_norm = {
@@ -628,12 +629,12 @@ class App extends Component {
         console.log(error);
       });
       */
-      let statsResult = model_result;
+      
       //init map layer with local R2
       //let currentActivMapLayer = 'loacl_R2';
       //let mapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
 
-      let currentActivMapLayer = null;
+      let currentActivMapLayer = 'loacl_R2';
       let ori_config_layer = {
         id: 'config-fill',
         type: 'fill',
@@ -641,18 +642,18 @@ class App extends Component {
           'visibility': 'none',
         },
       };
-
+      
       this.setState({
         model_trained: true,
-        loaded_map_data: model_result.geojson_poly,
+        oaded_map_data: model_result.geojson_poly,
         currentActivMapLayer: currentActivMapLayer,
         config_layer: ori_config_layer,
         model_result: model_result
       });
-      
+      //console.log(this.state.loaded_map_data, model_result.geojson_poly);
       //let updateActivMapLayer = 'loacl_R2';
-      //let newMapLayer = getConfigMapLayerY(['loacl_R2'], this.state.loaded_map_data);
-      //console.log(newMapLayer);
+      //let newMapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
+      
     }else{
 
     }
@@ -747,6 +748,10 @@ class App extends Component {
 
               trainModel={this.trainModel}
               exportData={this.exportData}
+            />
+
+            <ModelExplore
+              model_trained={this.state.model_trained}
             />
 
           </Content>
