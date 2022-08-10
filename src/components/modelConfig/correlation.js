@@ -12,19 +12,21 @@ export function Correlation(props) {
         setEchartScatterData(xData.map((d,i) => [d, yData[i]]));
     };
 
-    useEffect(()=>{
-        if (props.dependent_features.length > 0) {
+    useEffect(() => {
+        if (props.dependent_features.length > 0 && props.currentActivCorrelation !== null && props.loaded_map_data.features.length > 0) {
             setCurrentY(props.dependent_features[0]);
-        }
-
-        if (props.currentActivCorrelation !== null) {
             setCurrentX(props.currentActivCorrelation);
+            setEchartScatterData(
+                props.loaded_map_data.features.map(d => {
+                    return {
+                        x: d.properties[currentX],
+                        y: d.properties[currentY],
+                        UID: d.properties['UID']
+                    }
+                }
+            ));
         }
-
-        if (props.corrX.length > 0 && props.corrY.length > 0) {
-            makeScatterData(props.corrX, props.corrY);
-        }
-    }, [props]);
+    }, [props.dependent_features[0], props.currentActivCorrelation]);
     
     return(
         <Card

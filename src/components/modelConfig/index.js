@@ -9,14 +9,7 @@ import { ConsoleSqlOutlined } from '@ant-design/icons';
  
 class ModelConfigPanel extends Component {
     
-    render(){
-
-        var corrX = [];
-        var corrY = [];
-        if (this.props.loaded_map_data && this.props.currentActivCorrelation) {
-            corrX = this.props.loaded_map_data.features.map(d => d.properties[this.props.currentActivCorrelation]);
-            corrY = this.props.loaded_map_data.features.map(d => d.properties[this.props.dependent_features[0]]);
-        }
+    render() {
 
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
         {display: 'block'} : {display: 'none'};
@@ -26,7 +19,6 @@ class ModelConfigPanel extends Component {
         {display: 'block'} : {display: 'none'};
 
         const configInterfaceStyle = this.props.model_trained ? {display: 'none'} : {display: 'block'};
-
 
         return(
             <div style={configInterfaceStyle}>
@@ -73,8 +65,7 @@ class ModelConfigPanel extends Component {
                     <Correlation
                         dependent_features={this.props.dependent_features}
                         currentActivCorrelation={this.props.currentActivCorrelation}
-                        corrX={corrX}
-                        corrY={corrY}
+                        loaded_map_data={this.props.loaded_map_data}
                     />
                 </div>
             </div> 

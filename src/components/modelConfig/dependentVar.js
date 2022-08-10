@@ -99,7 +99,6 @@ export function DependentVar(props){
     };
 
     useEffect(()=>{
-        //console.log(props.dependent_features);
         if((props.dependent_features.length > 0) && (props.norm_test_result.length > 0)){
             setCurrentY(props.dependent_features[0]);
             makeHistoData(
@@ -108,7 +107,7 @@ export function DependentVar(props){
                 props.logtrans_backup, 
             );
         }
-    }, [props]);
+    }, [props.dependent_features[0], props.norm_test_result]);
 
     const handleBtnClick = (e) => {
         //console.log('click', props.select_case);
