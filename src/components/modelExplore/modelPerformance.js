@@ -31,16 +31,19 @@ export function ModelPerformance (props){
                 indicator: 'Local R2',
                 mean: local_r2.mean.toFixed(2),
                 numerical_distribution: local_r2,
+                std: local_r2.std.toFixed(2),
             },{
                 key: 1,
                 indicator: 'Cook\'s distance',
                 mean: cooksd.mean.toFixed(2),
                 numerical_distribution: cooksd,
+                std: cooksd.std.toFixed(2),
             },{
                 key: 2,
                 indicator: 'Residuals',
                 mean: residual.mean.toFixed(2),
                 numerical_distribution: residual,
+                std: residual.std.toFixed(2),
             }
         ];
         setLocalInfoData(tableData);
@@ -70,7 +73,12 @@ export function ModelPerformance (props){
             title: 'Mean',
             dataIndex: 'mean',
             key: 'mean',
-        }
+        },
+        {
+            title: 'Standard Deviation',
+            dataIndex: 'std',
+            key: 'std',
+        },
       ];
 
     useEffect(()=>{
@@ -84,6 +92,7 @@ export function ModelPerformance (props){
         onChange: (selectedRowKeys, selectedRows) => {
           //let selectedPrompt = localInfoData[selectedRowKeys[0]];
           setSelectedRowKeys(selectedRowKeys);
+          console.log("click");
         },
     };
     
@@ -109,7 +118,7 @@ export function ModelPerformance (props){
                 }}
             >
                 <Table
-                    size="middle"
+                    size="small"
                     rowSelection={{
                         type: 'radio',
                         selectedRowKeys: selectedRowKeys,
@@ -123,6 +132,7 @@ export function ModelPerformance (props){
                             onClick: event => {
                                 //let selectedPrompt = promptList[record.key];
                                 setSelectedRowKeys([record.key]);
+                                console.log("click");
                             },
                         };
                     }}

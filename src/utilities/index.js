@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 export function fomatFloat(value, n) {
     let f = Math.round(value*Math.pow(10,n))/Math.pow(10,n);
     let s = f.toString();
@@ -59,34 +61,46 @@ export function getCountyCenter(geojson_data){
 }
 
 export function getDiagnosticMapLayer(feature, geoData){
-    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+    // try 5 classes with multiple classification methods, use Quantile at first
+    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
     const configLayer = {
         id: 'config-fill',
         type: 'fill',
     };
     
     const featureList = geoData.features.map(e=>e.properties[feature]);
+    
+    /*
     const max = Math.max(...featureList);
     const min = Math.min(...featureList);
     const clusterInterval = (max - min) / 5; // start from 0, 5 classes
     const classSteps = [];
-    
     for(let i = 1; i < 4; i++){
         let classBreak = min + clusterInterval * i;
         classSteps.push(parseFloat(classBreak.toFixed(2)));
     }
-    //console.log(classSteps);
+    */
+
+    const quantile = d3.scaleQuantile()
+        .domain(featureList) // pass the whole dataset to a scaleQuantile’s domain
+        .range(dependentColorScheme);
+
+    const classSteps = quantile.quantiles();
+    //console.log(quantile.quantiles());
+
     let paintProp = {
         'fill-color': [
             'step',
             ['get', feature],
             dependentColorScheme[0],
-            classSteps[0],
+            parseFloat(classSteps[0].toFixed(2)),
             dependentColorScheme[1],
-            classSteps[1],
+            parseFloat(classSteps[1].toFixed(2)),
             dependentColorScheme[2],
-            classSteps[2],
-            dependentColorScheme[3]
+            parseFloat(classSteps[2].toFixed(2)),
+            dependentColorScheme[3],
+            parseFloat(classSteps[3].toFixed(2)),
+            dependentColorScheme[4],
         ],
         'fill-opacity': 0.8,
         
