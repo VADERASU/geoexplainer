@@ -58,16 +58,54 @@ export function getCountyCenter(geojson_data){
     };
 }
 
+export function getDiagnosticMapLayer(feature, geoData){
+    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+    const configLayer = {
+        id: 'config-fill',
+        type: 'fill',
+    };
+    
+    const featureList = geoData.features.map(e=>e.properties[feature]);
+    const max = Math.max(...featureList);
+    const min = Math.min(...featureList);
+    const clusterInterval = (max - min) / 5; // start from 0, 5 classes
+    const classSteps = [];
+    
+    for(let i = 1; i < 4; i++){
+        let classBreak = min + clusterInterval * i;
+        classSteps.push(parseFloat(classBreak.toFixed(2)));
+    }
+    //console.log(classSteps);
+    let paintProp = {
+        'fill-color': [
+            'step',
+            ['get', feature],
+            dependentColorScheme[0],
+            classSteps[0],
+            dependentColorScheme[1],
+            classSteps[1],
+            dependentColorScheme[2],
+            classSteps[2],
+            dependentColorScheme[3]
+        ],
+        'fill-opacity': 0.8,
+        
+    };
+    configLayer.paint = paintProp;
+
+    return configLayer;  
+}
+
 export function getConfigMapLayerY(feature, geoData){
     const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
     const configLayer = {
         id: 'config-fill',
         type: 'fill',
     };
+    
     const featureList = geoData.features.map(e=>e.properties[feature[0]]);
     const max = Math.max(...featureList);
     const min = Math.min(...featureList);
-    
     const clusterInterval = parseInt((max - min) / 5); // start from 0, 5 classes
     const classSteps = [];
     
@@ -75,6 +113,7 @@ export function getConfigMapLayerY(feature, geoData){
         let classBreak = min + clusterInterval * i;
         classSteps.push(parseInt(classBreak));
     }
+    console.log(classSteps);
     let paintProp = {
         'fill-color': [
             'step',

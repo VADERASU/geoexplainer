@@ -14,7 +14,14 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/App.css';
 
 // import utilities
-import { getCountyCenter, getConfigMapLayerY, addBivariateProp, getConfigMapLayerYX } from './utilities';
+import { 
+  getCountyCenter, 
+  getConfigMapLayerY, 
+  addBivariateProp, 
+  getConfigMapLayerYX, 
+  getDiagnosticMapLayer 
+} from './utilities';
+
 import { SortableItem } from './utilities/sortableItem';
 
 /** import data */ 
@@ -36,6 +43,7 @@ class App extends Component {
     this.state = {
       // model config states
       model_trained: false,
+      model_used: '',
       spatial_kernel: "adaptive bisquare",
       model_type: "gaussian",
       local_modal: "gwr",
@@ -634,7 +642,7 @@ class App extends Component {
       //let currentActivMapLayer = 'loacl_R2';
       //let mapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
 
-      let currentActivMapLayer = 'loacl_R2';
+      let currentActivMapLayer = null;
       let ori_config_layer = {
         id: 'config-fill',
         type: 'fill',
@@ -645,7 +653,8 @@ class App extends Component {
       
       this.setState({
         model_trained: true,
-        oaded_map_data: model_result.geojson_poly,
+        model_used: 'GWR',
+        loaded_map_data: model_result.geojson_poly,
         currentActivMapLayer: currentActivMapLayer,
         config_layer: ori_config_layer,
         model_result: model_result
@@ -674,6 +683,18 @@ class App extends Component {
   /**
    *  TRAINED MODEL EXPLORATION
    */
+
+  setMapLayer = (id) => {
+    const updateActivMapLayer = id;
+    //need to be changed
+    const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data);
+    console.log(newMapLayer);
+    this.setState({
+      currentActivMapLayer: updateActivMapLayer,
+      config_layer: newMapLayer,
+      currentCorrMapLayer: null,
+    });
+  };
 
   render() {
     const { Header, Content } = Layout;
@@ -752,6 +773,9 @@ class App extends Component {
 
             <ModelExplore
               model_trained={this.state.model_trained}
+              model_result={this.state.model_result}
+              model_used={this.state.model_used}
+              setMapLayer={this.setMapLayer}
             />
 
           </Content>
