@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Descriptions, Table, Radio} from 'antd';
+import { Card, Descriptions, Table, Tag} from 'antd';
+
+import { Boxplot } from "../../utilities/boxplot";
 
 export function ModelPerformance (props){
     const [globalInfoDiv, setGlobalInfoDic] = useState(<></>);
@@ -27,15 +29,18 @@ export function ModelPerformance (props){
             {
                 key: 0,
                 indicator: 'Local R2',
-                mean: local_r2.mean.toFixed(2)
+                mean: local_r2.mean.toFixed(2),
+                numerical_distribution: local_r2,
             },{
                 key: 1,
                 indicator: 'Cook\'s distance',
-                mean: cooksd.mean.toFixed(2)
+                mean: cooksd.mean.toFixed(2),
+                numerical_distribution: cooksd,
             },{
                 key: 2,
                 indicator: 'Residuals',
-                mean: residual.mean.toFixed(2)
+                mean: residual.mean.toFixed(2),
+                numerical_distribution: residual,
             }
         ];
         setLocalInfoData(tableData);
@@ -43,17 +48,33 @@ export function ModelPerformance (props){
 
     const local_columns = [
         {
-          title: 'Indicator',
-          dataIndex: 'indicator',
+            title: 'Indicator',
+            dataIndex: 'indicator',
+            key: 'indicator',
         },
         {
-          title: 'Mean',
-          dataIndex: 'mean',
+            title: 'Numerical distribution',
+            dataIndex: 'numerical_distribution',
+            key: 'numerical_distribution',
+            render: (_, { numerical_distribution }) => {
+                //console.log(numerical_distribution);
+                return(
+                    <Boxplot
+                        echartBoxplotData={numerical_distribution}
+                        height={30}
+                    />
+                );
+            },
+        },
+        {
+            title: 'Mean',
+            dataIndex: 'mean',
+            key: 'mean',
         }
       ];
 
     useEffect(()=>{
-        console.log(props.globalInfo);
+        //console.log(props.local_r2);
         makeGlobalInfo(props.globalInfo, props.model_used);
         makeLocalInfoTableData(props.local_r2, props.cooksd, props.residual);
         props.setMapLayer('local_R2');
@@ -88,7 +109,7 @@ export function ModelPerformance (props){
                 }}
             >
                 <Table
-                    size="small"
+                    size="middle"
                     rowSelection={{
                         type: 'radio',
                         selectedRowKeys: selectedRowKeys,

@@ -113,7 +113,7 @@ export function getConfigMapLayerY(feature, geoData){
         let classBreak = min + clusterInterval * i;
         classSteps.push(parseInt(classBreak));
     }
-    console.log(classSteps);
+    //console.log(classSteps);
     let paintProp = {
         'fill-color': [
             'step',
