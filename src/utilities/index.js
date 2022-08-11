@@ -61,53 +61,142 @@ export function getCountyCenter(geojson_data){
 }
 
 export function getDiagnosticMapLayer(feature, geoData){
-    // try 5 classes with multiple classification methods, use Quantile at first
-    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
-    const configLayer = {
-        id: 'config-fill',
-        type: 'fill',
-    };
-    
-    const featureList = geoData.features.map(e=>e.properties[feature]);
-    
-    /*
-    const max = Math.max(...featureList);
-    const min = Math.min(...featureList);
-    const clusterInterval = (max - min) / 5; // start from 0, 5 classes
-    const classSteps = [];
-    for(let i = 1; i < 4; i++){
-        let classBreak = min + clusterInterval * i;
-        classSteps.push(parseFloat(classBreak.toFixed(2)));
-    }
-    */
+    if(feature === 'local_R2'){
+        // try 5 classes with multiple classification methods, use Quantile at first
+        const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+        const configLayer = {
+            id: 'config-fill',
+            type: 'fill',
+        };
+        //'filter': ['in', 'UID', '']
+        const featureList = geoData.features.map(e=>e.properties[feature]);
 
-    const quantile = d3.scaleQuantile()
-        .domain(featureList) // pass the whole dataset to a scaleQuantile’s domain
-        .range(dependentColorScheme);
+        const quantile = d3.scaleQuantile()
+            .domain(featureList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(dependentColorScheme);
 
-    const classSteps = quantile.quantiles();
-    //console.log(quantile.quantiles());
+        const classSteps = quantile.quantiles();
+        //console.log(quantile.quantiles());
 
-    let paintProp = {
-        'fill-color': [
-            'step',
-            ['get', feature],
-            dependentColorScheme[0],
-            parseFloat(classSteps[0].toFixed(2)),
-            dependentColorScheme[1],
-            parseFloat(classSteps[1].toFixed(2)),
-            dependentColorScheme[2],
-            parseFloat(classSteps[2].toFixed(2)),
-            dependentColorScheme[3],
-            parseFloat(classSteps[3].toFixed(2)),
-            dependentColorScheme[4],
-        ],
-        'fill-opacity': 0.8,
+        let paintProp = {
+            'fill-color': [
+                'step',
+                ['get', feature],
+                dependentColorScheme[0],
+                parseFloat(classSteps[0].toFixed(2)),
+                dependentColorScheme[1],
+                parseFloat(classSteps[1].toFixed(2)),
+                dependentColorScheme[2],
+                parseFloat(classSteps[2].toFixed(2)),
+                dependentColorScheme[3],
+                parseFloat(classSteps[3].toFixed(2)),
+                dependentColorScheme[4],
+            ],
+            'fill-opacity': 0.8,
+            
+        };
+        configLayer.paint = paintProp;
+
+        return configLayer;
+    }else if(feature === 'cooksD'){
+        const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+        const configLayer = {
+            id: 'config-fill',
+            type: 'fill',
+        };
+        //'filter': ['in', 'UID', '']
+        const filter = ['in', 'UID', ''];
+        const featureList = geoData.features.map(e=>e.properties[feature]);
+
+        const quantile = d3.scaleQuantile()
+            .domain(featureList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(dependentColorScheme);
+
+        const classSteps = quantile.quantiles();
         
-    };
-    configLayer.paint = paintProp;
+        // filter cooksD above the threshold 4 / N
+        const threshold = 4 / featureList.length;
+        geoData.features.forEach(e=>{
+            let UID = e.properties['UID'];
+            if(e.properties[feature]>threshold){
+                filter.push(UID);
+            }
+        });
+        //console.log(classSteps, threshold);
 
-    return configLayer;  
+        let paintProp = {
+            'fill-color': [
+                'step',
+                ['get', feature],
+                dependentColorScheme[0],
+                classSteps[0],
+                dependentColorScheme[1],
+                classSteps[1],
+                dependentColorScheme[2],
+                classSteps[2],
+                dependentColorScheme[3],
+                classSteps[3],
+                dependentColorScheme[4],
+            ],
+            'fill-opacity': 0.8,
+            
+        };
+        configLayer.paint = paintProp;
+        configLayer.filter = filter;
+        return configLayer;
+    }else if(feature === 'std_residuals'){
+        const configLayer = {
+            id: 'config-fill',
+            type: 'fill',
+        };
+
+        const featureList = geoData.features.map(e=>e.properties[feature]);
+        const posList = featureList.filter(e=>e>0);
+        const negList = featureList.filter(e=>e<0);
+
+        const negColorScheme = ['#b2182b','#ef8a62','#fddbc7'];
+        const posColorScheme = ['#d1e5f0','#67a9cf','#2166ac'];
+
+        const quantile_neg = d3.scaleQuantile()
+            .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(negColorScheme);
+
+        const quantile_pos = d3.scaleQuantile()
+            .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(posColorScheme);
+
+        const classSteps_neg = quantile_neg.quantiles();
+        const classSteps_pos = quantile_pos.quantiles();
+        const min = Math.min(...classSteps_pos);
+        //console.log(min);
+
+        let paintProp = {
+            'fill-color': [
+                'step',
+                ['get', feature],
+
+                negColorScheme[0],
+                classSteps_neg[0],
+                negColorScheme[1],
+                classSteps_neg[1],
+                negColorScheme[2],
+                
+                0,
+
+                posColorScheme[0],
+                classSteps_pos[0],
+                posColorScheme[1],
+                classSteps_pos[1],
+                posColorScheme[2],
+            ],
+            'fill-opacity': 0.8,
+            
+        };
+        configLayer.paint = paintProp;
+        //console.log(configLayer);
+        return configLayer;
+    }
+      
 }
 
 export function getConfigMapLayerY(feature, geoData){

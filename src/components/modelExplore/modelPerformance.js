@@ -7,7 +7,7 @@ import { Boxplot } from "../../utilities/boxplot";
 export function ModelPerformance (props){
     const [globalInfoDiv, setGlobalInfoDic] = useState(<></>);
     const [localInfoData, setLocalInfoData] = useState([]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState([0]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
 
     const makeGlobalInfo = (ginfo, modeltype) => {
         setGlobalInfoDic(
@@ -27,19 +27,19 @@ export function ModelPerformance (props){
     const makeLocalInfoTableData = (local_r2, cooksd, residual) => {
         const tableData = [
             {
-                key: 0,
+                key: 'local_R2',
                 indicator: 'Local R2',
                 mean: local_r2.mean.toFixed(2),
                 numerical_distribution: local_r2,
                 std: local_r2.std.toFixed(2),
             },{
-                key: 1,
+                key: 'cooksD',
                 indicator: 'Cook\'s distance',
                 mean: cooksd.mean.toFixed(2),
                 numerical_distribution: cooksd,
                 std: cooksd.std.toFixed(2),
             },{
-                key: 2,
+                key: 'std_residuals',
                 indicator: 'Residuals',
                 mean: residual.mean.toFixed(2),
                 numerical_distribution: residual,
@@ -90,9 +90,8 @@ export function ModelPerformance (props){
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-          //let selectedPrompt = localInfoData[selectedRowKeys[0]];
           setSelectedRowKeys(selectedRowKeys);
-          console.log("click");
+          props.setMapLayer(selectedRowKeys[0]);
         },
     };
     
@@ -132,7 +131,7 @@ export function ModelPerformance (props){
                             onClick: event => {
                                 //let selectedPrompt = promptList[record.key];
                                 setSelectedRowKeys([record.key]);
-                                console.log("click");
+                                props.setMapLayer(record.key);
                             },
                         };
                     }}
