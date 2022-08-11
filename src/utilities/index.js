@@ -167,7 +167,7 @@ export function getDiagnosticMapLayer(feature, geoData){
 
         const classSteps_neg = quantile_neg.quantiles();
         const classSteps_pos = quantile_pos.quantiles();
-        const min = Math.min(...classSteps_pos);
+        //const min = Math.min(...classSteps_pos);
         //console.log(min);
 
         let paintProp = {

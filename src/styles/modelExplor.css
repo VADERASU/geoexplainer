@@ -14,6 +14,15 @@
     box-shadow:         0 1px 5px rgba(0, 0, 0, 0.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
+.cardToolBar {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    right: -35px;
+    /*background-color: aqua;*/
+    
+}
+
 .modelPerformanceContainer {
     /*border-radius: 5px;*/
     background: #fcfcfc;
@@ -23,3 +32,18 @@
     -moz-box-shadow:    0 1px 5px rgba(0, 0, 0, 0.4);  /* Firefox 3.5 - 3.6 */
     box-shadow:         0 1px 5px rgba(0, 0, 0, 0.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
+
+/* 
+* model exploration visualization components
+*/
+.globalNumericalDistributionContainer {
+    position: absolute;
+    top: 40px;
+    left: 25vw;
+    width: 24vw;
+    /*height: 160px;*/
+    margin-top: 6px;
+    margin-left: 5px;
+    /*padding: 6px;*/
+  }
+  

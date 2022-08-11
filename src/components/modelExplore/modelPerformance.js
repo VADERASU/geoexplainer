@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Descriptions, Table, Tag} from 'antd';
+import { Card, Descriptions, Table } from 'antd';
 
 import { Boxplot } from "../../utilities/boxplot";
 
 export function ModelPerformance (props){
-    const [globalInfoDiv, setGlobalInfoDic] = useState(<></>);
+    const [globalInfoDiv, setGlobalInfoDiv] = useState(<></>);
     const [localInfoData, setLocalInfoData] = useState([]);
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
 
     const makeGlobalInfo = (ginfo, modeltype) => {
-        setGlobalInfoDic(
+        setGlobalInfoDiv(
             <Descriptions 
                 column={4} size={'small'} bordered layout="vertical" 
                 labelStyle={{fontSize: 13}} 

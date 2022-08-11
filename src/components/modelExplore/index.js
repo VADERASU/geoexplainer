@@ -2,10 +2,13 @@ import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 
 import { ModelPerformance } from "./modelPerformance";
+import { NumDistribution } from "./numDistribution";
 
 export function ModelExplore (props) {
+    const [numericalDist, setNumericalDist] = useState(null);
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
+    
 
     //console.log(props.model_trained ? props.loaded_map_data : '');
 
@@ -23,6 +26,9 @@ export function ModelExplore (props) {
                 />
 
             </div>
+
+            <NumDistribution />
+            
         </div>
     ) : <></>;
 }
