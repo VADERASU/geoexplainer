@@ -8,8 +8,12 @@ export function ModelExplore (props) {
     const [numericalDist, setNumericalDist] = useState(null);
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
-    
-
+    const makeNumericalDist = (feature) => {
+        setNumericalDist({
+            key: feature,
+            data: props.model_result[feature]
+        });
+    };
     //console.log(props.model_trained ? props.loaded_map_data : '');
 
     return props.model_trained ? (
@@ -23,11 +27,14 @@ export function ModelExplore (props) {
                     cooksd={props.model_result.cooksD}
                     residual={props.model_result.std_residuals}
                     setMapLayer={props.setMapLayer}
+                    setNumericalDist={makeNumericalDist}
                 />
 
             </div>
 
-            <NumDistribution />
+            <NumDistribution
+                numericalDist={numericalDist}
+            />
             
         </div>
     ) : <></>;

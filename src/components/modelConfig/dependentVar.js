@@ -74,11 +74,12 @@ export function DependentVar(props){
             classSteps.push(parseInt(classBreak));
         }
         //console.log(classSteps);
-        // make  histogram clusters
+        // make histogram clusters
         const echartHistData = {
             binNames: [],
             binCount: [],
             featureName: dependentVar,
+            grid: { top: 15, bottom: 20, right: 25 },
         };
         dataBins.forEach(e=>{
             let name = e.x0 + '-' + e.x1;

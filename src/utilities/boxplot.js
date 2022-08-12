@@ -3,8 +3,10 @@ import ReactECharts from 'echarts-for-react';
 
 export function Boxplot (props) {
     const [chartOption, setChartOption] = useState({});
+    const inlineGrid =  { top: 0, bottom: 7, right: 15 };
+    const normalGrid =  { top: 0, bottom: 8, right: 10 };
 
-    const setOption = (echartBoxplotData) => {
+    const setOption = (echartBoxplotData, resource) => {
         const _chartOption = {
             dataset: [
                 {
@@ -19,7 +21,7 @@ export function Boxplot (props) {
                     fromTransformResult: 1
                 }
             ],
-            grid: { top: 0, bottom: 7, right: 15 },
+            grid: resource === 'inline' ? inlineGrid : normalGrid,
             yAxis: {
                 type: 'category',
                 show: false
@@ -57,9 +59,9 @@ export function Boxplot (props) {
     useEffect(()=>{
         //console.log(props.echartBoxplotData);
         if(props.echartBoxplotData !== null){
-            setOption(props.echartBoxplotData);  
+            setOption(props.echartBoxplotData, props.resource);  
         }
-    }, [props.echartBoxplotData]);
+    }, [props.echartBoxplotData, props.resource]);
 
     return(
         <div>

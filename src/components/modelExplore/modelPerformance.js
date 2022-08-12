@@ -64,6 +64,7 @@ export function ModelPerformance (props){
                 return(
                     <Boxplot
                         echartBoxplotData={numerical_distribution}
+                        resource={'inline'}
                         height={30}
                     />
                 );
@@ -86,6 +87,7 @@ export function ModelPerformance (props){
         makeGlobalInfo(props.globalInfo, props.model_used);
         makeLocalInfoTableData(props.local_r2, props.cooksd, props.residual);
         props.setMapLayer('local_R2');
+        props.setNumericalDist(selectedRowKeys[0]);
     }, [props.globalInfo, props.model_used, props.local_r2, props.cooksd, props.residual]);
 
     const rowSelection = {

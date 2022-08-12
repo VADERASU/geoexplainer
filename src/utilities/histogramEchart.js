@@ -6,7 +6,7 @@ export function HistogramEchart (props) {
 
     const setOption = (echartHistData) => {
         const chartOption = {
-            grid: { top: 15, bottom: 20, right: 25 },
+            grid: echartHistData.grid,
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
