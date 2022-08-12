@@ -87,6 +87,57 @@ export function NumDistribution (props) {
                 echartHistData.binCount.push(length);
             });
             setEchartHistData(echartHistData);
+        }else if(key === 'cooksD'){
+            const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+            const quantile = d3.scaleQuantile()
+                .domain(data) // pass the whole dataset to a scaleQuantile’s domain
+                .range(dependentColorScheme);
+            const threshold = 4 / data.length;
+
+            dataBins.forEach(e=>{
+                let name = e.x0 + '-' + e.x1;
+                let color = e.x1 > threshold ? quantile(e.x1) : 'gray';
+                
+                let length = {
+                    value: e.length,
+                    itemStyle: {
+                        color: color,
+                    }
+                };
+                echartHistData.binNames.push(name);
+                echartHistData.binCount.push(length);
+            });
+            setEchartHistData(echartHistData);
+        }else if(key === 'std_residuals'){
+            const posList = data.filter(e=>e>=0);
+            const negList = data.filter(e=>e<0);
+
+            const negColorScheme = ['#b2182b','#ef8a62','#fddbc7'];
+            const posColorScheme = ['#d1e5f0','#67a9cf','#2166ac'];
+
+            const quantile_neg = d3.scaleQuantile()
+                .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(negColorScheme);
+
+            const quantile_pos = d3.scaleQuantile()
+                .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(posColorScheme);
+
+            dataBins.forEach(e=>{
+                let name = e.x0 + '-' + e.x1;
+                let color = e.x1 >= 0 ? quantile_pos(e.x1) : 
+                    (e.x1 < 0 ? quantile_neg(e.x1) : '#ffffff');
+                
+                let length = {
+                    value: e.length,
+                    itemStyle: {
+                        color: color,
+                    }
+                };
+                echartHistData.binNames.push(name);
+                echartHistData.binCount.push(length);
+            });
+            setEchartHistData(echartHistData);  
         }
 
 
@@ -112,14 +163,14 @@ export function NumDistribution (props) {
                             <Col span={24}>
                                 <HistogramEchart
                                     echartHistData={echartHistData}
-                                    height={90}
+                                    height={100}
                                 />
                             </Col>
                             <Col span={24}>
                             <Boxplot
                                 echartBoxplotData={boxPlotData}
                                 resource={'normal'}
-                                height={40}
+                                height={30}
                             />
                             </Col>
                         </Row>

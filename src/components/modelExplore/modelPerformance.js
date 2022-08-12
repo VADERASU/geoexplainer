@@ -98,7 +98,7 @@ export function ModelPerformance (props){
                     ></Button>
                     <Button 
                         size='small' icon={<FileSearchOutlined />}
-                        type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
+                        //type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
                         //onClick={() => numericalBtnClick(operations)}
                     ></Button>
                     </>
@@ -120,11 +120,8 @@ export function ModelPerformance (props){
         onChange: (selectedRowKeys, selectedRows) => {
           setSelectedRowKeys(selectedRowKeys);
           props.setMapLayer(selectedRowKeys[0]);
+          props.handleNumBtnClick(selectedRowKeys[0]);
         },
-    };
-
-    const numericalBtnClick = (operations) => {
-        console.log(operations);
     };
     
     return(
@@ -164,6 +161,7 @@ export function ModelPerformance (props){
                                 //let selectedPrompt = promptList[record.key];
                                 setSelectedRowKeys([record.key]);
                                 props.setMapLayer(record.key);
+                                props.handleNumBtnClick(record.key);
                             },
                         };
                     }}

@@ -49,6 +49,9 @@ export function Boxplot (props) {
                   type: 'scatter',
                   symbolSize: 5,
                   //encode: { x: 1, y: 0 },
+                  itemStyle: {
+                    color: '#ef8a62',
+                  },
                   datasetIndex: 2
                 }
             ]

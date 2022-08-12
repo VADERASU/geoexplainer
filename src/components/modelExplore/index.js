@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 
 import { ModelPerformance } from "./modelPerformance";
+import { ModelCoefficient } from "./modelCoefficient";
 import { NumDistribution } from "./numDistribution";
 
 export function ModelExplore (props) {
@@ -35,7 +36,7 @@ export function ModelExplore (props) {
     return props.model_trained ? (
         <div style={modelExploreInterfaceStyle}>
             <div className="floatExplorationContainer">
-            {/** model performance container */}
+                {/** model performance container */}
                 <ModelPerformance
                     globalInfo={props.model_result.diagnostic_info}
                     model_used={props.model_used}
@@ -49,7 +50,8 @@ export function ModelExplore (props) {
                     narrativeBtnSelect={narrativeBtnSelect}
                     handleNumBtnClick={handleNumBtnClick}
                 />
-
+                {/** model coefficient container */}
+                <ModelCoefficient />
             </div>
 
             <NumDistribution
