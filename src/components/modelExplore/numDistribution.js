@@ -7,7 +7,6 @@ import { Boxplot } from "../../utilities/boxplot";
 import { HistogramEchart } from "../../utilities/histogramEchart";
 
 export function NumDistribution (props) {
-    const [containerDisplay, setContainerDisplay] = useState({display: 'block'});
     const [cardDisplay, setCardDisplay] = useState('block');
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
 
@@ -31,7 +30,8 @@ export function NumDistribution (props) {
     };
 
     const closeBtnClick = () => {
-        console.log('click');
+        props.setNumericalContainerDisplay({display: 'none'});
+        props.setNumericalBtnSelect(null);
     };
 
     const minBtnClick = () => {
@@ -56,7 +56,7 @@ export function NumDistribution (props) {
             feature: key,
         };
         setNarrativeInfo(narrative);
-
+        
         // make echart histogram data
         const dataBins = d3.bin().thresholds(10)(data);
         const echartHistData = {
@@ -99,7 +99,7 @@ export function NumDistribution (props) {
     }, [props.numericalDist]);
 
     return(
-        <div className="globalNumericalDistributionContainer" style={containerDisplay}>
+        <div className="globalNumericalDistributionContainer" style={props.numericalContainerDisplay}>
             <Card
                 title={'Numerical distribution: '+narrativeInfo.feature}
                 size="small"

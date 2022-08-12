@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Descriptions, Table } from 'antd';
-
+import { Card, Descriptions, Table, Button } from 'antd';
+import { BarChartOutlined, FileSearchOutlined } from '@ant-design/icons';
 import { Boxplot } from "../../utilities/boxplot";
 
 export function ModelPerformance (props){
@@ -32,18 +32,21 @@ export function ModelPerformance (props){
                 mean: local_r2.mean.toFixed(2),
                 numerical_distribution: local_r2,
                 std: local_r2.std.toFixed(2),
+                operations: 'local_R2',
             },{
                 key: 'cooksD',
                 indicator: 'Cook\'s distance',
                 mean: cooksd.mean.toFixed(2),
                 numerical_distribution: cooksd,
                 std: cooksd.std.toFixed(2),
+                operations: 'cooksD',
             },{
                 key: 'std_residuals',
                 indicator: 'Residuals',
                 mean: residual.mean.toFixed(2),
                 numerical_distribution: residual,
                 std: residual.std.toFixed(2),
+                operations: 'std_residuals',
             }
         ];
         setLocalInfoData(tableData);
@@ -76,9 +79,32 @@ export function ModelPerformance (props){
             key: 'mean',
         },
         {
-            title: 'Standard Deviation',
+            title: 'Deviation',
             dataIndex: 'std',
             key: 'std',
+        },
+        {
+            title: 'Operations',
+            dataIndex: 'opeartions',
+            key: 'operations',
+            render: (_, { operations }) => {
+                //console.log(operations, props.numericalBtnSelect);
+                return(
+                    <>
+                    <Button 
+                        size='small' icon={<BarChartOutlined />} style={{marginRight: 5}}
+                        type={operations === props.numericalBtnSelect ? 'primary' : 'text'}
+                        onClick={() => props.handleNumBtnClick(operations)}
+                    ></Button>
+                    <Button 
+                        size='small' icon={<FileSearchOutlined />}
+                        type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
+                        //onClick={() => numericalBtnClick(operations)}
+                    ></Button>
+                    </>
+                    
+                );
+            },
         },
       ];
 
@@ -95,6 +121,10 @@ export function ModelPerformance (props){
           setSelectedRowKeys(selectedRowKeys);
           props.setMapLayer(selectedRowKeys[0]);
         },
+    };
+
+    const numericalBtnClick = (operations) => {
+        console.log(operations);
     };
     
     return(

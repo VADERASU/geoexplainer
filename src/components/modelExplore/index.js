@@ -6,6 +6,9 @@ import { NumDistribution } from "./numDistribution";
 
 export function ModelExplore (props) {
     const [numericalDist, setNumericalDist] = useState(null);
+    const [numericalBtnSelect, setNumericalBtnSelect] = useState('local_R2');
+    const [narrativeBtnSelect, setNarrativeBtnSelect] = useState('local_R2');
+    const [numericalContainerDisplay, setNumericalContainerDisplay] = useState({display: 'block'});
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const makeNumericalDist = (feature) => {
@@ -14,7 +17,20 @@ export function ModelExplore (props) {
             data: props.model_result[feature]
         });
     };
-    //console.log(props.model_trained ? props.loaded_map_data : '');
+    
+    const handleNumBtnClick = (feature) => {
+        setNumericalBtnSelect(feature === numericalBtnSelect ? null : feature);
+        setNumericalContainerDisplay(
+            feature === numericalBtnSelect ? {display: 'none'} : {display: 'block'}
+        );
+        setNumericalDist(
+            feature === numericalBtnSelect ? null :
+            {
+                key: feature,
+                data: props.model_result[feature]
+            }
+        );
+    };
 
     return props.model_trained ? (
         <div style={modelExploreInterfaceStyle}>
@@ -28,12 +44,19 @@ export function ModelExplore (props) {
                     residual={props.model_result.std_residuals}
                     setMapLayer={props.setMapLayer}
                     setNumericalDist={makeNumericalDist}
+
+                    numericalBtnSelect={numericalBtnSelect}
+                    narrativeBtnSelect={narrativeBtnSelect}
+                    handleNumBtnClick={handleNumBtnClick}
                 />
 
             </div>
 
             <NumDistribution
                 numericalDist={numericalDist}
+                numericalContainerDisplay={numericalContainerDisplay}
+                setNumericalContainerDisplay={setNumericalContainerDisplay}
+                setNumericalBtnSelect={setNumericalBtnSelect}
             />
             
         </div>
