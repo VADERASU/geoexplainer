@@ -51,7 +51,13 @@ export function ModelExplore (props) {
                     handleNumBtnClick={handleNumBtnClick}
                 />
                 {/** model coefficient container */}
-                <ModelCoefficient />
+                <ModelCoefficient
+                    model_result={props.model_result}
+                    setMapLayer={props.setMapLayer}
+                    numericalBtnSelect={numericalBtnSelect}
+                    narrativeBtnSelect={narrativeBtnSelect}
+                    handleNumBtnClick={handleNumBtnClick}
+                />
             </div>
 
             <NumDistribution

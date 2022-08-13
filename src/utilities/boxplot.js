@@ -10,7 +10,10 @@ export function Boxplot (props) {
         const _chartOption = {
             dataset: [
                 {
-                    source: [echartBoxplotData.value]
+                    source: [
+                        echartBoxplotData.value === undefined ? 
+                        echartBoxplotData.param : echartBoxplotData.value
+                    ]
                 },
                 {
                     fromDatasetIndex: 0,
@@ -41,7 +44,7 @@ export function Boxplot (props) {
                   type: 'boxplot',
                   datasetIndex: 1,
                   itemStyle: {
-                    borderWidth: 2
+                    borderWidth: resource === 'inline' ? 1 : 2,
                   },
                 },
                 {
