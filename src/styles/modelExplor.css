@@ -47,3 +47,13 @@
     /*padding: 6px;*/
   }
   
+  .narrativeExplainContainer {
+    position: absolute;
+    top: 245px;
+    left: 25vw;
+    width: 24vw;
+    /*height: 160px;*/
+    /*margin-top: 6px;*/
+    margin-left: 5px;
+    /*padding: 6px;*/
+  }

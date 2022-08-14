@@ -4,6 +4,7 @@ import '../../styles/modelExplor.css';
 import { ModelPerformance } from "./modelPerformance";
 import { ModelCoefficient } from "./modelCoefficient";
 import { NumDistribution } from "./numDistribution";
+import { NarrativeExplain } from "./narrativeExplain";
 
 export function ModelExplore (props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
@@ -11,6 +12,8 @@ export function ModelExplore (props) {
     const [numericalBtnSelect, setNumericalBtnSelect] = useState('local_R2');
     const [narrativeBtnSelect, setNarrativeBtnSelect] = useState('local_R2');
     const [numericalContainerDisplay, setNumericalContainerDisplay] = useState({display: 'block'});
+
+    const [narrativeContainerDisplay, setNarrativeContainerDisplay] = useState({display: 'block'});
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const makeNumericalDist = (feature) => {
@@ -70,6 +73,14 @@ export function ModelExplore (props) {
                 numericalContainerDisplay={numericalContainerDisplay}
                 setNumericalContainerDisplay={setNumericalContainerDisplay}
                 setNumericalBtnSelect={setNumericalBtnSelect}
+            />
+
+            <NarrativeExplain
+                narrativeContainerDisplay={narrativeContainerDisplay}
+                setNarrativeContainerDisplay={setNarrativeContainerDisplay}
+                setNarrativeBtnSelect={setNarrativeBtnSelect}
+                selectedRowKeys={selectedRowKeys}
+                model_result={props.model_result}
             />
             
         </div>

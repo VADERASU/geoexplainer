@@ -92,7 +92,7 @@ export function ModelCoefficient (props) {
     ];
 
     useEffect(()=>{
-        console.log(props.model_result);
+        //console.log(props.model_result);
         makeLocalInfoTableData(props.model_result);
     }, [props.model_result]);
 
@@ -113,6 +113,16 @@ export function ModelCoefficient (props) {
             bodyStyle={{
                 padding: 0,
             }}
+            extra={
+                <div
+                    style={{
+                        display: 'inline-block',
+                        fontSize: 12
+                    }}
+                >
+                    <b>Model's dependent variable:</b> {props.model_result.Y}
+                </div>
+            }
         >
             <Table
                 size="small"
