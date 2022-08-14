@@ -32,7 +32,7 @@ export function Boxplot (props) {
             xAxis: {
                 type: 'value',
                 axisLabel:{
-                    fontSize: 11,
+                    fontSize: resource === 'inline' ? 9 : 11,
                     margin: -1
                 },
                 min: (echartBoxplotData.min - echartBoxplotData.min * 1 / 100),

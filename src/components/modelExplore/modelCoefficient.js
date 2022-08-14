@@ -21,6 +21,16 @@ export function ModelCoefficient (props) {
             };
             tableData.push(coeffData);
         });
+        // add intercept
+        const intercept = {
+            key: 'intercept',
+            coefficient: 'intercept',
+            mean: model_result.intercept.mean.toFixed(2),
+            numerical_distribution: model_result.intercept,
+            std: model_result.intercept.std.toFixed(2),
+            operations: 'intercept',            
+        };
+        tableData.push(intercept);
         //console.log(tableData);
         setcoeffData(tableData);
     };
@@ -90,7 +100,7 @@ export function ModelCoefficient (props) {
         onChange: (selectedRowKeys, selectedRows) => {
           props.setSelectedRowKeys(props.selectedRowKeys);
           props.setMapLayer(props.selectedRowKeys[0]);
-          //props.handleNumBtnClick(selectedRowKeys[0]);
+          props.handleNumBtnClick(selectedRowKeys[0]);
         },
     };
 
@@ -120,7 +130,7 @@ export function ModelCoefficient (props) {
                             //let selectedPrompt = promptList[record.key];
                             props.setSelectedRowKeys([record.key]);
                             props.setMapLayer(record.key);
-                            //props.handleNumBtnClick(record.key);
+                            props.handleNumBtnClick(record.key);
                         },
                     };
                 }}

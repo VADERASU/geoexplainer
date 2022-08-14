@@ -45,7 +45,7 @@ export function NumDistribution (props) {
     };
 
     const makeHistoData = (numericalDist, key) => {
-        const data = numericalDist.value;
+        const data = numericalDist.value === undefined ? numericalDist.param : numericalDist.value;
         setBoxPlotData(numericalDist);
         const narrative = {
             mean: numericalDist.mean.toFixed(2),
@@ -138,6 +138,80 @@ export function NumDistribution (props) {
                 echartHistData.binCount.push(length);
             });
             setEchartHistData(echartHistData);  
+        }else{
+            // coefficients
+            const posList = data.filter(e=>e>=0);
+            const negList = data.filter(e=>e<0);
+
+            if(negList.length === 0){
+                // all positive values
+                const posColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+                const quantile_pos = d3.scaleQuantile()
+                .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(posColorScheme);
+
+                dataBins.forEach(e=>{
+                    let name = e.x0 + '-' + e.x1;
+                    let color = quantile_pos(e.x1);
+                    
+                    let length = {
+                        value: e.length,
+                        itemStyle: {
+                            color: color,
+                        }
+                    };
+                    echartHistData.binNames.push(name);
+                    echartHistData.binCount.push(length);
+                });
+                setEchartHistData(echartHistData);
+            }else if(posList.length === 0){
+                const negColorScheme = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7'];
+                const quantile_neg = d3.scaleQuantile()
+                .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(negColorScheme);
+
+                dataBins.forEach(e=>{
+                    let name = e.x0 + '-' + e.x1;
+                    let color = quantile_neg(e.x1);
+                    
+                    let length = {
+                        value: e.length,
+                        itemStyle: {
+                            color: color,
+                        }
+                    };
+                    echartHistData.binNames.push(name);
+                    echartHistData.binCount.push(length);
+                });
+                setEchartHistData(echartHistData);
+            }else{
+                const negColorScheme = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7'];
+                const posColorScheme =['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+
+                const quantile_neg = d3.scaleQuantile()
+                    .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+                    .range(negColorScheme);
+
+                const quantile_pos = d3.scaleQuantile()
+                    .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+                    .range(posColorScheme);
+
+                dataBins.forEach(e=>{
+                    let name = e.x0 + '-' + e.x1;
+                    let color = e.x1 >= 0 ? quantile_pos(e.x1) : 
+                        (e.x1 < 0 ? quantile_neg(e.x1) : '#ffffff');
+                    
+                    let length = {
+                        value: e.length,
+                        itemStyle: {
+                            color: color,
+                        }
+                    };
+                    echartHistData.binNames.push(name);
+                    echartHistData.binCount.push(length);
+                });
+                setEchartHistData(echartHistData);
+            }
         }
 
 
