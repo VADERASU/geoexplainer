@@ -6,7 +6,7 @@ import { Boxplot } from "../../utilities/boxplot";
 
 export function ModelCoefficient (props) {
     const [coeffData, setcoeffData] = useState([]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState(null);
+    //const [selectedRowKeys, setSelectedRowKeys] = useState(null);
 
     const makeLocalInfoTableData = (model_result) => {
         const tableData = [];
@@ -82,14 +82,15 @@ export function ModelCoefficient (props) {
     ];
 
     useEffect(()=>{
+        console.log(props.model_result);
         makeLocalInfoTableData(props.model_result);
     }, [props.model_result]);
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-          setSelectedRowKeys(selectedRowKeys);
-          props.setMapLayer(selectedRowKeys[0]);
-          props.handleNumBtnClick(selectedRowKeys[0]);
+          props.setSelectedRowKeys(props.selectedRowKeys);
+          props.setMapLayer(props.selectedRowKeys[0]);
+          //props.handleNumBtnClick(selectedRowKeys[0]);
         },
     };
 
@@ -107,7 +108,7 @@ export function ModelCoefficient (props) {
                 size="small"
                 rowSelection={{
                     type: 'radio',
-                    selectedRowKeys: selectedRowKeys,
+                    selectedRowKeys: props.selectedRowKeys[0] === 'local_R2' ? null : props.selectedRowKeys,
                     ...rowSelection,
                 }}
                 columns={local_columns}
@@ -117,9 +118,9 @@ export function ModelCoefficient (props) {
                     return{
                         onClick: event => {
                             //let selectedPrompt = promptList[record.key];
-                            setSelectedRowKeys([record.key]);
+                            props.setSelectedRowKeys([record.key]);
                             props.setMapLayer(record.key);
-                            props.handleNumBtnClick(record.key);
+                            //props.handleNumBtnClick(record.key);
                         },
                     };
                 }}

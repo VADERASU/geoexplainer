@@ -7,7 +7,7 @@ import { Boxplot } from "../../utilities/boxplot";
 export function ModelPerformance (props){
     const [globalInfoDiv, setGlobalInfoDiv] = useState(<></>);
     const [localInfoData, setLocalInfoData] = useState([]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
+    //const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
 
     const makeGlobalInfo = (ginfo, modeltype) => {
         setGlobalInfoDiv(
@@ -113,14 +113,14 @@ export function ModelPerformance (props){
         makeGlobalInfo(props.globalInfo, props.model_used);
         makeLocalInfoTableData(props.local_r2, props.cooksd, props.residual);
         props.setMapLayer('local_R2');
-        props.setNumericalDist(selectedRowKeys[0]);
+        props.setNumericalDist(props.selectedRowKeys[0]);
     }, [props.globalInfo, props.model_used, props.local_r2, props.cooksd, props.residual]);
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-          setSelectedRowKeys(selectedRowKeys);
-          props.setMapLayer(selectedRowKeys[0]);
-          props.handleNumBtnClick(selectedRowKeys[0]);
+          props.setSelectedRowKeys(props.selectedRowKeys);
+          props.setMapLayer(props.selectedRowKeys[0]);
+          props.handleNumBtnClick(props.selectedRowKeys[0]);
         },
     };
     
@@ -149,7 +149,7 @@ export function ModelPerformance (props){
                     size="small"
                     rowSelection={{
                         type: 'radio',
-                        selectedRowKeys: selectedRowKeys,
+                        selectedRowKeys: props.selectedRowKeys,
                         ...rowSelection,
                     }}
                     columns={local_columns}
@@ -159,7 +159,7 @@ export function ModelPerformance (props){
                         return{
                             onClick: event => {
                                 //let selectedPrompt = promptList[record.key];
-                                setSelectedRowKeys([record.key]);
+                                props.setSelectedRowKeys([record.key]);
                                 props.setMapLayer(record.key);
                                 props.handleNumBtnClick(record.key);
                             },

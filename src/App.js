@@ -685,10 +685,10 @@ class App extends Component {
    */
 
   setMapLayer = (id) => {
+    //console.log(id);
     const updateActivMapLayer = id;
     //need to be changed
     const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data);
-    //console.log(newMapLayer);
     this.setState({
       currentActivMapLayer: updateActivMapLayer,
       config_layer: newMapLayer,

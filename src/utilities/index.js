@@ -105,7 +105,7 @@ export function getDiagnosticMapLayer(feature, geoData){
             type: 'fill',
         };
         //'filter': ['in', 'UID', '']
-        const filter = ['in', 'UID', ''];
+        const filter = ['in', 'UID'];
         const featureList = geoData.features.map(e=>e.properties[feature]);
 
         const quantile = d3.scaleQuantile()
@@ -195,6 +195,135 @@ export function getDiagnosticMapLayer(feature, geoData){
         configLayer.paint = paintProp;
         //console.log(configLayer);
         return configLayer;
+    }else{
+        //coefficients
+        const configLayer = {
+            id: 'config-fill',
+            type: 'fill',
+        };
+
+        const filter = ['in', 'UID'];
+
+        const featureName = feature + '_coefficient';
+        const featureTVal = feature + '_tval';
+
+        const featureList = geoData.features.map(e=>e.properties[featureName]);
+        
+        const posList = featureList.filter(e=>e>0);
+        const negList = featureList.filter(e=>e<0);
+
+        geoData.features.forEach(e=>{
+            let UID = e.properties['UID'];
+            if(e.properties[featureTVal] !== 0){
+                filter.push(UID);
+            }
+        });
+
+        if(negList.length === 0){
+            // all positive values
+            const posColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+            const quantile_pos = d3.scaleQuantile()
+            .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(posColorScheme);
+            const classSteps_pos = quantile_pos.quantiles();
+
+            let paintProp = {
+                'fill-color': [
+                    'step',
+                    ['get', featureName],
+                    posColorScheme[0],
+                    classSteps_pos[0],
+                    posColorScheme[1],
+                    classSteps_pos[1],
+                    posColorScheme[2],
+                    classSteps_pos[2],
+                    posColorScheme[3],
+                    classSteps_pos[3],
+                    posColorScheme[4],
+                ],
+                'fill-opacity': 0.8,
+                
+            };
+            configLayer.paint = paintProp;
+            configLayer.filter = filter;
+            return configLayer;
+        }else if(posList.length === 0){
+            //console.log(negList);
+            const negColorScheme = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7'];
+            const quantile_neg = d3.scaleQuantile()
+            .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(negColorScheme);
+            const classSteps_neg = quantile_neg.quantiles();
+            //console.log(classSteps_neg);
+            let paintProp = {
+                'fill-color': [
+                    'step',
+                    ['get', featureName],
+                    negColorScheme[0],
+                    classSteps_neg[0],
+                    negColorScheme[1],
+                    classSteps_neg[1],
+                    negColorScheme[2],
+                    classSteps_neg[2],
+                    negColorScheme[3],
+                    classSteps_neg[3],
+                    negColorScheme[4],
+                ],
+                'fill-opacity': 0.8,
+                
+            };
+            configLayer.paint = paintProp;
+            configLayer.filter = filter;
+            return configLayer;
+        }else{
+            const negColorScheme = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7'];
+            const posColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+    
+            const quantile_neg = d3.scaleQuantile()
+                .domain(negList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(negColorScheme);
+    
+            const quantile_pos = d3.scaleQuantile()
+                .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
+                .range(posColorScheme);
+    
+            const classSteps_neg = quantile_neg.quantiles();
+            const classSteps_pos = quantile_pos.quantiles();
+            let paintProp = {
+                'fill-color': [
+                    'step',
+                    ['get', featureName],
+    
+                    negColorScheme[0],
+                    classSteps_neg[0],
+                    negColorScheme[1],
+                    classSteps_neg[1],
+                    negColorScheme[2],
+                    classSteps_neg[2],
+                    negColorScheme[3],
+                    classSteps_neg[3],
+                    negColorScheme[4],
+                    
+                    0,
+    
+                    posColorScheme[0],
+                    classSteps_pos[0],
+                    posColorScheme[1],
+                    classSteps_pos[1],
+                    posColorScheme[2],
+                    classSteps_pos[2],
+                    posColorScheme[3],
+                    classSteps_pos[3],
+                    posColorScheme[4],
+                ],
+                'fill-opacity': 0.8,
+                
+            };
+            configLayer.paint = paintProp;
+            configLayer.filter = filter;
+            //console.log(configLayer);
+            return configLayer;            
+        } 
     }
       
 }

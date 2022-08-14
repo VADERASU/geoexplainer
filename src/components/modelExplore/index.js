@@ -6,6 +6,7 @@ import { ModelCoefficient } from "./modelCoefficient";
 import { NumDistribution } from "./numDistribution";
 
 export function ModelExplore (props) {
+    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
     const [numericalDist, setNumericalDist] = useState(null);
     const [numericalBtnSelect, setNumericalBtnSelect] = useState('local_R2');
     const [narrativeBtnSelect, setNarrativeBtnSelect] = useState('local_R2');
@@ -38,6 +39,8 @@ export function ModelExplore (props) {
             <div className="floatExplorationContainer">
                 {/** model performance container */}
                 <ModelPerformance
+                    selectedRowKeys={selectedRowKeys}
+                    setSelectedRowKeys={setSelectedRowKeys}
                     globalInfo={props.model_result.diagnostic_info}
                     model_used={props.model_used}
                     local_r2={props.model_result.local_R2}
@@ -52,6 +55,8 @@ export function ModelExplore (props) {
                 />
                 {/** model coefficient container */}
                 <ModelCoefficient
+                    selectedRowKeys={selectedRowKeys}
+                    setSelectedRowKeys={setSelectedRowKeys}
                     model_result={props.model_result}
                     setMapLayer={props.setMapLayer}
                     numericalBtnSelect={numericalBtnSelect}
