@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@turf/turf": "^6.5.0",
     "antd": "^4.16.11",
     "axios": "^0.27.2",
     "d3": "^7.6.1",

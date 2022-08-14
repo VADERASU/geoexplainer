@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Descriptions, Button, Row, Col} from 'antd';
+import { Card, Descriptions, Button, Row, Col, Typography} from 'antd';
 import * as d3 from 'd3';
 import { EditOutlined, CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
@@ -32,10 +32,20 @@ export function NarrativeExplain (props) {
         setMinCardDisplay({display: 'none'});
     };
 
+    const makeNarrative = () => {
+
+    };
+
+    useEffect(()=>{
+        if(props.model_result !== {}){
+            console.log(props.model_result, props.selectedRowKeys);
+        }
+    }, [props.model_result, props.selectedRowKeys]);
+
     return(
         <div className="narrativeExplainContainer" style={props.narrativeContainerDisplay}>
             <Card
-                title={'Narrative Explanation: '+ props.selectedRowKeys[0]}
+                title={'Narrative Explanation of the Spatial Distribution: '+ props.selectedRowKeys[0]}
                 size="small"
                 className="explorationCard"
                 bodyStyle={cardBodyDisplay}
@@ -56,10 +66,6 @@ export function NarrativeExplain (props) {
                     onClick={() => minBtnClick()}
                 ></Button>
 
-                <Button 
-                    className="explorationCard" size='small' style={btnDisplay}
-                    shape="circle" icon={<EditOutlined />}
-                ></Button>
                 <Button 
                     className="explorationCard" size='small'  style={minCardDisplay}
                     shape="circle" icon={<PlusOutlined />}
