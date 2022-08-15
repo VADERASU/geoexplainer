@@ -6,6 +6,16 @@
     padding: 6px;
 }
 
+.floatPlotsContainer {
+    position: absolute;
+    top: 40px;
+    left: 25vw;
+    width: 24vw;
+    /*height: 160px;*/
+    margin-top: 6px;
+    margin-left: 5px;
+}
+
 .explorationCard {
     /*border-radius: 5px;
     background: #F3F8FB;*/
@@ -37,23 +47,10 @@
 * model exploration visualization components
 */
 .globalNumericalDistributionContainer {
-    position: absolute;
-    top: 40px;
-    left: 25vw;
     width: 24vw;
-    /*height: 160px;*/
-    margin-top: 6px;
-    margin-left: 5px;
-    /*padding: 6px;*/
   }
   
   .narrativeExplainContainer {
-    position: absolute;
-    top: 245px;
-    left: 25vw;
+    margin-top: 10px;
     width: 24vw;
-    /*height: 160px;*/
-    /*margin-top: 6px;*/
-    margin-left: 5px;
-    /*padding: 6px;*/
   }

@@ -37,6 +37,14 @@ export function ModelExplore (props) {
         );
     };
 
+    const handleNarrativeBtnClick = (feature) => {
+        
+        setNarrativeBtnSelect(feature === narrativeBtnSelect ? null : feature);
+        setNarrativeContainerDisplay(
+            feature === narrativeBtnSelect ? {display: 'none'} : {display: 'block'}
+        );
+    };
+
     return props.model_trained ? (
         <div style={modelExploreInterfaceStyle}>
             <div className="floatExplorationContainer">
@@ -55,6 +63,7 @@ export function ModelExplore (props) {
                     numericalBtnSelect={numericalBtnSelect}
                     narrativeBtnSelect={narrativeBtnSelect}
                     handleNumBtnClick={handleNumBtnClick}
+                    handleNarrativeBtnClick={handleNarrativeBtnClick}
                 />
                 {/** model coefficient container */}
                 <ModelCoefficient
@@ -65,23 +74,26 @@ export function ModelExplore (props) {
                     numericalBtnSelect={numericalBtnSelect}
                     narrativeBtnSelect={narrativeBtnSelect}
                     handleNumBtnClick={handleNumBtnClick}
+                    handleNarrativeBtnClick={handleNarrativeBtnClick}
                 />
             </div>
 
-            <NumDistribution
-                numericalDist={numericalDist}
-                numericalContainerDisplay={numericalContainerDisplay}
-                setNumericalContainerDisplay={setNumericalContainerDisplay}
-                setNumericalBtnSelect={setNumericalBtnSelect}
-            />
+            <div className="floatPlotsContainer">
+                <NumDistribution
+                    numericalDist={numericalDist}
+                    numericalContainerDisplay={numericalContainerDisplay}
+                    setNumericalContainerDisplay={setNumericalContainerDisplay}
+                    setNumericalBtnSelect={setNumericalBtnSelect}
+                />
 
-            <NarrativeExplain
-                narrativeContainerDisplay={narrativeContainerDisplay}
-                setNarrativeContainerDisplay={setNarrativeContainerDisplay}
-                setNarrativeBtnSelect={setNarrativeBtnSelect}
-                selectedRowKeys={selectedRowKeys}
-                model_result={props.model_result}
-            />
+                <NarrativeExplain
+                    narrativeContainerDisplay={narrativeContainerDisplay}
+                    setNarrativeContainerDisplay={setNarrativeContainerDisplay}
+                    setNarrativeBtnSelect={setNarrativeBtnSelect}
+                    selectedRowKeys={selectedRowKeys}
+                    model_result={props.model_result}
+                />
+            </div>
             
         </div>
     ) : <></>;

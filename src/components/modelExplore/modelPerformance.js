@@ -7,7 +7,7 @@ import { Boxplot } from "../../utilities/boxplot";
 export function ModelPerformance (props){
     const [globalInfoDiv, setGlobalInfoDiv] = useState(<></>);
     const [localInfoData, setLocalInfoData] = useState([]);
-    //const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
+    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
 
     const makeGlobalInfo = (ginfo, modeltype) => {
         setGlobalInfoDiv(
@@ -98,8 +98,8 @@ export function ModelPerformance (props){
                     ></Button>
                     <Button 
                         size='small' icon={<FileSearchOutlined />}
-                        //type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
-                        //onClick={() => numericalBtnClick(operations)}
+                        type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
+                        onClick={() => props.handleNarrativeBtnClick(operations)}
                     ></Button>
                     </>
                     
@@ -118,9 +118,10 @@ export function ModelPerformance (props){
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-          props.setSelectedRowKeys(props.selectedRowKeys);
-          props.setMapLayer(props.selectedRowKeys[0]);
-          props.handleNumBtnClick(props.selectedRowKeys[0]);
+          props.setSelectedRowKeys(selectedRowKeys);
+          props.setMapLayer(selectedRowKeys[0]);
+          props.handleNumBtnClick(selectedRowKeys[0]);
+          props.handleNarrativeBtnClick(selectedRowKeys[0]);
         },
     };
     
@@ -162,6 +163,7 @@ export function ModelPerformance (props){
                                 props.setSelectedRowKeys([record.key]);
                                 props.setMapLayer(record.key);
                                 props.handleNumBtnClick(record.key);
+                                props.handleNarrativeBtnClick(record.key);
                             },
                         };
                     }}

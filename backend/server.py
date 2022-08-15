@@ -32,7 +32,7 @@ def getDatasetPath(dataName):
 
     return dataset_path, pointJson_path, polyJson_path, shape_path
 
-def geojsonGenerate(model, pointJson_path, polyJson_path):
+def geojsonGenerate(model, pointJson_path, polyJson_path, raw_dataset_name):
     #import raw geojson
     with open(pointJson_path, 'r', encoding='utf-8') as f:
         rawPointsJson = geojson.load(f)
@@ -62,9 +62,15 @@ def geojsonGenerate(model, pointJson_path, polyJson_path):
         cooksD = model['cooksD']['value'][i]
         std_residuals = model['std_residuals']['value'][i]
         # properties
-        properties = {
-            'local_R2': loacl_R2, 'cooksD': cooksD, 'std_residuals': std_residuals
-        }
+        if raw_dataset_name == 'chicago':
+            properties = {
+                'local_R2': loacl_R2, 'cooksD': cooksD, 'std_residuals': std_residuals,
+                'state_name': 'Chicago'
+            }
+        else:
+            properties = {
+                'local_R2': loacl_R2, 'cooksD': cooksD, 'std_residuals': std_residuals
+            }
         for key in record.properties:
             if key == 'county_name':
                 properties[key] = record.properties[key].title()
@@ -393,7 +399,7 @@ def single_sentence_embed():
         }
 
         # get geojson objects
-        poly_geojson_obj, point_geojson_obj = geojsonGenerate(model,pointJson_path, polyJson_path)
+        poly_geojson_obj, point_geojson_obj = geojsonGenerate(model,pointJson_path, polyJson_path,raw_dataset_name)
         model['geojson_poly'] = poly_geojson_obj
         model['geojson_point'] = point_geojson_obj
 

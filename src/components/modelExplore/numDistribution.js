@@ -26,7 +26,8 @@ export function NumDistribution (props) {
     };
     const btnDisplay = {
         display: cardDisplay,
-        marginBottom: 5,
+        marginLeft: 5,
+        float: 'left'
     };
 
     const closeBtnClick = () => {
@@ -36,7 +37,7 @@ export function NumDistribution (props) {
 
     const minBtnClick = () => {
         setCardDisplay('none');
-        setMinCardDisplay({display: 'block'});
+        setMinCardDisplay({display: 'block', float: 'left'});
     };
 
     const maxBtnClick = () => {
@@ -230,6 +231,34 @@ export function NumDistribution (props) {
                 size="small"
                 className="explorationCard"
                 bodyStyle={cardBodyDisplay}
+                extra={
+                    <div
+                    style={{
+                        display: 'inline-block',
+                        fontSize: 12
+                    }}
+                >
+                    <Button 
+                        size='small' style={btnDisplay}
+                        icon={<EditOutlined />}
+                    ></Button>
+                    <Button 
+                        size='small'  style={minCardDisplay}
+                        icon={<PlusOutlined />}
+                        onClick={() => maxBtnClick()}
+                    ></Button>
+                     <Button 
+                        style={btnDisplay} 
+                        size='small' icon={<MinusOutlined />}
+                        onClick={() => minBtnClick()}
+                    ></Button>
+                    <Button 
+                        style={btnDisplay} 
+                        size='small' icon={<CloseOutlined />}
+                        onClick={() => closeBtnClick()}
+                    ></Button>
+                </div>
+                }
             >
                 <Row>
                     <Col span={18}>
@@ -266,27 +295,7 @@ export function NumDistribution (props) {
             </Card>
             {/** float toolbar */}
             <div className="cardToolBar">
-                <Button 
-                    className="explorationCard" style={btnDisplay} 
-                    shape="circle" size='small' icon={<CloseOutlined />}
-                    onClick={() => closeBtnClick()}
-                ></Button>
 
-                <Button 
-                    className="explorationCard" style={btnDisplay} 
-                    shape="circle" size='small' icon={<MinusOutlined />}
-                    onClick={() => minBtnClick()}
-                ></Button>
-
-                <Button 
-                    className="explorationCard" size='small' style={btnDisplay}
-                    shape="circle" icon={<EditOutlined />}
-                ></Button>
-                <Button 
-                    className="explorationCard" size='small'  style={minCardDisplay}
-                    shape="circle" icon={<PlusOutlined />}
-                    onClick={() => maxBtnClick()}
-                ></Button>
             </div>
         </div>
     );

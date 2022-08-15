@@ -98,8 +98,8 @@ export function ModelCoefficient (props) {
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-          props.setSelectedRowKeys(props.selectedRowKeys);
-          props.setMapLayer(props.selectedRowKeys[0]);
+          props.setSelectedRowKeys(selectedRowKeys);
+          props.setMapLayer(selectedRowKeys[0]);
           props.handleNumBtnClick(selectedRowKeys[0]);
         },
     };
@@ -112,6 +112,8 @@ export function ModelCoefficient (props) {
             style={{marginTop: 8}}
             bodyStyle={{
                 padding: 0,
+                maxHeight: 300,
+                overflow: 'auto',
             }}
             extra={
                 <div
