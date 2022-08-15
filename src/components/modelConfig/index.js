@@ -4,12 +4,22 @@ import '../../styles/modelConfig.css';
 import ModelParameterSelection from './modelConfig';
 import { VariableSelection } from './variableSelect';
 import { DependentVar } from './dependentVar';
+import { Correlation } from './correlation';
+import { IndependentVars } from './independentVars';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
  
+
 class ModelConfigPanel extends Component {
-
-    render(){
-
+    
+    render() {
+        
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
+        {display: 'block'} : {display: 'none'};
+
+        const correlationContainerStyle = this.props.currentActivCorrelation !== null ?
+        {display: 'block'} : {display: 'none'};
+
+        const independentContainerStyle = this.props.independent_features.length >= 2 ?
         {display: 'block'} : {display: 'none'};
 
         const configInterfaceStyle = this.props.model_trained ? {display: 'none'} : {display: 'block'};
@@ -54,8 +64,25 @@ class ModelConfigPanel extends Component {
                         logtrans_backup={this.props.logtrans_backup}
                     />
                 </div>
-            </div>
-            
+
+                <div className='configCorrelationContainer' style={correlationContainerStyle}>
+                    <Correlation
+                        dependent_features={this.props.dependent_features}
+                        currentActivCorrelation={this.props.currentActivCorrelation}
+                        loaded_map_data={this.props.loaded_map_data}
+                    />
+                </div>
+
+                
+                <div className='configIndependentXContainer' style={independentContainerStyle}>
+                    <IndependentVars 
+                        independent_features={this.props.independent_features}
+                        loaded_map_data={this.props.loaded_map_data}
+                        VIF_test_result={this.props.VIF_test_result}
+                    />
+                </div>
+
+            </div> 
         );
     }
 }

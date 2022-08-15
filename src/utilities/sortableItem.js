@@ -9,8 +9,8 @@ import { Histogram } from './histogram';
 export function SortableItem(props){
 
     //console.log(props.norm_test_result);
-    const mapBtnRef = useRef(null);
     const corrBtnRef = useRef(null);
+    const mapBtnRef = useRef(null);
 
     const {
         attributes,
