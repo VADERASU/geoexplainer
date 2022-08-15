@@ -62,9 +62,9 @@
 
 .configCorrelationContainer {
   position: absolute;
-  top: 40px;
-  left: 48vw;
-  width: 20vw;
+  top: 300px;
+  left: 22vw;
+  width: 26vw;
   /*height: 32vh;*/
   margin-top: 6px;
   margin-left: 6px;
@@ -78,7 +78,7 @@
 .configIndependentXContainer {
   position: absolute;
   top: 40px;
-  left: 68vw;
+  left: 49vw;
   margin-top: 6px;
   margin-left: 6px;
   /*padding: 6px;*/
