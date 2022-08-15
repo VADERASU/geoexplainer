@@ -127,7 +127,7 @@ class App extends Component {
   
 
   getNormalityTestResult = (featureList, select_case) => {
-    axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
+    axios.get('http://demo.vaderlab.org:5006/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
     .then(response => {
       //console.log(response);
       const featureDict = this.updateSortableComponents('normTest', response.data.normality_results);
@@ -144,7 +144,7 @@ class App extends Component {
   };
 
   getVIF = (featureList, select_case) => {
-    axios.get('http://localhost:5005/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
+    axios.get('http://demo.vaderlab.org:5006/models/api/v0.1/calibration/VIF/'+featureList+'+'+select_case)
     .then(response => {
       const vifList = response.data.VIF_results.VIF_list;
       const vifDict = {};
@@ -193,7 +193,7 @@ class App extends Component {
       
     }else{
       //console.log(feature, select_case);
-      axios.get('http://localhost:5005/models/api/v0.1/calibration/normality/log-transform/'+feature+'+'+select_case)
+      axios.get('http://demo.vaderlab.org:5006/models/api/v0.1/calibration/normality/log-transform/'+feature+'+'+select_case)
       .then(response => {
         //console.log(feature);
         //console.log(this.state.norm_test_result);
@@ -441,6 +441,7 @@ class App extends Component {
       };
 
       this.setState({
+        model_trained: false,
         loaded_map_data: georgia_demo,
         data_properties: data_properties,
         original_features: global_data_properties_list,
@@ -483,6 +484,7 @@ class App extends Component {
         },
       };
       this.setState({
+        model_trained: false,
         loaded_map_data: chicago_demo,
         data_properties: data_properties,
         original_features: global_data_properties_list,
@@ -625,7 +627,7 @@ class App extends Component {
         'dataset': this.state.select_case
       };
       /* TODO after interface has been developed!
-      axios.post('http://localhost:5005/models/api/v0.1/models', model_param)
+      axios.post('http://demo.vaderlab.org:5006/models/api/v0.1/models', model_param)
       .then(response => {
         //console.log(response);
         // update states
