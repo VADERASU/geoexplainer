@@ -38,27 +38,17 @@ export function ScatterEchart (props) {
         setChartOption(chartOption);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         if (props.echartScatterData !== null) {
                 setEvents({'brushSelected': (params) => {
                     var brushComponent = params.batch[0];
                     var brushed = brushComponent.selected[0].dataIndex;
                     var brushedUIDs = brushed.map(d => props.echartScatterData[d].UID);
-                    console.log("selected", brushedUIDs);
+                    console.log("selected UIDs:", brushedUIDs);
                 }});
                 setOption(props.echartScatterData);
         }
     }, [props.echartScatterData]);
-
-    /*
-    const onBrushSelected = (params) => {
-        console.log(params);
-    }
-
-    const onEvents = {
-        'brushSelected': onBrushSelected
-    }
-      */
 
     return(
         <div>

@@ -680,8 +680,6 @@ class App extends Component {
         <Layer beforeId="waterway-label" {...this.state.default_stroke_layer} />
         <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={hoverfilter} />
       </Source>;
-
-    
     
     return (
       <div className="App">
@@ -736,6 +734,7 @@ class App extends Component {
 
               currentActivCorrelation={this.state.currentCorrMapLayer}
               loaded_map_data={this.state.loaded_map_data}
+              VIF_test_result={this.state.VIF_test_result}
 
               logTransform={this.logTransform}
               select_case={this.state.select_case}
