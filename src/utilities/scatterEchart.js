@@ -7,6 +7,7 @@ export function ScatterEchart (props) {
 
     const setOption = (echartScatterData) => {
         const chartOption = {
+            grid: { top: 25, bottom: 20, right: 10 },
             xAxis: {},
             yAxis: {},
             brush: {
@@ -54,7 +55,7 @@ export function ScatterEchart (props) {
         <div>
             <ReactECharts
                 option={chartOption} 
-                style={{height: 220, width: '100%'}}
+                style={{height: props.height, width: '100%'}}
                 onEvents={onEvents}
             />               
         </div> 

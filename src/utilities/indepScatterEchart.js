@@ -7,7 +7,7 @@ export function IndepScatterEchart (props) {
 
     const setOption = (echartScatterData) => {
         const chartOption = {
-            grid: { top: 15, bottom: 15, right: 30 },
+            grid: { top: 15, bottom: 3, right: 15 },
             xAxis: {
                 name: echartScatterData['xAxisName'],
                 nameLocation: 'middle',

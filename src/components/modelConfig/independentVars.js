@@ -5,7 +5,7 @@ import { IndepScatterEchart } from "../../utilities/indepScatterEchart";
 
 export function IndependentVars(props) {
 
-    const dimension = {width: 700, height: 500};
+    const dimension = {width: 600, height: 450};
     //const [indepFeatures, setIndepFeatures] = useState([]);
     const [colCount, setColCount] = useState(0);
     //const [VIFresult, setVIFresult] = useState(new Set());
@@ -98,7 +98,7 @@ export function IndependentVars(props) {
             title={'Correlations of X'}
             size='small'
             style={{width: dimension.width, overflow: 'hidden'}}
-            bodyStyle={{height: dimension.height}}
+            bodyStyle={{height: dimension.height, padding: 8}}
         >
             <div style={{display: 'grid', gridTemplateColumns: Array(props.independent_features.length).fill('auto').join(' '), width: '100%', height: '100%'}}>
                 {columns}

@@ -6,7 +6,7 @@ import { VariableSelection } from './variableSelect';
 import { DependentVar } from './dependentVar';
 import { Correlation } from './correlation';
 import { IndependentVars } from './independentVars';
-import { ConsoleSqlOutlined } from '@ant-design/icons';
+//import { ConsoleSqlOutlined } from '@ant-design/icons';
  
 
 class ModelConfigPanel extends Component {
@@ -54,34 +54,33 @@ class ModelConfigPanel extends Component {
                         updateSortableList={this.props.updateSortableList}
                     />
                 </div>
+                <div className='floatConfigVisComponentsContainer'>
+                    <div className='configDependentYContainer' style={dependentContainerStyle}>
+                        <DependentVar
+                            dependent_features={this.props.dependent_features}
+                            norm_test_result={this.props.norm_test_result}
+                            logTransform={this.props.logTransform}
+                            select_case={this.props.select_case}
+                            logtrans_backup={this.props.logtrans_backup}
+                        />
+                    </div>
 
-                <div className='configDependentYContainer' style={dependentContainerStyle}>
-                    <DependentVar
-                        dependent_features={this.props.dependent_features}
-                        norm_test_result={this.props.norm_test_result}
-                        logTransform={this.props.logTransform}
-                        select_case={this.props.select_case}
-                        logtrans_backup={this.props.logtrans_backup}
-                    />
+                    <div className='configCorrelationContainer' style={correlationContainerStyle}>
+                        <Correlation
+                            dependent_features={this.props.dependent_features}
+                            currentActivCorrelation={this.props.currentActivCorrelation}
+                            loaded_map_data={this.props.loaded_map_data}
+                        />
+                    </div>
+
+                    <div className='configIndependentXContainer' style={independentContainerStyle}>
+                        <IndependentVars 
+                            independent_features={this.props.independent_features}
+                            loaded_map_data={this.props.loaded_map_data}
+                            VIF_test_result={this.props.VIF_test_result}
+                        />
+                    </div>
                 </div>
-
-                <div className='configCorrelationContainer' style={correlationContainerStyle}>
-                    <Correlation
-                        dependent_features={this.props.dependent_features}
-                        currentActivCorrelation={this.props.currentActivCorrelation}
-                        loaded_map_data={this.props.loaded_map_data}
-                    />
-                </div>
-
-                
-                <div className='configIndependentXContainer' style={independentContainerStyle}>
-                    <IndependentVars 
-                        independent_features={this.props.independent_features}
-                        loaded_map_data={this.props.loaded_map_data}
-                        VIF_test_result={this.props.VIF_test_result}
-                    />
-                </div>
-
             </div> 
         );
     }
