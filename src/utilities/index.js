@@ -60,7 +60,8 @@ export function getCountyCenter(geojson_data){
     };
 }
 
-export function getDiagnosticMapLayer(feature, geoData){
+export function getDiagnosticMapLayer(feature, geoData, filter_){
+    //console.log(filter);
     if(feature === 'local_R2'){
         // try 5 classes with multiple classification methods, use Quantile at first
         const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
@@ -96,7 +97,9 @@ export function getDiagnosticMapLayer(feature, geoData){
             
         };
         configLayer.paint = paintProp;
-
+        if(filter_ !== undefined){
+            configLayer.filter = filter_;
+        }
         return configLayer;
     }else if(feature === 'cooksD'){
         const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];

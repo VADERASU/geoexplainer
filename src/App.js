@@ -120,11 +120,9 @@ class App extends Component {
         dataset: null
       },
       model_result: {},
-      
+      mapFilter: ['!', ['in', 'UID', ""]],
     };
   }
-
-  
 
   getNormalityTestResult = (featureList, select_case) => {
     axios.get('http://demo.vaderlab.org:5006/models/api/v0.1/calibration/normality/'+featureList+'+'+select_case)
@@ -684,16 +682,20 @@ class App extends Component {
    *  TRAINED MODEL EXPLORATION
    */
 
-  setMapLayer = (id) => {
+  setMapLayer = (id, filter) => {
     //console.log(id);
     const updateActivMapLayer = id;
     //need to be changed
-    const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data);
+    const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data, filter);
     this.setState({
       currentActivMapLayer: updateActivMapLayer,
       config_layer: newMapLayer,
       currentCorrMapLayer: null,
     });
+  };
+
+  setMapFilter = (filter) => {
+    this.setState({mapFilter: filter});
   };
 
   render() {

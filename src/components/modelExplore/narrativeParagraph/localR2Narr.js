@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { Typography, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { BoxZoomHandler } from "mapbox-gl";
+//import { BoxZoomHandler } from "mapbox-gl";
 const { Paragraph, Text } = Typography;
 
 export function LocalR2Narrative (props) {
@@ -9,7 +9,11 @@ export function LocalR2Narrative (props) {
     const [badLocalR2Areas, setBadLocalR2Areas] = useState("");
     const [textGoodLocalR2, setTextGoodLocalR2] = useState("");
     const [textBadLocalR2, setTextBadLocalR2] = useState("");
-
+    const [goodDIVstyle, setGoodDIVstyle] = useState({textAlign: 'left'});
+    const [badDIVstyle, setBadDIVstyle] = useState({textAlign: 'left'});
+    const [goodClicked, setGoodClicked] = useState(false);
+    const [badClicked, setBadClicked] = useState(false);
+    
     const updateGoodR2Name = (key) => {
         setGoodLocalR2Areas(key);
         const newText = key+`, where the local R <sup>2</sup> values are greater than <b>0.7</b> Indicating a decent prediction of the model in these areas.`;
@@ -78,10 +82,70 @@ export function LocalR2Narrative (props) {
         console.log(newText);
     };
 
+    const onGoodHover = () => {
+        setBadDIVstyle({textAlign: 'left'});
+        setBadClicked(false);
+
+        let filter = ['in', 'UID'];
+        Object.keys(good_places).forEach((key)=>{
+            good_places[key].forEach(e=>{
+                filter.push(e);
+            });
+        });
+        setGoodDIVstyle({textAlign: 'left', backgroundColor: 'rgba(0,0,0,0.1)'});
+        props.setMapLayer(key, filter);
+        //console.log(filter);
+    };
+
+    const offGoodHover = () => {
+        let filter = ['!', ['in', 'UID', ""]];
+        if(!goodClicked){
+            props.setMapLayer(key);
+            setGoodDIVstyle({textAlign: 'left'});
+        }
+            
+    };
+
+    const onGoodClick = () => {
+        //console.log('click');
+        setGoodClicked(!goodClicked);
+    };
+
+    const onBadHover = () => {
+        setGoodDIVstyle({textAlign: 'left'});
+        setGoodClicked(false);
+
+        let filter = ['in', 'UID'];
+        Object.keys(bad_places).forEach((key)=>{
+            bad_places[key].forEach(e=>{
+                filter.push(e);
+            });
+        });
+        setBadDIVstyle({textAlign: 'left', backgroundColor: 'rgba(0,0,0,0.1)'});
+        props.setMapLayer(key, filter);
+        //console.log(filter);
+    };
+
+    const offBadHover = () => {
+        let filter = ['!', ['in', 'UID', ""]];
+        if(!badClicked){
+            setBadDIVstyle({textAlign: 'left'});
+            props.setMapLayer(key);
+        }
+    };
+
+    const onBadClick = () => {
+        //console.log('click');
+        setBadClicked(!badClicked);
+    };
+
     return (
         <>
         <Paragraph
-            style={{textAlign: 'left'}}
+            style={goodDIVstyle}
+            onMouseEnter={() => onGoodHover()}
+            onMouseLeave={() => offGoodHover()}
+            onClick={onGoodClick}
         >
             <Text key={key} editable={{ onChange: updateGoodR2Name }}>{goodLocalR2Areas === "" ? good_places_narr : goodLocalR2Areas}</Text>
                 , where the local R <sup>2</sup> values are greater than <Text strong>0.7</Text>. 
@@ -94,9 +158,12 @@ export function LocalR2Narrative (props) {
         </Paragraph>
 
         <Paragraph
-            style={{textAlign: 'left'}}
+            style={badDIVstyle}
+            onMouseEnter={() => onBadHover()}
+            onMouseLeave={() => offBadHover()}
+            onClick={onBadClick}
         >
-            <Text key={key} editable={{ onChange: updateGoodR2Name }}>{badLocalR2Areas === "" ? bad_places_narr : badLocalR2Areas}</Text>
+            <Text key={key} editable={{ onChange: updateBadR2Name }}>{badLocalR2Areas === "" ? bad_places_narr : badLocalR2Areas}</Text>
                 , where the local R <sup>2</sup> values are less than <Text strong>0.6</Text>. 
                 Indicating a <Text type="warning">poor prediction</Text> in these areas.
             <Button 

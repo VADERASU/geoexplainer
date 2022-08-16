@@ -5,21 +5,23 @@ import * as d3 from 'd3';
 import { EditOutlined, CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { LocalR2Narrative } from "./narrativeParagraph/localR2Narr";
+import { CooksDNarrative } from "./narrativeParagraph/cooksDNarr";
+import { ResidualNarrative } from "./narrativeParagraph/residualNarr";
 
 export function NarrativeExplain (props) {
-    const { Paragraph, Text, Link } = Typography;
+    //const { Paragraph, Text, Link } = Typography;
 
     const [cardDisplay, setCardDisplay] = useState('block');
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [narrativeInfo, setNarrativeInfo] = useState(null);
 
-    const [goodLocalR2Areas, setGoodLocalR2Areas] = useState("");
-    const [badLocalR2Areas, setBadLocalR2Areas] = useState("");
+    //const [goodLocalR2Areas, setGoodLocalR2Areas] = useState("");
+    //const [badLocalR2Areas, setBadLocalR2Areas] = useState("");
 
     const cardBodyDisplay = {
         display: cardDisplay,
         padding: 12,
-        height: 300,
+        height: 250,
         overflow: 'auto',
     };
     const btnDisplay = {
@@ -43,15 +45,32 @@ export function NarrativeExplain (props) {
         setMinCardDisplay({display: 'none'});
     };
 
-    const makeNarrative = (model_result, selectedRowKeys) => {
+    const makeNarrative = (model_result, selectedRowKeys, setMapLayer) => {
         const key = selectedRowKeys[0];
-        const geojsonObj = model_result.geojson_poly.features.map(e=>e.properties);
-        const stat = model_result[key];
+        //const geojsonObj = model_result.geojson_poly.features.map(e=>e.properties);
+        //const stat = model_result[key];
         if(key === 'local_R2'){
             setNarrativeInfo(
                 <LocalR2Narrative
-                    selectedRowKeys={props.selectedRowKeys}
-                    model_result={props.model_result}
+                    selectedRowKeys={selectedRowKeys}
+                    model_result={model_result}
+                    setMapLayer={setMapLayer}
+                />
+            );
+        }else if(key === 'cooksD'){
+            setNarrativeInfo(
+                <CooksDNarrative
+                    selectedRowKeys={selectedRowKeys}
+                    model_result={model_result}
+                    setMapLayer={setMapLayer}
+                />
+            ); 
+        }else if(key === 'std_residuals'){
+            setNarrativeInfo(
+                <ResidualNarrative
+                    selectedRowKeys={selectedRowKeys}
+                    model_result={model_result}
+                    setMapLayer={setMapLayer}
                 />
             );
         }
@@ -60,9 +79,9 @@ export function NarrativeExplain (props) {
 
     useEffect(()=>{
         if(props.model_result !== {}){
-            makeNarrative(props.model_result, props.selectedRowKeys);
+            makeNarrative(props.model_result, props.selectedRowKeys, props.setMapLayer);
         }
-    }, [props.model_result, props.selectedRowKeys]);
+    }, [props.model_result, props.selectedRowKeys, props.setMapLayer]);
 
     return(
         <div className='narrativeExplainContainer' style={props.narrativeContainerDisplay}>

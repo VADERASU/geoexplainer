@@ -92,6 +92,7 @@ export function ModelExplore (props) {
                     setNarrativeBtnSelect={setNarrativeBtnSelect}
                     selectedRowKeys={selectedRowKeys}
                     model_result={props.model_result}
+                    setMapLayer={props.setMapLayer}
                 />
             </div>
             

@@ -45,7 +45,7 @@ export function ScatterEchart (props) {
                     var brushComponent = params.batch[0];
                     var brushed = brushComponent.selected[0].dataIndex;
                     var brushedUIDs = brushed.map(d => props.echartScatterData[d].UID);
-                    console.log("selected UIDs:", brushedUIDs);
+                    //console.log("selected UIDs:", brushedUIDs);
                 }});
                 setOption(props.echartScatterData);
         }
