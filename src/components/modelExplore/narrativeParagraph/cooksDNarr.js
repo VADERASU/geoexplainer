@@ -45,7 +45,7 @@ export function CooksDNarrative (props) {
         initCopy : textCooksd;
         console.log(newText);
     };
-    console.log(props.model_result);
+    //console.log(props.model_result);
 
     return(
         <Paragraph

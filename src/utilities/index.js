@@ -197,6 +197,9 @@ export function getDiagnosticMapLayer(feature, geoData, filter_){
         };
         configLayer.paint = paintProp;
         //console.log(configLayer);
+        if(filter_ !== undefined){
+            configLayer.filter = filter_;
+        }
         return configLayer;
     }else{
         //coefficients

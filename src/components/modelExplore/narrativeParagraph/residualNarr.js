@@ -46,6 +46,40 @@ export function ResidualNarrative (props) {
         console.log(e);
     };
 
+    const onGoodHover = () => {
+        let filter = ['in', 'UID'];
+        Object.keys(good_places).forEach((key)=>{
+            good_places[key].forEach(e=>{
+                filter.push(e);
+            });
+        });
+        setGoodDIVstyle({textAlign: 'left', backgroundColor: 'rgba(0,0,0,0.1)'});
+        props.setMapLayer(key, filter);
+        //console.log(key);
+    };
+
+    const offGoodHover = () => {
+        props.setMapLayer(key);
+        setGoodDIVstyle({textAlign: 'left'});        
+    };
+
+    const onBadHover = () => {
+        let filter = ['in', 'UID'];
+        Object.keys(bad_places).forEach((key)=>{
+            bad_places[key].forEach(e=>{
+                filter.push(e);
+            });
+        });
+        setBadDIVstyle({textAlign: 'left', backgroundColor: 'rgba(0,0,0,0.1)'});
+        props.setMapLayer(key, filter);
+        //console.log(filter);
+    };
+
+    const offBadHover = () => {
+        setBadDIVstyle({textAlign: 'left'});
+        props.setMapLayer(key);
+    };
+
     return(
         <>
             <Paragraph style={{textAlign: 'left'}}>
@@ -55,6 +89,8 @@ export function ResidualNarrative (props) {
 
             <Paragraph
                 style={goodDIVstyle}
+                onMouseEnter={() => onGoodHover()}
+                onMouseLeave={() => offGoodHover()}
             >
                 {goodNarr}
                 <Button 
@@ -66,6 +102,8 @@ export function ResidualNarrative (props) {
 
             <Paragraph
                 style={badDIVstyle}
+                onMouseEnter={() => onBadHover()}
+                onMouseLeave={() => offBadHover()}
             >
                 {badNarr}
                 <Button 
@@ -77,10 +115,20 @@ export function ResidualNarrative (props) {
 
             <Paragraph style={{textAlign: 'left'}}>
                 {moranNarr}
+                <Button 
+                size='small' style={{display: 'inline-block', marginLeft: 3}}
+                icon={<CopyOutlined />} type="dashed"
+                onClick={() => handleCopy(3)}
+                ></Button>
             </Paragraph>
 
             <Paragraph style={{textAlign: 'left'}}>
                 {moranPost}
+                <Button 
+                size='small' style={{display: 'inline-block', marginLeft: 3}}
+                icon={<CopyOutlined />} type="dashed"
+                onClick={() => handleCopy(4)}
+                ></Button>
             </Paragraph>
         </>
     );

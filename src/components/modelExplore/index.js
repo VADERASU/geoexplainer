@@ -38,7 +38,6 @@ export function ModelExplore (props) {
     };
 
     const handleNarrativeBtnClick = (feature) => {
-        
         setNarrativeBtnSelect(feature === narrativeBtnSelect ? null : feature);
         setNarrativeContainerDisplay(
             feature === narrativeBtnSelect ? {display: 'none'} : {display: 'block'}

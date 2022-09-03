@@ -156,6 +156,7 @@ export function ModelPerformance (props){
                     columns={local_columns}
                     dataSource={localInfoData}
                     pagination={false}
+                    /*
                     onRow={record => {
                         return{
                             onClick: event => {
@@ -167,6 +168,7 @@ export function ModelPerformance (props){
                             },
                         };
                     }}
+                    */
                 />                
             </Card>
         </div>

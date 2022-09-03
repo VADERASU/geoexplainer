@@ -112,7 +112,7 @@ export function ModelCoefficient (props) {
             style={{marginTop: 8}}
             bodyStyle={{
                 padding: 0,
-                maxHeight: 300,
+                height: 300,
                 overflow: 'auto',
             }}
             extra={

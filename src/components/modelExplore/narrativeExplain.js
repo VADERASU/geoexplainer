@@ -7,6 +7,7 @@ import { EditOutlined, CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-d
 import { LocalR2Narrative } from "./narrativeParagraph/localR2Narr";
 import { CooksDNarrative } from "./narrativeParagraph/cooksDNarr";
 import { ResidualNarrative } from "./narrativeParagraph/residualNarr";
+import { CoeffNarrative } from "./narrativeParagraph/coeffNarr";
 
 export function NarrativeExplain (props) {
     //const { Paragraph, Text, Link } = Typography;
@@ -68,6 +69,14 @@ export function NarrativeExplain (props) {
         }else if(key === 'std_residuals'){
             setNarrativeInfo(
                 <ResidualNarrative
+                    selectedRowKeys={selectedRowKeys}
+                    model_result={model_result}
+                    setMapLayer={setMapLayer}
+                />
+            );
+        }else{
+            setNarrativeInfo(
+                <CoeffNarrative
                     selectedRowKeys={selectedRowKeys}
                     model_result={model_result}
                     setMapLayer={setMapLayer}
