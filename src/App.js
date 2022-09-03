@@ -120,6 +120,7 @@ class App extends Component {
         dataset: null
       },
       model_result: {},
+      case_demo: {},
       mapFilter: ['!', ['in', 'UID', ""]],
     };
   }
@@ -627,18 +628,14 @@ class App extends Component {
       /* TODO after interface has been developed!
       axios.post('http://demo.vaderlab.org:5006/models/api/v0.1/models', model_param)
       .then(response => {
-        //console.log(response);
+        console.log(response);
         // update states
-        //this.setState({model_result: response.data.added_model});
+        this.setState({case_demo: response.data.added_model});
       })
       .catch(error => {
         console.log(error);
       });
       */
-      
-      //init map layer with local R2
-      //let currentActivMapLayer = 'loacl_R2';
-      //let mapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
 
       let currentActivMapLayer = null;
       let ori_config_layer = {
@@ -657,9 +654,6 @@ class App extends Component {
         config_layer: ori_config_layer,
         model_result: model_result
       });
-      //console.log(this.state.loaded_map_data, model_result.geojson_poly);
-      //let updateActivMapLayer = 'loacl_R2';
-      //let newMapLayer = getConfigMapLayerY(['loacl_R2'], model_result.geojson_poly);
       
     }else{
 
@@ -668,14 +662,32 @@ class App extends Component {
   };
 
   exportData = () => {
-    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(this.state.model_result)
-    )}`;
-    const link = document.createElement("a");
-    link.href = jsonString;
-    link.download = "model_result.json";
-
-    link.click();
+    let model_param = {
+      'dependent_Y': this.state.dependent_features[0],
+      'Y_data': this.state.norm_test_result.filter(e=>e.feature === this.state.dependent_features[0])[0].Y,
+      'X_list': this.state.independent_features,
+      'spatial_kernel': this.state.spatial_kernel,
+      'model_type': this.state.model_type,
+      'gwr_mgwr': this.state.local_modal,
+      'dataset': this.state.select_case
+    };
+    axios.post('http://demo.vaderlab.org:5006/models/api/v0.1/models', model_param)
+      .then(response => {
+        console.log(response);
+        // update states
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+          JSON.stringify(response.data.added_model)
+        )}`;
+        const link = document.createElement("a");
+        link.href = jsonString;
+        link.download = "case_demo.json";
+    
+        link.click();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    
   };
 
   /**
