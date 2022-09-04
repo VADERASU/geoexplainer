@@ -253,6 +253,7 @@ class App extends Component {
           corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
           handleCorrBtnclick={this.handleCorrBtnclick}
+          corrLegend={false}
       />
       let sortableItemActiv = 
       <SortableItem
@@ -265,6 +266,7 @@ class App extends Component {
           corrBtnType={'default'}
           handleMapBtnClick={this.handleMapBtnClick}
           handleCorrBtnclick={this.handleCorrBtnclick}
+          corrLegend={false}
       />
       featureDict.origin[e] = sortableItem;
       featureDict.activ[e] = sortableItemActiv;
@@ -348,7 +350,7 @@ class App extends Component {
           featureDict.origin[e],
           {
             mapBtnActiv: e !== currentActivMapLayer ? 'default' : 'primary',
-            corrBtnType: 'default'
+            corrBtnType: 'default',
           }
         );
         const sortableItemActiv = cloneElement(
@@ -388,11 +390,11 @@ class App extends Component {
       this.state.data_properties.forEach(e=>{
         const sortableItem = cloneElement(
           featureDict.origin[e],
-          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'},
         );
         const sortableItemActiv = cloneElement(
           featureDict.activ[e],
-          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'}
+          {corrBtnType: e !== currentCorrMapLayer ? 'default' : 'primary'},
         );
 
         featureDict.origin[e] = sortableItem;

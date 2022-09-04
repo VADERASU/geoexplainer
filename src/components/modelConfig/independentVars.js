@@ -5,7 +5,7 @@ import { IndepScatterEchart } from "../../utilities/indepScatterEchart";
 
 export function IndependentVars(props) {
 
-    const dimension = {width: 600, height: 450};
+    const dimension = {width: 580, height: 425};
     //const [indepFeatures, setIndepFeatures] = useState([]);
     const [colCount, setColCount] = useState(0);
     //const [VIFresult, setVIFresult] = useState(new Set());

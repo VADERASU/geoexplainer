@@ -94,6 +94,20 @@ Sortable List Item <li> Wrapper
   box-sizing: border-box;
 }
 
+.statusBar{
+  position: absolute;
+  left: 12px;
+  top: 30px;
+  list-style: none;
+
+}
+.statusBar span { float: left; height: 8px; }
+/* your colors */
+.statusBar .superawesome { background-color: #ff00ff; }
+.statusBar .awesome { background-color: #00ffff; }
+.statusBar .kindaawesome { background-color: #0000ff; }
+.statusBar .notawesome { background-color: #000000; }
+
 .sortableItem{
   position: relative;
   display: flex;

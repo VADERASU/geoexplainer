@@ -63,16 +63,12 @@ export function DependentVar(props){
         // get databins
         const dataBins = d3.bin().thresholds(10)(data);
         //console.log(rawDependentData);
-        //const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
-        const globalMax = d3.max(data);
-        const globalMin = d3.min(data);
-        const clusterInterval = parseInt((globalMax - globalMin) / 5); // start from 0, 5 classes
-        const classSteps = [];
-    
-        for(let i = 1; i < 4; i++){
-            let classBreak = globalMin + clusterInterval * i;
-            classSteps.push(parseInt(classBreak));
-        }
+        const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+        const quantile = d3.scaleQuantile()
+            .domain(data) // pass the whole dataset to a scaleQuantile’s domain
+            .range(dependentColorScheme);
+
+        const classSteps = quantile.quantiles();
         //console.log(classSteps);
         // make histogram clusters
         const echartHistData = {
@@ -83,9 +79,10 @@ export function DependentVar(props){
         };
         dataBins.forEach(e=>{
             let name = e.x0 + '-' + e.x1;
-            let color = e.x1 <= classSteps[0] ? '#eff3ff' : 
-            (e.x1 <=  classSteps[1] ? '#bdd7e7' : 
-            (e.x1 <= classSteps[2] ? '#6baed6' : '#2171b5'));
+            let color = e.x1 <= classSteps[0] ? dependentColorScheme[0] : 
+            (e.x1 <=  classSteps[1] ? dependentColorScheme[1] : 
+            (e.x1 <= classSteps[2] ? dependentColorScheme[2] : 
+                (e.x1 <= classSteps[3] ? dependentColorScheme[3] : dependentColorScheme[4])));
             
             let length = {
                 value: e.length,

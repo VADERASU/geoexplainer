@@ -335,38 +335,43 @@ export function getDiagnosticMapLayer(feature, geoData, filter_){
 }
 
 export function getConfigMapLayerY(feature, geoData){
-    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+    const dependentColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
     const configLayer = {
         id: 'config-fill',
         type: 'fill',
     };
     
     const featureList = geoData.features.map(e=>e.properties[feature[0]]);
-    const max = Math.max(...featureList);
-    const min = Math.min(...featureList);
-    const clusterInterval = parseInt((max - min) / 5); // start from 0, 5 classes
-    const classSteps = [];
+    //const max = Math.max(...featureList);
+    //const min = Math.min(...featureList);
+    //const clusterInterval = parseInt((max - min) / 5); // start from 0, 5 classes
     
-    for(let i = 1; i < 4; i++){
-        let classBreak = min + clusterInterval * i;
-        classSteps.push(parseInt(classBreak));
-    }
-    //console.log(classSteps);
+    const quantile = d3.scaleQuantile()
+            .domain(featureList) // pass the whole dataset to a scaleQuantile’s domain
+            .range(dependentColorScheme);
+
+    const classSteps = quantile.quantiles();
+    //console.log(quantile.quantiles());
+
     let paintProp = {
         'fill-color': [
             'step',
             ['get', feature[0]],
             dependentColorScheme[0],
-            classSteps[0],
+            parseFloat(classSteps[0].toFixed(2)),
             dependentColorScheme[1],
-            classSteps[1],
+            parseFloat(classSteps[1].toFixed(2)),
             dependentColorScheme[2],
-            classSteps[2],
-            dependentColorScheme[3]
+            parseFloat(classSteps[2].toFixed(2)),
+            dependentColorScheme[3],
+            parseFloat(classSteps[3].toFixed(2)),
+            dependentColorScheme[4],
         ],
-        'fill-opacity': 0.8,
-        
+        'fill-opacity': 0.8,            
     };
+
+    //console.log(classSteps);
+    
     configLayer.paint = paintProp;
 
     return configLayer;  

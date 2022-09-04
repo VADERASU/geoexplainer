@@ -15,10 +15,16 @@ export function HistogramEchart (props) {
             },
             xAxis: {
                 type: 'category',
-                data: echartHistData.binNames
+                data: echartHistData.binNames,
+                axisLabel:{
+                    fontSize: 10
+                }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLabel:{
+                    fontSize: 10
+                }
             },
             series: [{
                 type: 'bar',

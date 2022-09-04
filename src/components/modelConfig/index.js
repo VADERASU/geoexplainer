@@ -52,6 +52,7 @@ class ModelConfigPanel extends Component {
                         norm_test_result={this.props.norm_test_result}
                         
                         updateSortableList={this.props.updateSortableList}
+                        currentActivCorrelation={this.props.currentActivCorrelation}
                     />
                 </div>
                 <div className='floatConfigVisComponentsContainer'>
@@ -70,6 +71,7 @@ class ModelConfigPanel extends Component {
                             dependent_features={this.props.dependent_features}
                             currentActivCorrelation={this.props.currentActivCorrelation}
                             loaded_map_data={this.props.loaded_map_data}
+                            select_case={this.props.select_case}
                         />
                     </div>
 

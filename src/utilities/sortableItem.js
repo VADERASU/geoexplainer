@@ -23,7 +23,7 @@ export function SortableItem(props){
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        zIndex: 999,
+        zIndex: 99,
     };
 
     const featureNameStyle = {width: '4.9vw', marginRight: 3};
@@ -41,6 +41,35 @@ export function SortableItem(props){
         width: '6.3vw', paddingLeft: 0, marginRight: 3, fontSize: 11.5, paddingTop: 8,
         display: props.container === 'dependent'? 'block' : 'none',
     };
+
+    const singleVarLegend = <>
+        <span style={{backgroundColor: '#eff3ff', width:15}}></span>
+        <span style={{backgroundColor: '#bdd7e7', width:15}}></span>
+        <span style={{backgroundColor: '#6baed6', width:15}}></span>
+        <span style={{backgroundColor: '#3182bd', width:15}}></span>
+        <span style={{backgroundColor: '#08519c', width:15}}></span>
+        </>;
+    const dualIndependentLegend = <>
+        <span style={{backgroundColor: '#f4a582', width:15}}></span>
+        <span style={{backgroundColor: '#d6604d', width:15}}></span>
+        <span style={{backgroundColor: '#b2182b', width:15}}></span>
+        </>;
+    const dualDependentLegend = <>
+        <span style={{backgroundColor: '#92c5de', width:15}}></span>
+        <span style={{backgroundColor: '#4393c3', width:15}}></span>
+        <span style={{backgroundColor: '#2166ac', width:15}}></span>
+        </>;
+    
+
+    const statusBar = (props.mapBtnActiv !=='default') ? <div className='statusBar'>
+            {singleVarLegend}
+        </div> : (props.corrBtnType === 'primary' ? 
+         <div className='statusBar'>
+         {dualIndependentLegend}
+        </div> : ((props.container === 'dependent' && props.corrLegend) ? 
+        <div className='statusBar'>
+         {dualDependentLegend}
+        </div> : <></>));
 
     const VIFresult = props.VIFresult === null ? <></> : 
         (props.VIFresult > 10 ? 
@@ -82,11 +111,12 @@ export function SortableItem(props){
             style={style}
             {...attributes}
             {...listeners}
-        >
+        >  
             <div
                 className='sortableItem'
                 style={props.active ? {opacity: 0.33} : {}}
             >
+                {statusBar}
                 <div className='space-align-container'>
 
                     <div className='space-align-block' style={featureNameStyle}>

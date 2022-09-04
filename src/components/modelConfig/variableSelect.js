@@ -112,6 +112,7 @@ export function VariableSelection(props) {
                         sortableItems={props.dependent_features}
                         activeId={activeId}
                         sortable_components={props.sortable_components}
+                        currentActivCorrelation={props.currentActivCorrelation}
                     />
                 </SortableContext>
                 
@@ -127,6 +128,7 @@ export function VariableSelection(props) {
                         sortableItems={props.independent_features}
                         activeId={activeId}
                         sortable_components={props.sortable_components}
+                        currentActivCorrelation={props.currentActivCorrelation}
                     />
                 </SortableContext>
                 
@@ -142,6 +144,7 @@ export function VariableSelection(props) {
                         sortableItems={props.original_features}
                         activeId={activeId}
                         sortable_components={props.sortable_components}
+                        currentActivCorrelation={props.currentActivCorrelation}
                     />
                 </SortableContext>
                 

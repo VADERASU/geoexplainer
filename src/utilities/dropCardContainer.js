@@ -30,18 +30,36 @@ export function DropCardContainer(props) {
                             props.id === 'dependent' ?
                             cloneElement(
                                 props.sortable_components.activ[id],
-                                {container: 'dependent'}
+                                {
+                                    container: 'dependent',
+                                    corrLegend: (props.currentActivCorrelation !== null) ? true : false
+                                }
                             ) :
-                            props.sortable_components.activ[id]
+                            (props.id === 'independent' ?
+                            cloneElement(
+                                props.sortable_components.activ[id],
+                                {
+                                    container: 'independent'
+                                }
+                            ) :
+                            props.sortable_components.activ[id])
                         );
                     }else{
                         return (
                             props.id === 'dependent' ?
                             cloneElement(
                                 props.sortable_components.origin[id],
-                                {container: 'dependent'}
+                                {
+                                    container: 'dependent',
+                                    corrLegend: (props.currentActivCorrelation !== null) ? true : false
+                                }
                             ) :
-                            props.sortable_components.origin[id]
+                           (props.id === 'independent' ?
+                            cloneElement(
+                                props.sortable_components.origin[id],
+                                {container: 'independent'}
+                            ) :
+                            props.sortable_components.origin[id])
                         );
                     }
                     
