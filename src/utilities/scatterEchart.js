@@ -38,6 +38,7 @@ export function ScatterEchart (props) {
                 toolbox: ['rect', 'polygon', 'clear']
             },
             toolbox: {
+                show: props.independCorr? false:true,
                 feature: {
                     dataZoom: {}
                 },
@@ -73,17 +74,29 @@ export function ScatterEchart (props) {
                 },
             },
             series: [{
-                symbolSize: 5,
+                symbolSize: 6,
                 data: echartScatterData.map(d => {
-                    return {
-                        value: [d['x'], d['y']],
-                        itemStyle: {
-                            color: d['color']
-                        },
-                        county_name: d['county_name'],
-                        xName: d['xName'],
-                        yName: d['yName']
-                    };
+                    if(props.independCorr){
+                        return {
+                            value: [d['x'], d['y']],
+                            itemStyle: {
+                                color: '#feb24c'
+                            },
+                            county_name: d['county_name'],
+                            xName: d['xName'],
+                            yName: d['yName']
+                        };
+                    }else{
+                        return {
+                            value: [d['x'], d['y']],
+                            itemStyle: {
+                                color: d['color']
+                            },
+                            county_name: d['county_name'],
+                            xName: d['xName'],
+                            yName: d['yName']
+                        };
+                    }
                 }),
                 type: 'scatter'
               }]

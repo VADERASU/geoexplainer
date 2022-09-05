@@ -29,7 +29,8 @@ import { SortableItem } from './utilities/sortableItem';
 import georgia_demo from './data/georgia_demo.json';
 import chicago_demo from './data/chicago_config_poly.json';
 // temporal import
-import model_result from './data/temp/model_result.json';
+//import model_result from './data/temp/model_result.json';
+import model_result from './data/temp/case_demo.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
 const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name', 'biVariateLayer'];

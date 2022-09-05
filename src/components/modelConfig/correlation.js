@@ -32,7 +32,7 @@ export function Correlation(props) {
     };
 
     const makeSuggestion = (pVal, coeff) => {
-        if(pVal >= 0.05){
+        if(pVal < 0.05){
             if(coeff >= 0.7){
                 let sugDict = {
                     msg: 'Significant global strong positive relationship between two variables.',
@@ -104,6 +104,7 @@ export function Correlation(props) {
             setCurrentY(props.dependent_features[0]);
             setCurrentX(props.currentActivCorrelation);
             getPearsonResult(props.dependent_features[0], props.currentActivCorrelation, props.select_case);
+            //console.log(props.independCorr);
             setEchartScatterData(
                 props.loaded_map_data.features.map(d => {
                     return {
@@ -134,6 +135,7 @@ export function Correlation(props) {
                             xName={props.currentActivCorrelation}
                             yName={props.dependent_features[0]}
                             height={150}
+                            independCorr={props.independCorr!== undefined ? true : false}
                         />
                         </Col>
 

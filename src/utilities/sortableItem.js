@@ -50,14 +50,14 @@ export function SortableItem(props){
         <span style={{backgroundColor: '#08519c', width:15}}></span>
         </>;
     const dualIndependentLegend = <>
-        <span style={{backgroundColor: '#f4a582', width:15}}></span>
-        <span style={{backgroundColor: '#d6604d', width:15}}></span>
-        <span style={{backgroundColor: '#b2182b', width:15}}></span>
+        <span style={{backgroundColor: '#f4a582', width:25}}></span>
+        <span style={{backgroundColor: '#d6604d', width:25}}></span>
+        <span style={{backgroundColor: '#b2182b', width:25}}></span>
         </>;
     const dualDependentLegend = <>
-        <span style={{backgroundColor: '#92c5de', width:15}}></span>
-        <span style={{backgroundColor: '#4393c3', width:15}}></span>
-        <span style={{backgroundColor: '#2166ac', width:15}}></span>
+        <span style={{backgroundColor: '#92c5de', width:25}}></span>
+        <span style={{backgroundColor: '#4393c3', width:25}}></span>
+        <span style={{backgroundColor: '#2166ac', width:25}}></span>
         </>;
     
 

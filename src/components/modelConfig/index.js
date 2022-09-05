@@ -80,6 +80,7 @@ class ModelConfigPanel extends Component {
                             independent_features={this.props.independent_features}
                             loaded_map_data={this.props.loaded_map_data}
                             VIF_test_result={this.props.VIF_test_result}
+                            select_case={this.props.select_case}
                         />
                     </div>
                 </div>

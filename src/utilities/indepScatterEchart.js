@@ -7,9 +7,9 @@ export function IndepScatterEchart (props) {
 
     const setOption = (echartScatterData) => {
         const chartOption = {
-            grid: { top: 15, bottom: 3, right: 15 },
+            grid: { top: echartScatterData['xAxisShow']?15:2, bottom: 2, right: echartScatterData['yAxisShow']?15:2 },
             xAxis: {
-                name: echartScatterData['xAxisName'],
+                name: echartScatterData['xAxisShow'] ? echartScatterData['xAxisName'] : '',
                 nameLocation: 'middle',
                 nameGap: 0,
                 position: 'top',
@@ -26,7 +26,7 @@ export function IndepScatterEchart (props) {
                 }
             },
             yAxis: {
-                name: echartScatterData['yAxisName'],
+                name: echartScatterData['yAxisShow'] ? echartScatterData['yAxisName'] : '',
                 nameLocation: 'middle',
                 nameGap: 5,
                 position: 'right',
@@ -43,8 +43,122 @@ export function IndepScatterEchart (props) {
                 }
             },
             series: [{
-                symbolSize: 10 / props.echartScatterData.colCount,
-                data: echartScatterData['data'].map(d => [d['x'], d['y']]),
+                symbolSize: 15 / props.echartScatterData.colCount,
+                data: echartScatterData['data'].map(d => {
+                    if(echartScatterData['yAxisName'] === 'income_pc'){
+                        if(echartScatterData['xAxisName'] === 'poverty' || echartScatterData['xAxisName'] === 'unemployed'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#feb24c'
+                                },
+                            }
+                        }else if(echartScatterData['xAxisName']==='income_pc'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#bdbdbd'
+                                },
+                            }
+                        }else{
+                            return {
+                                value: [d['x'], d['y']],
+                            }
+                        }
+                    }else if(echartScatterData['yAxisName'] === 'poverty'){
+                        if(echartScatterData['xAxisName'] === 'income_pc' || echartScatterData['xAxisName'] === 'unemployed'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#feb24c'
+                                },
+                            }
+                        }else if(echartScatterData['xAxisName']==='poverty'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#bdbdbd'
+                                },
+                            }
+                        }else{
+                            return {
+                                value: [d['x'], d['y']],
+                            }
+                        }
+                    }else if(echartScatterData['yAxisName'] === 'unemployed'){
+                        if(echartScatterData['xAxisName'] === 'income_pc' || echartScatterData['xAxisName'] === 'poverty'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#feb24c'
+                                },
+                            }
+                        }else if(echartScatterData['xAxisName']==='unemployed'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#bdbdbd'
+                                },
+                            }
+                        }else{
+                            return {
+                                value: [d['x'], d['y']],
+                            }
+                        }
+                    }else if(echartScatterData['yAxisName'] === 'num_crimes'){
+                        if(echartScatterData['xAxisName'] === 'num_theft'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#feb24c'
+                                },
+                            }
+                        }else if(echartScatterData['xAxisName']==='num_crimes'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#bdbdbd'
+                                },
+                            }
+                        }else{
+                            return {
+                                value: [d['x'], d['y']],
+                            }
+                        }
+                    }else if(echartScatterData['yAxisName'] === 'num_theft'){
+                        if(echartScatterData['xAxisName'] === 'num_crimes'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#feb24c'
+                                },
+                            }
+                        }else if(echartScatterData['xAxisName']==='num_theft'){
+                            return {
+                                value: [d['x'], d['y']],
+                                itemStyle: {
+                                    color: '#bdbdbd'
+                                },
+                            }
+                        }else{
+                            return {
+                                value: [d['x'], d['y']],
+                            }
+                        }
+                    }else if(echartScatterData['yAxisName'] === echartScatterData['xAxisName']){
+                        return {
+                            value: [d['x'], d['y']],
+                            itemStyle: {
+                                color: '#bdbdbd'
+                            },
+                        }
+                    }else{
+                        return {
+                            value: [d['x'], d['y']],
+                        }
+                    }
+                    
+                }),
                 type: 'scatter'
             }]
         };
@@ -53,6 +167,7 @@ export function IndepScatterEchart (props) {
 
     useEffect(() => {
         if (props.echartScatterData !== null) {
+            //console.log(props.echartScatterData);
             setDimension({
                 width: (props.echartScatterData.dimension.width / props.echartScatterData.colCount) * 0.9,
                 height: (props.echartScatterData.dimension.height / props.echartScatterData.colCount) * 0.9

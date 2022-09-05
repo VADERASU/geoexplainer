@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
-import { Card, Drawer } from 'antd';
+import { Card, Drawer, Alert } from 'antd';
 import { LeftCircleOutlined } from '@ant-design/icons';
 import { IndepScatterEchart } from "../../utilities/indepScatterEchart";
+import { Correlation } from "./correlation";
+import '../../styles/modelConfig.css';
 
 export function IndependentVars(props) {
 
@@ -11,8 +13,22 @@ export function IndependentVars(props) {
     //const [VIFresult, setVIFresult] = useState(new Set());
     const [visible, setVisible] = useState(false);
     const [columns, setCols] = useState([]);
+    const [corrDetail, setCorrDetail] = useState(<></>);
+    const [suggestion, setSuggestion] = useState({
+        msg: '',
+        type: 'info',
+    });
 
-    const showDrawer = () => {
+    const showDrawer = (event) => {
+        //console.log(event.target.value);
+        let corrDetail = props.loaded_map_data !== null ? <Correlation
+        dependent_features={['unemployed']}
+        currentActivCorrelation={'poverty'}
+        loaded_map_data={props.loaded_map_data}
+        select_case={props.select_case}
+        independCorr={true}
+        /> : <></>;
+        setCorrDetail(corrDetail);
         setVisible(true);
     };
 
@@ -30,8 +46,28 @@ export function IndependentVars(props) {
         event.currentTarget.style.boxShadow = 'none';
     };
 
+    const setVIFannotation = (independent_features, VIF_test_result) => {
+        let highVifList = [];
+        let sugText = '';
+        independent_features.forEach(e=>{
+            if(VIF_test_result[e] > 10){
+                highVifList.push(e);
+                sugText = sugText+'['+e+'] ';
+            }
+        });
+        
+        let suggestion = {
+            msg: highVifList.length === 0 ? 
+            'No multicollinearity detected.' : 
+            sugText+'have high multicollinearities. Check the detail correlations by click the plot.',
+            type: highVifList.length === 0 ? 'success' : 'warning',
+        };
+        setSuggestion(suggestion);
+    };
+
     useEffect(() => {
         //setIndepFeatures([...props.independent_features].sort());
+        setVIFannotation(props.independent_features, props.VIF_test_result);
         setColCount(props.independent_features.length);
         //setVIFresult(new Set(props.independent_features.filter(feature => feature in props.VIF_test_result && props.VIF_test_result[feature] > 10)));
         //console.log(props.independent_features.filter(feature => feature in props.VIF_test_result && props.VIF_test_result[feature] > 10));
@@ -57,9 +93,9 @@ export function IndependentVars(props) {
                             UID: d.properties['UID']
                         }
                     });
-                    echartScatterData['xAxisName'] = i === 0 ? xFeature : '';
+                    echartScatterData['xAxisName'] = xFeature;//i === 0 ? xFeature : '';
                     echartScatterData['xAxisShow'] = i === 0 ? true : false;
-                    echartScatterData['yAxisName'] = (j+1) % props.independent_features.length === 0 ? yFeature : '';
+                    echartScatterData['yAxisName'] = yFeature;//(j+1) % props.independent_features.length === 0 ? yFeature : '';
                     echartScatterData['yAxisShow'] = (j+1) % props.independent_features.length === 0 ? true: false;
                     echartScatterData['dimension'] = dimension;
                     echartScatterData['colCount'] = props.independent_features.length;
@@ -103,9 +139,26 @@ export function IndependentVars(props) {
             <div style={{display: 'grid', gridTemplateColumns: Array(props.independent_features.length).fill('auto').join(' '), width: '100%', height: '100%'}}>
                 {columns}
             </div>
+            <div
+                className="VIFnotation"
+                style={{
+                    height: 140,
+                    width: 280,
+                }}
+            >
+                <Alert 
+                    message={suggestion.msg}
+                    type={suggestion.type} 
+                    showIcon
+                    style={{
+                        textAlign: 'left',
+                    }}
+                />
+            </div>
             <Drawer
-                title="Basic Drawer"
+                title={'Correlation of '}
                 placement="right"
+                headerStyle={{height: 30}}
                 width={dimension.width}
                 onClose={onClose}
                 closeIcon={<LeftCircleOutlined />}
@@ -115,7 +168,7 @@ export function IndependentVars(props) {
                     position: 'absolute'
                 }}
             >
-                <p>Some contents...</p>
+                {corrDetail}
             </Drawer>
         </Card>
     );
