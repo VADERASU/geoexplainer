@@ -104,7 +104,7 @@ export function Correlation(props) {
             setCurrentY(props.dependent_features[0]);
             setCurrentX(props.currentActivCorrelation);
             getPearsonResult(props.dependent_features[0], props.currentActivCorrelation, props.select_case);
-            //console.log(props.independCorr);
+            //console.log(props.currentActivMapLayer);
             setEchartScatterData(
                 props.loaded_map_data.features.map(d => {
                     return {
@@ -136,6 +136,8 @@ export function Correlation(props) {
                             yName={props.dependent_features[0]}
                             height={150}
                             independCorr={props.independCorr!== undefined ? true : false}
+                            setMapFilter={props.setMapFilter}
+                            currentActivMapLayer={props.currentActivMapLayer}
                         />
                         </Col>
 

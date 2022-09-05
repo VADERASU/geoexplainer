@@ -710,7 +710,8 @@ class App extends Component {
   };
 
   setMapFilter = (filter) => {
-    this.setState({mapFilter: filter});
+    //console.log(filter);
+    this.setState({config_layer: filter});
   };
 
   render() {
@@ -780,6 +781,7 @@ class App extends Component {
 
 
               currentActivCorrelation={this.state.currentCorrMapLayer}
+              currentActivMapLayer={this.state.config_layer}
               loaded_map_data={this.state.loaded_map_data}
               VIF_test_result={this.state.VIF_test_result}
 
@@ -789,6 +791,7 @@ class App extends Component {
 
               trainModel={this.trainModel}
               exportData={this.exportData}
+              setMapFilter={this.setMapFilter}
             />
 
             <ModelExplore

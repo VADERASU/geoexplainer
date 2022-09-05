@@ -5,7 +5,7 @@ export function ScatterEchart (props) {
     const [chartOption, setChartOption] = useState({});
     const [onEvents, setEvents] = useState({});
     //const [brushed, setBrushed] = useState([]);
-    let brushed = [];
+    //let brushed = [];
 
     const setOption = (echartScatterData) => {
         const chartOption = {
@@ -112,7 +112,20 @@ export function ScatterEchart (props) {
                         var brushed = brushComponent.selected[0].dataIndex;
                         var brushedUIDs = brushed.map(d => props.echartScatterData[d].UID);
                         //console.log("selected UIDs:", brushedUIDs);
-                        
+                        let filter = ['in', 'UID'];
+                        brushedUIDs.forEach(e=>{
+                            filter.push(e);
+                        });
+                        if(brushedUIDs.length > 0){
+                            let maplayer = JSON.parse(JSON.stringify(props.currentActivMapLayer));
+                            //console.log(maplayer);
+                            maplayer.filter = filter;
+                            props.setMapFilter(maplayer);
+                        }else{
+                            let maplayer = JSON.parse(JSON.stringify(props.currentActivMapLayer));
+                            if(maplayer.hasOwnProperty('filter')) delete maplayer['filter'];
+                            props.setMapFilter(maplayer);
+                        }
                     },
                 });
 

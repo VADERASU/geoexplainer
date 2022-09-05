@@ -12,7 +12,6 @@ import { IndependentVars } from './independentVars';
 class ModelConfigPanel extends Component {
     
     render() {
-        
         const dependentContainerStyle = this.props.dependent_features.length > 0 ?
         {display: 'block'} : {display: 'none'};
 
@@ -72,6 +71,8 @@ class ModelConfigPanel extends Component {
                             currentActivCorrelation={this.props.currentActivCorrelation}
                             loaded_map_data={this.props.loaded_map_data}
                             select_case={this.props.select_case}
+                            currentActivMapLayer={this.props.currentActivMapLayer}
+                            setMapFilter={this.props.setMapFilter}
                         />
                     </div>
 

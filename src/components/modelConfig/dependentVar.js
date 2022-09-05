@@ -22,11 +22,12 @@ export function DependentVar(props){
     const makeSuggestion = (narrativeInfo, logtrans_backup) => {
         //console.log(narrativeInfo);
         if(parseFloat(narrativeInfo.pvalue) >= 0.05){
+            console.log(logtrans_backup);
             let suggestionObj = {
                 msg: "Data is in normal distribution, can use Gaussian model type.",
                 type: 'success',
-                action: logtrans_backup.feature !== currentY ? true : false,
-                btnMsg: logtrans_backup.feature !== currentY ? 'no action needed' : 'Use original Y'
+                action: (logtrans_backup.feature !== currentY && logtrans_backup.feature === null) ? true : false,
+                btnMsg: (logtrans_backup.feature !== currentY && logtrans_backup.feature === null) ? 'no action needed' : 'Use original Y'
             }
             setSuggestion(suggestionObj);
         }else if(parseFloat(narrativeInfo.skewness) > 0){
