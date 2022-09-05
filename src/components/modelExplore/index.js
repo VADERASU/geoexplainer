@@ -92,8 +92,11 @@ export function ModelExplore (props) {
                     selectedRowKeys={selectedRowKeys}
                     model_result={props.model_result}
                     setMapLayer={props.setMapLayer}
+                    select_case={props.select_case}
                 />
             </div>
+
+            <div className="reportAuthoringContainer"></div>
             
         </div>
     ) : <></>;

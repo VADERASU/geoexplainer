@@ -34,9 +34,12 @@ export function Correlation(props) {
     const makeSuggestion = (pVal, coeff) => {
         if(pVal < 0.05){
             if(coeff >= 0.7){
-                let sugDict = {
+                let sugDict = props.independCorr === 'undefined' ? {
                     msg: 'Significant global strong positive relationship between two variables.',
                     type: 'success',
+                } : {
+                    msg: 'Significant global strong positive relationship between two variables.',
+                    type: 'warning',
                 };
                 setSuggestion(sugDict);
             }else if(coeff >= 0.5 || coeff < 0.7){

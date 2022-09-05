@@ -48,9 +48,23 @@
 */
 .globalNumericalDistributionContainer {
     width: 24vw;
-  }
+}
   
-  .narrativeExplainContainer {
+.narrativeExplainContainer {
     margin-top: 10px;
     width: 24vw;
-  }
+}
+
+/**
+* Report authoring panel
+*/
+.reportAuthoringContainer{
+    position: absolute;
+    bottom: 0px;
+    left: 25vw;
+    width: 700px;
+    height: 540px;
+    /*padding: 6px;*/
+    transition-property: height;
+    transition-duration: 0.5s;
+}

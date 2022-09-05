@@ -29,6 +29,9 @@ export function LocalR2Narrative (props) {
     const key = props.selectedRowKeys[0];
     const geojsonObj = props.model_result.geojson_poly.features.map(e=>e.properties);
     //const stat = props.model_result[key];
+    const areaName = props.select_case === 'chicago' ? ' community areas in ' : ' counties in ';
+    const upperAreaName = props.select_case === 'chicago' ? ' city' : ' state';
+
     const threshold_good = 0.7;
     const threshold_bad = 0.6;
     const good_places = {};
@@ -50,7 +53,7 @@ export function LocalR2Narrative (props) {
     let good_places_narr = '';
     Object.keys(good_places).map((key, i)=>{
         const len = good_places[key].length;
-        const textgood = len+' counties in '+key+' state';
+        const textgood = len+areaName+key+upperAreaName;
         if(i<Object.keys(good_places).length-1){
             good_places_narr = good_places_narr + ', '
         }
@@ -60,7 +63,7 @@ export function LocalR2Narrative (props) {
     let bad_places_narr = '';
     Object.keys(bad_places).map((key, i)=>{
         const len = bad_places[key].length;
-        const textbad = len+' counties in '+key+' state';
+        const textbad = len+areaName+key+upperAreaName;
         if(i<Object.keys(bad_places).length-1){
             bad_places_narr = bad_places_narr + ', '
         }
@@ -102,8 +105,7 @@ export function LocalR2Narrative (props) {
         if(!goodClicked){
             props.setMapLayer(key);
             setGoodDIVstyle({textAlign: 'left'});
-        }
-            
+        }   
     };
 
     const onGoodClick = () => {

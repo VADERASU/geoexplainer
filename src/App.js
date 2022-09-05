@@ -799,6 +799,7 @@ class App extends Component {
               model_result={this.state.model_result}
               model_used={this.state.model_used}
               setMapLayer={this.setMapLayer}
+              select_case={this.state.select_case}
             />
 
           </Content>

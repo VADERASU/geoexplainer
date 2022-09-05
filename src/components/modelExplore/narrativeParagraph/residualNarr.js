@@ -12,6 +12,7 @@ export function ResidualNarrative (props) {
 
     const key = props.selectedRowKeys[0];
     const geojsonObj = props.model_result.geojson_poly.features.map(e=>e.properties);
+    
     //const stat = props.model_result[key];
     const good_places = {};
     const bad_places = {};

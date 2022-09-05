@@ -81,8 +81,8 @@ export function ModelCoefficient (props) {
                     ></Button>
                     <Button 
                         size='small' icon={<FileSearchOutlined />}
-                        //type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
-                        //onClick={() => numericalBtnClick(operations)}
+                        type={operations === props.narrativeBtnSelect ? 'primary' : 'text'}
+                        onClick={() => props.handleNarrativeBtnClick(operations)}
                     ></Button>
                     </>
                     
@@ -101,6 +101,7 @@ export function ModelCoefficient (props) {
           props.setSelectedRowKeys(selectedRowKeys);
           props.setMapLayer(selectedRowKeys[0]);
           props.handleNumBtnClick(selectedRowKeys[0]);
+          props.handleNarrativeBtnClick(selectedRowKeys[0]);
         },
     };
 
@@ -136,6 +137,7 @@ export function ModelCoefficient (props) {
                 columns={local_columns}
                 dataSource={coeffData}
                 pagination={false}
+                /*
                 onRow={record => {
                     return{
                         onClick: event => {
@@ -146,6 +148,7 @@ export function ModelCoefficient (props) {
                         },
                     };
                 }}
+                */
             />
         </Card>
     );

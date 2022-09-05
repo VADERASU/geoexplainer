@@ -19,6 +19,8 @@ export function CooksDNarrative (props) {
     const key = props.selectedRowKeys[0];
     const geojsonObj = props.model_result.geojson_poly.features.map(e=>e.properties);
     const threshold = 4 / geojsonObj.length;
+    const areaName = props.select_case === 'chicago' ? ' community areas in ' : ' counties in ';
+    const upperAreaName = props.select_case === 'chicago' ? ' city' : ' state';
     const places = {};
     geojsonObj.forEach(e=>{
         if(e.cooksD > threshold){
@@ -31,7 +33,7 @@ export function CooksDNarrative (props) {
     let places_narr = '';
     Object.keys(places).map((key, i)=>{
         const len = places[key].length;
-        const textgood = len+' counties in '+key+' state';
+        const textgood = len+areaName+key+upperAreaName;
         if(i<Object.keys(places).length-1){
             places_narr = places_narr + ', '
         }

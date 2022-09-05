@@ -56,6 +56,7 @@ export function NarrativeExplain (props) {
                     selectedRowKeys={selectedRowKeys}
                     model_result={model_result}
                     setMapLayer={setMapLayer}
+                    select_case={props.select_case}
                 />
             );
         }else if(key === 'cooksD'){
@@ -64,6 +65,7 @@ export function NarrativeExplain (props) {
                     selectedRowKeys={selectedRowKeys}
                     model_result={model_result}
                     setMapLayer={setMapLayer}
+                    select_case={props.select_case}
                 />
             ); 
         }else if(key === 'std_residuals'){
@@ -72,6 +74,7 @@ export function NarrativeExplain (props) {
                     selectedRowKeys={selectedRowKeys}
                     model_result={model_result}
                     setMapLayer={setMapLayer}
+                    select_case={props.select_case}
                 />
             );
         }else{
@@ -80,6 +83,7 @@ export function NarrativeExplain (props) {
                     selectedRowKeys={selectedRowKeys}
                     model_result={model_result}
                     setMapLayer={setMapLayer}
+                    select_case={props.select_case}
                 />
             );
         }

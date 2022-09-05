@@ -30,6 +30,10 @@ export function CoeffNarrative (props){
     const featureName = key + '_coefficient';
     const featureTVal = key + '_tval';
     const geojsonObj = props.model_result.geojson_poly.features.map(e=>e.properties);
+    
+    const areaName = props.select_case === 'chicago' ? ' community areas in ' : ' counties in ';
+    const upperAreaName = props.select_case === 'chicago' ? ' city' : ' state';
+
     const pos_places = {};
     const neg_places = {};
     let posMax = 0;
@@ -74,7 +78,7 @@ export function CoeffNarrative (props){
     Object.keys(pos_places).map((key, i)=>{
         const len = pos_places[key].length;
         totalPosLen = totalPosLen + len;
-        const textgood = len+' counties in '+key+' state';
+        const textgood = len+areaName+key+upperAreaName;
         if(i<Object.keys(pos_places).length-1){
             pos_places_narr = pos_places_narr + ', '
         }
@@ -88,7 +92,7 @@ export function CoeffNarrative (props){
     Object.keys(neg_places).map((key, i)=>{
         const len = neg_places[key].length;
         negLen = negLen + len;
-        const textbad = len+' counties in '+key+' state';
+        const textbad = len+areaName+key+upperAreaName;
         if(i<Object.keys(neg_places).length-1){
             neg_places_narr = neg_places_narr + ', '
         }
@@ -136,6 +140,8 @@ export function CoeffNarrative (props){
         ></Button>
 
         </Paragraph>;
+
+    const nullComponent = <Paragraph style={{textAlign: 'left'}}></Paragraph>;
 
     return(
         <>

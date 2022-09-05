@@ -217,7 +217,6 @@ export function getDiagnosticMapLayer(feature, geoData, filter_){
         
         const posList = featureList.filter(e=>e>0);
         const negList = featureList.filter(e=>e<0);
-
         geoData.features.forEach(e=>{
             let UID = e.properties['UID'];
             if(e.properties[featureTVal] !== 0){

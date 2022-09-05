@@ -22,7 +22,7 @@ export function DependentVar(props){
     const makeSuggestion = (narrativeInfo, logtrans_backup) => {
         //console.log(narrativeInfo);
         if(parseFloat(narrativeInfo.pvalue) >= 0.05){
-            console.log(logtrans_backup);
+            //console.log(logtrans_backup);
             let suggestionObj = {
                 msg: "Data is in normal distribution, can use Gaussian model type.",
                 type: 'success',
