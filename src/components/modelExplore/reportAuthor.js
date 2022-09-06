@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Button, Typography} from 'antd';
-import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
+import { Card, Button, Typography, Popover} from 'antd';
+import { ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined } from '@ant-design/icons';
 const { Paragraph, Text } = Typography;
 
 export function ReportAuthor (props) {
@@ -13,23 +13,7 @@ export function ReportAuthor (props) {
         padding: 10
     });
     const [expand, setExpand] = useState(false);
-    const [editableStr, setEditableStr] = useState(`
-    Dependent Variable price_pp has the following values of model diagnostics - 
-    AICc of 176.56, global R2 value of 0.56, Adj R2 value of 0.51.
-    The impact of <b>num_spots</b> is statistically significant around colored areas. 
-    The gray areas indicate regions where this attribute has no impact on the <b>price_pp</b>.
-    `);
-
-    const [content, setContent] = useState(
-        <Paragraph
-            style={{textAlign: 'left'}}
-            editable={{
-                onChange: setEditableStr,
-            }}
-        >
-            {editableStr}
-        </Paragraph>
-    );
+    const [content, setContent] = useState([]);
 
     const toggleClick = () => {
         let style = {
@@ -42,6 +26,48 @@ export function ReportAuthor (props) {
         setExpand(!expand);
         setBodyStyle(style);
     };
+
+    const updateContent = (val) => {
+        console.log(val);
+    };
+
+    const genReportContent = (reportContent) => {
+        let reportList = [];
+        reportContent.forEach((e, i)=>{
+            if(e!==""){
+                let report = <Popover
+                style={{padding: 0}}
+                content={
+                    <Button 
+                    size='small' style={{}}
+                    icon={<DeleteOutlined />} type="dashed"
+                    onClick={() => props.deleteClick(i)}
+                    ></Button>
+                } 
+                trigger="click"
+                >
+                <Paragraph
+                key={i}
+                style={{textAlign: 'left'}}
+                editable={{
+                    onChange: () => updateContent(i),
+                }}
+                >
+                    {e}
+                </Paragraph>
+                </Popover>;
+                reportList.push(report);
+            }
+                
+        });
+        //console.log(reportList);
+        setContent(reportList);
+    };
+    
+    useEffect(()=>{
+        //console.log(props.reportContent);
+        genReportContent(props.reportContent);
+    },[props.reportContent]);
 
     return(
         <div className="reportAuthoringContainer">

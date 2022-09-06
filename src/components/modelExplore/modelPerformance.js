@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import { Card, Descriptions, Table, Button } from 'antd';
-import { BarChartOutlined, FileSearchOutlined } from '@ant-design/icons';
+import { BarChartOutlined, FileSearchOutlined, EditOutlined } from '@ant-design/icons';
 import { Boxplot } from "../../utilities/boxplot";
 
 export function ModelPerformance (props){
@@ -134,6 +134,25 @@ export function ModelPerformance (props){
                 bodyStyle={{
                     padding: 0,
                 }}
+                extra={
+                    <div
+                        style={{
+                            display: 'inline-block',
+                            fontSize: 12
+                        }}
+                    >
+                        <Button
+                            size="small"
+                            style={{
+                                marginLeft: 5,
+                                float: 'left'
+                            }}
+                            icon={<EditOutlined />}
+                            onClick={() => props.globalInfoGen()}
+                        ></Button>
+
+                    </div>
+                }
             >
                 {globalInfoDiv}
             </Card>

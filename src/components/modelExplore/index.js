@@ -24,6 +24,29 @@ export function ModelExplore (props) {
         });
     };
     
+    const [reportContent, setReportContent] = useState(['']);
+
+    const deleteClick = (val) => {
+        let conList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        conList.splice(val, 1);
+        setReportContent(conList);
+    };
+
+    const globalInfoGen = (param) => {
+        // generate global diagnostic information narrative
+        let globalDiag = props.model_result.diagnostic_info;
+        const globalInfo = `For the trained `+props.model_used+` model, the R-squared is `+globalDiag.R2.toFixed(2)+', adjusted R-squared is '
+        +globalDiag.adj_R2.toFixed(2)+', and the AICc is '+globalDiag.AICc.toFixed(2)+'.';
+
+        let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        reportList.push(globalInfo);
+        setReportContent(reportList);
+    };
+
+    const narraInfoGen = () => {};
+
+    const numDistInfoGen = () => {};
+
     const handleNumBtnClick = (feature) => {
         setNumericalBtnSelect(feature === numericalBtnSelect ? null : feature);
         setNumericalContainerDisplay(
@@ -64,6 +87,8 @@ export function ModelExplore (props) {
                     narrativeBtnSelect={narrativeBtnSelect}
                     handleNumBtnClick={handleNumBtnClick}
                     handleNarrativeBtnClick={handleNarrativeBtnClick}
+
+                    globalInfoGen={globalInfoGen}
                 />
                 {/** model coefficient container */}
                 <ModelCoefficient
@@ -97,7 +122,10 @@ export function ModelExplore (props) {
                 />
             </div>
 
-            <ReportAuthor />
+            <ReportAuthor
+                reportContent={reportContent}
+                deleteClick={deleteClick}
+            />
 
         </div>
     ) : <></>;
