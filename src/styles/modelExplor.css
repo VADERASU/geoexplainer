@@ -63,8 +63,6 @@
     bottom: 0px;
     left: 25vw;
     width: 700px;
-    height: 540px;
-    /*padding: 6px;*/
-    transition-property: height;
-    transition-duration: 0.5s;
+    padding-left: 6px;
+    overflow: hidden;
 }

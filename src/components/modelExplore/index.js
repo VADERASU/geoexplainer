@@ -5,6 +5,7 @@ import { ModelPerformance } from "./modelPerformance";
 import { ModelCoefficient } from "./modelCoefficient";
 import { NumDistribution } from "./numDistribution";
 import { NarrativeExplain } from "./narrativeExplain";
+import { ReportAuthor } from "./reportAuthor";
 
 export function ModelExplore (props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
@@ -96,8 +97,8 @@ export function ModelExplore (props) {
                 />
             </div>
 
-            <div className="reportAuthoringContainer"></div>
-            
+            <ReportAuthor />
+
         </div>
     ) : <></>;
 }
