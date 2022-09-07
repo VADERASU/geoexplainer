@@ -598,7 +598,10 @@ class App extends Component {
     }
 
     let sortableComponents = this.updateSortableComponents('updateCorrBtnClick', id);
+    //console.log(this.state.dependentMapLayer);
+    //console.log(this.state.config_layer);
     this.setState({
+      //config_layer: this.state.config_layer,
       currentCorrMapLayer: currentCorrMapLayer,
       sortable_components: sortableComponents,
     });
@@ -698,7 +701,6 @@ class App extends Component {
    */
 
   setMapLayer = (id, filter) => {
-    //console.log(id);
     const updateActivMapLayer = id;
     //need to be changed
     const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data, filter);
@@ -709,12 +711,25 @@ class App extends Component {
     });
   };
 
-  setMapFilter = (filter) => {
-    //console.log(filter);
-    this.setState({config_layer: filter});
-  };
-
+  setMapFilter = (list) => {
+    let filter = ['in', 'UID'];
+    //console.log(list);
+    let maplayer = JSON.parse(JSON.stringify(this.state.config_layer));
+    if(this.state.currentCorrMapLayer !== null){
+      if(list.length > 0){
+        list.forEach(e=>{
+          filter.push(e);
+        });
+        maplayer.filter = filter;
+        this.setState({config_layer: maplayer});
+      }else{
+        if(maplayer.hasOwnProperty('filter')) delete maplayer['filter'];
+        this.setState({config_layer: maplayer});
+      }
+    }
+  }
   render() {
+    //console.log(this.state.config_layer);
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';

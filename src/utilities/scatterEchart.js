@@ -111,21 +111,7 @@ export function ScatterEchart (props) {
                         var brushComponent = params.batch[0];
                         var brushed = brushComponent.selected[0].dataIndex;
                         var brushedUIDs = brushed.map(d => props.echartScatterData[d].UID);
-                        //console.log("selected UIDs:", brushedUIDs);
-                        let filter = ['in', 'UID'];
-                        brushedUIDs.forEach(e=>{
-                            filter.push(e);
-                        });
-                        if(brushedUIDs.length > 0){
-                            let maplayer = JSON.parse(JSON.stringify(props.currentActivMapLayer));
-                            //console.log(maplayer);
-                            maplayer.filter = filter;
-                            props.setMapFilter(maplayer);
-                        }else{
-                            let maplayer = JSON.parse(JSON.stringify(props.currentActivMapLayer));
-                            if(maplayer.hasOwnProperty('filter')) delete maplayer['filter'];
-                            props.setMapFilter(maplayer);
-                        }
+                        props.setMapFilter(brushedUIDs);
                     },
                 });
 
