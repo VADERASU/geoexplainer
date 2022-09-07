@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
+import numDistImg_chicago from '../../img/chicago_std.png';
 
 import { ModelPerformance } from "./modelPerformance";
 import { ModelCoefficient } from "./modelCoefficient";
@@ -43,9 +44,20 @@ export function ModelExplore (props) {
         setReportContent(reportList);
     };
 
-    const narraInfoGen = () => {};
+    const narraInfoGen = (param) => {
+        let content = param;
+        let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        reportList.push(content);
+        setReportContent(reportList);
+        console.log(reportContent);
+    };
 
-    const numDistInfoGen = () => {};
+    const numDistInfoGen = () => {
+        const imgInfo = 'num_img';
+        let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        reportList.push(imgInfo);
+        setReportContent(reportList);
+    };
 
     const handleNumBtnClick = (feature) => {
         setNumericalBtnSelect(feature === numericalBtnSelect ? null : feature);
@@ -109,6 +121,7 @@ export function ModelExplore (props) {
                     numericalContainerDisplay={numericalContainerDisplay}
                     setNumericalContainerDisplay={setNumericalContainerDisplay}
                     setNumericalBtnSelect={setNumericalBtnSelect}
+                    numDistInfoGen={numDistInfoGen}
                 />
 
                 <NarrativeExplain
@@ -119,12 +132,14 @@ export function ModelExplore (props) {
                     model_result={props.model_result}
                     setMapLayer={props.setMapLayer}
                     select_case={props.select_case}
+                    narraInfoGen={narraInfoGen}
                 />
             </div>
 
             <ReportAuthor
                 reportContent={reportContent}
                 deleteClick={deleteClick}
+                numDistImg={numDistImg_chicago}
             />
 
         </div>

@@ -10,7 +10,8 @@ export function ReportAuthor (props) {
         transitionProperty: 'height',
         transitionDuration: '0.5s',
         overflow: 'auto',
-        padding: 10
+        padding: 10,
+        paddingLeft: 25,
     });
     const [expand, setExpand] = useState(false);
     const [content, setContent] = useState([]);
@@ -20,7 +21,8 @@ export function ReportAuthor (props) {
             transitionProperty: 'height',
             transitionDuration: '0.5s',
             overflow: 'auto',
-            padding: 10
+            paddingLeft: 25,
+            padding:10,
         };
         expand ? style.height = 55 : style.height = 505;
         setExpand(!expand);
@@ -34,12 +36,13 @@ export function ReportAuthor (props) {
     const genReportContent = (reportContent) => {
         let reportList = [];
         reportContent.forEach((e, i)=>{
-            if(e!==""){
+            if(e!=="" && e !== 'num_img'){
                 let report = <Popover
+                key={i}
                 style={{padding: 0}}
                 content={
                     <Button 
-                    size='small' style={{}}
+                    size='small'
                     icon={<DeleteOutlined />} type="dashed"
                     onClick={() => props.deleteClick(i)}
                     ></Button>
@@ -55,6 +58,21 @@ export function ReportAuthor (props) {
                 >
                     {e}
                 </Paragraph>
+                </Popover>;
+                reportList.push(report);
+            }else if(e === 'num_img'){
+                let report = <Popover
+                key={i}
+                style={{padding: 0}}
+                content={
+                    <Button 
+                    size='small'
+                    icon={<DeleteOutlined />} type="dashed"
+                    onClick={() => props.deleteClick(i)}
+                    ></Button>
+                } 
+                trigger="click"
+                ><img key={i} src={props.numDistImg} style={{width: 400, marginBottom: 10}} alt='Img' />
                 </Popover>;
                 reportList.push(report);
             }

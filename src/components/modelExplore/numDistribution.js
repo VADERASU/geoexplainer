@@ -241,6 +241,7 @@ export function NumDistribution (props) {
                     <Button 
                         size='small' style={btnDisplay}
                         icon={<EditOutlined />}
+                        onClick={()=>props.numDistInfoGen()}
                     ></Button>
                     <Button 
                         size='small'  style={minCardDisplay}

@@ -45,6 +45,9 @@ export function ResidualNarrative (props) {
     
     const handleCopy = (e) => {
         console.log(e);
+        if(e === 4){
+            props.narraInfoGen(moranPost);
+        }
     };
 
     const onGoodHover = () => {

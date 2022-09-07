@@ -46,7 +46,7 @@ export function NarrativeExplain (props) {
         setMinCardDisplay({display: 'none'});
     };
 
-    const makeNarrative = (model_result, selectedRowKeys, setMapLayer) => {
+    const makeNarrative = (model_result, selectedRowKeys, setMapLayer,narraInfoGen) => {
         const key = selectedRowKeys[0];
         //const geojsonObj = model_result.geojson_poly.features.map(e=>e.properties);
         //const stat = model_result[key];
@@ -75,6 +75,7 @@ export function NarrativeExplain (props) {
                     model_result={model_result}
                     setMapLayer={setMapLayer}
                     select_case={props.select_case}
+                    narraInfoGen={narraInfoGen}
                 />
             );
         }else{
@@ -84,6 +85,7 @@ export function NarrativeExplain (props) {
                     model_result={model_result}
                     setMapLayer={setMapLayer}
                     select_case={props.select_case}
+                    narraInfoGen={narraInfoGen}
                 />
             );
         }
@@ -92,9 +94,9 @@ export function NarrativeExplain (props) {
 
     useEffect(()=>{
         if(props.model_result !== {}){
-            makeNarrative(props.model_result, props.selectedRowKeys, props.setMapLayer);
+            makeNarrative(props.model_result, props.selectedRowKeys, props.setMapLayer,props.narraInfoGen);
         }
-    }, [props.model_result, props.selectedRowKeys, props.setMapLayer]);
+    }, [props.model_result, props.selectedRowKeys, props.setMapLayer,props.narraInfoGen]);
 
     return(
         <div className='narrativeExplainContainer' style={props.narrativeContainerDisplay}>
