@@ -66,3 +66,14 @@
     padding-left: 6px;
     overflow: hidden;
 }
+
+/**
+* External Info panel
+*/
+.externalInfoContainer{
+    position: absolute;
+    top: 40px;
+    left: 49.5vw;
+    width: 550px;
+    padding: 6px;
+}

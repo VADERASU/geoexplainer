@@ -7,6 +7,7 @@ import { ModelCoefficient } from "./modelCoefficient";
 import { NumDistribution } from "./numDistribution";
 import { NarrativeExplain } from "./narrativeExplain";
 import { ReportAuthor } from "./reportAuthor";
+import { ExternalInfo } from "./wikiInfo";
 
 export function ModelExplore (props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
@@ -17,6 +18,10 @@ export function ModelExplore (props) {
 
     const [narrativeContainerDisplay, setNarrativeContainerDisplay] = useState({display: 'block'});
 
+    const [reportContent, setReportContent] = useState(['']);
+    const [displayFlag, setDisplayFlag] = useState(true);
+    //const [externalArea, ]
+
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const makeNumericalDist = (feature) => {
         setNumericalDist({
@@ -24,8 +29,6 @@ export function ModelExplore (props) {
             data: props.model_result[feature]
         });
     };
-    
-    const [reportContent, setReportContent] = useState(['']);
 
     const deleteClick = (val) => {
         let conList = JSON.parse(JSON.stringify(reportContent)); // deep copy
@@ -158,6 +161,11 @@ export function ModelExplore (props) {
                 numDistImg={numDistImg_chicago}
                 moveUpClick={moveUpClick}
                 moveDownClick={moveDownClick}
+            />
+
+            <ExternalInfo
+                displayFlag={displayFlag}
+                setDisplayFlag={setDisplayFlag}
             />
 
         </div>

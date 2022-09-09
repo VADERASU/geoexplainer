@@ -85,7 +85,7 @@ export function CoeffNarrative (props){
         pos_places_narr = pos_places_narr + textgood;
     });
     // positive area percentage
-    const posPct = (totalPosLen / geojsonObj.length).toFixed(2);
+    const posPct = (totalPosLen / geojsonObj.length).toFixed(2)*100;
 
     let neg_places_narr = '';
     let negLen = 0;
@@ -99,7 +99,7 @@ export function CoeffNarrative (props){
         neg_places_narr = neg_places_narr + textbad;
     });
     // negative area pct
-    const negPct = (negLen / geojsonObj.length).toFixed(2);
+    const negPct = (negLen / geojsonObj.length).toFixed(2)*100;
 
     const initPosCopy = pos_places_narr + 
     `, where the positive relationship is significant in `+posPct+`% of the study area. The significant local coefficients range from `+posMin+` to `+posMax+`, with a mean value equal to `+posMean+`.`;
