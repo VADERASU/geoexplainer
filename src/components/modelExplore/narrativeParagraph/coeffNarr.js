@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { Typography, Button } from 'antd';
-import { CopyOutlined } from '@ant-design/icons';
+import { Typography, Button, Popover } from 'antd';
+import { CopyOutlined, BulbFilled } from '@ant-design/icons';
 
 const { Paragraph, Text } = Typography;
 
@@ -110,16 +110,35 @@ export function CoeffNarrative (props){
     const handleGoodCopy = () => {
         const newText = posAreas === "" ? 
         initPosCopy : textPosAreas;
-        console.log(newText);
+        //console.log(newText);
+        props.narraInfoGen(newText);
     };
 
     const handleBadCopy = () => {
         const newText = negAreas === "" ? 
         initNegCopy : textNegAreas;
-        console.log(newText);
+        //console.log(newText);
+        props.narraInfoGen(newText);
     };
 
-    const posComponent = <Paragraph style={posDIVstyle}>
+    const posComponent = <Popover
+        key={'posNarr'}
+        trigger="click"
+        content={
+            <div
+                style={{
+                    display: 'inline-block',
+                }}
+            >
+                <Button 
+                    size='small'
+                    icon={<BulbFilled />}
+                    //onClick={() => props.moveUpClick(i)}
+                >Wiki</Button>
+            </div>            
+        }        
+        >
+        <Paragraph style={posDIVstyle} >
         <Text key={key} editable={{ onChange: updatePosName }}>{posAreas === "" ? pos_places_narr : posAreas}</Text>  
         , where the <Text strong style={{color: '#3182bd'}}>positive relationship</Text> is <Text strong>significant</Text> in <Text strong>{posPct}%</Text> of the study area. The significant local coefficients range from <Text strong>{posMin.toFixed(2)} to {posMax.toFixed(2)}</Text>, with a mean value equal to <Text strong>{posMean}</Text>.
         <Button 
@@ -128,9 +147,26 @@ export function CoeffNarrative (props){
             onClick={() => handleGoodCopy()}
         ></Button>
 
-        </Paragraph>;
+        </Paragraph></Popover>;
 
-    const negComponent = <Paragraph style={negDIVstyle}>
+    const negComponent = <Popover
+        key={'posNarr'}
+        trigger="click"
+        content={
+            <div
+                style={{
+                    display: 'inline-block',
+                }}
+            >
+                <Button 
+                    size='small'
+                    icon={<BulbFilled />}
+                    //onClick={() => props.moveUpClick(i)}
+                >Wiki</Button>
+            </div>            
+        }        
+        >
+        <Paragraph style={negDIVstyle}>
         <Text key={key} editable={{ onChange: updateNegName }}>{negAreas === "" ? neg_places_narr : negAreas}</Text>  
         , where the <Text strong style={{color: '#b2182b'}}>negative relationship</Text> is <Text strong>significant</Text> in <Text strong>{negPct}%</Text> of the study area. The significant local coefficients range from <Text strong>{negMin.toFixed(2)} to {negMax.toFixed(2)}</Text>, with a mean value equal to <Text strong>{negMean}</Text>.
         <Button 
@@ -139,7 +175,7 @@ export function CoeffNarrative (props){
             onClick={() => handleBadCopy()}
         ></Button>
 
-        </Paragraph>;
+        </Paragraph></Popover>;
 
     const nullComponent = <Paragraph style={{textAlign: 'left'}}></Paragraph>;
 

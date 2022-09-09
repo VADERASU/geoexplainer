@@ -33,6 +33,22 @@ export function ModelExplore (props) {
         setReportContent(conList);
     };
 
+    const moveUpClick = (val) => {
+        let conList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        let upOriObj = conList[val-1];
+        conList[val-1] = conList[val];
+        conList[val] = upOriObj;
+        setReportContent(conList);
+    };
+
+    const moveDownClick = (val) => {
+        let conList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        let downOriObj = conList[val+1];
+        conList[val+1] = conList[val];
+        conList[val] = downOriObj;
+        setReportContent(conList);
+    };
+
     const globalInfoGen = (param) => {
         // generate global diagnostic information narrative
         let globalDiag = props.model_result.diagnostic_info;
@@ -140,6 +156,8 @@ export function ModelExplore (props) {
                 reportContent={reportContent}
                 deleteClick={deleteClick}
                 numDistImg={numDistImg_chicago}
+                moveUpClick={moveUpClick}
+                moveDownClick={moveDownClick}
             />
 
         </div>

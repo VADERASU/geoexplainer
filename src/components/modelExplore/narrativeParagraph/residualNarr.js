@@ -44,7 +44,7 @@ export function ResidualNarrative (props) {
     (`The residuals exhibit strong spatial dependency, which invalidates the inferences made from the model.`);
     
     const handleCopy = (e) => {
-        console.log(e);
+        //console.log(e);
         if(e === 4){
             props.narraInfoGen(moranPost);
         }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import { Card, Button, Typography, Popover} from 'antd';
-import { ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 const { Paragraph, Text } = Typography;
 
 export function ReportAuthor (props) {
@@ -41,11 +41,32 @@ export function ReportAuthor (props) {
                 key={i}
                 style={{padding: 0}}
                 content={
+                    <div
+                        style={{
+                            display: 'inline-block',
+                        }}
+                    >
+
+                    <Button 
+                    size='small'
+                    disabled={i===1?true:false}
+                    icon={<ArrowUpOutlined />} type="dashed"
+                    onClick={() => props.moveUpClick(i)}
+                    ></Button>
+
+                    <Button 
+                    size='small'
+                    disabled={i===reportContent.length-1?true:false}
+                    icon={<ArrowDownOutlined />} type="dashed"
+                    onClick={() => props.moveDownClick(i)}
+                    ></Button>
+
                     <Button 
                     size='small'
                     icon={<DeleteOutlined />} type="dashed"
                     onClick={() => props.deleteClick(i)}
                     ></Button>
+                    </div>
                 } 
                 trigger="click"
                 >
@@ -65,11 +86,32 @@ export function ReportAuthor (props) {
                 key={i}
                 style={{padding: 0}}
                 content={
+                    <div
+                    style={{
+                        display: 'inline-block',
+                    }}
+                    >
+
+                    <Button 
+                    size='small'
+                    disabled={i===1?true:false}
+                    icon={<ArrowUpOutlined />} type="dashed"
+                    onClick={() => props.moveUpClick(i)}
+                    ></Button>
+
+                    <Button 
+                    size='small'
+                    disabled={i===reportContent.length-1?true:false}
+                    icon={<ArrowDownOutlined />} type="dashed"
+                    onClick={() => props.moveDownClick(i)}
+                    ></Button>
+
                     <Button 
                     size='small'
                     icon={<DeleteOutlined />} type="dashed"
                     onClick={() => props.deleteClick(i)}
                     ></Button>
+                    </div>
                 } 
                 trigger="click"
                 ><img key={i} src={props.numDistImg} style={{width: 400, marginBottom: 10}} alt='Img' />

@@ -1,4 +1,4 @@
-import {Component, cloneElement} from 'react';
+import React, {Component, cloneElement} from 'react';
 import {Layout} from 'antd';
 import {Row, Col} from 'antd';
 import Map, { Source, Layer, useMap } from 'react-map-gl';
@@ -41,6 +41,7 @@ class App extends Component {
     /** Initialize the data
      * TODO: Modify the state initial with a more flexible way
      */
+    this.canvasRef = React.createRef();
     this.state = {
       // model config states
       model_trained: false,
@@ -660,6 +661,9 @@ class App extends Component {
         config_layer: ori_config_layer,
         model_result: model_result
       });
+
+      if(this.state.select_case === 'chicago')
+        this.canvasRef.current.flyTo({center: [this.state.viewState.longitude-0.3, this.state.viewState.latitude]});
       
     }else{
 
@@ -759,6 +763,7 @@ class App extends Component {
              * Main layout of the systemx
              */}
             <Map
+              ref={this.canvasRef}
               {...this.state.viewState}
               onMove={evt => this.setState({viewState: evt.viewState})}
               style={{width: '100vw', height: '96.5vh'}}
