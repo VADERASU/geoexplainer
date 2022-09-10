@@ -153,6 +153,11 @@ export function ModelExplore (props) {
                     select_case={props.select_case}
                     narraInfoGen={narraInfoGen}
                 />
+
+                <ExternalInfo
+                    displayFlag={displayFlag}
+                    setDisplayFlag={setDisplayFlag}
+                />
             </div>
 
             <ReportAuthor
@@ -161,11 +166,6 @@ export function ModelExplore (props) {
                 numDistImg={numDistImg_chicago}
                 moveUpClick={moveUpClick}
                 moveDownClick={moveDownClick}
-            />
-
-            <ExternalInfo
-                displayFlag={displayFlag}
-                setDisplayFlag={setDisplayFlag}
             />
 
         </div>

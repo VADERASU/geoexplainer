@@ -2,14 +2,14 @@
     position: absolute;
     top: 40px;
     left: 0;
-    width: 25vw;
+    width: 21vw;
     padding: 6px;
 }
 
 .floatPlotsContainer {
     position: absolute;
     top: 40px;
-    left: 25vw;
+    left: 21vw;
     width: 24vw;
     /*height: 160px;*/
     margin-top: 6px;
@@ -61,7 +61,8 @@
 .reportAuthoringContainer{
     position: absolute;
     bottom: 0px;
-    left: 25vw;
+    /*left: 21vw;*/
+    right: 0;
     width: 650px;
     padding-left: 6px;
     overflow: hidden;

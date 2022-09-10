@@ -14,9 +14,9 @@ export function ModelCoefficient (props) {
             const coeffData = {
                 key: e,
                 coefficient: e,
-                mean: model_result[e].mean.toFixed(2),
+                //mean: model_result[e].mean.toFixed(2),
                 numerical_distribution: model_result[e],
-                std: model_result[e].std.toFixed(2),
+                //std: model_result[e].std.toFixed(2),
                 operations: e,
             };
             tableData.push(coeffData);
@@ -25,9 +25,9 @@ export function ModelCoefficient (props) {
         const intercept = {
             key: 'intercept',
             coefficient: 'intercept',
-            mean: model_result.intercept.mean.toFixed(2),
+            //mean: model_result.intercept.mean.toFixed(2),
             numerical_distribution: model_result.intercept,
-            std: model_result.intercept.std.toFixed(2),
+            //std: model_result.intercept.std.toFixed(2),
             operations: 'intercept',            
         };
         tableData.push(intercept);
@@ -52,19 +52,10 @@ export function ModelCoefficient (props) {
                         echartBoxplotData={numerical_distribution}
                         resource={'inline'}
                         height={30}
+                        width={200}
                     />
                 );
             },
-        },
-        {
-            title: 'Mean',
-            dataIndex: 'mean',
-            key: 'mean',
-        },
-        {
-            title: 'Deviation',
-            dataIndex: 'std',
-            key: 'std',
         },
         {
             title: 'Operations',
@@ -113,7 +104,7 @@ export function ModelCoefficient (props) {
             style={{marginTop: 8}}
             bodyStyle={{
                 padding: 0,
-                height: 300,
+                maxHeight: 600,
                 overflow: 'auto',
             }}
             extra={

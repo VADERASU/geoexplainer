@@ -73,7 +73,7 @@ export function Boxplot (props) {
         <div>
              <ReactECharts
                  option={chartOption} 
-                 style={{height: props.height, width: '100%'}}
+                 style={{height: props.height, width: props.width}}
              />               
         </div> 
     );

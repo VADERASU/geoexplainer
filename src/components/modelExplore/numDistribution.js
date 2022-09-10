@@ -275,6 +275,7 @@ export function NumDistribution (props) {
                                 echartBoxplotData={boxPlotData}
                                 resource={'normal'}
                                 height={30}
+                                width={337}
                             />
                             </Col>
                         </Row>

@@ -16,13 +16,13 @@ export function CoeffNarrative (props){
     
     const updatePosName = (key) => {
         setPosAreas(key);
-        const newText = key+`, where the positive relationship is significant in `+posPct+`% study area. The significant local coefficients range from `+posMax+` to `+posMin+`, with a mean value equal to `+posMean+`.`;
+        const newText = key+`, where the positive relationship is significant in `+posPct+`% study area. The significant local coefficients range from `+posMax.toFixed(2)+` to `+posMin.toFixed(2)+`, with a mean value equal to `+posMean+`.`;
         setTextPosAreas(newText);
     };
 
     const updateNegName = (key) => {
         setNegAreas(key);
-        const newText = key+`, where the negative relationship is significant in `+negPct+`% study area. The significant local coefficients range from `+negMax+` to `+negMin+`, with a mean value equal to `+negMean+`.`;
+        const newText = key+`, where the negative relationship is significant in `+negPct+`% study area. The significant local coefficients range from `+negMax.toFixed(2)+` to `+negMin.toFixed(2)+`, with a mean value equal to `+negMean+`.`;
         setTextNegAreas(newText);
     };
 
@@ -102,10 +102,10 @@ export function CoeffNarrative (props){
     const negPct = (negLen / geojsonObj.length).toFixed(2)*100;
 
     const initPosCopy = pos_places_narr + 
-    `, where the positive relationship is significant in `+posPct+`% of the study area. The significant local coefficients range from `+posMin+` to `+posMax+`, with a mean value equal to `+posMean+`.`;
+    `, where the positive relationship is significant in `+posPct+`% of the study area. The significant local coefficients range from `+posMin.toFixed(2)+` to `+posMax.toFixed(2)+`, with a mean value equal to `+posMean+`.`;
 
     const initNegCopy = neg_places_narr + 
-    `, where the negative relationship is significant in `+negPct+`% of the study area. The significant local coefficients range from `+negMin+` to `+negMax+`, with a mean value equal to `+negMean+`.`;
+    `, where the negative relationship is significant in `+negPct+`% of the study area. The significant local coefficients range from `+negMin.toFixed(2)+` to `+negMax.toFixed(2)+`, with a mean value equal to `+negMean+`.`;
 
     const handleGoodCopy = () => {
         const newText = posAreas === "" ? 

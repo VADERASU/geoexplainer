@@ -132,6 +132,7 @@ export function ReportAuthor (props) {
     return(
         <div className="reportAuthoringContainer">
             <Card
+                className="explorationCard"
                 title='Report Authoring'
                 size="small"
                 bodyStyle={bodyStyle}

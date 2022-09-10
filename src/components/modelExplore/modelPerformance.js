@@ -29,23 +29,23 @@ export function ModelPerformance (props){
             {
                 key: 'local_R2',
                 indicator: 'Local R2',
-                mean: local_r2.mean.toFixed(2),
+                //mean: local_r2.mean.toFixed(2),
                 numerical_distribution: local_r2,
-                std: local_r2.std.toFixed(2),
+                //std: local_r2.std.toFixed(2),
                 operations: 'local_R2',
             },{
                 key: 'cooksD',
                 indicator: 'Cook\'s distance',
-                mean: cooksd.mean.toFixed(2),
+                //mean: cooksd.mean.toFixed(2),
                 numerical_distribution: cooksd,
-                std: cooksd.std.toFixed(2),
+                //std: cooksd.std.toFixed(2),
                 operations: 'cooksD',
             },{
                 key: 'std_residuals',
                 indicator: 'Residuals',
-                mean: residual.mean.toFixed(2),
+                //mean: residual.mean.toFixed(2),
                 numerical_distribution: residual,
-                std: residual.std.toFixed(2),
+                //std: residual.std.toFixed(2),
                 operations: 'std_residuals',
             }
         ];
@@ -69,19 +69,10 @@ export function ModelPerformance (props){
                         echartBoxplotData={numerical_distribution}
                         resource={'inline'}
                         height={30}
+                        width={200}
                     />
                 );
             },
-        },
-        {
-            title: 'Mean',
-            dataIndex: 'mean',
-            key: 'mean',
-        },
-        {
-            title: 'Deviation',
-            dataIndex: 'std',
-            key: 'std',
         },
         {
             title: 'Operations',
