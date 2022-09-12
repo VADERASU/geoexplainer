@@ -1,1 +1,471 @@
-{"keywords": [{"text": "chicago metropolitan area", "value": 0.0844131462102968}, {"text": "west chicago", "value": 0.08406856456721758}, {"text": "chicago public schools", "value": 0.0817842656717091}, {"text": "chicago", "value": 0.07751273101999386}, {"text": "chicago loop map", "value": 0.07576273926306477}, {"text": "chicago river", "value": 0.07562293717227546}, {"text": "central chicago", "value": 0.07514770669183504}, {"text": "downtown chicago", "value": 0.0748692909009329}, {"text": "chicago cuisine", "value": 0.0742381701282076}, {"text": "chicago politics", "value": 0.07390543100781453}, {"text": "chicago press", "value": 0.07347547224734385}, {"text": "dutch chicago", "value": 0.07342191612282065}, {"text": "chicago giant", "value": 0.07327883013953698}, {"text": "south lawndale.enlace chicago", "value": 0.07086953686628379}, {"text": "designated chicago landmarks", "value": 0.06880548240282347}, {"text": "area public schools", "value": 0.06869190951708967}, {"text": "chicago metropolitan agency", "value": 0.06830678379691948}, {"text": "chicago collections archives", "value": 0.06817225639411104}, {"text": "explore chicago collections", "value": 0.06814532372987281}, {"text": "chicago mercantile exchange", "value": 0.06804355920900479}, {"text": "chicago police department", "value": 0.06798720559549318}, {"text": "investigation chicago field office", "value": 0.0677298449853206}, {"text": "chicago fire tv show", "value": 0.06464901603650862}, {"text": "chicago midway international airport", "value": 0.06453265813062918}, {"text": "chicago gads hill center", "value": 0.06417561627951283}, {"text": "chicago police department statistics", "value": 0.06308432654647937}, {"text": "west streets", "value": 0.060949605043172574}, {"text": "lower west side", "value": 0.059354134959307664}, {"text": "high school", "value": 0.05844155071756489}, {"text": "clemente high school wells community academy high schoolmagnet high schools", "value": 0.05734576761246611}, {"text": "residential areas", "value": 0.05663345066464976}, {"text": "dual language community school", "value": 0.05658235233552063}, {"text": "district public schools", "value": 0.05640963300863043}, {"text": "west cross streets", "value": 0.05635648844104743}, {"text": "several areas", "value": 0.05593966696569631}, {"text": "south loop school", "value": 0.055533266114282054}, {"text": "neighborhood parochial elementary schools", "value": 0.055255290884743805}, {"text": "south side", "value": 0.054633570312102336}, {"text": "comprehensive high schools", "value": 0.05424294899543516}, {"text": "tepeyac high school", "value": 0.0538809647210413}, {"text": "kennedy high school", "value": 0.05383708748715681}, {"text": "river west dr. pedro albizu campos high school", "value": 0.053756301422266194}, {"text": "phillips academy high school", "value": 0.05337869775578924}, {"text": "uno brighton park school", "value": 0.05227233642963828}, {"text": "chicago-area offices", "value": 0.05213779652995807}, {"text": "chicago's west side", "value": 0.05137356821873721}, {"text": "holy trinity high school", "value": 0.050879691386728335}, {"text": "ogden international school west campus", "value": 0.05086340491531726}, {"text": "south loop residents", "value": 0.050558045011952116}, {"text": "harrison technical high school", "value": 0.05037674076470649}, {"text": "school", "value": 0.050351253515884466}, {"text": "schools", "value": 0.050351253515884466}, {"text": "chicago's downtown area", "value": 0.05030526102964587}, {"text": "st. jane de chantal school", "value": 0.05018504339144219}, {"text": "chicago public library branch instituto health sciences career academy", "value": 0.049907711293554785}, {"text": "community residents", "value": 0.049890265834677684}, {"text": "st. jerome school", "value": 0.04988038271531511}, {"text": "noble street college prep golder college prepprivate high schools", "value": 0.04978457048765999}, {"text": "subsequent school years", "value": 0.04916895153770329}, {"text": "little village lawndale high school campus", "value": 0.04879552449052476}, {"text": "street artists", "value": 0.04876789754597483}, {"text": "middle school", "value": 0.04853506647239495}, {"text": "drake school", "value": 0.048370046877436665}, {"text": "eight chicago public schools", "value": 0.04826652936050777}, {"text": "state street", "value": 0.048221508893544186}, {"text": "neighborhood residents", "value": 0.0480454184722697}, {"text": "street art", "value": 0.048027327313054285}, {"text": "burroughs school", "value": 0.04797344960871717}, {"text": "charter high school instituto justice", "value": 0.04787474019457945}, {"text": "\"enlace chicago community schools", "value": 0.04765220306444721}, {"text": "brighton park school", "value": 0.047532005208978975}, {"text": "street", "value": 0.04729133776411915}, {"text": "streets", "value": 0.04729133776411915}, {"text": "st. nicholas cathedral school", "value": 0.04688686099388861}, {"text": "st. turibius grade school", "value": 0.04674143304976226}, {"text": "chicago's street grid addresses", "value": 0.046715490001639486}, {"text": "halsted street", "value": 0.046625444988680986}, {"text": "street names", "value": 0.04661870426029194}, {"text": "chicago's largest art districts", "value": 0.04640045535387514}, {"text": "providence st. mel school", "value": 0.046378021424465427}, {"text": "west town residents", "value": 0.046297032442866634}, {"text": "chicago school", "value": 0.046215452504543286}, {"text": "most streets", "value": 0.046155629050924664}, {"text": "west garfield", "value": 0.04614943110595477}, {"text": "street numbers", "value": 0.0460417254138581}, {"text": "several primary schools", "value": 0.04569264254736442}, {"text": "halsted streets", "value": 0.0455958443429155}, {"text": "north side", "value": 0.04555842316694558}, {"text": "chicago's downtown theatre district", "value": 0.045322816459402414}, {"text": "west side", "value": 0.04513182788758298}, {"text": "erie streets", "value": 0.04495030017306043}, {"text": "madero middle schools", "value": 0.04486842622564706}, {"text": "west harrison street", "value": 0.04473436646553948}, {"text": "western avenue station", "value": 0.04473126317390062}, {"text": "john hancock high school", "value": 0.04468429102529432}, {"text": "chicago neighborhood", "value": 0.04461534934055501}, {"text": "ukrainian village st. helen school", "value": 0.044438395802071116}, {"text": "west town", "value": 0.04437089688755178}, {"text": "neighborhood line drawing", "value": 0.04433487137155102}, {"text": "chicago park district", "value": 0.0443038286925676}, {"text": "loop residents", "value": 0.04424793026014691}, {"text": "st. bruno catholic church carnival st. richard family", "value": 0.04421671901820574}, {"text": "neighborhoods", "value": 0.044202874532558764}, {"text": "west", "value": 0.04407653028272037}, {"text": "main chicago post office", "value": 0.04396997389753105}, {"text": "chicago public schools magnet high school", "value": 0.043919412610537986}, {"text": "west ridge", "value": 0.043582855097362296}, {"text": "west loop", "value": 0.04340592562573148}, {"text": "st. adalbert", "value": 0.04326954261229309}, {"text": "lasalle street historic district", "value": 0.04314941979294265}, {"text": "west elsdon", "value": 0.04311313556414043}, {"text": "michigan avenue", "value": 0.043086385452662725}, {"text": "chicago's city hall", "value": 0.042943110199256944}, {"text": "south loop residential development", "value": 0.042919594228015286}, {"text": "google's chicago offices", "value": 0.04290504693811654}, {"text": "chicago transit authority's train lines", "value": 0.042530942327171806}, {"text": "w. madison st.", "value": 0.04245612790795681}, {"text": "major chicago railroad junction", "value": 0.042423809002624484}, {"text": "west washington", "value": 0.04216059332918602}, {"text": "west lawn", "value": 0.04209967073495422}, {"text": "illinois center", "value": 0.04203979300638122}, {"text": "chicago landmark historic michigan boulevard district", "value": 0.04203201727838036}, {"text": "chicago downtown location", "value": 0.04148722734527385}, {"text": "chicago and cook county", "value": 0.04147083770084942}, {"text": "chicago urban art society", "value": 0.041287708209694754}, {"text": "chicago public library", "value": 0.04122321796213535}, {"text": "chicago's commercial core", "value": 0.041082740888725704}, {"text": "chicago's primary convention center", "value": 0.04107760489093012}, {"text": "south indiana avenue", "value": 0.041067160637416875}, {"text": "south loop neighbors", "value": 0.040930126686668185}, {"text": "chicago public library system", "value": 0.04091107501356392}, {"text": "great chicago fire", "value": 0.040907586307948794}, {"text": "st. symphorosa parish", "value": 0.04090552971298092}, {"text": "chicago white sox", "value": 0.040885529766087635}, {"text": "michigan avenue bridge", "value": 0.04085123977505567}, {"text": "st. rene parish", "value": 0.04077836846011947}, {"text": "western avenue", "value": 0.04072238703384942}, {"text": "chicago city council", "value": 0.040670362153070426}, {"text": "chicago board of trade", "value": 0.040597802499296703}, {"text": "chicago academy", "value": 0.04055891665963755}, {"text": "loop.the chicago loop alliance", "value": 0.04048010716763633}, {"text": "trade and chicago mercantile exchange", "value": 0.04047477619722597}, {"text": "current chicago sanitary", "value": 0.040461295252002365}, {"text": "chicago transit authority", "value": 0.04045103031336698}, {"text": "\"chicago multifamily market characterization", "value": 0.040417370729243576}, {"text": "chicago's cultural heavyweights", "value": 0.0401629806645829}, {"text": "five chicago mayors", "value": 0.04008546356794465}, {"text": "several distinct neighborhoods", "value": 0.040077308219477706}, {"text": "iit chicago-kent", "value": 0.04005937945430421}, {"text": "chicago symphony orchestra", "value": 0.040039947234353127}, {"text": "accompanying chicago riverwalk", "value": 0.03994009163327348}, {"text": "alternative high school st. ann school - catholic", "value": 0.03983945411017831}, {"text": ".", "value": 0.039746577668452306}, {"text": "chicago's government", "value": 0.039677983491667096}, {"text": "chicago theatre", "value": 0.039551773127997084}, {"text": "chicago board", "value": 0.03934451306202566}]}
+{
+    "keywords": [{
+        "text": "chicago metropolitan area",
+        "value": 0.0844131462102968
+    }, {
+        "text": "west chicago",
+        "value": 0.08406856456721758
+    }, {
+        "text": "chicago public schools",
+        "value": 0.0817842656717091
+    }, {
+        "text": "chicago",
+        "value": 0.07751273101999386
+    }, {
+        "text": "chicago loop map",
+        "value": 0.07576273926306477
+    }, {
+        "text": "chicago river",
+        "value": 0.07562293717227546
+    }, {
+        "text": "central chicago",
+        "value": 0.07514770669183504
+    }, {
+        "text": "downtown chicago",
+        "value": 0.0748692909009329
+    }, {
+        "text": "chicago cuisine",
+        "value": 0.0742381701282076
+    }, {
+        "text": "chicago politics",
+        "value": 0.07390543100781453
+    }, {
+        "text": "chicago press",
+        "value": 0.07347547224734385
+    }, {
+        "text": "dutch chicago",
+        "value": 0.07342191612282065
+    }, {
+        "text": "chicago giant",
+        "value": 0.07327883013953698
+    }, {
+        "text": "south lawndale.enlace chicago",
+        "value": 0.07086953686628379
+    }, {
+        "text": "designated chicago landmarks",
+        "value": 0.06880548240282347
+    }, {
+        "text": "area public schools",
+        "value": 0.06869190951708967
+    }, {
+        "text": "chicago metropolitan agency",
+        "value": 0.06830678379691948
+    }, {
+        "text": "chicago collections archives",
+        "value": 0.06817225639411104
+    }, {
+        "text": "explore chicago collections",
+        "value": 0.06814532372987281
+    }, {
+        "text": "chicago mercantile exchange",
+        "value": 0.06804355920900479
+    }, {
+        "text": "chicago police department",
+        "value": 0.06798720559549318
+    }, {
+        "text": "investigation chicago field office",
+        "value": 0.0677298449853206
+    }, {
+        "text": "chicago fire tv show",
+        "value": 0.06464901603650862
+    }, {
+        "text": "chicago midway international airport",
+        "value": 0.06453265813062918
+    }, {
+        "text": "chicago gads hill center",
+        "value": 0.06417561627951283
+    }, {
+        "text": "chicago police department statistics",
+        "value": 0.06308432654647937
+    }, {
+        "text": "west streets",
+        "value": 0.060949605043172574
+    }, {
+        "text": "lower west side",
+        "value": 0.059354134959307664
+    }, {
+        "text": "high school",
+        "value": 0.05844155071756489
+    }, {
+        "text": "clemente high school wells community academy high schoolmagnet high schools",
+        "value": 0.05734576761246611
+    }, {
+        "text": "residential areas",
+        "value": 0.05663345066464976
+    }, {
+        "text": "dual language community school",
+        "value": 0.05658235233552063
+    }, {
+        "text": "district public schools",
+        "value": 0.05640963300863043
+    }, {
+        "text": "west cross streets",
+        "value": 0.05635648844104743
+    }, {
+        "text": "several areas",
+        "value": 0.05593966696569631
+    }, {
+        "text": "south loop school",
+        "value": 0.055533266114282054
+    }, {
+        "text": "neighborhood parochial elementary schools",
+        "value": 0.055255290884743805
+    }, {
+        "text": "south side",
+        "value": 0.054633570312102336
+    }, {
+        "text": "comprehensive high schools",
+        "value": 0.05424294899543516
+    }, {
+        "text": "tepeyac high school",
+        "value": 0.0538809647210413
+    }, {
+        "text": "kennedy high school",
+        "value": 0.05383708748715681
+    }, {
+        "text": "river west dr. pedro albizu campos high school",
+        "value": 0.053756301422266194
+    }, {
+        "text": "phillips academy high school",
+        "value": 0.05337869775578924
+    }, {
+        "text": "uno brighton park school",
+        "value": 0.05227233642963828
+    }, {
+        "text": "chicago-area offices",
+        "value": 0.05213779652995807
+    }, {
+        "text": "chicago's west side",
+        "value": 0.05137356821873721
+    }, {
+        "text": "holy trinity high school",
+        "value": 0.050879691386728335
+    }, {
+        "text": "ogden international school west campus",
+        "value": 0.05086340491531726
+    }, {
+        "text": "south loop residents",
+        "value": 0.050558045011952116
+    }, {
+        "text": "harrison technical high school",
+        "value": 0.05037674076470649
+    }, {
+        "text": "school",
+        "value": 0.050351253515884466
+    }, {
+        "text": "schools",
+        "value": 0.050351253515884466
+    }, {
+        "text": "chicago's downtown area",
+        "value": 0.05030526102964587
+    }, {
+        "text": "st. jane de chantal school",
+        "value": 0.05018504339144219
+    }, {
+        "text": "chicago public library branch instituto health sciences career academy",
+        "value": 0.049907711293554785
+    }, {
+        "text": "community residents",
+        "value": 0.049890265834677684
+    }, {
+        "text": "st. jerome school",
+        "value": 0.04988038271531511
+    }, {
+        "text": "noble street college prep golder college prepprivate high schools",
+        "value": 0.04978457048765999
+    }, {
+        "text": "subsequent school years",
+        "value": 0.04916895153770329
+    }, {
+        "text": "little village lawndale high school campus",
+        "value": 0.04879552449052476
+    }, {
+        "text": "street artists",
+        "value": 0.04876789754597483
+    }, {
+        "text": "middle school",
+        "value": 0.04853506647239495
+    }, {
+        "text": "drake school",
+        "value": 0.048370046877436665
+    }, {
+        "text": "eight chicago public schools",
+        "value": 0.04826652936050777
+    }, {
+        "text": "state street",
+        "value": 0.048221508893544186
+    }, {
+        "text": "neighborhood residents",
+        "value": 0.0480454184722697
+    }, {
+        "text": "street art",
+        "value": 0.048027327313054285
+    }, {
+        "text": "burroughs school",
+        "value": 0.04797344960871717
+    }, {
+        "text": "charter high school instituto justice",
+        "value": 0.04787474019457945
+    }, {
+        "text": "\"enlace chicago community schools",
+        "value": 0.04765220306444721
+    }, {
+        "text": "brighton park school",
+        "value": 0.047532005208978975
+    }, {
+        "text": "street",
+        "value": 0.04729133776411915
+    }, {
+        "text": "streets",
+        "value": 0.04729133776411915
+    }, {
+        "text": "st. nicholas cathedral school",
+        "value": 0.04688686099388861
+    }, {
+        "text": "st. turibius grade school",
+        "value": 0.04674143304976226
+    }, {
+        "text": "chicago's street grid addresses",
+        "value": 0.046715490001639486
+    }, {
+        "text": "halsted street",
+        "value": 0.046625444988680986
+    }, {
+        "text": "street names",
+        "value": 0.04661870426029194
+    }, {
+        "text": "chicago's largest art districts",
+        "value": 0.04640045535387514
+    }, {
+        "text": "providence st. mel school",
+        "value": 0.046378021424465427
+    }, {
+        "text": "west town residents",
+        "value": 0.046297032442866634
+    }, {
+        "text": "chicago school",
+        "value": 0.046215452504543286
+    }, {
+        "text": "most streets",
+        "value": 0.046155629050924664
+    }, {
+        "text": "west garfield",
+        "value": 0.04614943110595477
+    }, {
+        "text": "street numbers",
+        "value": 0.0460417254138581
+    }, {
+        "text": "several primary schools",
+        "value": 0.04569264254736442
+    }, {
+        "text": "halsted streets",
+        "value": 0.0455958443429155
+    }, {
+        "text": "north side",
+        "value": 0.04555842316694558
+    }, {
+        "text": "chicago's downtown theatre district",
+        "value": 0.045322816459402414
+    }, {
+        "text": "west side",
+        "value": 0.04513182788758298
+    }, {
+        "text": "erie streets",
+        "value": 0.04495030017306043
+    }, {
+        "text": "madero middle schools",
+        "value": 0.04486842622564706
+    }, {
+        "text": "west harrison street",
+        "value": 0.04473436646553948
+    }, {
+        "text": "western avenue station",
+        "value": 0.04473126317390062
+    }, {
+        "text": "john hancock high school",
+        "value": 0.04468429102529432
+    }, {
+        "text": "chicago neighborhood",
+        "value": 0.04461534934055501
+    }, {
+        "text": "ukrainian village st. helen school",
+        "value": 0.044438395802071116
+    }, {
+        "text": "west town",
+        "value": 0.04437089688755178
+    }, {
+        "text": "neighborhood line drawing",
+        "value": 0.04433487137155102
+    }, {
+        "text": "chicago park district",
+        "value": 0.0443038286925676
+    }, {
+        "text": "loop residents",
+        "value": 0.04424793026014691
+    }, {
+        "text": "st. bruno catholic church carnival st. richard family",
+        "value": 0.04421671901820574
+    }, {
+        "text": "neighborhoods",
+        "value": 0.044202874532558764
+    }, {
+        "text": "west",
+        "value": 0.04407653028272037
+    }, {
+        "text": "main chicago post office",
+        "value": 0.04396997389753105
+    }, {
+        "text": "chicago public schools magnet high school",
+        "value": 0.043919412610537986
+    }, {
+        "text": "west ridge",
+        "value": 0.043582855097362296
+    }, {
+        "text": "west loop",
+        "value": 0.04340592562573148
+    }, {
+        "text": "st. adalbert",
+        "value": 0.04326954261229309
+    }, {
+        "text": "lasalle street historic district",
+        "value": 0.04314941979294265
+    }, {
+        "text": "west elsdon",
+        "value": 0.04311313556414043
+    }, {
+        "text": "michigan avenue",
+        "value": 0.043086385452662725
+    }, {
+        "text": "chicago's city hall",
+        "value": 0.042943110199256944
+    }, {
+        "text": "south loop residential development",
+        "value": 0.042919594228015286
+    }, {
+        "text": "google's chicago offices",
+        "value": 0.04290504693811654
+    }, {
+        "text": "chicago transit authority's train lines",
+        "value": 0.042530942327171806
+    }, {
+        "text": "w. madison st.",
+        "value": 0.04245612790795681
+    }, {
+        "text": "major chicago railroad junction",
+        "value": 0.042423809002624484
+    }, {
+        "text": "west washington",
+        "value": 0.04216059332918602
+    }, {
+        "text": "west lawn",
+        "value": 0.04209967073495422
+    }, {
+        "text": "illinois center",
+        "value": 0.04203979300638122
+    }, {
+        "text": "chicago landmark historic michigan boulevard district",
+        "value": 0.04203201727838036
+    }, {
+        "text": "chicago downtown location",
+        "value": 0.04148722734527385
+    }, {
+        "text": "chicago and cook county",
+        "value": 0.04147083770084942
+    }, {
+        "text": "chicago urban art society",
+        "value": 0.041287708209694754
+    }, {
+        "text": "chicago public library",
+        "value": 0.04122321796213535
+    }, {
+        "text": "chicago's commercial core",
+        "value": 0.041082740888725704
+    }, {
+        "text": "chicago's primary convention center",
+        "value": 0.04107760489093012
+    }, {
+        "text": "south indiana avenue",
+        "value": 0.041067160637416875
+    }, {
+        "text": "south loop neighbors",
+        "value": 0.040930126686668185
+    }, {
+        "text": "chicago public library system",
+        "value": 0.04091107501356392
+    }, {
+        "text": "great chicago fire",
+        "value": 0.040907586307948794
+    }, {
+        "text": "st. symphorosa parish",
+        "value": 0.04090552971298092
+    }, {
+        "text": "chicago white sox",
+        "value": 0.040885529766087635
+    }, {
+        "text": "michigan avenue bridge",
+        "value": 0.04085123977505567
+    }, {
+        "text": "st. rene parish",
+        "value": 0.04077836846011947
+    }, {
+        "text": "western avenue",
+        "value": 0.04072238703384942
+    }, {
+        "text": "chicago city council",
+        "value": 0.040670362153070426
+    }, {
+        "text": "chicago board of trade",
+        "value": 0.040597802499296703
+    }, {
+        "text": "chicago academy",
+        "value": 0.04055891665963755
+    }, {
+        "text": "loop.the chicago loop alliance",
+        "value": 0.04048010716763633
+    }, {
+        "text": "trade and chicago mercantile exchange",
+        "value": 0.04047477619722597
+    }, {
+        "text": "current chicago sanitary",
+        "value": 0.040461295252002365
+    }, {
+        "text": "chicago transit authority",
+        "value": 0.04045103031336698
+    }, {
+        "text": "\"chicago multifamily market characterization",
+        "value": 0.040417370729243576
+    }, {
+        "text": "chicago's cultural heavyweights",
+        "value": 0.0401629806645829
+    }, {
+        "text": "five chicago mayors",
+        "value": 0.04008546356794465
+    }, {
+        "text": "several distinct neighborhoods",
+        "value": 0.040077308219477706
+    }, {
+        "text": "iit chicago-kent",
+        "value": 0.04005937945430421
+    }, {
+        "text": "chicago symphony orchestra",
+        "value": 0.040039947234353127
+    }, {
+        "text": "accompanying chicago riverwalk",
+        "value": 0.03994009163327348
+    }, {
+        "text": "alternative high school st. ann school - catholic",
+        "value": 0.03983945411017831
+    }, {
+        "text": ".",
+        "value": 0.039746577668452306
+    }, {
+        "text": "chicago's government",
+        "value": 0.039677983491667096
+    }, {
+        "text": "chicago theatre",
+        "value": 0.039551773127997084
+    }, {
+        "text": "chicago board",
+        "value": 0.03934451306202566
+    }]
+}

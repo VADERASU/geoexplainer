@@ -1,1 +1,486 @@
-{"keywords": [{"text": "chicago", "value": 0.0005989890508618631}, {"text": "west side", "value": 0.000918999480612765}, {"text": "chicago public schools", "value": 0.000945013271433919}, {"text": "lower west side", "value": 0.0011953721520068258}, {"text": "area", "value": 0.0017218190709497566}, {"text": "west", "value": 0.0017978101724086726}, {"text": "south side", "value": 0.0019286901762971013}, {"text": "south", "value": 0.0022964027247791103}, {"text": "side", "value": 0.002437253312209693}, {"text": "school", "value": 0.0024732988737546724}, {"text": "street", "value": 0.0033986531189633506}, {"text": "high school", "value": 0.003400309327962947}, {"text": "chicago public", "value": 0.0037551496605434656}, {"text": "chicago west side", "value": 0.004075888952783731}, {"text": "neighborhood", "value": 0.004251750550064828}, {"text": "south loop", "value": 0.004502038737270126}, {"text": "loop", "value": 0.004661627713373139}, {"text": "north side", "value": 0.005295100050339823}, {"text": "chicago river", "value": 0.00553532003782865}, {"text": "lower west", "value": 0.0055501177349112675}, {"text": "public schools", "value": 0.005762839209497662}, {"text": "areas", "value": 0.005803167979867698}, {"text": "schools", "value": 0.006311176436477439}, {"text": "west side cast", "value": 0.006449804723586641}, {"text": "south side cast", "value": 0.0073600304250558204}, {"text": "west chicago avenue", "value": 0.007424123335797196}, {"text": "united states", "value": 0.007476114443229455}, {"text": "votes", "value": 0.007805201713385222}, {"text": "west town", "value": 0.008340743427210223}, {"text": "cast", "value": 0.008492848052281994}, {"text": "located", "value": 0.00851270691712225}, {"text": "north", "value": 0.008576576386271387}, {"text": "city south side", "value": 0.008992908381072506}, {"text": "percent", "value": 0.009057763062713697}, {"text": "avenue", "value": 0.00911554064886918}, {"text": "district", "value": 0.010004529369670796}, {"text": "east", "value": 0.010099672271423797}, {"text": "chicago loop", "value": 0.010563725238077455}, {"text": "south loop school", "value": 0.010617133296842168}, {"text": "chicago park district", "value": 0.010620686137524059}, {"text": "presidential election", "value": 0.010640989395408766}, {"text": "illinois", "value": 0.011789456260622203}, {"text": "public schools operates", "value": 0.013172004281947673}, {"text": "high", "value": 0.013210355212244519}, {"text": "united", "value": 0.013947915726140302}, {"text": "city", "value": 0.013972849322536318}, {"text": "chicago downtown area", "value": 0.014386926683158871}, {"text": "south loop neighborhood", "value": 0.014402953872640286}, {"text": "schools operates area", "value": 0.01492151392603302}, {"text": "west streets north", "value": 0.01498471960112729}, {"text": "presidential", "value": 0.015084827096883401}, {"text": "high schools include", "value": 0.015122406895903879}, {"text": "high school located", "value": 0.015371742645666066}, {"text": "west town west", "value": 0.015594555622162755}, {"text": "area public schools", "value": 0.01572684423367337}, {"text": "side of chicago", "value": 0.01579323652827709}, {"text": "south lawndale", "value": 0.015794315001277644}, {"text": "west loop", "value": 0.015846334869520657}, {"text": "chicago city", "value": 0.016382273836949162}, {"text": "states", "value": 0.016439121509493636}, {"text": "brighton park school", "value": 0.01668745254713143}, {"text": "office", "value": 0.017011178056771305}, {"text": "bridgeport", "value": 0.01740272771367328}, {"text": "side cast", "value": 0.017496846099917456}, {"text": "chicago transit", "value": 0.01780012892100154}, {"text": "chicago operates", "value": 0.01789245395546212}, {"text": "west side include", "value": 0.01804433114073299}, {"text": "park areas", "value": 0.018579689454234275}, {"text": "schools operates district", "value": 0.01864240474421442}, {"text": "chicago metropolitan", "value": 0.019374739258964196}, {"text": "garfield", "value": 0.019471389652431458}, {"text": "station", "value": 0.01953895914587248}, {"text": "district public schools", "value": 0.019730920560662783}, {"text": "west streets", "value": 0.019918350068951166}, {"text": "chicago west", "value": 0.020142078922287206}, {"text": "west chicago", "value": 0.020142078922287206}, {"text": "line", "value": 0.020253767564112596}, {"text": "chicago avenue", "value": 0.020286294927529498}, {"text": "streets", "value": 0.020391918713780106}, {"text": "residents", "value": 0.02040451534472961}, {"text": "south side includes", "value": 0.020639448000420748}, {"text": "election", "value": 0.020645834913436294}, {"text": "chicago operates catholic", "value": 0.020740366600382237}, {"text": "public", "value": 0.020966269044193072}, {"text": "park cast", "value": 0.02105550272483114}, {"text": "garfield park cast", "value": 0.02107880621307793}, {"text": "chicago school", "value": 0.021615840672972595}, {"text": "park school", "value": 0.021839322551994188}, {"text": "schools operates", "value": 0.021931874750699618}, {"text": "operates", "value": 0.022033187237844}, {"text": "home", "value": 0.022250047323440325}, {"text": "chicago offices", "value": 0.0226105668706075}, {"text": "streets south", "value": 0.02261300772116883}, {"text": "armour square", "value": 0.024050704312116748}, {"text": "east garfield", "value": 0.024137618295599503}, {"text": "square", "value": 0.024430800184949013}, {"text": "chicago fire", "value": 0.024865227976384626}, {"text": "west garfield", "value": 0.025026679051467167}, {"text": "center", "value": 0.02523706151719591}, {"text": "southwest side", "value": 0.025364958365072045}, {"text": "building", "value": 0.025698349979445433}, {"text": "chicago street", "value": 0.02662180220266263}, {"text": "chicago public library", "value": 0.02666903331154518}, {"text": "south lawndale cast", "value": 0.02718403389491352}, {"text": "chicago downtown", "value": 0.027386624322404143}, {"text": "mayor of chicago", "value": 0.027552737738535216}, {"text": "area cast", "value": 0.028110396313867227}, {"text": "michigan", "value": 0.02863194633535195}, {"text": "north east side", "value": 0.028642283980496473}, {"text": "academy high school", "value": 0.028735245255033768}, {"text": "south lawndale.enlace chicago", "value": 0.02882281295370601}, {"text": "chicago neighborhood", "value": 0.028824386668691093}, {"text": "south loop residents", "value": 0.029165632451854672}, {"text": "museum park west", "value": 0.02941200693369636}, {"text": "lower", "value": 0.029694616488873025}, {"text": "daley", "value": 0.029707494491369144}, {"text": "chicago transit authority", "value": 0.02995469451153733}, {"text": "pilsen", "value": 0.02999395096840011}, {"text": "post office", "value": 0.03012043535708181}, {"text": "state", "value": 0.03013838943407167}, {"text": "elementary school", "value": 0.03017742262782112}, {"text": "west elsdon", "value": 0.030278901591355073}, {"text": "schools include", "value": 0.03036626517420172}, {"text": "designated chicago", "value": 0.03088191990423182}, {"text": "school west campus", "value": 0.030934194406657702}, {"text": "chicago community schools.", "value": 0.03158242241639774}, {"text": "international school west", "value": 0.03198218231972895}, {"text": "school west", "value": 0.03226770659311295}, {"text": "school located", "value": 0.03234711183869683}, {"text": "include", "value": 0.03258458569522659}, {"text": "house", "value": 0.03301290401832406}, {"text": "united states postal", "value": 0.03356754493283064}, {"text": "road", "value": 0.033649254846516256}, {"text": "river", "value": 0.03367425225423047}, {"text": "armour", "value": 0.03391170871733674}, {"text": "offices", "value": 0.03402235611354261}, {"text": "south west", "value": 0.0340677759952746}, {"text": "chicago city council", "value": 0.034080862458502725}, {"text": "headquarters", "value": 0.03411537803705971}, {"text": "academy", "value": 0.034170730147444026}, {"text": "votes for mitt", "value": 0.03439988384380828}, {"text": "west elsdon cast", "value": 0.03499048259509531}, {"text": "brighton park cast", "value": 0.03499811973874041}, {"text": "population", "value": 0.03504051049193394}, {"text": "michigan avenue", "value": 0.035065758955023806}, {"text": "chicago street grid", "value": 0.0351358545800035}, {"text": "great chicago", "value": 0.03517236691144342}, {"text": "pilsen neighborhood", "value": 0.03524923713647215}, {"text": "catholic", "value": 0.035254882083807955}, {"text": "chicago field office", "value": 0.03572786766437663}, {"text": "east side", "value": 0.03651623150511273}, {"text": "west town state", "value": 0.03693138015342417}, {"text": "major", "value": 0.037347735517003586}, {"text": "town", "value": 0.03756334558074276}, {"text": "chicago post office", "value": 0.03783612272989695}, {"text": "chicago loop alliance", "value": 0.037978545859186856}, {"text": "downtown area", "value": 0.03823486714375195}, {"text": "area include", "value": 0.0384898927888123}, {"text": "part", "value": 0.039687538942105596}, {"text": "station area includes", "value": 0.039864324265211325}, {"text": "city of chicago", "value": 0.03993068819253564}]}
+{
+    "keywords": [{
+        "text": "chicago",
+        "value": 0.0005989890508618631
+    }, {
+        "text": "west side",
+        "value": 0.000918999480612765
+    }, {
+        "text": "chicago public schools",
+        "value": 0.000945013271433919
+    }, {
+        "text": "lower west side",
+        "value": 0.0011953721520068258
+    }, {
+        "text": "area",
+        "value": 0.0017218190709497566
+    }, {
+        "text": "west",
+        "value": 0.0017978101724086726
+    }, {
+        "text": "south side",
+        "value": 0.0019286901762971013
+    }, {
+        "text": "south",
+        "value": 0.0022964027247791103
+    }, {
+        "text": "side",
+        "value": 0.002437253312209693
+    }, {
+        "text": "school",
+        "value": 0.0024732988737546724
+    }, {
+        "text": "street",
+        "value": 0.0033986531189633506
+    }, {
+        "text": "high school",
+        "value": 0.003400309327962947
+    }, {
+        "text": "chicago public",
+        "value": 0.0037551496605434656
+    }, {
+        "text": "chicago west side",
+        "value": 0.004075888952783731
+    }, {
+        "text": "neighborhood",
+        "value": 0.004251750550064828
+    }, {
+        "text": "south loop",
+        "value": 0.004502038737270126
+    }, {
+        "text": "loop",
+        "value": 0.004661627713373139
+    }, {
+        "text": "north side",
+        "value": 0.005295100050339823
+    }, {
+        "text": "chicago river",
+        "value": 0.00553532003782865
+    }, {
+        "text": "lower west",
+        "value": 0.0055501177349112675
+    }, {
+        "text": "public schools",
+        "value": 0.005762839209497662
+    }, {
+        "text": "areas",
+        "value": 0.005803167979867698
+    }, {
+        "text": "schools",
+        "value": 0.006311176436477439
+    }, {
+        "text": "west side cast",
+        "value": 0.006449804723586641
+    }, {
+        "text": "south side cast",
+        "value": 0.0073600304250558204
+    }, {
+        "text": "west chicago avenue",
+        "value": 0.007424123335797196
+    }, {
+        "text": "united states",
+        "value": 0.007476114443229455
+    }, {
+        "text": "votes",
+        "value": 0.007805201713385222
+    }, {
+        "text": "west town",
+        "value": 0.008340743427210223
+    }, {
+        "text": "cast",
+        "value": 0.008492848052281994
+    }, {
+        "text": "located",
+        "value": 0.00851270691712225
+    }, {
+        "text": "north",
+        "value": 0.008576576386271387
+    }, {
+        "text": "city south side",
+        "value": 0.008992908381072506
+    }, {
+        "text": "percent",
+        "value": 0.009057763062713697
+    }, {
+        "text": "avenue",
+        "value": 0.00911554064886918
+    }, {
+        "text": "district",
+        "value": 0.010004529369670796
+    }, {
+        "text": "east",
+        "value": 0.010099672271423797
+    }, {
+        "text": "chicago loop",
+        "value": 0.010563725238077455
+    }, {
+        "text": "south loop school",
+        "value": 0.010617133296842168
+    }, {
+        "text": "chicago park district",
+        "value": 0.010620686137524059
+    }, {
+        "text": "presidential election",
+        "value": 0.010640989395408766
+    }, {
+        "text": "illinois",
+        "value": 0.011789456260622203
+    }, {
+        "text": "public schools operates",
+        "value": 0.013172004281947673
+    }, {
+        "text": "high",
+        "value": 0.013210355212244519
+    }, {
+        "text": "united",
+        "value": 0.013947915726140302
+    }, {
+        "text": "city",
+        "value": 0.013972849322536318
+    }, {
+        "text": "chicago downtown area",
+        "value": 0.014386926683158871
+    }, {
+        "text": "south loop neighborhood",
+        "value": 0.014402953872640286
+    }, {
+        "text": "schools operates area",
+        "value": 0.01492151392603302
+    }, {
+        "text": "west streets north",
+        "value": 0.01498471960112729
+    }, {
+        "text": "presidential",
+        "value": 0.015084827096883401
+    }, {
+        "text": "high schools include",
+        "value": 0.015122406895903879
+    }, {
+        "text": "high school located",
+        "value": 0.015371742645666066
+    }, {
+        "text": "west town west",
+        "value": 0.015594555622162755
+    }, {
+        "text": "area public schools",
+        "value": 0.01572684423367337
+    }, {
+        "text": "side of chicago",
+        "value": 0.01579323652827709
+    }, {
+        "text": "south lawndale",
+        "value": 0.015794315001277644
+    }, {
+        "text": "west loop",
+        "value": 0.015846334869520657
+    }, {
+        "text": "chicago city",
+        "value": 0.016382273836949162
+    }, {
+        "text": "states",
+        "value": 0.016439121509493636
+    }, {
+        "text": "brighton park school",
+        "value": 0.01668745254713143
+    }, {
+        "text": "office",
+        "value": 0.017011178056771305
+    }, {
+        "text": "bridgeport",
+        "value": 0.01740272771367328
+    }, {
+        "text": "side cast",
+        "value": 0.017496846099917456
+    }, {
+        "text": "chicago transit",
+        "value": 0.01780012892100154
+    }, {
+        "text": "chicago operates",
+        "value": 0.01789245395546212
+    }, {
+        "text": "west side include",
+        "value": 0.01804433114073299
+    }, {
+        "text": "park areas",
+        "value": 0.018579689454234275
+    }, {
+        "text": "schools operates district",
+        "value": 0.01864240474421442
+    }, {
+        "text": "chicago metropolitan",
+        "value": 0.019374739258964196
+    }, {
+        "text": "garfield",
+        "value": 0.019471389652431458
+    }, {
+        "text": "station",
+        "value": 0.01953895914587248
+    }, {
+        "text": "district public schools",
+        "value": 0.019730920560662783
+    }, {
+        "text": "west streets",
+        "value": 0.019918350068951166
+    }, {
+        "text": "chicago west",
+        "value": 0.020142078922287206
+    }, {
+        "text": "west chicago",
+        "value": 0.020142078922287206
+    }, {
+        "text": "line",
+        "value": 0.020253767564112596
+    }, {
+        "text": "chicago avenue",
+        "value": 0.020286294927529498
+    }, {
+        "text": "streets",
+        "value": 0.020391918713780106
+    }, {
+        "text": "residents",
+        "value": 0.02040451534472961
+    }, {
+        "text": "south side includes",
+        "value": 0.020639448000420748
+    }, {
+        "text": "election",
+        "value": 0.020645834913436294
+    }, {
+        "text": "chicago operates catholic",
+        "value": 0.020740366600382237
+    }, {
+        "text": "public",
+        "value": 0.020966269044193072
+    }, {
+        "text": "park cast",
+        "value": 0.02105550272483114
+    }, {
+        "text": "garfield park cast",
+        "value": 0.02107880621307793
+    }, {
+        "text": "chicago school",
+        "value": 0.021615840672972595
+    }, {
+        "text": "park school",
+        "value": 0.021839322551994188
+    }, {
+        "text": "schools operates",
+        "value": 0.021931874750699618
+    }, {
+        "text": "operates",
+        "value": 0.022033187237844
+    }, {
+        "text": "home",
+        "value": 0.022250047323440325
+    }, {
+        "text": "chicago offices",
+        "value": 0.0226105668706075
+    }, {
+        "text": "streets south",
+        "value": 0.02261300772116883
+    }, {
+        "text": "armour square",
+        "value": 0.024050704312116748
+    }, {
+        "text": "east garfield",
+        "value": 0.024137618295599503
+    }, {
+        "text": "square",
+        "value": 0.024430800184949013
+    }, {
+        "text": "chicago fire",
+        "value": 0.024865227976384626
+    }, {
+        "text": "west garfield",
+        "value": 0.025026679051467167
+    }, {
+        "text": "center",
+        "value": 0.02523706151719591
+    }, {
+        "text": "southwest side",
+        "value": 0.025364958365072045
+    }, {
+        "text": "building",
+        "value": 0.025698349979445433
+    }, {
+        "text": "chicago street",
+        "value": 0.02662180220266263
+    }, {
+        "text": "chicago public library",
+        "value": 0.02666903331154518
+    }, {
+        "text": "south lawndale cast",
+        "value": 0.02718403389491352
+    }, {
+        "text": "chicago downtown",
+        "value": 0.027386624322404143
+    }, {
+        "text": "mayor of chicago",
+        "value": 0.027552737738535216
+    }, {
+        "text": "area cast",
+        "value": 0.028110396313867227
+    }, {
+        "text": "michigan",
+        "value": 0.02863194633535195
+    }, {
+        "text": "north east side",
+        "value": 0.028642283980496473
+    }, {
+        "text": "academy high school",
+        "value": 0.028735245255033768
+    }, {
+        "text": "south lawndale.enlace chicago",
+        "value": 0.02882281295370601
+    }, {
+        "text": "chicago neighborhood",
+        "value": 0.028824386668691093
+    }, {
+        "text": "south loop residents",
+        "value": 0.029165632451854672
+    }, {
+        "text": "museum park west",
+        "value": 0.02941200693369636
+    }, {
+        "text": "lower",
+        "value": 0.029694616488873025
+    }, {
+        "text": "daley",
+        "value": 0.029707494491369144
+    }, {
+        "text": "chicago transit authority",
+        "value": 0.02995469451153733
+    }, {
+        "text": "pilsen",
+        "value": 0.02999395096840011
+    }, {
+        "text": "post office",
+        "value": 0.03012043535708181
+    }, {
+        "text": "state",
+        "value": 0.03013838943407167
+    }, {
+        "text": "elementary school",
+        "value": 0.03017742262782112
+    }, {
+        "text": "west elsdon",
+        "value": 0.030278901591355073
+    }, {
+        "text": "schools include",
+        "value": 0.03036626517420172
+    }, {
+        "text": "designated chicago",
+        "value": 0.03088191990423182
+    }, {
+        "text": "school west campus",
+        "value": 0.030934194406657702
+    }, {
+        "text": "chicago community schools.",
+        "value": 0.03158242241639774
+    }, {
+        "text": "international school west",
+        "value": 0.03198218231972895
+    }, {
+        "text": "school west",
+        "value": 0.03226770659311295
+    }, {
+        "text": "school located",
+        "value": 0.03234711183869683
+    }, {
+        "text": "include",
+        "value": 0.03258458569522659
+    }, {
+        "text": "house",
+        "value": 0.03301290401832406
+    }, {
+        "text": "united states postal",
+        "value": 0.03356754493283064
+    }, {
+        "text": "road",
+        "value": 0.033649254846516256
+    }, {
+        "text": "river",
+        "value": 0.03367425225423047
+    }, {
+        "text": "armour",
+        "value": 0.03391170871733674
+    }, {
+        "text": "offices",
+        "value": 0.03402235611354261
+    }, {
+        "text": "south west",
+        "value": 0.0340677759952746
+    }, {
+        "text": "chicago city council",
+        "value": 0.034080862458502725
+    }, {
+        "text": "headquarters",
+        "value": 0.03411537803705971
+    }, {
+        "text": "academy",
+        "value": 0.034170730147444026
+    }, {
+        "text": "votes for mitt",
+        "value": 0.03439988384380828
+    }, {
+        "text": "west elsdon cast",
+        "value": 0.03499048259509531
+    }, {
+        "text": "brighton park cast",
+        "value": 0.03499811973874041
+    }, {
+        "text": "population",
+        "value": 0.03504051049193394
+    }, {
+        "text": "michigan avenue",
+        "value": 0.035065758955023806
+    }, {
+        "text": "chicago street grid",
+        "value": 0.0351358545800035
+    }, {
+        "text": "great chicago",
+        "value": 0.03517236691144342
+    }, {
+        "text": "pilsen neighborhood",
+        "value": 0.03524923713647215
+    }, {
+        "text": "catholic",
+        "value": 0.035254882083807955
+    }, {
+        "text": "chicago field office",
+        "value": 0.03572786766437663
+    }, {
+        "text": "east side",
+        "value": 0.03651623150511273
+    }, {
+        "text": "west town state",
+        "value": 0.03693138015342417
+    }, {
+        "text": "major",
+        "value": 0.037347735517003586
+    }, {
+        "text": "town",
+        "value": 0.03756334558074276
+    }, {
+        "text": "chicago post office",
+        "value": 0.03783612272989695
+    }, {
+        "text": "chicago loop alliance",
+        "value": 0.037978545859186856
+    }, {
+        "text": "downtown area",
+        "value": 0.03823486714375195
+    }, {
+        "text": "area include",
+        "value": 0.0384898927888123
+    }, {
+        "text": "part",
+        "value": 0.039687538942105596
+    }, {
+        "text": "station area includes",
+        "value": 0.039864324265211325
+    }, {
+        "text": "city of chicago",
+        "value": 0.03993068819253564
+    }]
+}

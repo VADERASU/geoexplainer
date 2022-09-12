@@ -1,6 +1,6 @@
 import React, {Component, cloneElement} from 'react';
 import {Layout} from 'antd';
-import {Row, Col} from 'antd';
+//import {Row, Col} from 'antd';
 import Map, { Source, Layer, useMap } from 'react-map-gl';
 import axios from 'axios';
 
@@ -8,10 +8,12 @@ import axios from 'axios';
 import NavBar from './components/nav';
 import ModelConfigPanel from './components/modelConfig';
 import { ModelExplore } from './components/modelExplore';
+import DrawControl from './utilities/mapDraw';
 
 // import css style files
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/App.css';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 
 // import utilities
 import { 
@@ -42,6 +44,7 @@ class App extends Component {
      * TODO: Modify the state initial with a more flexible way
      */
     this.canvasRef = React.createRef();
+    
     this.state = {
       // model config states
       model_trained: false,
@@ -752,8 +755,19 @@ class App extends Component {
       }
     }
   }
+
   render() {
-    //console.log(this.state.config_layer);
+    const drawmap = this.state.loaded_map_data === null ? <></> : 
+    <DrawControl
+      map={this.canvasRef.current}
+      position="top-right"
+      displayControlsDefault={false}
+      controls={{
+        polygon: true,
+        trash: true
+      }}
+    />;
+
     const { Header, Content } = Layout;
 
     const selectedUID = (this.state.hoverInfo && this.state.hoverInfo.UID) || '';
@@ -795,7 +809,9 @@ class App extends Component {
               projection={'globe'}
               interactiveLayerIds={this.state.loaded_map_data === null ? [] : ['counties-fill']}
             >
+              {drawmap}
               {this.state.loaded_map_data && (default_source_layers)}
+              
             </Map>
             
             <ModelConfigPanel

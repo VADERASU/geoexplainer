@@ -133,7 +133,7 @@ export function CoeffNarrative (props){
                 <Button 
                     size='small'
                     icon={<BulbFilled />}
-                    //onClick={() => props.moveUpClick(i)}
+                    onClick={() => props.setDisplayFlag(true)}
                 >Wiki</Button>
             </div>            
         }        

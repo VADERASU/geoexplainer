@@ -20,7 +20,7 @@ export function ModelExplore (props) {
     const [narrativeContainerDisplay, setNarrativeContainerDisplay] = useState({display: 'block'});
 
     const [reportContent, setReportContent] = useState(['']);
-    const [displayFlag, setDisplayFlag] = useState(true);
+    const [displayFlag, setDisplayFlag] = useState(false);
     //const [externalArea, setExternalArea] = useState([]);
     const [externalCase, setExternalCase] = useState('general');
 
@@ -122,6 +122,7 @@ export function ModelExplore (props) {
                     handleNarrativeBtnClick={handleNarrativeBtnClick}
 
                     globalInfoGen={globalInfoGen}
+                    setDisplayFlag={setDisplayFlag}
                 />
                 {/** model coefficient container */}
                 <ModelCoefficient
@@ -133,6 +134,7 @@ export function ModelExplore (props) {
                     narrativeBtnSelect={narrativeBtnSelect}
                     handleNumBtnClick={handleNumBtnClick}
                     handleNarrativeBtnClick={handleNarrativeBtnClick}
+                    setDisplayFlag={setDisplayFlag}
                 />
             </div>
 
@@ -154,12 +156,13 @@ export function ModelExplore (props) {
                     setMapLayer={props.setMapLayer}
                     select_case={props.select_case}
                     narraInfoGen={narraInfoGen}
+                    setDisplayFlag={setDisplayFlag}
                 />
 
                 <ExternalInfo
                     displayFlag={displayFlag}
                     setDisplayFlag={setDisplayFlag}
-                    //selectedRowKeys={selectedRowKeys}
+                    
                     externalCase={externalCase}
                 />
             </div>

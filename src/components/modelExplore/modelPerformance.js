@@ -113,6 +113,7 @@ export function ModelPerformance (props){
           props.setMapLayer(selectedRowKeys[0]);
           props.handleNumBtnClick(selectedRowKeys[0]);
           props.handleNarrativeBtnClick(selectedRowKeys[0]);
+          props.setDisplayFlag(false);
         },
     };
     

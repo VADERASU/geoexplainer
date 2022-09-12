@@ -86,6 +86,7 @@ export function NarrativeExplain (props) {
                     setMapLayer={setMapLayer}
                     select_case={props.select_case}
                     narraInfoGen={narraInfoGen}
+                    setDisplayFlag={props.setDisplayFlag}
                 />
             );
         }

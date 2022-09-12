@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import * as d3 from 'd3';
 import '../../styles/modelExplor.css';
 import { Card, Button, Popover, Checkbox, Tag, Divider} from 'antd';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
@@ -8,11 +9,16 @@ import 'tippy.js/animations/scale.css';
 
 import income_textrank from '../../data/incomeKey/income_textrank.json';
 
-const CheckboxGroup = Checkbox.Group;
-
-const chicagoCate = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Other'];
-const chicagoCateDefault = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Other'];
-const colors = ['#8dd3c7', '#33a02c', '#bebada', '#fb8072', '#80b1d3'];
+const chicagoCate = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Politics', 'Other'];
+const cate2Color = {
+    'Introduction': '#ff7f00',
+    'Demographics': '#33a02c',
+    'Education': '#1f78b4',
+    'Crime and policing': '#e7298a',
+    'Politics': '#b2df8a',
+    'Other': '#80b1d3'
+};
+const colors = ['#ff7f00', '#33a02c', '#1f78b4', '#e7298a', '#b2df8a', '#80b1d3'];
 
 export function ExternalInfo (props) {
     const containerStyle = props.displayFlag ? {display: 'block'} : {display: 'none'};
@@ -20,37 +26,20 @@ export function ExternalInfo (props) {
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [wordCloud, setWordCloud] = useState(null);
 
-    const [checkedList, setCheckedList] = useState(chicagoCateDefault);
-    const [indeterminate, setIndeterminate] = useState(true);
-    const [checkAll, setCheckAll] = useState(false);
-    const size = [450, 370];
-
-    const onCheckChange = (list) => {
-        console.log(list);
-        setCheckedList(list);
-        setIndeterminate(!!list.length && list.length < chicagoCate.length);
-        setCheckAll(list.length === chicagoCate.length);
-    };
-
-    const onCheckAllChange = (e) => {
-        setCheckedList(e.target.checked ? chicagoCate : []);
-        setIndeterminate(false);
-        setCheckAll(e.target.checked);
-      };
-
     const cardBodyDisplay = {
         display: cardDisplay,
-        padding: 9,
-        height: 450,
+        padding: 5,
+        height: 390,
         //overflow: 'auto',
     };
 
     const options = {
         //fontFamily: "impact",
-        fontSizes: [15, 50],
+        fontSizes: [12, 50],
+        fontFamily: "times new roman",
         fontStyle: "normal",
         fontWeight: "normal",
-        padding: 1,
+        padding: 2,
         rotations: 0,
         rotationAngles: [0, 90],
         scale: "sqrt",
@@ -78,7 +67,7 @@ export function ExternalInfo (props) {
             <ReactWordcloud
                 words={income_textrank.keywords}
                 options={options}
-                size={size}
+                callbacks={callbacks}               
             />;
         
             setWordCloud(wordCloud);
@@ -86,18 +75,40 @@ export function ExternalInfo (props) {
         
     };
 
-    const extractCategory = (externalCase) => {
-        if(externalCase === 'general'){
-            
-        }
+    const getCallback = (callback) => {
+        return (word, event) => {
+            const isActive = callback !== "onWordMouseOut";
+            const element = event.target;
+            const text = d3.select(element);
+            text
+            .on("dblclick", () => {
+                if (isActive) {
+                window.open(`https://duckduckgo.com/?q=${word.text}`, "_blank");
+                }
+            })
+            .on("click", function (d, i) {
+               // react on right-clicking
+               if (isActive) console.log('dblclick');
+            })
+            .transition()
+            .attr("text-decoration", isActive ? "underline" : "none");
+        };
+    };
 
+    const callbacks = {
+        getWordColor: (word) => (cate2Color[word.category]),
+        getWordTooltip: (word) =>
+            `The textrank weight of "${word.text}" is ${word.coefficient.toFixed(5)}.`,
+        onWordClick: getCallback("onWordClick"),
+        onWordMouseOut: getCallback("onWordMouseOut"),
+        onWordMouseOver: getCallback("onWordMouseOver")
     };
 
     useEffect(()=>{
         //console.log(props.selectedRowKeys);
         makeWordCloud(props.externalCase);
-    }, [props.displayFlag, props.externalCase]);
-//<CheckboxGroup options={chicagoCate} value={checkedList} onChange={onCheckChange} />
+    }, [props.externalCase]);
+
     return(
         <div className="narrativeExplainContainer" style={containerStyle}>
             <Card
@@ -117,7 +128,7 @@ export function ExternalInfo (props) {
                             marginLeft: 5,
                             float: 'left'
                         }}
-                        indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                        checked={true}>
                             Check all
                         </Checkbox>
 
@@ -131,7 +142,7 @@ export function ExternalInfo (props) {
                             style={btnDisplay} 
                             size='small' 
                             icon={<CloseOutlined />}
-                            //onClick={()=>toggleClick()}
+                            onClick={()=>props.setDisplayFlag(false)}
                         ></Button>
 
                         <Button 
@@ -141,20 +152,21 @@ export function ExternalInfo (props) {
                         ></Button>
                     </div>
                 }
-            >
-                <div style={{textAlign: 'left'}}>
-                    <Checkbox.Group style={{ width: '100%' }} onChange={onCheckChange}>
-                        {chicagoCate.map(
-                            (e,i)=><Checkbox 
-                                key={e} value={e}
-                                >
-                                    <Tag color={colors[i]} style={{fontSize: 12}}>{e}</Tag>
-                                </Checkbox>)}
-                    </Checkbox.Group>
-                </div>
-                <Divider style={{marginTop: 10, marginBottom: 10}} />
-                <div>{wordCloud}</div>
+            >    
+                {wordCloud}
             </Card>
+            <div
+                className="explorationCard"
+                style={{textAlign: 'left',
+                    backgroundColor: '#fff',
+                    padding: 6}}>
+                {chicagoCate.map((e,i)=>
+                <Checkbox 
+                    key={e} defaultValue={e} checked={true}
+                >
+                    <Tag color={colors[i]} style={{fontSize: 12}}>{e}</Tag>
+                </Checkbox>)}
+            </div>
         </div>
     );
 }
