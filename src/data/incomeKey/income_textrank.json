@@ -1,0 +1,154 @@
+{
+    "keywords": [
+        {
+            "text": "chicago metropolitan",
+            "value": 9,
+            "category": "Demographics",
+            "coefficient": 0.07803259016347137
+        },
+        {
+            "text": "public schools",
+            "value": 14,
+            "category": "Education",
+            "coefficient": 0.07765400467888732
+        },
+        {
+            "text": "south chicago neighborhoods",
+            "category": "Introduction",
+            "value": 1,
+            "coefficient": 0.07747920161398872
+        },
+        {
+            "text": "chicago high school",
+            "category": "Education",
+            "value": 5,
+            "coefficient": 0.07615968403470945
+        },
+        {
+            "text": "chicago law school",
+            "category": "Education",
+            "value": 4,
+            "coefficient": 0.07536404027746041
+        },
+        {
+            "text": "chicago school district",
+            "category": "Education",
+            "value": 6,
+            "coefficient": 0.07358479335875259
+        },
+        {
+            "text": "south chicago avenue",
+            "category": "Introduction",
+            "value": 7,
+            "coefficient": 0.07313902927886765
+        },
+        {
+            "text": "south chicago",
+            "category": "Introduction",
+            "value": 20,
+            "coefficient": 0.07228498404767975
+        },
+        {
+            "text": "central chicago",
+            "category": "Introduction",
+            "value": 3,
+            "coefficient": 0.06996476595617088
+        },
+        {
+            "text": "chicago river",
+            "category": "Introduction",
+            "value": 18,
+            "coefficient": 0.06993827167507494
+        },
+        {
+            "text": "downtown chicago",
+            "category": "Introduction",
+            "value": 20,
+            "coefficient": 0.06961873843368044
+        },
+        {
+            "text": "chicago lawn",
+            "category": "Introduction",
+            "value": 8,
+            "coefficient": 0.06907213195370192
+        },
+        {
+            "text": "chicago politics",
+            "category": "Politics",
+            "value": 3,
+            "coefficient": 0.06857268610760568
+        },
+        {
+            "text": "chicago bulls",
+            "category": "Other",
+            "value": 2,
+            "coefficient": 0.06842652910159139
+        },
+        {
+            "text": "douglas",
+            "category": "Introduction",
+            "value": 5,
+            "coefficient": 0.0683773403248846
+        },
+        {
+            "text": "healthy south chicago",
+            "category": "Other",
+            "value": 1,
+            "coefficient": 0.06651350186964271
+        },
+        {
+            "text": "university chicago campus",
+            "category": "Education",
+            "value": 1,
+            "coefficient": 0.0658277198228589
+        },
+        {
+            "text": "chicago loop",
+            "category": "Introduction",
+            "value": 6,
+            "coefficient": 0.06574408791286895
+        },
+        {
+            "text": "loyola university chicago",
+            "category": "Education",
+            "value": 2,
+            "coefficient": 0.0652597775542062
+        },
+        {
+            "text": "chicago state university",
+            "category": "Education",
+            "value": 3,
+            "coefficient": 0.06508713179561611
+        },
+        {
+            "text": "chicago military academy",
+            "category": "Education",
+            "value": 1,
+            "coefficient": 0.06491994418152541
+        },
+        {
+            "text": "park high school",
+            "category": "Education",
+            "value": 5,
+            "coefficient": 0.0645041339046159
+        },
+        {
+            "text": "public library",
+            "category": "Education",
+            "value": 6,
+            "coefficient": 0.06428360483170016
+        },
+        {
+            "text": "chicago law enforcement",
+            "category": "Crime and policing",
+            "value": 2,
+            "coefficient": 0.06336912489267708
+        },
+        {
+            "text": "chicago police department",
+            "category": "Crime and policing",
+            "value": 6,
+            "coefficient": 0.06326518240871845
+        }
+    ]
+}

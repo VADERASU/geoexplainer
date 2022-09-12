@@ -1,0 +1,540 @@
+{
+    "keywords": [
+        {
+            "text": "chicago public schools",
+            "value": 7.363925724688691e-05
+        },
+        {
+            "text": "chicago park district",
+            "value": 7.48115098487023e-05
+        },
+        {
+            "text": "chicago",
+            "value": 8.422834837861107e-05
+        },
+        {
+            "text": "south chicago",
+            "value": 0.00022231537930404724
+        },
+        {
+            "text": "area",
+            "value": 0.0002607799590555255
+        },
+        {
+            "text": "south chicago avenue",
+            "value": 0.0002816121366308088
+        },
+        {
+            "text": "high school",
+            "value": 0.0003012021230230298
+        },
+        {
+            "text": "chicago school district",
+            "value": 0.00035444465631580523
+        },
+        {
+            "text": "park high school",
+            "value": 0.0003628006225416732
+        },
+        {
+            "text": "south",
+            "value": 0.0003902831956221196
+        },
+        {
+            "text": "chicago public",
+            "value": 0.0003903900784592655
+        },
+        {
+            "text": "school",
+            "value": 0.0004084406881473295
+        },
+        {
+            "text": "south side",
+            "value": 0.0004349218867377658
+        },
+        {
+            "text": "south chicago neighborhood",
+            "value": 0.0004920848645713476
+        },
+        {
+            "text": "park cast",
+            "value": 0.0005711061706450749
+        },
+        {
+            "text": "neighborhood",
+            "value": 0.000593094232243463
+        },
+        {
+            "text": "chicago city",
+            "value": 0.0006038481377189872
+        },
+        {
+            "text": "presidential election",
+            "value": 0.0006110960690949586
+        },
+        {
+            "text": "west",
+            "value": 0.0006198630502010053
+        },
+        {
+            "text": "chicago city council",
+            "value": 0.0006832819238874846
+        },
+        {
+            "text": "street",
+            "value": 0.0006845097401187099
+        },
+        {
+            "text": "public schools",
+            "value": 0.0007022171809466888
+        },
+        {
+            "text": "park district",
+            "value": 0.0007176271689466258
+        },
+        {
+            "text": "areas",
+            "value": 0.0007622798803161515
+        },
+        {
+            "text": "chicago high school",
+            "value": 0.0008198594851621918
+        },
+        {
+            "text": "west side",
+            "value": 0.0008200619123540728
+        },
+        {
+            "text": "votes",
+            "value": 0.000831834934830058
+        },
+        {
+            "text": "city south side",
+            "value": 0.0008601811690905429
+        },
+        {
+            "text": "park neighborhood",
+            "value": 0.0008838079224436644
+        },
+        {
+            "text": "city",
+            "value": 0.0009023252952504576
+        },
+        {
+            "text": "schools",
+            "value": 0.0009128030530565318
+        },
+        {
+            "text": "cast",
+            "value": 0.0009303395177630779
+        },
+        {
+            "text": "avenue",
+            "value": 0.0009318525294465216
+        },
+        {
+            "text": "north",
+            "value": 0.0009763995771447951
+        },
+        {
+            "text": "south chicago cast",
+            "value": 0.0009935817327155656
+        },
+        {
+            "text": "chicago public library",
+            "value": 0.001002879592229714
+        },
+        {
+            "text": "side",
+            "value": 0.001006283795713923
+        },
+        {
+            "text": "chicago south side",
+            "value": 0.0010155531374123508
+        },
+        {
+            "text": "chicago river",
+            "value": 0.0011421506532872186
+        },
+        {
+            "text": "chicago school",
+            "value": 0.001203244019913113
+        },
+        {
+            "text": "south chicago branch",
+            "value": 0.0012732338188031942
+        },
+        {
+            "text": "lincoln park neighborhood",
+            "value": 0.0012937240674432454
+        },
+        {
+            "text": "chicago neighborhood",
+            "value": 0.0013138730162008713
+        },
+        {
+            "text": "located",
+            "value": 0.00134568834587767
+        },
+        {
+            "text": "north side",
+            "value": 0.0013593540387578627
+        },
+        {
+            "text": "public schools operates",
+            "value": 0.0014480349319384237
+        },
+        {
+            "text": "city of chicago",
+            "value": 0.0015175118030018482
+        },
+        {
+            "text": "chicago avenue",
+            "value": 0.0015500985927633126
+        },
+        {
+            "text": "district",
+            "value": 0.0015703453038441967
+        },
+        {
+            "text": "east",
+            "value": 0.0016305611136132037
+        },
+        {
+            "text": "elementary school",
+            "value": 0.0016330062482730323
+        },
+        {
+            "text": "presidential",
+            "value": 0.0016341397007664368
+        },
+        {
+            "text": "residents",
+            "value": 0.0016981111547560673
+        },
+        {
+            "text": "north park cast",
+            "value": 0.0017818931738899286
+        },
+        {
+            "text": "percent",
+            "value": 0.001829739738438608
+        },
+        {
+            "text": "lower west side",
+            "value": 0.0018806800412968056
+        },
+        {
+            "text": "east side",
+            "value": 0.0018899661814896448
+        },
+        {
+            "text": "illinois",
+            "value": 0.0019142551598162886
+        },
+        {
+            "text": "high",
+            "value": 0.0019567168364790547
+        },
+        {
+            "text": "south shore",
+            "value": 0.0020142625247102364
+        },
+        {
+            "text": "votes for mitt",
+            "value": 0.002185908940981277
+        },
+        {
+            "text": "votes for hillary",
+            "value": 0.0022065780934049763
+        },
+        {
+            "text": "election",
+            "value": 0.0022301389226539476
+        },
+        {
+            "text": "park west",
+            "value": 0.002294756478715764
+        },
+        {
+            "text": "chicago transit",
+            "value": 0.002358803806132224
+        },
+        {
+            "text": "votes for barack",
+            "value": 0.002377806286802352
+        },
+        {
+            "text": "district south chicago",
+            "value": 0.0024224029048318155
+        },
+        {
+            "text": "west chicago avenue",
+            "value": 0.002424719551301302
+        },
+        {
+            "text": "chicago metropolitan",
+            "value": 0.002490604655471746
+        },
+        {
+            "text": "chicago west side",
+            "value": 0.0024987202474711207
+        },
+        {
+            "text": "park high",
+            "value": 0.0025728625673079406
+        },
+        {
+            "text": "district public schools",
+            "value": 0.0026131557418332544
+        },
+        {
+            "text": "chicago law school",
+            "value": 0.0026888270220393716
+        },
+        {
+            "text": "home",
+            "value": 0.0027398777008404117
+        },
+        {
+            "text": "chicago operates catholic",
+            "value": 0.002753968718654525
+        },
+        {
+            "text": "public",
+            "value": 0.0027545622261933985
+        },
+        {
+            "text": "line",
+            "value": 0.002792892594095452
+        },
+        {
+            "text": "population",
+            "value": 0.0028081872730222855
+        },
+        {
+            "text": "operates public schools",
+            "value": 0.002896069863876847
+        },
+        {
+            "text": "schools operates public",
+            "value": 0.0028960698638768475
+        },
+        {
+            "text": "academy high school",
+            "value": 0.002990308631060186
+        },
+        {
+            "text": "south side cast",
+            "value": 0.003049699842894046
+        },
+        {
+            "text": "city north side",
+            "value": 0.0030710853705013816
+        },
+        {
+            "text": "north park university",
+            "value": 0.0031268060492834126
+        },
+        {
+            "text": "chicago transit authority",
+            "value": 0.0031588013956510073
+        },
+        {
+            "text": "south chicago station",
+            "value": 0.003185862868831053
+        },
+        {
+            "text": "park school",
+            "value": 0.0033038023279720087
+        },
+        {
+            "text": "chicago district",
+            "value": 0.0034099354899479388
+        },
+        {
+            "text": "schools operates district",
+            "value": 0.0034162294971233228
+        },
+        {
+            "text": "city south",
+            "value": 0.003467762155995984
+        },
+        {
+            "text": "votes for donald",
+            "value": 0.0034978313530535086
+        },
+        {
+            "text": "area high school",
+            "value": 0.0035532525734169305
+        },
+        {
+            "text": "station",
+            "value": 0.003688703680897857
+        },
+        {
+            "text": "west side cast",
+            "value": 0.0037626762222533047
+        },
+        {
+            "text": "humboldt park neighborhood",
+            "value": 0.00377613323815196
+        },
+        {
+            "text": "side of chicago",
+            "value": 0.003821511240673369
+        },
+        {
+            "text": "chicago operates",
+            "value": 0.0038493061728204383
+        },
+        {
+            "text": "barack obama",
+            "value": 0.0038607729836216023
+        },
+        {
+            "text": "areas of chicago",
+            "value": 0.003862238376713105
+        },
+        {
+            "text": "schools operates",
+            "value": 0.003862323089945363
+        },
+        {
+            "text": "chicago loop",
+            "value": 0.003936314533958598
+        },
+        {
+            "text": "community elementary school",
+            "value": 0.003948941327772099
+        },
+        {
+            "text": "area public schools",
+            "value": 0.0040464296265924505
+        },
+        {
+            "text": "park areas",
+            "value": 0.00406863283084869
+        },
+        {
+            "text": "square",
+            "value": 0.0041202570602029195
+        },
+        {
+            "text": "chicago lawn",
+            "value": 0.0041254173805067304
+        },
+        {
+            "text": "chicago metropolitan agency",
+            "value": 0.00422412145650058
+        },
+        {
+            "text": "community academy high",
+            "value": 0.004264190486290919
+        },
+        {
+            "text": "school district",
+            "value": 0.004287573400926926
+        },
+        {
+            "text": "house",
+            "value": 0.004324570094032842
+        },
+        {
+            "text": "clinton and cast",
+            "value": 0.0043551009358381515
+        },
+        {
+            "text": "ridge park district",
+            "value": 0.004358042764981619
+        },
+        {
+            "text": "street station",
+            "value": 0.004379775300517041
+        },
+        {
+            "text": "high school located",
+            "value": 0.004381712510532061
+        },
+        {
+            "text": "lincoln",
+            "value": 0.004419764197377743
+        },
+        {
+            "text": "hillary clinton",
+            "value": 0.004603695781149569
+        },
+        {
+            "text": "united states",
+            "value": 0.004605248940989578
+        },
+        {
+            "text": "south loop",
+            "value": 0.004649099461564196
+        },
+        {
+            "text": "loop",
+            "value": 0.00466065420620008
+        },
+        {
+            "text": "brighton park school",
+            "value": 0.004665095775009302
+        },
+        {
+            "text": "chicago landmark",
+            "value": 0.004718740277049498
+        },
+        {
+            "text": "donald trump",
+            "value": 0.004771411409726527
+        },
+        {
+            "text": "chicago south",
+            "value": 0.004779780655037015
+        },
+        {
+            "text": "democratic party",
+            "value": 0.004873212343661777
+        },
+        {
+            "text": "chicago city limits",
+            "value": 0.0048876529982947465
+        },
+        {
+            "text": "hyde park cast",
+            "value": 0.004964264591637611
+        },
+        {
+            "text": "high schools include",
+            "value": 0.004972573388812964
+        },
+        {
+            "text": "chicago downtown area",
+            "value": 0.0049858771262479085
+        },
+        {
+            "text": "center",
+            "value": 0.005080974096973449
+        },
+        {
+            "text": "obama and cast",
+            "value": 0.005132013492144281
+        },
+        {
+            "text": "park elementary school",
+            "value": 0.005134018067758913
+        },
+        {
+            "text": "humboldt park cast",
+            "value": 0.005191980554664133
+        },
+        {
+            "text": "designated chicago",
+            "value": 0.0052199503356652405
+        },
+        {
+            "text": "schools include",
+            "value": 0.005261812637388441
+        }
+    ]
+}

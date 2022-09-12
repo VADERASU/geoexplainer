@@ -1,0 +1,640 @@
+{
+    "keywords": [
+        {
+            "text": "douglas illinois",
+            "value": 0.5465
+        },
+        {
+            "text": "camp douglas",
+            "value": 0.5432
+        },
+        {
+            "text": "douglas area",
+            "value": 0.5408
+        },
+        {
+            "text": "village chicago",
+            "value": 0.5142
+        },
+        {
+            "text": "chicago lakefront",
+            "value": 0.5097
+        },
+        {
+            "text": "downtown",
+            "value": 0.5086
+        },
+        {
+            "text": "highlands chicago",
+            "value": 0.5022
+        },
+        {
+            "text": "trail chicago",
+            "value": 0.5012
+        },
+        {
+            "text": "chicago train",
+            "value": 0.4983
+        },
+        {
+            "text": "building chicago",
+            "value": 0.4977
+        },
+        {
+            "text": "chicago neighborhood",
+            "value": 0.497
+        },
+        {
+            "text": "chicago junction",
+            "value": 0.4963
+        },
+        {
+            "text": "park lincoln",
+            "value": 0.496
+        },
+        {
+            "text": "chicago loop",
+            "value": 0.4907
+        },
+        {
+            "text": "architecture chicago",
+            "value": 0.4883
+        },
+        {
+            "text": "accessible chicago",
+            "value": 0.4746
+        },
+        {
+            "text": "bounded chicago",
+            "value": 0.4739
+        },
+        {
+            "text": "summit chicago",
+            "value": 0.4739
+        },
+        {
+            "text": "place douglas",
+            "value": 0.4726
+        },
+        {
+            "text": "chicago board",
+            "value": 0.4721
+        },
+        {
+            "text": "chicago riverwalk",
+            "value": 0.4716
+        },
+        {
+            "text": "place chicago",
+            "value": 0.4712
+        },
+        {
+            "text": "illinois area",
+            "value": 0.4694
+        },
+        {
+            "text": "lincoln chicago",
+            "value": 0.4682
+        },
+        {
+            "text": "northern chicago",
+            "value": 0.4679
+        },
+        {
+            "text": "central chicago",
+            "value": 0.4673
+        },
+        {
+            "text": "chicago stronghold",
+            "value": 0.4663
+        },
+        {
+            "text": "chicago ave",
+            "value": 0.4661
+        },
+        {
+            "text": "proximity chicago",
+            "value": 0.4657
+        },
+        {
+            "text": "chicago revisited",
+            "value": 0.4647
+        },
+        {
+            "text": "chicago central",
+            "value": 0.4644
+        },
+        {
+            "text": "neighborhood chicago",
+            "value": 0.4643
+        },
+        {
+            "text": "chicago lake",
+            "value": 0.464
+        },
+        {
+            "text": "chicago constructed",
+            "value": 0.464
+        },
+        {
+            "text": "lake chicago",
+            "value": 0.4636
+        },
+        {
+            "text": "defined chicago",
+            "value": 0.4617
+        },
+        {
+            "text": "south chicago",
+            "value": 0.4613
+        },
+        {
+            "text": "land chicago",
+            "value": 0.4607
+        },
+        {
+            "text": "northernmost chicago",
+            "value": 0.4606
+        },
+        {
+            "text": "chicago riverdale",
+            "value": 0.4598
+        },
+        {
+            "text": "concept chicago",
+            "value": 0.4584
+        },
+        {
+            "text": "access chicago",
+            "value": 0.4577
+        },
+        {
+            "text": "chicago south",
+            "value": 0.4577
+        },
+        {
+            "text": "park district",
+            "value": 0.4574
+        },
+        {
+            "text": "chicago center",
+            "value": 0.4568
+        },
+        {
+            "text": "chicago street",
+            "value": 0.4567
+        },
+        {
+            "text": "main chicago",
+            "value": 0.4564
+        },
+        {
+            "text": "park area",
+            "value": 0.4556
+        },
+        {
+            "text": "chicago north",
+            "value": 0.4548
+        },
+        {
+            "text": "following chicago",
+            "value": 0.4547
+        },
+        {
+            "text": "southward chicago",
+            "value": 0.4545
+        },
+        {
+            "text": "chicago town",
+            "value": 0.4544
+        },
+        {
+            "text": "places chicago",
+            "value": 0.453
+        },
+        {
+            "text": "developments chicago",
+            "value": 0.4528
+        },
+        {
+            "text": "railway chicago",
+            "value": 0.4527
+        },
+        {
+            "text": "chicago landmarks",
+            "value": 0.4519
+        },
+        {
+            "text": "south douglas",
+            "value": 0.451
+        },
+        {
+            "text": "site chicago",
+            "value": 0.451
+        },
+        {
+            "text": "destination chicagoans",
+            "value": 0.4506
+        },
+        {
+            "text": "miles chicago",
+            "value": 0.4505
+        },
+        {
+            "text": "chicago represented",
+            "value": 0.4491
+        },
+        {
+            "text": "chicago st",
+            "value": 0.449
+        },
+        {
+            "text": "link chicago",
+            "value": 0.4486
+        },
+        {
+            "text": "illinois street",
+            "value": 0.448
+        },
+        {
+            "text": "chicago uic",
+            "value": 0.448
+        },
+        {
+            "text": "chicagoans seeking",
+            "value": 0.4478
+        },
+        {
+            "text": "chicago urban",
+            "value": 0.4474
+        },
+        {
+            "text": "chicago representing",
+            "value": 0.4471
+        },
+        {
+            "text": "chicago point",
+            "value": 0.447
+        },
+        {
+            "text": "communities chicago",
+            "value": 0.4466
+        },
+        {
+            "text": "street chicago",
+            "value": 0.4465
+        },
+        {
+            "text": "districts chicago",
+            "value": 0.4464
+        },
+        {
+            "text": "chicago lane",
+            "value": 0.4457
+        },
+        {
+            "text": "lakeview lincoln",
+            "value": 0.4457
+        },
+        {
+            "text": "chicagochicago public",
+            "value": 0.4455
+        },
+        {
+            "text": "loop chicago",
+            "value": 0.4451
+        },
+        {
+            "text": "chicago political",
+            "value": 0.4448
+        },
+        {
+            "text": "chicago based",
+            "value": 0.4448
+        },
+        {
+            "text": "proposed chicago",
+            "value": 0.4448
+        },
+        {
+            "text": "chicago alongside",
+            "value": 0.4447
+        },
+        {
+            "text": "chicago built",
+            "value": 0.4446
+        },
+        {
+            "text": "area lincoln",
+            "value": 0.444
+        },
+        {
+            "text": "park village",
+            "value": 0.4424
+        },
+        {
+            "text": "chicagoans looking",
+            "value": 0.4423
+        },
+        {
+            "text": "chicago plan",
+            "value": 0.4422
+        },
+        {
+            "text": "suburbs chicago",
+            "value": 0.442
+        },
+        {
+            "text": "chicago politics",
+            "value": 0.4418
+        },
+        {
+            "text": "chicago river",
+            "value": 0.4409
+        },
+        {
+            "text": "townships chicago",
+            "value": 0.4408
+        },
+        {
+            "text": "northwest chicago",
+            "value": 0.4405
+        },
+        {
+            "text": "illinois center",
+            "value": 0.4398
+        },
+        {
+            "text": "development chicago",
+            "value": 0.4397
+        },
+        {
+            "text": "areas lincoln",
+            "value": 0.4395
+        },
+        {
+            "text": "island chicago",
+            "value": 0.4394
+        },
+        {
+            "text": "douglas south",
+            "value": 0.4393
+        },
+        {
+            "text": "chicago southeast",
+            "value": 0.4392
+        },
+        {
+            "text": "park located",
+            "value": 0.439
+        },
+        {
+            "text": "features chicago",
+            "value": 0.4389
+        },
+        {
+            "text": "chicago heights",
+            "value": 0.4388
+        },
+        {
+            "text": "chicago field",
+            "value": 0.4374
+        },
+        {
+            "text": "important chicago",
+            "value": 0.4373
+        },
+        {
+            "text": "chicago bounded",
+            "value": 0.4369
+        },
+        {
+            "text": "outside chicago",
+            "value": 0.4367
+        },
+        {
+            "text": "illinois mount",
+            "value": 0.4364
+        },
+        {
+            "text": "olympics neighborhood",
+            "value": 0.4361
+        },
+        {
+            "text": "chicago development",
+            "value": 0.4358
+        },
+        {
+            "text": "designated chicago",
+            "value": 0.4357
+        },
+        {
+            "text": "southeast chicago",
+            "value": 0.4355
+        },
+        {
+            "text": "chicago historic",
+            "value": 0.4352
+        },
+        {
+            "text": "illinois central",
+            "value": 0.4348
+        },
+        {
+            "text": "chicago considered",
+            "value": 0.4346
+        },
+        {
+            "text": "chicagoland page",
+            "value": 0.4345
+        },
+        {
+            "text": "chicago landmark",
+            "value": 0.4343
+        },
+        {
+            "text": "city chicagochicago",
+            "value": 0.4341
+        },
+        {
+            "text": "chicago southern",
+            "value": 0.4339
+        },
+        {
+            "text": "park districts",
+            "value": 0.4337
+        },
+        {
+            "text": "river chicago",
+            "value": 0.4331
+        },
+        {
+            "text": "seat chicago",
+            "value": 0.433
+        },
+        {
+            "text": "park bordered",
+            "value": 0.4328
+        },
+        {
+            "text": "chicago region",
+            "value": 0.4328
+        },
+        {
+            "text": "local chicago",
+            "value": 0.4327
+        },
+        {
+            "text": "chicago campus",
+            "value": 0.4327
+        },
+        {
+            "text": "ave chicago",
+            "value": 0.4323
+        },
+        {
+            "text": "parts chicago",
+            "value": 0.4321
+        },
+        {
+            "text": "greater chicago",
+            "value": 0.4317
+        },
+        {
+            "text": "park neighborhoods",
+            "value": 0.4316
+        },
+        {
+            "text": "near illinois",
+            "value": 0.4311
+        },
+        {
+            "text": "chicago beach",
+            "value": 0.4309
+        },
+        {
+            "text": "ridge chicago",
+            "value": 0.4308
+        },
+        {
+            "text": "park downtown",
+            "value": 0.4304
+        },
+        {
+            "text": "annexed chicago",
+            "value": 0.4304
+        },
+        {
+            "text": "park lakeview",
+            "value": 0.4303
+        },
+        {
+            "text": "bridgeview chicago",
+            "value": 0.4302
+        },
+        {
+            "text": "baths chicago",
+            "value": 0.4302
+        },
+        {
+            "text": "chicago suburban",
+            "value": 0.4301
+        },
+        {
+            "text": "chicago northwest",
+            "value": 0.43
+        },
+        {
+            "text": "located illinois",
+            "value": 0.43
+        },
+        {
+            "text": "center chicago",
+            "value": 0.43
+        },
+        {
+            "text": "north chicago",
+            "value": 0.4299
+        },
+        {
+            "text": "olympic village",
+            "value": 0.4296
+        },
+        {
+            "text": "chicago illinois",
+            "value": 0.4296
+        },
+        {
+            "text": "banks chicago",
+            "value": 0.4283
+        },
+        {
+            "text": "trips chicago",
+            "value": 0.4275
+        },
+        {
+            "text": "branch chicago",
+            "value": 0.4274
+        },
+        {
+            "text": "current chicago",
+            "value": 0.4271
+        },
+        {
+            "text": "neighborhood lincoln",
+            "value": 0.4269
+        },
+        {
+            "text": "shore chicago",
+            "value": 0.4267
+        },
+        {
+            "text": "chicago transportation",
+            "value": 0.4266
+        },
+        {
+            "text": "chicago railroad",
+            "value": 0.4265
+        },
+        {
+            "text": "bank chicago",
+            "value": 0.4262
+        },
+        {
+            "text": "parks adjacent",
+            "value": 0.4261
+        },
+        {
+            "text": "airport chicago",
+            "value": 0.4259
+        },
+        {
+            "text": "park memorial",
+            "value": 0.4258
+        },
+        {
+            "text": "park neighborhood",
+            "value": 0.4255
+        },
+        {
+            "text": "park adjacent",
+            "value": 0.425
+        },
+        {
+            "text": "chicago designated",
+            "value": 0.425
+        },
+        {
+            "text": "chicago columbia",
+            "value": 0.4248
+        },
+        {
+            "text": "city chicago",
+            "value": 0.4246
+        },
+        {
+            "text": "plaines chicago",
+            "value": 0.4243
+        }
+    ]
+}

@@ -8,6 +8,7 @@ import { NumDistribution } from "./numDistribution";
 import { NarrativeExplain } from "./narrativeExplain";
 import { ReportAuthor } from "./reportAuthor";
 import { ExternalInfo } from "./wikiInfo";
+import { Legend } from "../../utilities/legend";
 
 export function ModelExplore (props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
@@ -20,7 +21,8 @@ export function ModelExplore (props) {
 
     const [reportContent, setReportContent] = useState(['']);
     const [displayFlag, setDisplayFlag] = useState(true);
-    //const [externalArea, ]
+    //const [externalArea, setExternalArea] = useState([]);
+    const [externalCase, setExternalCase] = useState('general');
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const makeNumericalDist = (feature) => {
@@ -157,6 +159,8 @@ export function ModelExplore (props) {
                 <ExternalInfo
                     displayFlag={displayFlag}
                     setDisplayFlag={setDisplayFlag}
+                    //selectedRowKeys={selectedRowKeys}
+                    externalCase={externalCase}
                 />
             </div>
 
@@ -167,6 +171,16 @@ export function ModelExplore (props) {
                 moveUpClick={moveUpClick}
                 moveDownClick={moveDownClick}
             />
+
+            <div
+                className='mapLegend'
+                style={{width: 500, height: 40}}
+                >
+                <Legend 
+                    mapLegend={props.mapLegend}
+                    loaded_map_data={props.loaded_map_data}
+                />
+            </div>
 
         </div>
     ) : <></>;

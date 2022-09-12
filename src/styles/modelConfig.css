@@ -90,3 +90,13 @@
   left: 5px;
   top: 315px;
 }
+
+/**
+* Map legend
+*/
+.configLegend{
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background-color: #fff;
+}

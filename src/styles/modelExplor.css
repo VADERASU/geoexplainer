@@ -78,3 +78,13 @@
     width: 550px;
     padding: 6px;
 }
+
+/**
+* Map legend
+*/
+.mapLegend{
+    position: absolute;
+    top: 45px;
+    right: 8px;
+    background-color: #fff;
+  }

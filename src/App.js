@@ -124,6 +124,10 @@ class App extends Component {
       model_result: {},
       case_demo: {},
       mapFilter: ['!', ['in', 'UID', ""]],
+      mapLegend: {
+        layer: null,
+        id: null,
+      },
     };
   }
 
@@ -526,6 +530,10 @@ class App extends Component {
         const sortableComponents = this.updateSortableComponents('activCorrBtn');
         this.setState({
           dependentMapLayer: getConfigMapLayerY(newList, this.state.loaded_map_data),
+          mapLegend:{
+            layer: 'dependent',
+            id: newList[0]
+          },
           sortable_components: sortableComponents,
         });
       }else if(newList.length === 0){
@@ -561,13 +569,17 @@ class App extends Component {
         'visibility': 'none',
       },
     };
-    let configLayer = currentActivMapLayer !== null ? getConfigMapLayerY([id], this.state.loaded_map_data) : ori_config_layer;
+    let configLayer = currentActivMapLayer !== null ? getConfigMapLayerY([id], this.state.loaded_map_data) : ori_config_layer;   
     let sortableComponents = this.updateSortableComponents('updateMapClickBtn', id);
     this.setState({
       currentActivMapLayer: currentActivMapLayer,
       config_layer: configLayer,
       sortable_components: sortableComponents,
       currentCorrMapLayer: null,
+      mapLegend:{
+        layer: 'dependent',
+        id: id
+      },
     });
 
   };
@@ -585,7 +597,11 @@ class App extends Component {
       this.setState({
         currentActivMapLayer: null,
         sortable_components: sortableComponents,
-        config_layer: configLayer
+        config_layer: configLayer,
+        mapLegend:{
+          layer: 'bi-var',
+          id: corrList
+        },
       });
     }else{
       // display dependent variable map
@@ -663,7 +679,7 @@ class App extends Component {
       });
 
       if(this.state.select_case === 'chicago')
-        this.canvasRef.current.flyTo({center: [this.state.viewState.longitude-0.3, this.state.viewState.latitude]});
+        this.canvasRef.current.flyTo({center: [this.state.viewState.longitude-0.2, this.state.viewState.latitude]});
       
     }else{
 
@@ -712,6 +728,10 @@ class App extends Component {
       currentActivMapLayer: updateActivMapLayer,
       config_layer: newMapLayer,
       currentCorrMapLayer: null,
+      mapLegend:{
+        layer: 'result',
+        id: id
+      },
     });
   };
 
@@ -812,6 +832,7 @@ class App extends Component {
               trainModel={this.trainModel}
               exportData={this.exportData}
               setMapFilter={this.setMapFilter}
+              mapLegend={this.state.mapLegend}
             />
 
             <ModelExplore
@@ -820,6 +841,8 @@ class App extends Component {
               model_used={this.state.model_used}
               setMapLayer={this.setMapLayer}
               select_case={this.state.select_case}
+              mapLegend={this.state.mapLegend}
+              loaded_map_data={this.state.loaded_map_data}
             />
 
           </Content>

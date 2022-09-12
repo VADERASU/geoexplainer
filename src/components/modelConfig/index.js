@@ -6,6 +6,7 @@ import { VariableSelection } from './variableSelect';
 import { DependentVar } from './dependentVar';
 import { Correlation } from './correlation';
 import { IndependentVars } from './independentVars';
+import { Legend } from '../../utilities/legend';
 //import { ConsoleSqlOutlined } from '@ant-design/icons';
  
 
@@ -22,6 +23,10 @@ class ModelConfigPanel extends Component {
         {display: 'block'} : {display: 'none'};
 
         const configInterfaceStyle = this.props.model_trained ? {display: 'none'} : {display: 'block'};
+
+        const legendStyle = this.props.mapLegend.layer === 'bi-var' ?
+            {width: 200, height: 200} : (this.props.mapLegend.layer !== null ? 
+            {width: 500, height: 50} : {display: 'none'});
 
         return(
             <div style={configInterfaceStyle}>
@@ -85,6 +90,17 @@ class ModelConfigPanel extends Component {
                         />
                     </div>
                 </div>
+
+                <div
+                className='configLegend'
+                style={legendStyle}
+                >
+                <Legend 
+                    mapLegend={this.props.mapLegend}
+                    loaded_map_data={this.props.loaded_map_data}
+                />
+                </div>
+
             </div> 
         );
     }

@@ -1,33 +1,18 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Button, Popover} from 'antd';
+import { Card, Button, Popover, Checkbox, Tag, Divider} from 'antd';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ReactWordcloud from 'react-wordcloud';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
 
-const words = [
-    {
-      text: 'West Chicago Avenue',
-      value: 0.08005367947355094,
-    },
-    {
-      text: 'Chicago metropolitan area',
-      value: 0.07970667932932353,
-    },
-    {
-      text: 'Chicago Avenue',
-      value: 0.07795969445910046,
-    },
-    {
-      text: 'Downtown Chicago',
-      value: 0.06911265604237112,
-    },
-    {
-        text: 'Armour Square Park',
-        value: 0.04416064765849588,
-      },
-  ];
+import income_textrank from '../../data/incomeKey/income_textrank.json';
+
+const CheckboxGroup = Checkbox.Group;
+
+const chicagoCate = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Other'];
+const chicagoCateDefault = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Other'];
+const colors = ['#8dd3c7', '#33a02c', '#bebada', '#fb8072', '#80b1d3'];
 
 export function ExternalInfo (props) {
     const containerStyle = props.displayFlag ? {display: 'block'} : {display: 'none'};
@@ -35,16 +20,34 @@ export function ExternalInfo (props) {
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [wordCloud, setWordCloud] = useState(null);
 
+    const [checkedList, setCheckedList] = useState(chicagoCateDefault);
+    const [indeterminate, setIndeterminate] = useState(true);
+    const [checkAll, setCheckAll] = useState(false);
+    const size = [450, 370];
+
+    const onCheckChange = (list) => {
+        console.log(list);
+        setCheckedList(list);
+        setIndeterminate(!!list.length && list.length < chicagoCate.length);
+        setCheckAll(list.length === chicagoCate.length);
+    };
+
+    const onCheckAllChange = (e) => {
+        setCheckedList(e.target.checked ? chicagoCate : []);
+        setIndeterminate(false);
+        setCheckAll(e.target.checked);
+      };
+
     const cardBodyDisplay = {
         display: cardDisplay,
-        padding: 8,
-        height: 250,
+        padding: 9,
+        height: 450,
         //overflow: 'auto',
     };
 
     const options = {
         //fontFamily: "impact",
-        fontSizes: [15, 40],
+        fontSizes: [15, 50],
         fontStyle: "normal",
         fontWeight: "normal",
         padding: 1,
@@ -69,20 +72,32 @@ export function ExternalInfo (props) {
         setMinCardDisplay({display: 'none'});
     };
 
-    const makeWordCloud = () => {
-        const wordCloud = 
+    const makeWordCloud = (externalCase) => {
+        if(externalCase === 'general'){
+            const wordCloud = 
             <ReactWordcloud
-                words={words}
+                words={income_textrank.keywords}
                 options={options}
+                size={size}
             />;
         
-        setWordCloud(wordCloud);
+            setWordCloud(wordCloud);
+        }
+        
+    };
+
+    const extractCategory = (externalCase) => {
+        if(externalCase === 'general'){
+            
+        }
+
     };
 
     useEffect(()=>{
-        makeWordCloud();
-    }, [props.displayFlag]);
-
+        //console.log(props.selectedRowKeys);
+        makeWordCloud(props.externalCase);
+    }, [props.displayFlag, props.externalCase]);
+//<CheckboxGroup options={chicagoCate} value={checkedList} onChange={onCheckChange} />
     return(
         <div className="narrativeExplainContainer" style={containerStyle}>
             <Card
@@ -97,6 +112,15 @@ export function ExternalInfo (props) {
                             fontSize: 12
                         }}
                     >
+                        <Checkbox 
+                        style={{
+                            marginLeft: 5,
+                            float: 'left'
+                        }}
+                        indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                            Check all
+                        </Checkbox>
+
                         <Button 
                         style={btnDisplay} 
                         size='small' icon={<MinusOutlined />}
@@ -118,7 +142,18 @@ export function ExternalInfo (props) {
                     </div>
                 }
             >
-                {wordCloud}
+                <div style={{textAlign: 'left'}}>
+                    <Checkbox.Group style={{ width: '100%' }} onChange={onCheckChange}>
+                        {chicagoCate.map(
+                            (e,i)=><Checkbox 
+                                key={e} value={e}
+                                >
+                                    <Tag color={colors[i]} style={{fontSize: 12}}>{e}</Tag>
+                                </Checkbox>)}
+                    </Checkbox.Group>
+                </div>
+                <Divider style={{marginTop: 10, marginBottom: 10}} />
+                <div>{wordCloud}</div>
             </Card>
         </div>
     );
