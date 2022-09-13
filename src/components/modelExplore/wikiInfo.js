@@ -8,6 +8,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
 
 import income_textrank from '../../data/incomeKey/income_textrank.json';
+import selected_textrank from '../../data/selected_counties/selected_counties_textrank.json';
 
 const chicagoCate = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Politics', 'Other'];
 const cate2Color = {
@@ -43,6 +44,7 @@ export function ExternalInfo (props) {
         rotations: 0,
         rotationAngles: [0, 90],
         scale: "sqrt",
+        //transitionDuration: 0
     };
 
     const btnDisplay = {
@@ -67,6 +69,28 @@ export function ExternalInfo (props) {
             <ReactWordcloud
                 words={income_textrank.keywords}
                 options={options}
+                callbacks={callbacks}               
+            />;
+        
+            setWordCloud(wordCloud);
+        }else if(externalCase === 'select'){
+            const optionsSelect = {
+                //fontFamily: "impact",
+                fontSizes: [20, 90],
+                fontFamily: "times new roman",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                padding: 5,
+                rotations: 0,
+                rotationAngles: [0, 90],
+                scale: "sqrt",
+                //transitionDuration: 0
+            };
+            //console.log("select!")
+            const wordCloud = 
+            <ReactWordcloud
+                words={selected_textrank.keywords}
+                options={optionsSelect}
                 callbacks={callbacks}               
             />;
         

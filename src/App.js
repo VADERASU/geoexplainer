@@ -759,7 +759,8 @@ class App extends Component {
   }
 
   onDrawCreate = ({ features }) => {
-    console.log(features, 1);
+    this.setState({externalCase: 'select'});
+    //console.log(features, 1);
   };
 
   onDrawUpdate = ({ features }) => {
@@ -767,7 +768,8 @@ class App extends Component {
   };
 
   onDrawDelete = ({ features }) => {
-    console.log(features, 3);
+    this.setState({externalCase: 'general'});
+    //console.log(features, 3);
   };
 
   setExternalCase = (val) => {

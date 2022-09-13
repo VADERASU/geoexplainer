@@ -1,13 +1,14 @@
 {
-    "keywords": [{
+    "keywords": [
+        {
         "text": "chicago metropolitan area",
+        "value": 20,
         "category": "Demographics",
-        "value": 15,
         "coefficient": 0.0844131462102968
     }, {
-        "text": "west chicago",
+        "text": "westt chicago",
         "category": "Other",
-        "value": 12,
+        "value": 19,
         "coefficient": 0.08406856456721758
     }, {
         "text": "public schools",
