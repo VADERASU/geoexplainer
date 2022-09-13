@@ -756,6 +756,18 @@ class App extends Component {
     }
   }
 
+  onDrawCreate = ({ features }) => {
+    console.log(features);
+  };
+
+  onDrawUpdate = ({ features }) => {
+    console.log(features);
+  };
+
+  onDrawDelete = ({ features }) => {
+    console.log(features);
+  };
+
   render() {
     const drawmap = this.state.loaded_map_data === null ? <></> : 
     <DrawControl
@@ -766,6 +778,9 @@ class App extends Component {
         polygon: true,
         trash: true
       }}
+      onDrawCreate={this.onDrawCreate}
+      onDrawUpdate={this.onDrawUpdate}
+      onDrawDelete={this.onDrawDelete}
     />;
 
     const { Header, Content } = Layout;
