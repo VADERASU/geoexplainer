@@ -121,6 +121,11 @@ export function CoeffNarrative (props){
         props.narraInfoGen(newText);
     };
 
+    const handleWikiClick = () => {
+        props.setDisplayFlag(true);
+        props.setExternalCase('general');
+    };
+
     const posComponent = <Popover
         key={'posNarr'}
         trigger="click"
@@ -133,7 +138,7 @@ export function CoeffNarrative (props){
                 <Button 
                     size='small'
                     icon={<BulbFilled />}
-                    onClick={() => props.setDisplayFlag(true)}
+                    onClick={() => handleWikiClick()}
                 >Wiki</Button>
             </div>            
         }        

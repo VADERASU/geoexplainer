@@ -131,6 +131,8 @@ class App extends Component {
         layer: null,
         id: null,
       },
+
+      externalCase: 'general',
     };
   }
 
@@ -757,15 +759,26 @@ class App extends Component {
   }
 
   onDrawCreate = ({ features }) => {
-    console.log(features);
+    console.log(features, 1);
   };
 
   onDrawUpdate = ({ features }) => {
-    console.log(features);
+    console.log(features, 2);
   };
 
   onDrawDelete = ({ features }) => {
-    console.log(features);
+    console.log(features, 3);
+  };
+
+  setExternalCase = (val) => {
+    if(val === 'select'){
+      this.setState({externalCase: 'select'});
+    }else if(val === 'general'){
+      this.setState({externalCase: 'general'});
+    }else if(val === 'loop'){
+      this.setState({externalCase: 'loop'});
+    }
+    
   };
 
   render() {
@@ -874,6 +887,8 @@ class App extends Component {
               select_case={this.state.select_case}
               mapLegend={this.state.mapLegend}
               loaded_map_data={this.state.loaded_map_data}
+              externalCase={this.state.externalCase}
+              setExternalCase={this.setExternalCase}
             />
 
           </Content>

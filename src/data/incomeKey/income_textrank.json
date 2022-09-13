@@ -97,10 +97,11 @@
             "coefficient": 0.06651350186964271
         },
         {
-            "text": "university chicago campus",
+            "text": "university of chicago",
             "category": "Education",
-            "value": 1,
-            "coefficient": 0.0658277198228589
+            "value": 4,
+            "coefficient": 0.0658277198228589,
+            "location": [41]
         },
         {
             "text": "chicago loop",
@@ -111,7 +112,7 @@
         {
             "text": "loyola university chicago",
             "category": "Education",
-            "value": 2,
+            "value": 1,
             "coefficient": 0.0652597775542062
         },
         {

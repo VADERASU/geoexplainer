@@ -87,6 +87,7 @@ export function NarrativeExplain (props) {
                     select_case={props.select_case}
                     narraInfoGen={narraInfoGen}
                     setDisplayFlag={props.setDisplayFlag}
+                    setExternalCase={props.setExternalCase}
                 />
             );
         }

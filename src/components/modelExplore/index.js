@@ -22,7 +22,7 @@ export function ModelExplore (props) {
     const [reportContent, setReportContent] = useState(['']);
     const [displayFlag, setDisplayFlag] = useState(false);
     //const [externalArea, setExternalArea] = useState([]);
-    const [externalCase, setExternalCase] = useState('general');
+    //const [externalCase, setExternalCase] = useState('general');
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const makeNumericalDist = (feature) => {
@@ -123,6 +123,7 @@ export function ModelExplore (props) {
 
                     globalInfoGen={globalInfoGen}
                     setDisplayFlag={setDisplayFlag}
+                    //setExternalCase={props.setExternalCase}
                 />
                 {/** model coefficient container */}
                 <ModelCoefficient
@@ -135,6 +136,7 @@ export function ModelExplore (props) {
                     handleNumBtnClick={handleNumBtnClick}
                     handleNarrativeBtnClick={handleNarrativeBtnClick}
                     setDisplayFlag={setDisplayFlag}
+                    setExternalCase={props.setExternalCase}
                 />
             </div>
 
@@ -157,13 +159,14 @@ export function ModelExplore (props) {
                     select_case={props.select_case}
                     narraInfoGen={narraInfoGen}
                     setDisplayFlag={setDisplayFlag}
+                    setExternalCase={props.setExternalCase}
                 />
 
                 <ExternalInfo
                     displayFlag={displayFlag}
                     setDisplayFlag={setDisplayFlag}
                     
-                    externalCase={externalCase}
+                    externalCase={props.externalCase}
                 />
             </div>
 
