@@ -98,6 +98,8 @@ export function ModelExplore (props) {
         setReportContent(reportList);
     };
 
+    const newParagraphGen = () => {};
+
     const handleNumBtnClick = (feature) => {
         setNumericalBtnSelect(feature === numericalBtnSelect ? null : feature);
         setNumericalContainerDisplay(
