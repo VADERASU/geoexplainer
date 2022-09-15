@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import { Card, Button, Typography, Popover, Select, Input} from 'antd';
 import { FilePdfOutlined, GlobalOutlined, FormOutlined, ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import ReactPDF, { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 //import { D3Map } from "../../utilities/d3Map";
 
 const { Paragraph, Text } = Typography;
@@ -25,54 +24,6 @@ const biColors = [
     [['#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3'],
     ['#c7eae5','#80cdc1','#35978f','#01665e','#003c30']]
 ];
-
-const styles = StyleSheet.create({
-    body: {
-      paddingTop: 35,
-      paddingBottom: 65,
-      paddingHorizontal: 35,
-    },
-    title: {
-      fontSize: 24,
-      textAlign: 'center',
-      fontFamily: 'Oswald'
-    },
-    author: {
-      fontSize: 12,
-      textAlign: 'center',
-      marginBottom: 40,
-    },
-    subtitle: {
-      fontSize: 18,
-      margin: 12,
-      fontFamily: 'Oswald'
-    },
-    text: {
-      margin: 12,
-      fontSize: 14,
-      textAlign: 'justify',
-      fontFamily: 'Times-Roman'
-    },
-    image: {
-      marginVertical: 15,
-      marginHorizontal: 100,
-    },
-    header: {
-      fontSize: 12,
-      marginBottom: 20,
-      textAlign: 'center',
-      color: 'grey',
-    },
-    pageNumber: {
-      position: 'absolute',
-      fontSize: 12,
-      bottom: 30,
-      left: 0,
-      right: 0,
-      textAlign: 'center',
-      color: 'grey',
-    },
-  });
 
 export function ReportAuthor (props) {
     const [bodyStyle, setBodyStyle] = useState({
@@ -273,27 +224,13 @@ export function ReportAuthor (props) {
 
     const exportPDF = () => {
         
-        ReactPDF.render(MyDocument(), `${__dirname}/example.pdf`);
+        //ReactPDF.render(MyDocument(), `${__dirname}/example.pdf`);
     };
     
     useEffect(()=>{
         //console.log(props.reportContent);
         genReportContent(props.reportContent, props.mapImg);
     },[props.reportContent, props.mapImg]);
-
-    // Create Document Component
-    const MyDocument = () => (
-        <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-            <Text>Section #1</Text>
-            </View>
-            <View style={styles.section}>
-            <Text>Section #2</Text>
-            </View>
-        </Page>
-        </Document>
-    );
 
     return(
         <div className="reportAuthoringContainer">
