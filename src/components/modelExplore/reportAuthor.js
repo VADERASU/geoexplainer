@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import { Card, Button, Typography, Popover, Select, Input} from 'antd';
 import { FilePdfOutlined, GlobalOutlined, FormOutlined, ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import ReactPDF, { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 //import { D3Map } from "../../utilities/d3Map";
 
 const { Paragraph, Text } = Typography;
@@ -269,11 +270,30 @@ export function ReportAuthor (props) {
         };
         setTextStyle(style);
     };
+
+    const exportPDF = () => {
+        
+        ReactPDF.render(MyDocument(), `${__dirname}/example.pdf`);
+    };
     
     useEffect(()=>{
         //console.log(props.reportContent);
         genReportContent(props.reportContent, props.mapImg);
     },[props.reportContent, props.mapImg]);
+
+    // Create Document Component
+    const MyDocument = () => (
+        <Document>
+        <Page size="A4" style={styles.page}>
+            <View style={styles.section}>
+            <Text>Section #1</Text>
+            </View>
+            <View style={styles.section}>
+            <Text>Section #2</Text>
+            </View>
+        </Page>
+        </Document>
+    );
 
     return(
         <div className="reportAuthoringContainer">
@@ -309,6 +329,7 @@ export function ReportAuthor (props) {
                     <Button type="primary" size='small'
                     style={{marginLeft: 10, float: 'left'}}
                     icon={<FilePdfOutlined />}
+                    onClick={exportPDF}
                     >Export PDF</Button>
 
                     <Button 
