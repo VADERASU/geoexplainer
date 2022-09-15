@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from 'd3';
 import '../../styles/modelExplor.css';
-import { Card, Button, Popover, Checkbox, Tag, Divider} from 'antd';
+import { Card, Button, Popover, Checkbox, Tag, Table, Typography } from 'antd';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ReactWordcloud from 'react-wordcloud';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
+import { WordBar } from "../../utilities/echartBar";
 
 import income_textrank from '../../data/incomeKey/income_textrank.json';
 import selected_textrank from '../../data/selected_counties/selected_counties_textrank.json';
@@ -21,18 +22,105 @@ const cate2Color = {
 };
 const colors = ['#ff7f00', '#33a02c', '#1f78b4', '#e7298a', '#b2df8a', '#80b1d3'];
 
+const { Text } = Typography;
+
 export function ExternalInfo (props) {
     const containerStyle = props.displayFlag ? {display: 'block'} : {display: 'none'};
     const [cardDisplay, setCardDisplay] = useState('block');
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [wordCloud, setWordCloud] = useState(null);
+    const [wordData, setWordData] = useState([]);
+    const [dataDomain, setDataDomain] = useState(null);
 
     const cardBodyDisplay = {
         display: cardDisplay,
         padding: 5,
         height: 390,
-        //overflow: 'auto',
+        overflow: 'auto',
     };
+
+    const getDataDomain = (data) => {
+        return d3.extent(data.map(e=>e.coefficient));
+    };
+
+    const makeTableData = (externalCase) => {
+        if(externalCase === 'general'){
+            setDataDomain(getDataDomain(income_textrank.keywords));
+            const tableData = [];
+            income_textrank.keywords.forEach(e=>{
+                const wordData = {
+                    key: e['text'],
+                    word: e,
+                    textrank: e,
+                    operations: e
+                };
+                tableData.push(wordData);
+            });
+            setWordData(tableData);
+        }else if(externalCase === 'select'){
+            setDataDomain(getDataDomain(selected_textrank.keywords));
+            const tableData = [];
+            selected_textrank.keywords.forEach(e=>{
+                const wordData = {
+                    key: e['text'],
+                    word: e,
+                    textrank: e,
+                    operations: e
+                };
+                tableData.push(wordData);
+            });
+            setWordData(tableData);
+        }
+    };
+
+    const local_columns = [
+        {
+            title: 'Key phrases',
+            dataIndex: 'word',
+            key: 'word',
+            render: (_, { word }) => {
+                let wordStyle = {color: cate2Color[word.category]};
+                return <Text style={wordStyle}>{word.text}</Text>;
+            },
+        },
+        {
+            title: 'Word with weight',
+            dataIndex: 'textrank',
+            key: 'textrank',
+            render: (_, { textrank }) => {
+                //console.log(numerical_distribution);
+                return(
+                    <WordBar
+                        data={textrank}
+                        height={30}
+                        dataDomain={dataDomain}
+                    />
+                );
+            },
+        },
+        {
+            title: 'Operations',
+            dataIndex: 'opeartions',
+            key: 'operations',
+            render: (_, { operations }) => {
+                //console.log(operations, props.numericalBtnSelect);
+                return(
+                    <>
+                    <Button 
+                        size='small' style={{marginRight: 5, fontSize: 11}}
+                        onClick={() => props.setWikiTextDisplay(true)}
+                    >Original Paragraphs</Button>
+                    <Button 
+                        size='small'
+                        style={{fontSize: 11}}
+                        onClick={() => window.open(`https://duckduckgo.com/?q=${operations.text}`, "_blank")}
+                    >Search online</Button>
+                    </>
+                    
+                );
+            },
+        },
+    ];
 
     const options = {
         //fontFamily: "impact",
@@ -130,7 +218,8 @@ export function ExternalInfo (props) {
 
     useEffect(()=>{
         //console.log(props.selectedRowKeys);
-        makeWordCloud(props.externalCase);
+        //makeWordCloud(props.externalCase);
+        makeTableData(props.externalCase);
     }, [props.externalCase]);
 
     return(
@@ -177,7 +266,12 @@ export function ExternalInfo (props) {
                     </div>
                 }
             >    
-                {wordCloud}
+                <Table
+                size="small"
+                columns={local_columns}
+                dataSource={wordData}
+                pagination={false}
+                />
             </Card>
             <div
                 className="explorationCard"

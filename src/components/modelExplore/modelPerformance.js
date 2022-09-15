@@ -69,7 +69,7 @@ export function ModelPerformance (props){
                         echartBoxplotData={numerical_distribution}
                         resource={'inline'}
                         height={30}
-                        width={200}
+                        width={190}
                     />
                 );
             },

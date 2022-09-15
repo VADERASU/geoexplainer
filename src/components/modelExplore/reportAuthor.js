@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import { Card, Button, Typography, Popover, Select, Input} from 'antd';
-import { GlobalOutlined, FormOutlined, ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { FilePdfOutlined, GlobalOutlined, FormOutlined, ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 //import { D3Map } from "../../utilities/d3Map";
 
 const { Paragraph, Text } = Typography;
@@ -24,6 +24,54 @@ const biColors = [
     [['#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3'],
     ['#c7eae5','#80cdc1','#35978f','#01665e','#003c30']]
 ];
+
+const styles = StyleSheet.create({
+    body: {
+      paddingTop: 35,
+      paddingBottom: 65,
+      paddingHorizontal: 35,
+    },
+    title: {
+      fontSize: 24,
+      textAlign: 'center',
+      fontFamily: 'Oswald'
+    },
+    author: {
+      fontSize: 12,
+      textAlign: 'center',
+      marginBottom: 40,
+    },
+    subtitle: {
+      fontSize: 18,
+      margin: 12,
+      fontFamily: 'Oswald'
+    },
+    text: {
+      margin: 12,
+      fontSize: 14,
+      textAlign: 'justify',
+      fontFamily: 'Times-Roman'
+    },
+    image: {
+      marginVertical: 15,
+      marginHorizontal: 100,
+    },
+    header: {
+      fontSize: 12,
+      marginBottom: 20,
+      textAlign: 'center',
+      color: 'grey',
+    },
+    pageNumber: {
+      position: 'absolute',
+      fontSize: 12,
+      bottom: 30,
+      left: 0,
+      right: 0,
+      textAlign: 'center',
+      color: 'grey',
+    },
+  });
 
 export function ReportAuthor (props) {
     const [bodyStyle, setBodyStyle] = useState({
@@ -214,7 +262,7 @@ export function ReportAuthor (props) {
     };
 
     const addNewParagraph = (event) => {
-        console.log(event.target.value);
+        props.newParagraphGen(event.target.value);
         let style = {
             marginBottom: '1em',
             display: 'none'
@@ -241,20 +289,28 @@ export function ReportAuthor (props) {
                             fontSize: 12
                         }}
                     >
+
                     <Button 
                         style={{marginLeft: 10, float: 'left'}} 
                         size='small' 
                         type="primary"
                         icon={<FormOutlined />}
                         onClick={editNewParagraph}
-                    >New Paragraph</Button>   
+                    >New Paragraph</Button>
+
                     <Button 
                         style={{marginLeft: 10, float: 'left'}} 
                         size='small' 
                         type="primary"
                         icon={<GlobalOutlined />}
                         onClick={()=>props.mapInfoGen()}
-                    >Add Map</Button>                     
+                    >Add Map</Button>
+
+                    <Button type="primary" size='small'
+                    style={{marginLeft: 10, float: 'left'}}
+                    icon={<FilePdfOutlined />}
+                    >Export PDF</Button>
+
                     <Button 
                         style={{marginLeft: 10, float: 'left'}} 
                         size='small' 

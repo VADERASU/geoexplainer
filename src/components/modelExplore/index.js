@@ -98,7 +98,13 @@ export function ModelExplore (props) {
         setReportContent(reportList);
     };
 
-    const newParagraphGen = () => {};
+    const newParagraphGen = (param) => {
+        console.log(param);
+        let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        reportList.splice(1, 0, param);
+        setReportContent(reportList);
+        //console.log(reportContent);
+    };
 
     const handleNumBtnClick = (feature) => {
         setNumericalBtnSelect(feature === numericalBtnSelect ? null : feature);
@@ -209,6 +215,7 @@ export function ModelExplore (props) {
                 mapInfoGen={mapInfoGen}
                 mapImg={mapImg}
                 resetMapColor={resetMapColor}
+                newParagraphGen={newParagraphGen}
             />
 
             <div

@@ -632,13 +632,21 @@ class App extends Component {
 
   //MAIN APP Controllers
   onHover = (event) => {
-    let feature = event.features && event.features[0];
+    const {
+      features,
+      point: {x, y}
+    } = event;
+    let feature = features && features[0];
     let hoverInfo = {
       longitude: event.lngLat.lng,
       latitude: event.lngLat.lat,
-      UID: feature && feature.properties.UID
+      UID: feature && feature.properties.UID,
+      properties: feature && feature.properties,
+      x,
+      y
     };
-    this.setState({hoverInfo: hoverInfo});
+    //console.log(hoverInfo);
+    hoverInfo.UID !== undefined?this.setState({hoverInfo: hoverInfo}):this.setState({hoverInfo: null});
   };
 
   trainModel = () => {
@@ -855,7 +863,17 @@ class App extends Component {
             >
               {drawmap}
               {this.state.loaded_map_data && (default_source_layers)}
-              
+              {this.state.hoverInfo && (
+                <div className="maptooltip" style={{left: this.state.hoverInfo.x, top: this.state.hoverInfo.y}}>
+                  <div>{this.state.hoverInfo.properties.county_name}</div>
+                  {this.state.currentCorrMapLayer !== null ?
+                  <div>{this.state.currentCorrMapLayer}: {this.state.hoverInfo.properties[this.state.currentCorrMapLayer].toFixed(2)}</div> : 
+                  (this.state.model_trained ? <><div>{this.state.currentActivMapLayer}: {this.state.hoverInfo.properties[this.state.currentActivMapLayer]}</div> 
+                  <div>Coefficient: {this.state.hoverInfo.properties[this.state.currentActivMapLayer+'_coefficient']}</div></>:
+                  <div>{this.state.currentActivMapLayer}: {this.state.hoverInfo.properties[this.state.currentActivMapLayer].toFixed(2)}</div>)}
+                  
+                </div>
+              )}
             </Map>
             
             <ModelConfigPanel
