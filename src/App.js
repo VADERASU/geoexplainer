@@ -133,6 +133,7 @@ class App extends Component {
       },
 
       externalCase: 'general',
+      textFilter: ['in', 'UID', ''],
     };
   }
 
@@ -756,7 +757,19 @@ class App extends Component {
         this.setState({config_layer: maplayer});
       }
     }
-  }
+  };
+
+  setTextFilter = (list) => {
+    let filter = ['in', 'UID'];
+    if(list.length > 0){
+      list.forEach(e=>{
+        filter.push(e);
+      });
+      this.setState({textFilter: filter});
+    }else{
+      this.setState({textFilter: ['in', 'UID', '']});
+    }
+  };
 
   onDrawCreate = ({ features }) => {
     this.setState({externalCase: 'select'});
@@ -810,6 +823,7 @@ class App extends Component {
         <Layer beforeId='waterway-label' {...this.state.config_layer} />
         <Layer beforeId="waterway-label" {...this.state.default_stroke_layer} />
         <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={hoverfilter} />
+        <Layer beforeId="waterway-label" {...this.state.hover_border_layer} filter={this.state.textFilter} />
       </Source>;
     
     return (
@@ -891,6 +905,7 @@ class App extends Component {
               loaded_map_data={this.state.loaded_map_data}
               externalCase={this.state.externalCase}
               setExternalCase={this.setExternalCase}
+              setMapFilter={this.setTextFilter}
             />
 
           </Content>

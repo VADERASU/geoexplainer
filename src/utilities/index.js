@@ -227,6 +227,7 @@ export function getDiagnosticMapLayer(feature, geoData, filter_){
         if(negList.length === 0){
             // all positive values
             const posColorScheme = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+            //const posColorScheme = ['#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'];
             const quantile_pos = d3.scaleQuantile()
             .domain(posList) // pass the whole dataset to a scaleQuantile’s domain
             .range(posColorScheme);

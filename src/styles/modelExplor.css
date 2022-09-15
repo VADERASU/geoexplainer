@@ -88,3 +88,5 @@
     right: 50px;
     background-color: #fff;
   }
+
+  .statusBarmap span { float: left; height: 15px; margin-top: 3px; }

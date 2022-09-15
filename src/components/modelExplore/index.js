@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import numDistImg_chicago from '../../img/chicago_std.png';
+import chicagoMapBlue from '../../img/chicago_blue.png';
+import chicagoMapGreen from '../../img/chicago_green.png';
 
 import { ModelPerformance } from "./modelPerformance";
 import { ModelCoefficient } from "./modelCoefficient";
@@ -9,6 +11,7 @@ import { NarrativeExplain } from "./narrativeExplain";
 import { ReportAuthor } from "./reportAuthor";
 import { ExternalInfo } from "./wikiInfo";
 import { Legend } from "../../utilities/legend";
+import { WikiText } from "./oriWikiText";
 
 export function ModelExplore (props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
@@ -21,10 +24,18 @@ export function ModelExplore (props) {
 
     const [reportContent, setReportContent] = useState(['']);
     const [displayFlag, setDisplayFlag] = useState(false);
+    const [wikiTextDisplay, setWikiTextDisplay] = useState(false);
     //const [externalArea, setExternalArea] = useState([]);
     //const [externalCase, setExternalCase] = useState('general');
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
+    const [mapImg, setMapImg] = useState(chicagoMapBlue);
+
+    const resetMapColor = (val) => {
+        //console.log(val);
+        val === 0 ? setMapImg(chicagoMapBlue) : setMapImg(chicagoMapGreen);
+    };
+
     const makeNumericalDist = (feature) => {
         setNumericalDist({
             key: feature,
@@ -75,6 +86,13 @@ export function ModelExplore (props) {
 
     const numDistInfoGen = () => {
         const imgInfo = 'num_img';
+        let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
+        reportList.push(imgInfo);
+        setReportContent(reportList);
+    };
+
+    const mapInfoGen = () => {
+        const imgInfo = 'map_img';
         let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
         reportList.push(imgInfo);
         setReportContent(reportList);
@@ -138,6 +156,13 @@ export function ModelExplore (props) {
                     setDisplayFlag={setDisplayFlag}
                     setExternalCase={props.setExternalCase}
                 />
+
+                <WikiText 
+                    wikiTextDisplay={wikiTextDisplay}
+                    setWikiTextDisplay={setWikiTextDisplay}
+                    select_case={props.select_case}
+                    setMapFilter={props.setMapFilter}
+                />
             </div>
 
             <div className="floatPlotsContainer">
@@ -167,6 +192,7 @@ export function ModelExplore (props) {
                     setDisplayFlag={setDisplayFlag}
                     
                     externalCase={props.externalCase}
+                    setWikiTextDisplay={setWikiTextDisplay}
                 />
             </div>
 
@@ -176,6 +202,11 @@ export function ModelExplore (props) {
                 numDistImg={numDistImg_chicago}
                 moveUpClick={moveUpClick}
                 moveDownClick={moveDownClick}
+                loaded_map_data={props.loaded_map_data}
+                selectedRowKeys={selectedRowKeys}
+                mapInfoGen={mapInfoGen}
+                mapImg={mapImg}
+                resetMapColor={resetMapColor}
             />
 
             <div

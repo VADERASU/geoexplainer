@@ -112,7 +112,7 @@ export function ExternalInfo (props) {
             })
             .on("click", function (d, i) {
                // react on right-clicking
-               if (isActive) console.log('dblclick');
+               if (isActive) props.setWikiTextDisplay(true);
             })
             .transition()
             .attr("text-decoration", isActive ? "underline" : "none");
