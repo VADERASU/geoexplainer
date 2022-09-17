@@ -3,6 +3,9 @@ import '../../styles/modelExplor.css';
 import { Card, Button, Typography, Popover, Select, Input} from 'antd';
 import { FilePdfOutlined, GlobalOutlined, FormOutlined, ArrowsAltOutlined, ShrinkOutlined, DeleteOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 //import { D3Map } from "../../utilities/d3Map";
+//import { PDFDownloadLink } from '@react-pdf/renderer';
+//import { PDFFile } from "./genPDF";
+
 
 const { Paragraph, Text } = Typography;
 const { Option } = Select;
@@ -223,8 +226,7 @@ export function ReportAuthor (props) {
     };
 
     const exportPDF = () => {
-        
-        //ReactPDF.render(MyDocument(), `${__dirname}/example.pdf`);
+        //ReactPDF.renderToStream(<MyDocument />);
     };
     
     useEffect(()=>{
