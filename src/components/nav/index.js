@@ -28,8 +28,38 @@ class NavBar extends React.Component{
 
                     <Button type="primary" size='small' onClick={this.props.handleLoadData}>Load Data</Button>
                     <Button type="primary" size='small'>Import Trained CSV</Button>
-
                 </Space>
+
+                <Button
+                    size="small" 
+                    type="default" 
+                    style={{
+                        float:'right',
+                        //width: 70,
+                        marginTop: 7,
+                        marginRight: 5
+                        
+                    }}
+                    //onClick={this.props.exportData}
+                >
+                    Load State
+                </Button>
+
+                <Button
+                    size="small" 
+                    type="default" 
+                    style={{
+                        float:'right',
+                        //width: 70,
+                        marginTop: 7,
+                        marginRight: 10
+                        
+                    }}
+                    //onClick={this.props.exportData}
+                >
+                    Save State
+                </Button>
+
             </>
         );
     }

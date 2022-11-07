@@ -19,20 +19,6 @@ class ModelParameterSelection extends Component {
                             fontSize: 10
                         }}
                     >
-                        <Button
-                        size="small" 
-                        type="default" 
-                        style={{
-                            float:'left',
-                            //width: 70,
-                            marginTop: 5,
-                            marginRight: 8
-                            
-                        }}
-                        onClick={this.props.exportData}
-                        >
-                            Save Configuration
-                        </Button>
 
                         <Button
                         size="small" 
