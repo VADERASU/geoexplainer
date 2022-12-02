@@ -164,7 +164,7 @@ export function ModelExplore (props) {
                     setDisplayFlag={setDisplayFlag}
                     setExternalCase={props.setExternalCase}
                 />
-
+                {/** original Wiki content list */}
                 <WikiText 
                     wikiTextDisplay={wikiTextDisplay}
                     setWikiTextDisplay={setWikiTextDisplay}

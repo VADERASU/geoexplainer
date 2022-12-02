@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
-import { Card, Descriptions, Button, Row, Col, Typography} from 'antd';
+import { Card, InputNumber, Button} from 'antd';
 import * as d3 from 'd3';
 import { EditOutlined, CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
@@ -15,6 +15,8 @@ export function NarrativeExplain (props) {
     const [cardDisplay, setCardDisplay] = useState('block');
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [narrativeInfo, setNarrativeInfo] = useState(null);
+    // control the local R2 threshold setting
+    const [R2ThresholdDisplay, setR2ThresholdDisplay] = useState({display: 'none'});
 
     //const [goodLocalR2Areas, setGoodLocalR2Areas] = useState("");
     //const [badLocalR2Areas, setBadLocalR2Areas] = useState("");
@@ -114,6 +116,16 @@ export function NarrativeExplain (props) {
                         fontSize: 12
                     }}
                 >
+                    <InputNumber 
+                        style={{
+                            marginRight: 10,
+                            float: 'left'
+                        }}
+                        size="small"
+                        defaultValue={0.7}
+                        step="0.01"
+                    />
+
                     <Button 
                     style={btnDisplay} 
                     size='small' icon={<MinusOutlined />}
@@ -131,6 +143,7 @@ export function NarrativeExplain (props) {
                     icon={<PlusOutlined />}
                     onClick={() => maxBtnClick()}
                     ></Button>
+
                 </div>
                 }
             >
