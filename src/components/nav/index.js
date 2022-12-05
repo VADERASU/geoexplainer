@@ -1,9 +1,28 @@
 import React from 'react';
-import { Space, Select, Button } from 'antd';
+import { Space, Select, Button, Popover } from 'antd';
 
 class NavBar extends React.Component{
 
     render(){
+        const content = (
+            <div
+                style={{
+                    width: 200
+                }}
+            >
+                <input type="file" />
+                <Button 
+                    type="default" 
+                    style={{
+                        //width: 70,
+                        marginTop: 7,
+                        //marginRight: 10
+                        
+                    }} size='small' onClick={this.props.handleLoadCase}>
+                        Load State
+                </Button>
+            </div>
+        );
         const { Option } = Select;
         return(
             <>
@@ -29,7 +48,8 @@ class NavBar extends React.Component{
                     <Button type="primary" size='small' onClick={this.props.handleLoadData}>Load Data</Button>
                     <Button type="primary" size='small' onClick={this.props.handleLoadCase}>Import Trained CSV</Button>
                 </Space>
-
+                
+                <Popover content={content} title="Upload a state file" trigger="click">
                 <Button
                     size="small" 
                     type="default" 
@@ -44,6 +64,7 @@ class NavBar extends React.Component{
                 >
                     Load State
                 </Button>
+                </Popover>
 
                 <Button
                     size="small" 
