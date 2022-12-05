@@ -27,7 +27,7 @@ class NavBar extends React.Component{
                     </Select>
 
                     <Button type="primary" size='small' onClick={this.props.handleLoadData}>Load Data</Button>
-                    <Button type="primary" size='small'>Import Trained CSV</Button>
+                    <Button type="primary" size='small' onClick={this.props.handleLoadCase}>Import Trained CSV</Button>
                 </Space>
 
                 <Button

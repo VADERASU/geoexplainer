@@ -1,0 +1,114 @@
+{
+    "keywords": [
+        {
+            "text": "county commissioners",
+            "category": "Other",
+            "coefficient": 0.09916925412080442
+        },
+        {
+            "text": "ohio university",
+            "category": "Education",
+            "coefficient": 0.07601403186240208
+        },
+        {
+            "text": "mason county schools",
+            "category": "Education",
+            "coefficient": 0.07291097750899125
+        },
+        {
+            "text": "wirt county high school",
+            "category": "Education",
+            "coefficient": 0.07198636252621184
+        },
+        {
+            "text": "southeastern ohio",
+            "category": "Introduction",
+            "coefficient": 0.07160466578079758
+        },
+        {
+            "text": "micropolitan statistical area",
+            "category": "Introduction",
+            "coefficient": 0.06550999589661764
+        },
+        {
+            "text": "land area",
+            "category": "Other",
+            "coefficient": 0.06461602976778713
+        },
+        {
+            "text": "ohio university athens",
+            "category": "Education",
+            "coefficient": 0.06277679137922948
+        },
+        {
+            "text": "total area",
+            "category": "Introduction",
+            "coefficient": 0.0617708816451331
+        },
+        {
+            "text": "washington county historical society",
+            "category": "Other",
+            "coefficient": 0.0609334821088866
+        },
+        {
+            "text": "zanesville high school",
+            "category": "Education",
+            "coefficient": 0.06064685847221072
+        },
+        {
+            "text": "local school districts",
+            "category": "Education",
+            "coefficient": 0.0604890051318284
+        },
+        {
+            "text": "area communities",
+            "category": "Other",
+            "coefficient": 0.057855942260434175
+        },
+        {
+            "text": "smaller areas",
+            "category": "Other",
+            "coefficient": 0.057821581746247304
+        },
+        {
+            "text": "senior high school",
+            "category": "Education",
+            "coefficient": 0.05767627788955286
+        },
+        {
+            "text": "athens county economy",
+            "category": "Introduction",
+            "coefficient": 0.05755474882509924
+        },
+        {
+            "text": "noble local school district",
+            "category": "Education",
+            "coefficient": 0.0571550866008806
+        },
+        {
+            "text": "catholic high school",
+            "category": "Education",
+            "coefficient": 0.05679385955783536
+        },
+        {
+            "text": "maysville high school",
+            "category": "Education",
+            "coefficient": 0.056449664258613315
+        },
+        {
+            "text": "public schools",
+            "category": "Education",
+            "coefficient": 0.05481726987605441
+        },
+        {
+            "text": "hocking county sheriff",
+            "category": "Crime and policing",
+            "coefficient": 0.054608866469971616
+        },
+        {
+            "text": "vinton county courier",
+            "category": "Other",
+            "coefficient": 0.05416064836232881
+        }
+    ]
+}

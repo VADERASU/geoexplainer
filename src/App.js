@@ -8,6 +8,7 @@ import axios from 'axios';
 import NavBar from './components/nav';
 import ModelConfigPanel from './components/modelConfig';
 import { ModelExplore } from './components/modelExplore';
+import { ModelCase2 } from './components/modelCase2';
 import DrawControl from './utilities/mapDraw';
 
 // import css style files
@@ -33,6 +34,8 @@ import chicago_demo from './data/chicago_config_poly.json';
 // temporal import
 //import model_result from './data/temp/model_result.json';
 import model_result from './data/temp/case_demo.json';
+//Case2
+import case2_result from './data/2016Election_new.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubWlzYW4iLCJhIjoiY2sxOWxqajdjMDB2ZzNpcGR5aW13MDYzcyJ9.WsMnhXizk5z3P2C351yBZQ'; // Set your mapbox token here
 const ignore_properties = ['county_name', 'state_name', 'UID', 'Long_', 'Lat', 'ID', 'name', 'biVariateLayer'];
@@ -701,6 +704,33 @@ class App extends Component {
     
   };
 
+  mapFly = (coord) => {
+    //console.log(coord);
+    this.canvasRef.current.flyTo({center: [coord[0]-3, coord[1]], zoom: 7});
+  };
+
+  loadCase = () => {
+    let currentActivMapLayer = null;
+    let ori_config_layer = {
+      id: 'config-fill',
+      type: 'fill',
+      layout: {
+        'visibility': 'none',
+      },
+    };
+
+    console.log(case2_result);
+    this.setState({
+      model_trained: true,
+      model_used: 'MGWR',
+      loaded_map_data: case2_result.geojson_poly,
+      currentActivMapLayer: currentActivMapLayer,
+      config_layer: ori_config_layer,
+      model_result: case2_result,
+      select_case: "US_election"
+    });
+  };
+
   exportData = () => {
     let model_param = {
       'dependent_Y': this.state.dependent_features[0],
@@ -736,6 +766,7 @@ class App extends Component {
 
   setMapLayer = (id, filter) => {
     const updateActivMapLayer = id;
+    console.log(id);
     //need to be changed
     const newMapLayer = getDiagnosticMapLayer(id, this.state.loaded_map_data, filter);
     this.setState({
@@ -842,6 +873,7 @@ class App extends Component {
               select_case={this.state.select_case}
               handleCaseSelectionChange={this.handleCaseSelectionChange}
               handleLoadData={this.handleLoadData}
+              handleLoadCase={this.loadCase}
             />
           </Header>
           <Content className="vastContainer">
@@ -924,6 +956,20 @@ class App extends Component {
               externalCase={this.state.externalCase}
               setExternalCase={this.setExternalCase}
               setMapFilter={this.setTextFilter}
+            />
+
+            <ModelCase2 
+              model_trained={this.state.model_trained}
+              model_result={this.state.model_result}
+              model_used={this.state.model_used}
+              setMapLayer={this.setMapLayer}
+              select_case={this.state.select_case}
+              mapLegend={this.state.mapLegend}
+              loaded_map_data={this.state.loaded_map_data}
+              externalCase={this.state.externalCase}
+              setExternalCase={this.setExternalCase}
+              setMapFilter={this.setTextFilter}
+              mapFly={this.mapFly}
             />
 
           </Content>

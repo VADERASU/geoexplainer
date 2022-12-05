@@ -4,8 +4,6 @@ import { Card, InputNumber, Button} from 'antd';
 //import * as d3 from 'd3';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
-import { LocalR2Narrative } from "./narrativeParagraph/localR2Narr";
-import { CooksDNarrative } from "./narrativeParagraph/cooksDNarr";
 import { ResidualNarrative } from "./narrativeParagraph/residualNarr";
 import { CoeffNarrative } from "./narrativeParagraph/coeffNarr";
 
@@ -16,9 +14,6 @@ export function NarrativeExplain (props) {
     const [minCardDisplay, setMinCardDisplay] = useState({display: 'none'});
     const [narrativeInfo, setNarrativeInfo] = useState(null);
     // control the local R2 threshold setting
-    const [R2ThresholdDisplay, setR2ThresholdDisplay] = useState({
-        display: 'none'
-    });
 
     //const [goodLocalR2Areas, setGoodLocalR2Areas] = useState("");
     //const [badLocalR2Areas, setBadLocalR2Areas] = useState("");
@@ -54,35 +49,7 @@ export function NarrativeExplain (props) {
         const key = selectedRowKeys[0];
         //const geojsonObj = model_result.geojson_poly.features.map(e=>e.properties);
         //const stat = model_result[key];
-        if(key === 'local_R2'){
-            setR2ThresholdDisplay({
-                marginRight: 10,
-                float: 'left'
-            });
-            setNarrativeInfo(
-                <LocalR2Narrative
-                    selectedRowKeys={selectedRowKeys}
-                    model_result={model_result}
-                    setMapLayer={setMapLayer}
-                    select_case={props.select_case}
-                />
-            );
-        }else if(key === 'cooksD'){
-            setR2ThresholdDisplay({
-                display: 'none'
-            });
-            setNarrativeInfo(
-                <CooksDNarrative
-                    selectedRowKeys={selectedRowKeys}
-                    model_result={model_result}
-                    setMapLayer={setMapLayer}
-                    select_case={props.select_case}
-                />
-            ); 
-        }else if(key === 'std_residuals'){
-            setR2ThresholdDisplay({
-                display: 'none'
-            });
+        if(key === 'ols_residual' || key === 'mgwr_residual'){
             setNarrativeInfo(
                 <ResidualNarrative
                     selectedRowKeys={selectedRowKeys}
@@ -93,9 +60,6 @@ export function NarrativeExplain (props) {
                 />
             );
         }else{
-            setR2ThresholdDisplay({
-                display: 'none'
-            });
             setNarrativeInfo(
                 <CoeffNarrative
                     selectedRowKeys={selectedRowKeys}
@@ -105,6 +69,7 @@ export function NarrativeExplain (props) {
                     narraInfoGen={narraInfoGen}
                     setDisplayFlag={props.setDisplayFlag}
                     setExternalCase={props.setExternalCase}
+                    mapFly={props.mapFly}
                 />
             );
         }
@@ -112,6 +77,7 @@ export function NarrativeExplain (props) {
     };
 
     useEffect(()=>{
+        
         if(props.model_result !== {}){
             makeNarrative(props.model_result, props.selectedRowKeys, props.setMapLayer,props.narraInfoGen);
         }
@@ -131,13 +97,6 @@ export function NarrativeExplain (props) {
                         fontSize: 12
                     }}
                 >
-                    <InputNumber 
-                        style={R2ThresholdDisplay}
-                        size="small"
-                        defaultValue={0.7}
-                        step="0.01"
-                    />
-
                     <Button 
                     style={btnDisplay} 
                     size='small' icon={<MinusOutlined />}

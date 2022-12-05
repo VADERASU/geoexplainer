@@ -109,7 +109,7 @@ export function NumDistribution (props) {
                 echartHistData.binCount.push(length);
             });
             setEchartHistData(echartHistData);
-        }else if(key === 'std_residuals'){
+        }else if(key === 'ols_residual' || key === 'mgwr_residual'){
             const posList = data.filter(e=>e>=0);
             const negList = data.filter(e=>e<0);
 

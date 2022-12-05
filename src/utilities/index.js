@@ -147,7 +147,7 @@ export function getDiagnosticMapLayer(feature, geoData, filter_){
         configLayer.paint = paintProp;
         configLayer.filter = filter;
         return configLayer;
-    }else if(feature === 'std_residuals'){
+    }else if(feature === 'std_residuals' || feature === 'ols_residual' || feature === 'mgwr_residual'){
         const configLayer = {
             id: 'config-fill',
             type: 'fill',

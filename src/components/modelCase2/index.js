@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/modelExplor.css';
 import numDistImg_chicago from '../../img/chicago_std.png';
-import chicagoMapBlue from '../../img/chicago_blue.png';
+import us1 from '../../img/us_pct_age_18_29.png';
+import us2 from '../../img/us_intercept.png';
 import chicagoMapGreen from '../../img/chicago_green.png';
 
 import { ModelPerformance } from "./modelPerformance";
@@ -13,11 +14,11 @@ import { ExternalInfo } from "./wikiInfo";
 import { Legend } from "../../utilities/legend";
 import { WikiText } from "./oriWikiText";
 
-export function ModelExplore (props) {
-    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
+export function ModelCase2 (props) {
+    const [selectedRowKeys, setSelectedRowKeys] = useState(['ols_residual']);
     const [numericalDist, setNumericalDist] = useState(null);
-    const [numericalBtnSelect, setNumericalBtnSelect] = useState('local_R2');
-    const [narrativeBtnSelect, setNarrativeBtnSelect] = useState('local_R2');
+    const [numericalBtnSelect, setNumericalBtnSelect] = useState('ols_residual');
+    const [narrativeBtnSelect, setNarrativeBtnSelect] = useState('ols_residual');
     const [numericalContainerDisplay, setNumericalContainerDisplay] = useState({display: 'block'});
 
     const [narrativeContainerDisplay, setNarrativeContainerDisplay] = useState({display: 'block'});
@@ -29,11 +30,11 @@ export function ModelExplore (props) {
     //const [externalCase, setExternalCase] = useState('general');
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
-    const [mapImg, setMapImg] = useState(chicagoMapBlue);
+    const [mapImg, setMapImg] = useState(us1);
 
     const resetMapColor = (val) => {
         //console.log(val);
-        val === 0 ? setMapImg(chicagoMapBlue) : setMapImg(chicagoMapGreen);
+        val === 0 ? setMapImg(us1) : setMapImg(us1);
     };
 
     const makeNumericalDist = (feature) => {
@@ -127,7 +128,7 @@ export function ModelExplore (props) {
         );
     };
 
-    return (props.model_trained && props.select_case!== "US_election") ? (
+    return (props.model_trained && props.select_case === "US_election") ? (
         <div style={modelExploreInterfaceStyle}>
             <div className="floatExplorationContainer">
                 {/** model performance container */}
@@ -136,9 +137,8 @@ export function ModelExplore (props) {
                     setSelectedRowKeys={setSelectedRowKeys}
                     globalInfo={props.model_result.diagnostic_info}
                     model_used={props.model_used}
-                    local_r2={props.model_result.local_R2}
-                    cooksd={props.model_result.cooksD}
-                    residual={props.model_result.std_residuals}
+                    ols_residual={props.model_result.ols_residual}
+                    mgwr_residual={props.model_result.mgwr_residual}
                     setMapLayer={props.setMapLayer}
                     setNumericalDist={makeNumericalDist}
 
@@ -193,6 +193,7 @@ export function ModelExplore (props) {
                     narraInfoGen={narraInfoGen}
                     setDisplayFlag={setDisplayFlag}
                     setExternalCase={props.setExternalCase}
+                    mapFly={props.mapFly}
                 />
 
                 <ExternalInfo
@@ -202,6 +203,7 @@ export function ModelExplore (props) {
                     externalCase={props.externalCase}
                     setWikiTextDisplay={setWikiTextDisplay}
                 />
+
             </div>
 
             <ReportAuthor
@@ -226,8 +228,8 @@ export function ModelExplore (props) {
                     mapLegend={props.mapLegend}
                     loaded_map_data={props.loaded_map_data}
                 />
-            </div>
-
+            </div>           
+            
         </div>
     ) : <></>;
 }

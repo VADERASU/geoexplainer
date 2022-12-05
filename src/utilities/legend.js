@@ -16,6 +16,7 @@ export function Legend(props){
     });
 
     const coeffMapLegend = (legendData) => {
+        //console.log(legendData);
         clearCanvas();
         const margin = {
             top: 0,
@@ -244,7 +245,7 @@ export function Legend(props){
                     texts: classSteps
                 };
                 return legendData;
-            }else if(id === 'std_residuals'){
+            }else if(id === 'std_residuals' || id === 'ols_residual' || id === 'mgwr_residual'){
                 const featureList = loaded_map_data.features.map(e=>e.properties[id]);
                 const posList = featureList.filter(e=>e>0);
                 const negList = featureList.filter(e=>e<0);

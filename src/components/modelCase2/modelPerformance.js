@@ -7,7 +7,6 @@ import { Boxplot } from "../../utilities/boxplot";
 export function ModelPerformance (props){
     const [globalInfoDiv, setGlobalInfoDiv] = useState(<></>);
     const [localInfoData, setLocalInfoData] = useState([]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState(['local_R2']);
 
     const makeGlobalInfo = (ginfo, modeltype) => {
         setGlobalInfoDiv(
@@ -24,29 +23,22 @@ export function ModelPerformance (props){
         );
     };
 
-    const makeLocalInfoTableData = (local_r2, cooksd, residual) => {
+    const makeLocalInfoTableData = (ols_residual, mgwr_residual) => {
         const tableData = [
             {
-                key: 'local_R2',
-                indicator: 'Local R2',
-                //mean: local_r2.mean.toFixed(2),
-                numerical_distribution: local_r2,
-                //std: local_r2.std.toFixed(2),
-                operations: 'local_R2',
-            },{
-                key: 'cooksD',
-                indicator: 'Cook\'s distance',
+                key: 'ols_residual',
+                indicator: 'OLS Residuals',
                 //mean: cooksd.mean.toFixed(2),
-                numerical_distribution: cooksd,
+                numerical_distribution: ols_residual,
                 //std: cooksd.std.toFixed(2),
-                operations: 'cooksD',
+                operations: 'ols_residual',
             },{
-                key: 'std_residuals',
-                indicator: 'Residuals',
+                key: 'mgwr_residual',
+                indicator: 'MGWR Residuals',
                 //mean: residual.mean.toFixed(2),
-                numerical_distribution: residual,
+                numerical_distribution: mgwr_residual,
                 //std: residual.std.toFixed(2),
-                operations: 'std_residuals',
+                operations: 'mgwr_residual',
             }
         ];
         setLocalInfoData(tableData);
@@ -102,10 +94,10 @@ export function ModelPerformance (props){
     useEffect(()=>{
         //console.log(props.local_r2);
         makeGlobalInfo(props.globalInfo, props.model_used);
-        makeLocalInfoTableData(props.local_r2, props.cooksd, props.residual);
-        props.setMapLayer('local_R2');
+        makeLocalInfoTableData(props.ols_residual, props.mgwr_residual);
+        props.setMapLayer('ols_residual');
         props.setNumericalDist(props.selectedRowKeys[0]);
-    }, [props.globalInfo, props.model_used, props.local_r2, props.cooksd, props.residual]);
+    }, [props.globalInfo, props.model_used, props.ols_residual, props.mgwr_residual]);
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { Typography, Button, Popover, Tooltip } from 'antd';
-import { CopyOutlined, BulbFilled } from '@ant-design/icons';
+import { Typography, Button, Popover, Tooltip, Badge } from 'antd';
+import { CopyOutlined, BulbFilled, MenuUnfoldOutlined, EnvironmentOutlined } from '@ant-design/icons';
 
 const { Paragraph, Text } = Typography;
 
@@ -12,7 +12,18 @@ export function CoeffNarrative (props){
     const [posDIVstyle, setPosDIVstyle] = useState({textAlign: 'left'});
     const [negDIVstyle, setNegDIVstyle] = useState({textAlign: 'left'});
     const [goodClicked, setGoodClicked] = useState(false);
-    const [badClicked, setBadClicked] = useState(false);
+    const [badClicked, setBadClicked] = useState(false);        
+
+    const [posClusters1, setPosClusters1] = useState('14 counties in Ohio state and 5 counties in West Virginia state.');
+    const [posClusters2, setPosClusters2] = useState('14 counties in Indiana state.');
+    const [posClusters3, setPosClusters3] = useState('4 counties in Georgia state and 1 counties in South Carolina state.');
+    const [posClusters4, setPosClusters4] = useState('2 counties in Kansas state');
+
+    const numCluster = {
+        pct_age_18_29: [4, 2],
+        pct_hisp: [1,0],
+        intercept: [5, 2]
+    };
     
     const updatePosName = (key) => {
         setPosAreas(key);
@@ -42,6 +53,7 @@ export function CoeffNarrative (props){
     let negMin = 0;
     let poscount = 0;
     let negcount = 0;
+
     geojsonObj.forEach(e=>{
         if(e[featureTVal] !== 0){
             if(e[featureName] > 0){
@@ -79,7 +91,7 @@ export function CoeffNarrative (props){
         const len = pos_places[key].length;
         totalPosLen = totalPosLen + len;
         const textgood = len+areaName+key+upperAreaName;
-        if(i<Object.keys(pos_places).length-1){
+        if(i<Object.keys(pos_places).length-1 && i !== 0){
             pos_places_narr = pos_places_narr + ', '
         }
         pos_places_narr = pos_places_narr + textgood;
@@ -93,7 +105,7 @@ export function CoeffNarrative (props){
         const len = neg_places[key].length;
         negLen = negLen + len;
         const textbad = len+areaName+key+upperAreaName;
-        if(i<Object.keys(neg_places).length-1){
+        if(i<Object.keys(neg_places).length-1 && i !== 0){
             neg_places_narr = neg_places_narr + ', '
         }
         neg_places_narr = neg_places_narr + textbad;
@@ -114,6 +126,11 @@ export function CoeffNarrative (props){
         props.narraInfoGen(newText);
     };
 
+    const handleClusterCopy = () => {
+        const newText = posClusters1;
+        props.narraInfoGen(newText);
+    };
+
     const handleBadCopy = () => {
         const newText = negAreas === "" ? 
         initNegCopy : textNegAreas;
@@ -125,6 +142,69 @@ export function CoeffNarrative (props){
         props.setDisplayFlag(true);
         props.setExternalCase('general');
     };
+
+    const positionOnMap = () => {
+        props.mapFly([-82.042786, 39.334256])
+    }
+
+    const detectedClusters = (
+        <>
+        <Paragraph editable={{ onChange: setPosClusters1 }}>
+        <Popover
+        key={'posNarr'}
+        trigger="click"
+        content={
+            <div
+                style={{
+                    display: 'inline-block',
+                }}
+            >
+                <Button 
+                    style={{display: 'inline-block', marginLeft: 3}}
+                    size='small'
+                    icon={<BulbFilled />}
+                    onClick={() => handleWikiClick()}
+                >Wiki</Button>
+                <Button 
+                    style={{display: 'inline-block', marginLeft: 3}}
+                    size='small'
+                    icon={<EnvironmentOutlined />}
+                    onClick={() => positionOnMap()}
+                >Location</Button>
+            </div>            
+        }        
+        >
+            {posClusters1}
+        </Popover>
+        <Tooltip title="Add to report"><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<CopyOutlined />} type="dashed"
+            onClick={() => handleClusterCopy()}
+        ></Button></Tooltip>
+        </Paragraph>
+        <Paragraph editable={{ onChange: setPosClusters2 }}>{posClusters2}
+        <Tooltip title="Add to report"><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<CopyOutlined />} type="dashed"
+            //onClick={() => handleClusterCopy()}
+        ></Button></Tooltip>
+        </Paragraph>
+        <Paragraph editable={{ onChange: setPosClusters3 }}>{posClusters3}
+        <Tooltip title="Add to report"><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<CopyOutlined />} type="dashed"
+            //onClick={() => handleClusterCopy()}
+        ></Button></Tooltip>
+        </Paragraph>
+        <Paragraph editable={{ onChange: setPosClusters4 }}>{posClusters4}
+        <Tooltip title="Add to report"><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<CopyOutlined />} type="dashed"
+            //onClick={() => handleClusterCopy()}
+        ></Button></Tooltip>
+        </Paragraph>
+        </>
+    );
 
     const posComponent = 
         <Paragraph style={posDIVstyle} >
@@ -148,14 +228,19 @@ export function CoeffNarrative (props){
         <Text key={key} editable={{ onChange: updatePosName }}>{posAreas === "" ? pos_places_narr : posAreas}</Text>  
         , where the <Text strong style={{color: '#3182bd'}}>positive relationship</Text> is <Text strong>significant</Text> in <Text strong>{posPct}%</Text> of the study area. The significant local coefficients range from <Text strong>{posMin.toFixed(2)} to {posMax.toFixed(2)}</Text>, with a mean value equal to <Text strong>{posMean}</Text>.
         </Popover>
-        
-        <Tooltip title="Add to report">
-        <Button 
+
+        <Tooltip title="Add to report"><Button 
             size='small' style={{display: 'inline-block', marginLeft: 3}}
             icon={<CopyOutlined />} type="dashed"
             onClick={() => handleGoodCopy()}
-        ></Button>
-        </Tooltip>
+        ></Button></Tooltip>
+
+        <Popover content={detectedClusters} title="4 clusters have significant positive relationships" trigger="click" placement="rightTop">
+        <Badge count={numCluster[key]!== undefined ? numCluster[key][0] : ''} size="small" offset={[10, 10]}><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<MenuUnfoldOutlined />} type="dashed"
+        ></Button></Badge>
+        </Popover>
 
         </Paragraph>;
 
@@ -182,13 +267,18 @@ export function CoeffNarrative (props){
         , where the <Text strong style={{color: '#b2182b'}}>negative relationship</Text> is <Text strong>significant</Text> in <Text strong>{negPct}%</Text> of the study area. The significant local coefficients range from <Text strong>{negMin.toFixed(2)} to {negMax.toFixed(2)}</Text>, with a mean value equal to <Text strong>{negMean}</Text>.
         </Popover>
         
-        <Tooltip title="Add to report">
-        <Button 
+        <Tooltip title="Add to report"><Button 
             size='small' style={{display: 'inline-block', marginLeft: 3}}
             icon={<CopyOutlined />} type="dashed"
             onClick={() => handleBadCopy()}
-        ></Button>
-        </Tooltip>
+        ></Button></Tooltip>
+
+        
+        <Badge count={numCluster[key]!== undefined ? numCluster[key][1] : ''} size="small" offset={[10, 10]}><Button 
+            size='small' style={{display: 'inline-block', marginLeft: 3}}
+            icon={<MenuUnfoldOutlined />} type="dashed"
+        ></Button></Badge>
+        
 
         </Paragraph>;
 
