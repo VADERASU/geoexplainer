@@ -61,10 +61,10 @@ export function ReportAuthor (props) {
         console.log(val);
     };
 
-    const genReportContent = (reportContent, mapImg) => {
+    const genReportContent = (reportContent, mapImg, mapImg1) => {
         let reportList = [];
         reportContent.forEach((e, i)=>{
-            if(e!=="" && e !== 'num_img' && e !== 'map_img'){
+            if(e!=="" && e !== 'num_img' && e !== 'map_img' && e !== 'map_img1'){
                 let report = <Popover
                 key={i}
                 style={{padding: 0}}
@@ -145,7 +145,7 @@ export function ReportAuthor (props) {
                 </Popover>;
                 reportList.push(report);
             }else if(e === 'map_img'){
-                //console.log('here');
+                //console.log(props.selectedRowKeys);
                 let report = <Popover
                 key={i}
                 style={{padding: 0}}
@@ -197,6 +197,59 @@ export function ReportAuthor (props) {
                 ><img key={i} src={mapImg} style={{width: 500, marginBottom: 10}} alt='Map' />
                 </Popover>;
                 reportList.push(report);
+            }else if(e === 'map_img1'){
+                console.log('HERE');
+                let report = <Popover
+                key={i}
+                style={{padding: 0}}
+                content={
+                    <div
+                    style={{
+                        display: 'inline-block',
+                    }}
+                    >
+                    <Select
+                        defaultValue={0}
+                        style={{
+                            width: 100,
+                            marginRight: 10
+                        }}
+                        size="small"
+                        onChange={handleMapColorChange}
+                    >
+                        {singleColorList.map((item, i)=>(
+                            <Option key={i} value={i}><div className='statusBarmap'>{item.map((subItem,j)=>{
+                                let colorBarstyle = {backgroundColor: subItem, width:12};
+                                return <span key={j+'_sub'+j} style={colorBarstyle}></span>
+                            })}</div></Option>
+                        ))}
+                    </Select>
+
+                    <Button 
+                    size='small'
+                    disabled={i===1?true:false}
+                    icon={<ArrowUpOutlined />} type="dashed"
+                    onClick={() => props.moveUpClick(i)}
+                    ></Button>
+
+                    <Button 
+                    size='small'
+                    disabled={i===reportContent.length-1?true:false}
+                    icon={<ArrowDownOutlined />} type="dashed"
+                    onClick={() => props.moveDownClick(i)}
+                    ></Button>
+
+                    <Button 
+                    size='small'
+                    icon={<DeleteOutlined />} type="dashed"
+                    onClick={() => props.deleteClick(i)}
+                    ></Button>
+                    </div>
+                } 
+                trigger="click"
+                ><img key={i} src={mapImg1} style={{width: 500, marginBottom: 10}} alt='Map' />
+                </Popover>;
+                reportList.push(report);
             }
                 
         });
@@ -231,8 +284,8 @@ export function ReportAuthor (props) {
     
     useEffect(()=>{
         //console.log(props.reportContent);
-        genReportContent(props.reportContent, props.mapImg);
-    },[props.reportContent, props.mapImg]);
+        genReportContent(props.reportContent, props.mapImg, props.mapImg1);
+    },[props.reportContent, props.mapImg, props.mapImg1]);
 
     return(
         <div className="reportAuthoringContainer">

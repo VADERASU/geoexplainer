@@ -90,6 +90,7 @@ export function ModelCoefficient (props) {
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
           props.setSelectedRowKeys(selectedRowKeys);
+          //props.changeMapImg(selectedRowKeys[0]);
           props.setMapLayer(selectedRowKeys[0]);
           props.handleNumBtnClick(selectedRowKeys[0]);
           props.handleNarrativeBtnClick(selectedRowKeys[0]);

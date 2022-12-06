@@ -31,6 +31,16 @@ export function ModelCase2 (props) {
 
     const modelExploreInterfaceStyle = props.model_trained ? {display: 'block'} : {display: 'none'};
     const [mapImg, setMapImg] = useState(us1);
+    const [mapImg1, setMapImg1] = useState(us2);
+
+    /*const changeMapImg = (val) => {
+        //console.log(val);
+        if(val === 'intercept'){
+            setMapImg(us2);
+        }else{
+            setMapImg(us1);
+        }
+    };*/
 
     const resetMapColor = (val) => {
         //console.log(val);
@@ -93,7 +103,7 @@ export function ModelCase2 (props) {
     };
 
     const mapInfoGen = () => {
-        const imgInfo = 'map_img';
+        const imgInfo = selectedRowKeys[0] === 'intercept' ? 'map_img1' : 'map_img';
         let reportList = JSON.parse(JSON.stringify(reportContent)); // deep copy
         reportList.push(imgInfo);
         setReportContent(reportList);
@@ -216,6 +226,7 @@ export function ModelCase2 (props) {
                 selectedRowKeys={selectedRowKeys}
                 mapInfoGen={mapInfoGen}
                 mapImg={mapImg}
+                mapImg1={mapImg1}
                 resetMapColor={resetMapColor}
                 newParagraphGen={newParagraphGen}
             />
