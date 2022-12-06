@@ -1,0 +1,49 @@
+{
+    "keywords": [
+        {
+            "text": "Athens County",
+            "category": "Introduction",
+            "coefficient": 0.09934
+        },
+        {
+            "text": "Athens County economy",
+            "category": "Other",
+            "coefficient": 0.09645
+        },
+        {
+            "text": "Ohio University",
+            "category": "Education",
+            "coefficient": 0.08630
+        },
+        {
+            "text": "National Forest",
+            "category": "Other",
+            "coefficient": 0.08373
+        },
+        {
+            "text": "School District",
+            "category": "Education",
+            "coefficient": 0.07890040767301994
+        },
+        {
+            "text": "Democratic stronghold",
+            "category": "Politics",
+            "coefficient": 0.0766372605518936
+        },
+        {
+            "text": "Hocking College",
+            "category": "Education",
+            "coefficient": 0.07598166927742958
+        },
+        {
+            "text": "ohio university athens",
+            "category": "Education",
+            "coefficient": 0.06277679137922948
+        },
+        {
+            "text": "Hocking River",
+            "category": "Other",
+            "coefficient": 0.07343998755152947
+        }
+    ]
+}

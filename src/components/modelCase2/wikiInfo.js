@@ -9,7 +9,7 @@ import 'tippy.js/animations/scale.css';
 import { WordBar } from "../../utilities/echartBar";
 
 import us_textrank from '../../data/case2_key/us_textrank.json';
-import selected_textrank from '../../data/selected_counties/selected_counties_textrank.json';
+import selected_textrank from '../../data/case2_key/athens_textrank.json';
 
 const chicagoCate = ['Introduction', 'Demographics', 'Education', 'Crime and policing', 'Politics', 'Other'];
 const cate2Color = {

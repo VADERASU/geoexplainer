@@ -835,6 +835,14 @@ class App extends Component {
     
   };
 
+  handleMapClick = (evt) => {
+    //console.log(evt.features);
+    if(evt.features[0].properties.county_name === "Athens"){
+      this.setState({externalCase: 'select'});
+    }
+    
+  };
+
   render() {
     const drawmap = this.state.loaded_map_data === null ? <></> : 
     <DrawControl
@@ -892,6 +900,7 @@ class App extends Component {
               onMouseMove={this.onHover}
               projection={'globe'}
               interactiveLayerIds={this.state.loaded_map_data === null ? [] : ['counties-fill']}
+              onClick={evt => this.handleMapClick(evt)}
             >
               {drawmap}
               {this.state.loaded_map_data && (default_source_layers)}
