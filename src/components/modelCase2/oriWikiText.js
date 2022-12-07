@@ -7,15 +7,15 @@ const { Paragraph, Text } = Typography;
 
 const chicagoText = [
     {
-        area: 'Loop',
+        area: 'Athens County',
         UID: 39009,
         text: <Paragraph>Athens County is a county in southeastern Ohio. As of the 2010 census, the population was 64,757. Its county seat is Athens. The county was formed in 1805 from Washington County. Because the original state university (<Text mark>Ohio University</Text>) was founded there in 1804, the town and the county were named for the ancient center of learning, Athens, Greece.</Paragraph>
     },{
-        area: 'Loop',
+        area: 'Athens County',
         UID: 39009,
         text: <Paragraph>The largest employer in Athens County is <Text mark>Ohio University</Text></Paragraph>
     },{
-        area: 'Lower West Side',
+        area: 'Athens County',
         UID: 39009,
         text: <Paragraph>Over one-quarter of the county's residents either attend or work at Hocking College or <Text mark>Ohio University</Text>.</Paragraph>,
     }
