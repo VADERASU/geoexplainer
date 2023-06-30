@@ -1,3 +1,23 @@
+# The GeoExplainer framework
+
+The frontend interface is implemented by ReactJS, and the services are deployed in a Python Flask server. We use the asynchronized API to handle the communications between interface and the Python backend calculations.
+
+The framework is still under active development, we will deploy a web-service that can be visited remotely soon.
+
+## Install the backend packages
+
+```bash
+# cd backend
+# pip install -r requirements.txt
+```
+
+## Run backend service
+
+```bash
+# cd backend
+# python server.py
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
